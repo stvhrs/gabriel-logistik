@@ -4,7 +4,9 @@ class Transaksi {
   String tanggalBerangkat;
   String tanggalPulang;
   String supir;
+   String mobil;
   String tujuan;
+ 
   int gajiSupir;
   int totalCost;
   List<Map<String, dynamic>> fixCost;
@@ -15,6 +17,7 @@ class Transaksi {
       this.tanggalBerangkat,
       this.tanggalPulang,
       this.supir,
+      this.mobil,
       this.tujuan,
       this.gajiSupir,
       this.totalCost,
@@ -27,6 +30,7 @@ class Transaksi {
         data['tanggalBerangkat'],
         data['tanggalPulang'],
         data['supir'],
+        data['mobil'],
         data['tujuan'],
         data['gajiSupir'],
         data['totalCost'],

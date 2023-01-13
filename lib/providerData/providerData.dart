@@ -1,17 +1,51 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 
-import '../models/transaksi.dart';
+import '../models/transaksi_model.dart';
 
-class ProviderData with ChangeNotifier{
+class ProviderData with ChangeNotifier {
+  List<Transaksi> listTransaksi = [];
 
+  List<Transaksi> backupTransaksi = [];
+  void addTransaksi(Transaksi transaksi) {
+    listTransaksi.add(transaksi);
+    backupTransaksi.add(transaksi);
 
-  List<Transaksi> listTransaksi=[];
-   void addTransaksi(Transaksi transaksi) {
-   listTransaksi.add(transaksi);
+    log('Add');
     notifyListeners();
   }
-  void setTransaksi(List<Transaksi> data) {
-   listTransaksi=data;
+
+  void setTransaksi(List<Transaksi> data, bool listen) {
+    log('Set');
+    listTransaksi.addAll(data);
+    backupTransaksi.addAll(data);
+    (listen) ? notifyListeners() : () {};
+  }
+
+  void searchTransaksi(String val) {
+    log(val);
+    List<Transaksi> dummyData = [];
+
+    if (val.isEmpty) {
+      listTransaksi.clear();
+      listTransaksi.addAll(backupTransaksi);
+    } else {
+      for (var element in listTransaksi) {
+        if (element.supir.toLowerCase().startsWith(val.toLowerCase()) ||
+            element.mobil.toLowerCase().startsWith(val.toLowerCase())) {
+          dummyData.add(element);
+        }
+      }
+    }
+    listTransaksi = dummyData;
+    notifyListeners();
+  }
+
+  void restoreSearchTransaksi(String val) {
+    log('Restore');
+    listTransaksi = backupTransaksi;
+
     notifyListeners();
   }
 }

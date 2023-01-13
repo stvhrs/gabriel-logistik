@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:gabriel_logistik/pages/transaksi_page.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
+import 'package:gabriel_logistik/styles/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => ProviderData()),
@@ -38,14 +40,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      locale: Locale('id'),
+    return MaterialApp(debugShowCheckedModeBanner: false,
+      locale: const Locale('id'),
       supportedLocales: localization.supportedLocales,
       localizationsDelegates: localization.localizationsDelegates,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,scaffoldBackgroundColor: Colors.white
-      ),
+      title: 'Gabriel Logistik',
+      theme: AppTheme.getAppThemeData(),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -67,25 +67,22 @@ class _MyHomePageState extends State<MyHomePage> {
     List<SideMenuItem> items = [
       SideMenuItem(
         priority: 0,
-        title: 'Dashboard',
+        title: 'Daftar Transaksi',
         onTap: () => page.jumpToPage(0),
-        icon: Icon(Icons.home),
-        badgeContent: Text(
-          '3',
-          style: TextStyle(color: Colors.white),
-        ),
+        icon: Icon(Icons.wifi_protected_setup_outlined),
+       
       ),
       SideMenuItem(
         priority: 1,
-        title: 'Settings',
+        title: 'Daftar Supir',
         onTap: () => page.jumpToPage(1),
-        icon: Icon(Icons.settings),
+        icon: Icon(Icons.people_rounded),
       ),
       SideMenuItem(
         priority: 2,
-        title: 'Exit',
+        title: 'Daftar Mobil',
         onTap: () {},
-        icon: Icon(Icons.exit_to_app),
+        icon: Icon(Icons.car_rental_rounded),
       ),
     ];
     //
@@ -97,8 +94,8 @@ class _MyHomePageState extends State<MyHomePage> {
             showToggle: true,
             controller: page,
             style: SideMenuStyle(backgroundColor: Color.fromARGB(255, 163, 213, 237),
-              hoverColor: Colors.blue[100],
-              selectedColor: Colors.lightBlue,
+              hoverColor: Colors.blue[100],openSideMenuWidth: MediaQuery.of(context).size.width/6.5,
+              selectedColor: Colors.transparent,
               displayMode: SideMenuDisplayMode.open,
               selectedTitleTextStyle: const TextStyle(color: Colors.white),
               selectedIconColor: Colors.white,
