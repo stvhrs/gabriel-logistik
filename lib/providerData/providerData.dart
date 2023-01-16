@@ -5,9 +5,10 @@ import 'package:flutter/cupertino.dart';
 import '../models/transaksi_model.dart';
 
 class ProviderData with ChangeNotifier {
+    
   List<Transaksi> listTransaksi = [];
-
   List<Transaksi> backupTransaksi = [];
+String asu='';
   void addTransaksi(Transaksi transaksi) {
     listTransaksi.add(transaksi);
     backupTransaksi.add(transaksi);
@@ -18,6 +19,8 @@ class ProviderData with ChangeNotifier {
 
   void setTransaksi(List<Transaksi> data, bool listen) {
     log('Set');
+    listTransaksi.clear();
+    backupTransaksi.clear();
     listTransaksi.addAll(data);
     backupTransaksi.addAll(data);
     (listen) ? notifyListeners() : () {};

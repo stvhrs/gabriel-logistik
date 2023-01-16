@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -52,7 +53,6 @@ class _TransaksiPageState extends State<TransaksiPage> {
                   {'harga': 100, 'nama': 'Ban Bocor'}
                 ]
               }));
-              
             }
           }),
       body: FutureBuilder(
@@ -72,6 +72,13 @@ class _TransaksiPageState extends State<TransaksiPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    FutureBuilder(
+                      future: Service.test(),
+                      builder: (context, snapshotx) =>
+                          snapshot.connectionState == ConnectionState.waiting
+                              ? CircularProgressIndicator()
+                              : Text(jsonDecode(snapshotx.data!)['deskripsi']),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -85,7 +92,8 @@ class _TransaksiPageState extends State<TransaksiPage> {
                       ],
                     ),
                     Container(
-                      decoration: BoxDecoration(color: Colors.grey.shade300,
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
                           borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(5),
                               topRight: Radius.circular(5))),
