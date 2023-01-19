@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 
-import '../models/transaksi_model.dart';
+import '../models/transaksi.dart';
 
 class ProviderData with ChangeNotifier {
     

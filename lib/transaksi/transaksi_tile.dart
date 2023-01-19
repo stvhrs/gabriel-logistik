@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:gabriel_logistik/helper/format_tanggal.dart';
-import 'package:gabriel_logistik/models/transaksi_model.dart';
+import 'package:gabriel_logistik/models/transaksi.dart';
 
 class TransaksiTile extends StatefulWidget {
   final Transaksi _transaksi;

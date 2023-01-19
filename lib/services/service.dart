@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
-import 'package:gabriel_logistik/models/transaksi_model.dart';
+import 'package:gabriel_logistik/models/transaksi.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
@@ -19,53 +19,27 @@ List<Map<String, dynamic>> dummyData = [
     'mobil': 'Ford AD 9999 RR',
     'gajiSupir': 100,
     'totalCost': 400,
-    'fixCost': [
-      {'harga': 100, 'nama': 'bensin'},
-      {'harga': 100, 'nama': 'bensin'}
-    ],
-    'extendedCost': [
-      {'harga': 23, 'nama': 'Ban Bocor'},
-      {'harga': 100, 'nama': 'Ban Bocor'}
-    ]
+ 'perbaikan_transaksi':[] 
   },
-  {
-    'transaksiId': 1,
-    'tanggalBerangkat': '2022-07-20T20:18:04.000Z',
-    'tanggalPulang': '2022-07-20T20:18:04.000Z',
-    'supir': 'Steve',
-    'tujuan': 'Gemolong',
-    'mobil': 'Carry AD 1234 XX',
-    'gajiSupir': 100,
-    'totalCost': 400,
-    'fixCost': [
-      {'harga': 100, 'nama': 'bensin'},
-      {'harga': 100, 'nama': 'bensin'}
-    ],
-    'extendedCost': [
-      {'harga': 23, 'nama': 'Ban Bocor'},
-      {'harga': 100, 'nama': 'Ban Bocor'}
-    ]
-  }
+ 
 ];
 
 class Service {
   static Future<List<Transaksi>> getAllTransaksi() async {
-    await Future.delayed(const Duration(seconds: 1), () {});
+    // final response = await http.get(
+    //     Uri.parse('http://localhost/logistik/api/pengirimanConfirmed_read'),  );
 
-    final response = await http.get(
-        Uri.parse('http://localhost/logistik/api/pengirimanConfirmed_read'));
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      print('Asu');
-      log(response.body.toString());
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load album');
-    }
-    print(response.body);
+    // if (response.statusCode == 200) {
+    //   // If the server did return a 200 OK response,
+    //   // then parse the JSON.
+    //   print('Asu');
+    //   log(response.body.toString());
+    // } else {
+    //   // If the server did not return a 200 OK response,
+    //   // then throw an exception.
+    //   throw Exception('Failed to load album');
+    // }
+    // print(response.body);
     List<Transaksi> data = [];
     for (var element in dummyData) {
       data.add(Transaksi.fromMap(element));
@@ -75,16 +49,16 @@ class Service {
 
   static Future<String> test() async {
     final response = await http.get(
-        Uri.parse('http://localhost/logistik/api/pengirimanConfirmed_read'));
+        Uri.parse(
+          'http://localhost/logistik/api/pengirimanConfirmed_read',
+        ),
+        headers: headers);
 
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      print('Asu');
-
+    print(response.statusCode);
+    if (response.body.isNotEmpty) {
       return response.body.toString();
     } else {
-      throw json.decode(response.body);
+      return 'Eroorrrrrr';
     }
   }
 

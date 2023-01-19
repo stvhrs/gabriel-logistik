@@ -4,9 +4,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:gabriel_logistik/models/transaksi_model.dart';
+import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
-import 'package:gabriel_logistik/transaksi/search_transaksi.dart';
+import 'package:gabriel_logistik/transaksi/transaksi_search.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_tile.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -43,16 +43,8 @@ class _TransaksiPageState extends State<TransaksiPage> {
                 'tujuan': 'Ganurejo RT4',
                 'mobil': '$i Carry AD 1234 XX',
                 'gajiSupir': 100,
-                'totalCost': 400,
-                'fixCost': [
-                  {'harga': 100, 'nama': 'bensin'},
-                  {'harga': 100, 'nama': 'bensin'}
-                ],
-                'extendedCost': [
-                  {'harga': 23, 'nama': 'Ban Bocor'},
-                  {'harga': 100, 'nama': 'Ban Bocor'}
-                ]
-              }));
+                'totalCost': 400,   
+               'perbaikan_transaksi':[]              }));
             }
           }),
       body: FutureBuilder(
@@ -75,9 +67,9 @@ class _TransaksiPageState extends State<TransaksiPage> {
                     FutureBuilder(
                       future: Service.test(),
                       builder: (context, snapshotx) =>
-                          snapshot.connectionState == ConnectionState.waiting
-                              ? CircularProgressIndicator()
-                              : Text(jsonDecode(snapshotx.data!)['deskripsi']),
+                          snapshotx.connectionState == ConnectionState.waiting
+                              ? const CircularProgressIndicator()
+                              : Text(snapshotx.data!.toString()),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,3 +1,5 @@
+import 'package:gabriel_logistik/models/perbaikan.dart';
+
 class Transaksi {
   
   int transaksiId;
@@ -9,8 +11,7 @@ class Transaksi {
  
   int gajiSupir;
   int totalCost;
-  List<Map<String, dynamic>> fixCost;
-  List<Map<String, dynamic>> extendedCost;
+ List<Perbaikan> listPerbaikan;
 
   Transaksi(
       this.transaksiId,
@@ -20,11 +21,14 @@ class Transaksi {
       this.mobil,
       this.tujuan,
       this.gajiSupir,
-      this.totalCost,
-      this.fixCost,
-      this.extendedCost);
+      this.totalCost,this.listPerbaikan
+     );
 
   factory Transaksi.fromMap(Map<String, dynamic> data) {
+    List<Perbaikan> list_perbaikan=[];
+    for (var element in data['perbaikan_transaksi']) {
+      list_perbaikan.add(Perbaikan.fromMap(element));
+    }
     return Transaksi(
         data['transaksiId'],
         data['tanggalBerangkat'],
@@ -34,7 +38,9 @@ class Transaksi {
         data['tujuan'],
         data['gajiSupir'],
         data['totalCost'],
-        data['fixCost'],
-        data['extendedCost']);
+       
+    list_perbaikan
+        
+        );
   }
 }
