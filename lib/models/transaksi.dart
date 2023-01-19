@@ -30,8 +30,8 @@ class Transaksi {
       list_perbaikan.add(Perbaikan.fromMap(element));
     }
     return Transaksi(
-        data['transaksiId'],
-        data['tanggalBerangkat'],
+        data['id_transaksi'],
+        data['tgl_berangkat'],
         data['tanggalPulang'],
         data['supir'],
         data['mobil'],

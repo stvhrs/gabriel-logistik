@@ -11,10 +11,43 @@ const Map<String, String> headers = {
 
 List<Map<String, dynamic>> dummyData = [
   {
-    'transaksiId': 1,
-    'tanggalBerangkat': '2022-07-20T20:18:04.000Z',
+    'id_transaksi': 1,
+    'tgl_berangkat': '2022-07-20T20:18:04.000Z',
     'tanggalPulang': '2022-07-20T20:18:04.000Z',
     'supir': 'Budi',
+    'tujuan': 'Gemolong',
+    'mobil': 'Ford AD 9999 RR',
+    'gajiSupir': 100,
+    'totalCost': 400,
+ 'perbaikan_transaksi':[] 
+  },
+   {
+    'id_transaksi': 1,
+    'tgl_berangkat': '2022-07-20T20:18:04.000Z',
+    'tanggalPulang': '2022-07-20T20:18:04.000Z',
+    'supir': '2Budi',
+    'tujuan': 'Gemolong',
+    'mobil': 'Ford AD 9999 RR',
+    'gajiSupir': 100,
+    'totalCost': 400,
+ 'perbaikan_transaksi':[] 
+  },
+   {
+    'id_transaksi': 1,
+    'tgl_berangkat': '2022-07-20T20:18:04.000Z',
+    'tanggalPulang': '2022-07-20T20:18:04.000Z',
+    'supir': '3Budi',
+    'tujuan': 'Gemolong',
+    'mobil': 'Ford AD 9999 RR',
+    'gajiSupir': 100,
+    'totalCost': 400,
+ 'perbaikan_transaksi':[] 
+  },
+  {
+    'id_transaksi': 1,
+    'tgl_berangkat': '2022-07-20T20:18:04.000Z',
+    'tanggalPulang': '2022-07-20T20:18:04.000Z',
+    'supir': '4Budi',
     'tujuan': 'Gemolong',
     'mobil': 'Ford AD 9999 RR',
     'gajiSupir': 100,

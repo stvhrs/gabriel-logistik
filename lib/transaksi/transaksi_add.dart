@@ -1,202 +1,235 @@
-// import 'package:gabriel_logistik/models/transaksi.dart';
-// import 'package:gabriel_logistik/providerData/providerData.dart';
+import 'package:gabriel_logistik/models/transaksi.dart';
+import 'package:gabriel_logistik/providerData/providerData.dart';
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
-// import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
+import 'package:web_date_picker/web_date_picker.dart';
 
+import '../helper/dropdown.dart';
+import '../helper/input_currency.dart';
 
-// import '../helper/dropdown.dart';
-// import '../helper/input_currency.dart';
+class TransaksiAdd extends StatefulWidget {
+  const TransaksiAdd({super.key});
 
-// class TransaksiAdd extends StatefulWidget {
-//   const TransaksiAdd({super.key});
+  @override
+  State<TransaksiAdd> createState() => _TransaksiAddState();
+}
 
-//   @override
-//   State<TransaksiAdd> createState() => _TransaksiAddState();
-// }
+class _TransaksiAddState extends State<TransaksiAdd> {
+  final TextEditingController _controller = TextEditingController();
+  int jumlahOpsi = 1;
 
-// class _TransaksiAddState extends State<TransaksiAdd> {
- 
-//   final TextEditingController _controller = TextEditingController();
-//   int jumlahOpsi = 1;
+  List<Transaksi> _updatedTransaksi = [
+    Transaksi.fromMap(
+      {
+        'id_transaksi': 1,
+        'tgl_berangkat': '2022-07-20T20:18:04.000Z',
+        'tanggalPulang': '2022-07-20T20:18:04.000Z',
+        'supir': 'Budi',
+        'tujuan': 'Gemolong',
+        'mobil': 'Ford AD 9999 RR',
+        'gajiSupir': 100,
+        'totalCost': 400,
+        'perbaikan_transaksi': []
+      },
+    )
+  ];
+  List<String> itemsTransaksi = [];
+  Widget _buildPartName(int i, BuildContext context) {
+    List<Transaksi> transaksi =
+        Provider.of<ProviderData>(context, listen: false).listTransaksi;
+    return Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        child: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) => Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                        width: 200,
+                        child: TextFormField(
+                          decoration: const InputDecoration(hintText: 'Part'),
+                        )),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      width: 200,
+                      child: TextFormField(
+                        decoration: const InputDecoration(hintText: 'Harga'),
+                        onChanged: (value) {
+                          if (_updatedTransaksi.isNotEmpty) {
+                            _updatedTransaksi[i]
+                                .listPerbaikan[jumlahOpsi]
+                                .harga_perbaikan = NumberFormat.currency(
+                                    locale: 'id_ID', symbol: 'Rp ')
+                                .parse(value)
+                                .toDouble();
+                          }
+                        },
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          CurrencyInputFormatter()
+                        ],
+                      ),
+                    ),
+                  ],
+                )));
+  }
 
+  Widget _buildSize(widget, String ket, double width) {
+    return Container(
+      width: width,
+      margin: EdgeInsets.only(right: 45, bottom: 50),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              margin: EdgeInsets.only(bottom: 7),
+              child: Text(
+                ket + ' :',
+                style: TextStyle(fontSize: 13),
+              )),
+          widget
+        ],
+      ),
+    );
+  }
 
-//   List<Transaksi> _updatedTransaksi = [
-//     // Transaksi(
-//     // )
-//   ];
-//   List<String> itemsTransaksi = [];
-//   Widget _buildPartName(int i, BuildContext context) {
-//     List<Transaksi> transaksi =
-//         Provider.of<ProviderData>(context, listen: false).listTransaksi;
-//     return Container(
-//         margin: const EdgeInsets.only(bottom: 10),
-//         child: StatefulBuilder(
-//             builder: (BuildContext context, StateSetter setState) => Row(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     SizedBox(
-//                       width: 200,
-//                       child: DropDownField(
-//                         inputFormatters: const [],
-//                         required: true,
-//                         onValueChanged: (val) {
-//                           if (transaksi
-//                               .map((e) => e.supir)
-//                               .toList()
-//                               .contains(val)) {
-//                             if (_updatedTransaksi.length < i + 1) {
-//                               _updatedTransaksi.insert(
-//                                   i,
-//                                   transaksi.firstWhere(
-//                                       (element) => element.supir == val));
-//                             }
+  @override
+  Widget build(BuildContext context) {
+    List<Transaksi> Transaksis =
+        Provider.of<ProviderData>(context, listen: false).listTransaksi;
 
-//                             setState(() {});
-//                           }
-//                         },
-//                         strict: true,
-//                         labelText: 'PartName',
-//                         items: transaksi.map((e) => e.supir).toList(),
-//                       ),
-//                     ),
-//                     const Spacer(),
-//                     SizedBox(
-//                       width: 200,
-//                       child: TextFormField(
-//                         decoration: const InputDecoration(hintText: 'Perbaikan'),
-//                         onChanged: (value) {
-//                           if (_updatedTransaksi.isNotEmpty) {
-//                             _updatedTransaksi[i].extendedCost[i]['harga'] =
-//                                 NumberFormat.currency(
-//                                         locale: 'id_ID', symbol: 'Rp ')
-//                                     .parse(value)
-//                                     .toDouble();
-//                           }
-//                         },
-//                         inputFormatters: [
-//                           FilteringTextInputFormatter.digitsOnly,
-//                           CurrencyInputFormatter()
-//                         ],
-//                       ),
-//                     ),
-//                     IconButton(
-//                         onPressed: () {
-//                           setState(() {});
-//                           if (  _updatedTransaksi[i].extendedCost.length > 1) {
-//                             setState(() {
-//                                 _updatedTransaksi[i].extendedCost.length--;
-//                               //   _updatedTransaksi[i].extendedCost[i]['harga']--;
-//                             });
-//                           }
-//                         },
-//                         icon: const Icon(Icons.remove_circle)),
-//                     Text(  _updatedTransaksi[i].extendedCost.length.toString()),
-//                     IconButton(
-//                         onPressed: () {
-//                           setState(() {
-//                                _updatedTransaksi[i].extendedCost.length++;
-//                             //   _updatedTransaksi[i].extendedCost[i]['harga']++;
-//                           });
-//                         },
-//                         icon: const Icon(Icons.add_circle)),
-//                   ],
-//                 )));
-//   }
+    return Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        child: FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () {
+              showDialog(barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                        backgroundColor: Theme.of(context).primaryColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0))),
+                        actionsPadding:
+                            const EdgeInsets.only(right: 15, bottom: 15),
+                        content: Container(
+                          decoration: BoxDecoration(color: Colors.white,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: StatefulBuilder(
+                            builder:
+                                (BuildContext context, StateSetter setState) =>
+                                    IntrinsicHeight(
+                              child: Container(padding: EdgeInsets.all(20),
+                                width: MediaQuery.of(context).size.width * 0.7,
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text('Tambah Transaksi',style: TextStyle(fontWeight: FontWeight.bold),),
+                                      SizedBox(height: 30,),
+                                      Container(
+                                        // margin: EdgeInsets.only(bottom: 50),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            _buildSize(
+                                                DropDownField(
+                                                  onValueChanged: (val) {},
+                                                  items: Transaksis.map(
+                                                      (e) => e.supir).toList(),
+                                                ),
+                                                'Pilih Supir',
+                                                200),
+                                            _buildSize(
+                                                DropDownField(
+                                                  onValueChanged: (val) {},
+                                                  items: Transaksis.map(
+                                                      (e) => e.mobil).toList(),
+                                                ),
+                                                'Pilih Mobil',
+                                                200),
+                                            _buildSize(TextFormField(),
+                                                'Ketik Tujuan', 200),
+                                            _buildSize(
+                                                WebDatePicker(
+                                                  height: 60,
+                                                  initialDate: DateTime.now(),
+                                                  dateformat: 'dd/MM/yyyy',
+                                                  onChange: (value) {},
+                                                ),
+                                                'Tanggal',
+                                                200)
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          _buildSize(
+                                              TextFormField(
+                                                inputFormatters: [
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly,
+                                                  CurrencyInputFormatter()
+                                                ],
+                                              ),
+                                              'Biaya Keluar',
+                                              200),
+                                          _buildSize(
+                                              TextFormField(
+                                                inputFormatters: [
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly,
+                                                  CurrencyInputFormatter()
+                                                ],
+                                              ),
+                                              'Biaya Ongkos',
+                                              200),
+                                          _buildSize(TextFormField(),
+                                              'Keterangan', 400),
+                                        ],
+                                      ),
+                                      Text(
+                                        'Perbaikan :',
+                                        style: TextStyle(fontSize: 13),
+                                      ),
+                                      Divider(),
+                                      ...List.generate(
+                                          jumlahOpsi,
+                                          (index) =>
+                                              _buildPartName(index, context)),
+                                      Row(
+                                        children: [
+                                          IconButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  if (jumlahOpsi ==
+                                                      _updatedTransaksi
+                                                          .length) {
+                                                    _updatedTransaksi.add(
+                                                        _updatedTransaksi[0]);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     List<Transaksi> Transaksis =
-//         Provider.of<ProviderData>(context, listen: false).listTransaksi;
-//     // List<Transaksi> transaksi =
-//     //     Provider.of<Trigger>(context, listen: false).listSelectedTransaksi;
-//     // List<Penyuplai> penyuplais =
-//     //     Provider.of<Trigger>(context, listen: false).listSelectedPenyuplai;
-
-//     // if (_updatedTransaksi.isNotEmpty) {
-//     //   for ( e in penyuplais) {
-//     //     if (!itemsTransaksi.contains(e.namaPenyuplai)) {
-//     //       itemsTransaksi.add(e.namaPenyuplai);
-//     //     }
-//     //   }
-//     // }
-
-//     return Container(
-//       margin: const EdgeInsets.only(bottom: 10),
-//       child: ElevatedButton.icon(  icon: const Icon(
-//             Icons.add,
-//             color: Colors.white,
-//           ),
-//           label: const Text(
-//             'Tambah Pembelian',
-//             style: TextStyle(color: Colors.white),
-//           ),
-//           style: ButtonStyle(
-//               backgroundColor: MaterialStateProperty.all(
-//                   const Color.fromARGB(255, 79, 117, 134))),
-//           onPressed:() {
-//                   showDialog(
-//                       context: context,
-//                       builder: (context) {
-//                         return 
-//                         AlertDialog(
-//                             actionsPadding:
-//                                 const EdgeInsets.only(right: 15, bottom: 15),
-//                             title: const Text("Tambah Pembelian"),
-//                             content: StatefulBuilder(
-//                               builder: (BuildContext context,
-//                                       StateSetter setState) =>
-//                                   IntrinsicHeight(
-//                                 child: SizedBox(
-//                                   width: 500,
-//                                   child: Column(
-//                                     crossAxisAlignment:
-//                                         CrossAxisAlignment.start,
-//                                     children: [
-                                    
-                                     
-//                                       ...List.generate(
-//                                           jumlahOpsi,
-//                                           (index) =>
-//                                               _buildPartName(index, context)),
-//                                       Row(
-//                                         children: [
-//                                           IconButton(
-//                                               onPressed: () {
-//                                                 setState(() {
-//                                                   if (jumlahOpsi > 1 &&
-//                                                       jumlahOpsi ==
-//                                                           _updatedTransaksi
-//                                                               .length) {
-//                                                     _updatedTransaksi.removeAt(
-//                                                         jumlahOpsi - 1);
-//                                                     _updatedTransaksi
-//                                                         .removeAt(
-//                                                             jumlahOpsi - 1);
-//                                                     jumlahOpsi = jumlahOpsi - 1;
-//                                                   }
-//                                                 });
-//                                               },
-//                                               icon: const Icon(
-//                                                   Icons.remove_circle)),
-//                                           // Text(jumlahOpsi.toString()),
-                                       
-//                                         ],
-//                                       ),
-//                                     ],
-//                                   ),
-//                                 ),
-                              
-                           
-                
-//         ),
-//     ));
-  
-// });})
-
-// );
-//   }
-// }
+                                                    jumlahOpsi = jumlahOpsi + 1;
+                                                  }
+                                                });
+                                              },
+                                              icon: const Icon(Icons.add)),
+                                          // Text(jumlahOpsi.toString()),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ));
+                  });
+            }));
+  }
+}

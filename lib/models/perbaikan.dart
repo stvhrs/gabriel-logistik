@@ -1,7 +1,6 @@
 class Perbaikan {
-  
   String nama_perbaikan;
-  int harga_perbaikan;
+  double harga_perbaikan;
 
   Perbaikan(this.nama_perbaikan, this.harga_perbaikan);
   factory Perbaikan.fromMap(Map<String, dynamic> data) {

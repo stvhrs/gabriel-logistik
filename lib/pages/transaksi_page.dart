@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
+import 'package:gabriel_logistik/transaksi/transaksi_add.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_search.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_tile.dart';
 import 'package:intl/intl.dart';
@@ -30,23 +31,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () {
-            for (var i = 0; i <= 1000; i++) {
-              Provider.of<ProviderData>(context, listen: false)
-                  .addTransaksi(Transaksi.fromMap({
-                'transaksiId': 1,
-                'tanggalBerangkat': '2022-07-20T20:18:04.000Z',
-                'tanggalPulang': '2022-07-20T20:18:04.000Z',
-                'supir': '$i Steve',
-                'tujuan': 'Ganurejo RT4',
-                'mobil': '$i Carry AD 1234 XX',
-                'gajiSupir': 100,
-                'totalCost': 400,   
-               'perbaikan_transaksi':[]              }));
-            }
-          }),
+      floatingActionButton:TransaksiAdd(),
       body: FutureBuilder(
         future: Service.getAllTransaksi(),
         builder: (context, AsyncSnapshot<List<Transaksi>> snapshot) {
@@ -64,13 +49,13 @@ class _TransaksiPageState extends State<TransaksiPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FutureBuilder(
-                      future: Service.test(),
-                      builder: (context, snapshotx) =>
-                          snapshotx.connectionState == ConnectionState.waiting
-                              ? const CircularProgressIndicator()
-                              : Text(snapshotx.data!.toString()),
-                    ),
+                    // FutureBuilder(
+                    //   future: Service.test(),
+                    //   builder: (context, snapshotx) =>
+                    //       snapshotx.connectionState == ConnectionState.waiting
+                    //           ? const CircularProgressIndicator()
+                    //           : Text(snapshotx.data!.toString()),
+                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
