@@ -5,7 +5,8 @@ class AppTheme {
   static Color primaryColor = const Color.fromARGB(255, 75, 135, 167);
   static Color secondaryColor = const Color.fromARGB(255, 157, 208, 255);
   static ThemeData getAppThemeData() {
-    return ThemeData(primaryColor: primaryColor,
+    return ThemeData(scaffoldBackgroundColor: Colors.white,
+      primaryColor: primaryColor,
       scrollbarTheme: const ScrollbarThemeData()
           .copyWith(thumbColor: MaterialStateProperty.all(secondaryColor)),
       textTheme: const TextTheme(
@@ -20,8 +21,8 @@ class AppTheme {
             color: Colors.black,
           )),
       inputDecorationTheme: InputDecorationTheme(
-        labelStyle:
-            TextStyle(fontSize: 18, color: Colors.grey.shade600, letterSpacing: 0.7),
+        labelStyle: TextStyle(
+            fontSize: 18, color: Colors.grey.shade600, letterSpacing: 0.7),
         //        border: InputBorder.none,
 
         contentPadding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),

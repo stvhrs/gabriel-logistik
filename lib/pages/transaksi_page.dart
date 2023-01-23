@@ -83,53 +83,59 @@ class _TransaksiPageState extends State<TransaksiPage> {
                                 topRight: Radius.circular(5))),
                         margin: const EdgeInsets.only(top: 10),
                         padding: const EdgeInsets.only(
-                            top: 10, bottom: 10, left: 15, right: 15),
+                            top: 10, bottom: 12.5, left: 15, right: 15),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                               Expanded(
+                                flex:3,
+                                child: Text(
+                                  'No',
+                                  style: Theme.of(context).textTheme.headline2,
+                                )),
                             Expanded(
-                                flex: 11,
+                                flex:7,
                                 child: Text(
                                   'Berangkat',
                                   style: Theme.of(context).textTheme.headline2,
                                 )),
                             Expanded(
-                                flex: 11,
+                                flex: 5,
                                 child: Text(
                                   'Supir',
                                   style: Theme.of(context).textTheme.headline2,
                                 )),
                             Expanded(
-                                flex: 5,
+                                flex: 7,
                                 child: Text(
                                   'Mobil',
                                   style: Theme.of(context).textTheme.headline2,
                                 )),
                             Expanded(
-                                flex: 11,
+                                flex: 10,
                                 child: Text(
                                   'Tujuan',
                                   style: Theme.of(context).textTheme.headline2,
                                 )),
                             Expanded(
-                                flex: 11,
+                                flex: 7,
                                 child: Text(
                                   'Keluar',
                                   style: Theme.of(context).textTheme.headline2,
                                 )),
                             Expanded(
-                                flex: 11,
+                                flex: 7,
                                 child: Text(
                                   'Ongkos',
                                   style: Theme.of(context).textTheme.headline2,
                                 )),
                             Expanded(
-                                flex: 11,
+                                flex: 7,
                                 child: Text(
                                   'Perbaikan',
                                   style: Theme.of(context).textTheme.headline2,
                                 )),
-                            const Expanded(flex: 5, child: Text('Action')),
+                            Expanded(flex: 5, child: Text(textAlign: TextAlign.center,'Action', style: Theme.of(context).textTheme.headline2,)),
                           ],
                         ),
                       ),
