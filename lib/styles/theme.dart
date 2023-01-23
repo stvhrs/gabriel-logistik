@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   AppTheme();
-  static Color primaryColor = Color.fromARGB(255, 163, 213, 237);
-  static Color secondaryColor = Colors.yellow.shade200;
+  static Color primaryColor = const Color.fromARGB(255, 75, 135, 167);
+  static Color secondaryColor = const Color.fromARGB(255, 157, 208, 255);
   static ThemeData getAppThemeData() {
     return ThemeData(primaryColor: primaryColor,
       scrollbarTheme: const ScrollbarThemeData()

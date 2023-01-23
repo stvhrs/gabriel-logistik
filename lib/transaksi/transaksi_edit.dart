@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:gabriel_logistik/helper/rupiah_format.dart';
-import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/supir.dart';
@@ -55,20 +53,10 @@ class _TransaksiAddState extends State<TransaksiAdd> {
 
   int jumlahOpsi = 0;
 
-  final List<Perbaikan> _updatedPerbaikan = [];
+  final List<Transaksi> _updatedTransaksi = [];
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
-  Transaksi transaksi = Transaksi.fromMap({
-    'id_transaksi': 1,
-    'tgl_berangkat': DateTime.now().toIso8601String(),
-    'keterangan': '',
-    'supir': '',
-    'tujuan': '',
-    'mobil': '',
-    'keluar': 0,
-    'ongkos': 0,
-    'perbaikan_transaksi': []
-  });
+
   Widget _buildPartName(int i, BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(bottom: 10),
@@ -79,11 +67,6 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                     SizedBox(
                         width: 200,
                         child: TextFormField(
-                          onChanged: (value) {
-                            if (_updatedPerbaikan.isNotEmpty) {
-                              _updatedPerbaikan[i].nama_perbaikan = value;
-                            }
-                          },
                           decoration: const InputDecoration(hintText: 'Part'),
                         )),
                     Container(
@@ -92,12 +75,13 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                       child: TextFormField(
                         decoration: const InputDecoration(hintText: 'Harga'),
                         onChanged: (value) {
-                          if (_updatedPerbaikan.isNotEmpty) {
-                            _updatedPerbaikan[i].harga_perbaikan =
-                                NumberFormat.currency(
-                                        locale: 'id_ID', symbol: 'Rp ')
-                                    .parse(value)
-                                    .toDouble();
+                          if (_updatedTransaksi.isNotEmpty) {
+                            _updatedTransaksi[i]
+                                .listPerbaikan[jumlahOpsi]
+                                .harga_perbaikan = NumberFormat.currency(
+                                    locale: 'id_ID', symbol: 'Rp ')
+                                .parse(value)
+                                .toDouble();
                           }
                         },
                         inputFormatters: [
@@ -135,9 +119,6 @@ class _TransaksiAddState extends State<TransaksiAdd> {
 
   @override
   Widget build(BuildContext context) {
-    transaksi.transaksiId = Provider.of<ProviderData>(context, listen: false)
-        .backupTransaksi
-        .length;
     return Container(
         child: FloatingActionButton(
             child: const Icon(Icons.add),
@@ -203,26 +184,19 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                           children: [
                                             _buildSize(
                                                 DropDownField(
-                                                  onValueChanged: (val) {
-                                                    transaksi.supir = val;
-                                                  },
+                                                  onValueChanged: (val) {},
                                                   items: listSupir,
                                                 ),
                                                 'Pilih Supir',
                                                 200),
                                             _buildSize(
                                                 DropDownField(
-                                                  onValueChanged: (val) {
-                                                    transaksi.mobil = val;
-                                                  },
+                                                  onValueChanged: (val) {},
                                                   items: listMobil,
                                                 ),
                                                 'Pilih Mobil',
                                                 200),
-                                            _buildSize(TextFormField( onChanged: (va) {
-                                                  transaksi.tujuan =
-                                                    va;
-                                                },),
+                                            _buildSize(TextFormField(),
                                                 'Ketik Tujuan', 200),
                                             const Spacer(),
                                             _buildSize(
@@ -230,14 +204,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                   height: 60,
                                                   initialDate: DateTime.now(),
                                                   dateformat: 'dd/MM/yyyy',
-                                                  onChange: (value) {
-                                                    if (value != null) {
-                                                      transaksi
-                                                              .tanggalBerangkat =
-                                                          value
-                                                              .toIso8601String();
-                                                    }
-                                                  },
+                                                  onChange: (value) {},
                                                 ),
                                                 'Tanggal',
                                                 200)
@@ -248,13 +215,6 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                         children: [
                                           _buildSize(
                                               TextFormField(
-                                                onChanged: (va) {
-                                                  if(va.isNotEmpty&&va.startsWith('Rp')){  transaksi.keluar =
-                                                      Rupiah.parse(va);}else{
-                                                        transaksi.keluar=0;
-                                                      }
-                                                
-                                                },
                                                 inputFormatters: [
                                                   FilteringTextInputFormatter
                                                       .digitsOnly,
@@ -265,12 +225,6 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                               200),
                                           _buildSize(
                                               TextFormField(
-                                                onChanged: (va) {
-                                                   if(va.isNotEmpty&&va.startsWith('Rp')){  transaksi.ongkos =
-                                                      Rupiah.parse(va);}else{
-                                                        transaksi.ongkos=0;
-                                                      }
-                                                },
                                                 inputFormatters: [
                                                   FilteringTextInputFormatter
                                                       .digitsOnly,
@@ -279,10 +233,8 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                               ),
                                               'Biaya Ongkos',
                                               200),
-                                          _buildSize(
-                                              TextFormField(onChanged: (val) {
-                                            transaksi.keterangan = val;
-                                          }), 'Keterangan', 400),
+                                          _buildSize(TextFormField(),
+                                              'Keterangan', 400),
                                         ],
                                       ),
 
@@ -332,36 +284,34 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                       //   ],
                                       // ),
 
-                                      RoundedLoadingButton(
-                                        color: Theme.of(context).primaryColor,
-                                        successColor: Colors.green,
-                                        errorColor: Colors.red,
+                                      RoundedLoadingButton(color: Theme.of(context).primaryColor,successColor: Colors.green,errorColor: Colors.red,
                                         child: Text('Tambah',
                                             style:
                                                 TextStyle(color: Colors.white)),
                                         controller: _btnController,
                                         onPressed: () async {
-                                          if (transaksi.keluar == 0 ||
-                                              transaksi.ongkos == 0 ||
-                                              transaksi.mobil == '' || transaksi.tujuan == ''||
-                                              transaksi.supir == '' ||
-                                              transaksi.tanggalBerangkat ==
-                                                  '') {
-                                            _btnController.error();
-                                           await Future.delayed(Duration(seconds: 1));
-                                            _btnController.reset();
-                                            return;
-                                          }
-
                                           await Future.delayed(
                                               Duration(seconds: 3), () {
                                             Provider.of<ProviderData>(context,
                                                     listen: false)
-                                                .addTransaksi(transaksi);
+                                                .addTransaksi(Transaksi(
+                                                    Provider.of<ProviderData>(
+                                                            context,
+                                                            listen: false)
+                                                        .listTransaksi
+                                                        .length,
+                                                    DateTime.now()
+                                                        .toIso8601String(),'keterabgan',
+                                                    'supir',
+                                                    'mobil',
+                                                    'tujuan',
+                                                    5,
+                                                    5,
+                                                    []));
                                             _btnController.success();
                                           });
                                           await Future.delayed(
-                                              Duration(seconds: 2), () {
+                                              Duration(seconds: 1), () {
                                             Navigator.of(context).pop();
                                           });
                                         },

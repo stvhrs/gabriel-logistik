@@ -1,11 +1,12 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:gabriel_logistik/mobil/daftar_mobil.dart';
 import 'package:gabriel_logistik/pages/transaksi_page.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/styles/theme.dart';
+import 'package:gabriel_logistik/supir/daftar_supir.dart';
 import 'package:provider/provider.dart';
-import 'package:web_date_picker/web_date_picker.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,12 +14,12 @@ void main() {
     providers: [
       ChangeNotifierProvider(create: (_) => ProviderData()),
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -40,7 +41,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       locale: const Locale('id'),
       supportedLocales: localization.supportedLocales,
       localizationsDelegates: localization.localizationsDelegates,
@@ -69,20 +71,31 @@ class _MyHomePageState extends State<MyHomePage> {
         priority: 0,
         title: 'Daftar Transaksi',
         onTap: () => page.jumpToPage(0),
-        icon: Icon(Icons.wifi_protected_setup_outlined),
-       
+        icon: const Icon(Icons.wifi_protected_setup_outlined),
       ),
       SideMenuItem(
         priority: 1,
         title: 'Daftar Supir',
         onTap: () => page.jumpToPage(1),
-        icon: Icon(Icons.people_rounded),
+        icon: const Icon(Icons.people_rounded),
       ),
       SideMenuItem(
         priority: 2,
         title: 'Daftar Mobil',
-        onTap: () {},
-        icon: Icon(Icons.car_rental_rounded),
+        onTap: () => page.jumpToPage(2),
+        icon: const Icon(Icons.car_rental_rounded),
+      ),
+      SideMenuItem(
+        priority: 3,
+        title: 'Laporan Bulanan',
+        onTap: () => page.jumpToPage(3),
+        icon: const Icon(Icons.document_scanner_rounded),
+      ),
+      SideMenuItem(
+        priority: 4,
+        title: 'Kas Tahunan',
+        onTap: () => page.jumpToPage(4),
+        icon: const Icon(Icons.monetization_on),
       ),
     ];
     //
@@ -93,8 +106,10 @@ class _MyHomePageState extends State<MyHomePage> {
           SideMenu(
             showToggle: true,
             controller: page,
-            style: SideMenuStyle(backgroundColor: Color.fromARGB(255, 163, 213, 237),
-              hoverColor: Colors.blue[100],openSideMenuWidth: MediaQuery.of(context).size.width/6.5,
+            style: SideMenuStyle(
+              backgroundColor: Theme.of(context).primaryColor,
+              hoverColor: const Color.fromARGB(255, 101, 157, 202),
+              openSideMenuWidth: MediaQuery.of(context).size.width / 6.5,
               selectedColor: Colors.transparent,
               displayMode: SideMenuDisplayMode.open,
               selectedTitleTextStyle: const TextStyle(color: Colors.white),
@@ -123,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
             footer: const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'mohada',
+                'Logistik',
                 style: TextStyle(fontSize: 15),
               ),
             ),
@@ -132,17 +147,12 @@ class _MyHomePageState extends State<MyHomePage> {
           Expanded(
             child: PageView(
               controller: page,
-              children: [
+              children: const [
                 TransaksiPage(),
-                Center(
-                  child: Container(
-                    color: Colors.white,
-                    child: WebDatePicker(
-                      dateformat: 'dd/MM/yyyy',
-                      onChange: (value) {},
-                    ),
-                  ),
-                ),
+                DaftarSupir(),
+                DaftarMobil(),
+                SizedBox(),
+                SizedBox()
               ],
             ),
           ),

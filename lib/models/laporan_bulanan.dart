@@ -1,4 +1,3 @@
-import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 
 class LaporanBulanan {

@@ -51,7 +51,7 @@ class DropDownField extends FormField<String> {
           onSaved: setter,
           builder: (FormFieldState<String> field) {
             final DropDownFieldState state = field as DropDownFieldState;
-            final ScrollController _scrollController = ScrollController();
+            final ScrollController scrollController = ScrollController();
             final InputDecoration effectiveDecoration = InputDecoration(
                 border: InputBorder.none,
                 filled: true,
@@ -124,7 +124,7 @@ class DropDownField extends FormField<String> {
                         child: ListView(padding: EdgeInsets.zero,
                           cacheExtent: 0.0,
                           scrollDirection: Axis.vertical,
-                          controller: _scrollController,
+                          controller: scrollController,
                         
                           children: items!.isNotEmpty
                               ? ListTile.divideTiles(color: const Color.fromARGB(255, 0, 0, 0),
