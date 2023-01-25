@@ -1,10 +1,13 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_add.dart';
-import 'package:gabriel_logistik/transaksi/transaksi_search.dart';
+import 'package:gabriel_logistik/transaksi/transaksi_search_mobil.dart';
+import 'package:gabriel_logistik/transaksi/transaksi_search_nama.dart';
+import 'package:gabriel_logistik/transaksi/transaksi_search_perbaikan.dart';
+import 'package:gabriel_logistik/transaksi/transaksi_search_tanggal.dart';
+import 'package:gabriel_logistik/transaksi/transaksi_search_tujuan.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_tile.dart';
 import 'package:provider/provider.dart';
 
@@ -45,10 +48,10 @@ class _TransaksiPageState extends State<TransaksiPage> {
           List<Transaksi> data = snapshot.data!;
           Provider.of<ProviderData>(context, listen: false)
               .setData(data, false, listMobil, listSupir);
-          return Scaffold(
-              floatingActionButton: const TransaksiAdd(),
+          return Scaffold(floatingActionButton:          const  TransaksiAdd() ,
+             
               body: Consumer<ProviderData>(builder: (context, prov, _) {
-                prov.listTransaksi.reversed.toList();
+  
                 return Padding(
                   padding: const EdgeInsets.all(24),
                   child: Column(
@@ -65,16 +68,15 @@ class _TransaksiPageState extends State<TransaksiPage> {
                       // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const SearchTransaksi(),
-                          InkWell(
-                              onTap: () {},
-                              child: Image.asset(
-                                'images/excel.png',
-                                width: MediaQuery.of(context).size.width / 20,
-                              ))
+                        children: [SearchTanggal(),
+                           const SearchNama(),
+                            const SearchMobil(),
+                             const SearchTujuan(),SearchPerbaikan(),
+                        
                         ],
                       ),
+                      
+            
                       Container(
                         decoration: BoxDecoration(
                             color: Colors.grey.shade300,
@@ -142,9 +144,9 @@ class _TransaksiPageState extends State<TransaksiPage> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.7,
                         child: ListView.builder(
-                            itemCount: prov.listTransaksi.reversed.toList().length,
+                            itemCount: prov.listTransaksi.length,
                             itemBuilder: (context, index) => TransaksiTile(
-                                prov.listTransaksi[index], index)),
+                                prov.listTransaksi[index], index+1)),
                       ),
                     ],
                   ),

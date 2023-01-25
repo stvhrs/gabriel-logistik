@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 
-class SearchTransaksi extends StatefulWidget {
-  const SearchTransaksi({super.key});
+class SearchTanggal extends StatefulWidget {
+  const SearchTanggal({super.key});
 
   @override
-  State<SearchTransaksi> createState() => _SearchTransaksiState();
+  State<SearchTanggal> createState() => _SearchTanggalState();
 }
 
-class _SearchTransaksiState extends State<SearchTransaksi> {
+class _SearchTanggalState extends State<SearchTanggal> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -18,12 +18,13 @@ class _SearchTransaksiState extends State<SearchTransaksi> {
         child: TextFormField(
           onChanged: (val) {
           
+             Provider.of<ProviderData>(context, listen: false).searchTanggal=val;
               Provider.of<ProviderData>(context, listen: false)
-                  .searchTransaksi(val);
+                  .searchTransaksi();
             
           },
           decoration: const InputDecoration(
-            hintText: 'Cari Supir/Mobil',
+            hintText: 'DD/MM/YYYY',
           ),
         ));
   }

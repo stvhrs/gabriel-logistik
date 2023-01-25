@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
-import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,7 +25,7 @@ class TransaksiEdit extends StatefulWidget {
 class _TransaksiEditState extends State<TransaksiEdit> {
   List<String> listSupir = [];
   List<String> listMobil = [];
-final RoundedLoadingButtonController _btnController =
+  final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
   late Transaksi transaksi = Transaksi.fromMap({
     'id_transaksi': 1,
@@ -78,70 +76,94 @@ final RoundedLoadingButtonController _btnController =
     transaksi.listPerbaikan = List.from(widget.transaksi.listPerbaikan);
   }
 
-
-
-  Widget _buildPartName(int i, BuildContext context,StateSetter stateSetter ) {
-    print(i);
+  Widget _buildPartName(int i, BuildContext context, StateSetter stateSetter) {
+    TextEditingController controller =
+        TextEditingController(text: transaksi.listPerbaikan[i].nama_perbaikan);
+    TextEditingController controller2 = TextEditingController(
+        text: Rupiah.format(transaksi.listPerbaikan[i].harga_perbaikan));
     return Container(
+        key: ValueKey(i),
         margin: const EdgeInsets.only(bottom: 10),
-        child:Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    _buildSize2(
-                        TextFormField(
-                          initialValue: transaksi.listPerbaikan[i].nama_perbaikan,
-                          onChanged: (value) {
-                            if (transaksi.listPerbaikan.isNotEmpty) {
-                              transaksi.listPerbaikan[i].nama_perbaikan = value;
-                            }
-                          },
-                          decoration: const InputDecoration(hintText: 'Part'),
-                        ),
-                        1),
-                    _buildSize2(
-                        TextFormField(
-                          initialValue: Rupiah.format(
-                              transaksi.listPerbaikan[i].harga_perbaikan),
-                          decoration: const InputDecoration(hintText: 'Harga'),
-                          onChanged: (value) {
-                            if (transaksi.listPerbaikan.isNotEmpty) {
-                              transaksi.listPerbaikan[i].harga_perbaikan =
-                                  NumberFormat.currency(
-                                          locale: 'id_ID', symbol: 'Rp ')
-                                      .parse(value)
-                                      .toDouble();
-                            }
-                          },
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                            CurrencyInputFormatter()
-                          ],
-                        ),
-                        1),
-                    IconButton(
-                      onPressed: () {
- transaksi.listPerbaikan.removeAt(i);
-           stateSetter((){});
-
-
-                      },
-                      icon: Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                      ),
-                    ),
-                    Expanded(flex: 2, child: SizedBox())
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildSize2(
+                TextFormField(
+                  controller: controller,
+                  onChanged: (value) {
+                    if (transaksi.listPerbaikan.isNotEmpty) {
+                      transaksi.listPerbaikan[i].nama_perbaikan = value;
+                    }
+                  },
+                  decoration: const InputDecoration(hintText: 'Part'),
+                ),
+                1,
+                false),
+            _buildSize2(
+                TextFormField(
+                  controller: controller2,
+                  decoration: const InputDecoration(hintText: 'Harga'),
+                  onChanged: (value) {
+                    if (transaksi.listPerbaikan.isNotEmpty) {
+                      transaksi.listPerbaikan[i].harga_perbaikan =
+                          NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ')
+                              .parse(value)
+                              .toDouble();
+                    }
+                  },
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    CurrencyInputFormatter()
                   ],
-                ));
+                ),
+                1,
+                true),
+            IconButton(
+              onPressed: () {
+                print(transaksi.listPerbaikan.length);
+                transaksi.listPerbaikan.removeAt(i);
+                print(transaksi.listPerbaikan.length);
+                stateSetter(() {});
+                for (var element in transaksi.listPerbaikan) {
+                  print(element.nama_perbaikan);
+                }
+              },
+              icon: const Icon(
+                Icons.delete,
+                color: Colors.red,
+              ),
+            ),
+          ],
+        ));
   }
 
   Widget _buildSize(widget, String ket, int flex) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.14 * flex,
+      margin: EdgeInsets.only(
+          right: ket == 'Tanggal' || ket == 'Keterangan' ? 0 : 50, bottom: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              margin: const EdgeInsets.only(bottom: 7),
+              child: Text(
+                '$ket :',
+                style: const TextStyle(fontSize: 13),
+              )),
+          widget
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSizeV2(
+    widget,
+    String ket,
+  ) {
     return Expanded(
-      flex: flex,
       child: Container(
-        margin: EdgeInsets.only(
-            right: ket == 'Tanggal' || ket == 'Keterangan' ? 0 : 70,
-            bottom: 50),
+        margin: EdgeInsets.only(right: 0, bottom: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -158,22 +180,17 @@ final RoundedLoadingButtonController _btnController =
     );
   }
 
-  Widget _buildSize2(widget, int flex) {
-    return Flexible(
-      flex: flex,
-      child: Container(
-          margin: EdgeInsets.only(right: 70, bottom: 15), child: widget),
-    );
+  Widget _buildSize2(widget, int flex, bool ket) {
+    return Container(
+        width: MediaQuery.of(context).size.width * 0.14 * flex,
+        margin: EdgeInsets.only(right: ket ? 10 : 50,bottom: 10),
+        child: widget);
   }
 
   @override
   Widget build(BuildContext context) {
-    transaksi.transaksiId = Provider.of<ProviderData>(context, listen: false)
-            .backupTransaksi
-            .length +
-        1;
     return InkWell(
-        child: Icon(
+        child: const Icon(
           Icons.edit,
           color: Colors.green,
           size: 18,
@@ -204,11 +221,11 @@ final RoundedLoadingButtonController _btnController =
                         // ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4),
-                          borderSide: BorderSide(color: Colors.green),
+                          borderSide: const BorderSide(color: Colors.green),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4),
-                          borderSide: BorderSide(color: Colors.green),
+                          borderSide: const BorderSide(color: Colors.green),
                         ),
                       ),
                     ),
@@ -255,44 +272,14 @@ final RoundedLoadingButtonController _btnController =
                                 (BuildContext context, StateSetter setState) =>
                                     IntrinsicHeight(
                               child: Container(
-                                padding: const EdgeInsets.only(
-                                    bottom: 20, left: 20, right: 20, top: 15),
+                                padding: const EdgeInsets.all(
+                                  25),
                                 width: MediaQuery.of(context).size.width * 0.7,
                                 child: SingleChildScrollView(
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    children: [ Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          const Text('Tambah Perbaikan'),
-                                          IconButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  transaksi.listPerbaikan
-                                                      .add(Perbaikan.fromMap(
-                                                    {
-                                                      'nama_perbaikan': '',
-                                                      'harga_perbaikan': 0
-                                                    },
-                                                  ));
-                                                });
-                                              },
-                                              icon: const Icon(Icons.add)),
-                                               IconButton(
-                                              onPressed: () {
-                                          setState(() {
-                                             transaksi.listPerbaikan
-                                                      .remove(transaksi.listPerbaikan[transaksi.listPerbaikan.length-1]);
-                                          });
-                                                  
-                                                
-                                              },
-                                              icon: const Icon(Icons.car_crash)),Text(transaksi.listPerbaikan.length.toString())
-                                          // Text(jumlahOpsi.toString()),
-                                        ],
-                                      ),
+                                    children: [
                                       Container(
                                         // margin: EdgeInsets.only(bottom: 50),
                                         child: Row(
@@ -307,7 +294,7 @@ final RoundedLoadingButtonController _btnController =
                                                   items: listSupir,
                                                 ),
                                                 'Pilih Supir',
-                                                200),
+                                                1),
                                             _buildSize(
                                                 DropDownField(
                                                   onValueChanged: (val) {
@@ -316,29 +303,27 @@ final RoundedLoadingButtonController _btnController =
                                                   items: listMobil,
                                                 ),
                                                 'Pilih Mobil',
-                                                200),
+                                                1),
                                             _buildSize(TextFormField(
                                               onChanged: (va) {
                                                 transaksi.tujuan = va;
                                               },
-                                            ), 'Ketik Tujuan', 200),
-                                            const Spacer(),
-                                            _buildSize(
-                                                WebDatePicker(
-                                                  height: 60,
-                                                  initialDate: DateTime.now(),
-                                                  dateformat: 'dd/MM/yyyy',
-                                                  onChange: (value) {
-                                                    if (value != null) {
-                                                      transaksi
-                                                              .tanggalBerangkat =
-                                                          value
-                                                              .toIso8601String();
-                                                    }
-                                                  },
-                                                ),
-                                                'Tanggal',
-                                                200)
+                                            ), 'Ketik Tujuan', 1),
+                                         
+                                            _buildSizeV2(
+                                              WebDatePicker(
+                                                height: 60,width: double.infinity,
+                                                initialDate: DateTime.now(),
+                                                dateformat: 'dd/MM/yyyy',
+                                                onChange: (value) {
+                                                  if (value != null) {
+                                                    transaksi.tanggalBerangkat =
+                                                        value.toIso8601String();
+                                                  }
+                                                },
+                                              ),
+                                              'Tanggal',
+                                            )
                                           ],
                                         ),
                                       ),
@@ -362,7 +347,7 @@ final RoundedLoadingButtonController _btnController =
                                                 ],
                                               ),
                                               'Biaya Keluar',
-                                              200),
+                                              1),
                                           _buildSize(
                                               TextFormField(
                                                 onChanged: (va) {
@@ -381,11 +366,13 @@ final RoundedLoadingButtonController _btnController =
                                                 ],
                                               ),
                                               'Biaya Ongkos',
-                                              200),
-                                          _buildSize(
-                                              TextFormField(onChanged: (val) {
-                                            transaksi.keterangan = val;
-                                          }), 'Keterangan', 400),
+                                              1),
+                                          _buildSizeV2(
+                                            TextFormField(onChanged: (val) {
+                                              transaksi.keterangan = val;
+                                            }),
+                                            'Keterangan',
+                                          ),
                                         ],
                                       ),
                                       const Text(
@@ -393,15 +380,18 @@ final RoundedLoadingButtonController _btnController =
                                         style: TextStyle(fontSize: 13),
                                       ),
                                       const Divider(),
-                                     
-                                          ...transaksi.listPerbaikan.map((e) => _buildPartName(transaksi.listPerbaikan.indexOf(e), context, setState
-                                          )).toList(),
-                                         
+                                      ...transaksi.listPerbaikan
+                                          .map((e) => _buildPartName(
+                                              transaksi.listPerbaikan
+                                                  .indexOf(e),
+                                              context,
+                                              setState))
+                                          .toList(),
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.end,
+                                            MainAxisAlignment.start,
                                         children: [
-                                          const Text('Tambah Perbaikan'),
+                                          const Text('Tambah Perbaikan',style: TextStyle(fontSize: 13),),
                                           IconButton(
                                               onPressed: () {
                                                 setState(() {
@@ -414,27 +404,15 @@ final RoundedLoadingButtonController _btnController =
                                                   ));
                                                 });
                                               },
-                                              icon: const Icon(Icons.add)),
-                                               IconButton(
-                                              onPressed: () {
-                                          setState(() {
-                                             transaksi.listPerbaikan
-                                                      .remove(transaksi.listPerbaikan[transaksi.listPerbaikan.length-1]);
-                                          });
-                                                  
-                                                
-                                              },
-                                              icon: const Icon(Icons.car_crash)),Text(transaksi.listPerbaikan.length.toString())
+                                              icon: const Icon(Icons.add_circle_rounded,color: Colors.green,)),
+
                                           // Text(jumlahOpsi.toString()),
                                         ],
                                       ),
                                       RoundedLoadingButton(
-                                        color: Theme.of(context).primaryColor,
+                                        color: Colors.green,
                                         successColor: Colors.green,
                                         errorColor: Colors.red,
-                                        child: Text('Edit',
-                                            style:
-                                                TextStyle(color: Colors.white)),
                                         controller: _btnController,
                                         onPressed: () async {
                                           if (transaksi.keluar == 0 ||
@@ -446,23 +424,26 @@ final RoundedLoadingButtonController _btnController =
                                                   '') {
                                             _btnController.error();
                                             await Future.delayed(
-                                                Duration(seconds: 1));
+                                                const Duration(seconds: 1));
                                             _btnController.reset();
                                             return;
                                           }
 
                                           await Future.delayed(
-                                              Duration(seconds: 3), () {
+                                              const Duration(seconds: 3), () {
                                             Provider.of<ProviderData>(context,
                                                     listen: false)
                                                 .updateTransaksi(transaksi);
                                             _btnController.success();
                                           });
                                           await Future.delayed(
-                                              Duration(seconds: 2), () {
+                                              const Duration(seconds: 2), () {
                                             Navigator.of(context).pop();
                                           });
                                         },
+                                        child: const Text('Edit',
+                                            style:
+                                                TextStyle(color: Colors.white)),
                                       )
                                     ],
                                   ),

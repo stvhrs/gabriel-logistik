@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/mobil/edit_pelanggan.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
-import 'package:gabriel_logistik/supir/edit_supir.dart';
 import 'package:gabriel_logistik/supir/tambah_supir.dart';
 import 'package:provider/provider.dart';
 
@@ -42,10 +40,10 @@ class _DaftarMobilState extends State<DaftarMobil> {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      margin: EdgeInsets.only(bottom: 5),
+                      margin: const EdgeInsets.only(bottom: 5),
                       height: MediaQuery.of(context).size.height / 20,
                       child: TextFormField(
-                        decoration: InputDecoration(hintText: 'Cari'),
+                        decoration: const InputDecoration(hintText: 'Cari'),
                         onChanged: (val) {
                           Provider.of<ProviderData>(context, listen: false)
                               .searchMobil(val.toLowerCase());
@@ -53,7 +51,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
                       ),
                     ),
                   ),
-                  Expanded(flex: 4, child: SizedBox()),
+                  const Expanded(flex: 4, child: SizedBox()),
                   TambahPelanggan()
                 ],
               ),

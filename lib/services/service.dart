@@ -16,56 +16,69 @@ List<Map<String, dynamic>> dummyData = [
     'id_transaksi': 1,
     'tgl_berangkat': '2022-07-20T20:18:04.000Z','keterangan':'test keterangan',
     'supir': 'Budi',
-    'tujuan': 'Gemolong',
-    'mobil': 'Ford AD 9999 RR',
+    'tujuan': 'Sumberlawang',
+    'mobil': 'Toyota',
     'keluar': 100,
     'ongkos': 400,
     'perbaikan_transaksi': [{'nama_perbaikan':'Ban BridgeStone','harga_perbaikan':100000}]
   },
   {
-    'id_transaksi': 1,
+    'id_transaksi': 2,
     'tgl_berangkat': '2022-07-20T20:18:04.000Z','keterangan':'test keterangan',
     'supir': 'Ahamad',
     'tujuan': 'Gemolong',
-    'mobil': 'Ford AD 9999 RR',
+    'mobil': 'Honda',
     'keluar': 100,
     'ongkos': 400,
     'perbaikan_transaksi': []
   },
   {
-    'id_transaksi': 1,
+    'id_transaksi': 3,
     'tgl_berangkat': '2022-07-20T20:18:04.000Z','keterangan':'test keterangan',
     'supir': 'Cahyo',
-    'tujuan': 'Gemolong',
-    'mobil': 'Ford AD 9999 RR',
+    'tujuan': 'Miri',
+    'mobil': 'Ford',
     'keluar': 100,
     'ongkos': 400,
     'perbaikan_transaksi': []
   },
   {
-    'id_transaksi': 1,
+    'id_transaksi': 4,
     'tgl_berangkat': '2022-07-20T20:18:04.000Z','keterangan':'test keterangan',
     'supir': 'Doni',
     'tujuan': 'Gemolong',
-    'mobil': 'Ford AD 9999 RR',
+    'mobil': 'Ford',
     'keluar': 100,
     'ongkos': 400,
     'perbaikan_transaksi': []
   },
-];
+  
+]
+;
 List<Map<String, dynamic>> dummyData2 = [
-  {'id_supir': 1, 'nama_supir': 'Steve', 'nohp_supir': '085728181929'}
+  {'id_supir': 1, 'nama_supir': 'Doni', 'nohp_supir': '085728181929'},
+    {'id_supir': 1, 'nama_supir': 'Budi', 'nohp_supir': '085728181929'},  {'id_supir': 1, 'nama_supir': 'Steve', 'nohp_supir': '085728181929'}
+    ,  {'id_supir': 1, 'nama_supir': 'Ahamad', 'nohp_supir': '085728181929'},
+      {'id_supir': 1, 'nama_supir': 'Cahyo', 'nohp_supir': '085728181929'}
 ];
 List<Map<String, dynamic>> dummyData3 = [
+  {'id_mobil': 1, 'nama_mobil': 'Honda', 'nopol_mobil': 'AD 4349 AWE'},
+  {'id_mobil': 1, 'nama_mobil': 'Toyota', 'nopol_mobil': 'AD 4349 AWE'},
+  {'id_mobil': 1, 'nama_mobil': 'Ford', 'nopol_mobil': 'AD 4349 AWE'},
   {'id_mobil': 1, 'nama_mobil': 'Avanza', 'nopol_mobil': 'AD 4349 AWE'}
 ];
 
 class Service {
   static Future<List<Transaksi>> getAllTransaksi() async {
-    List<Transaksi> data = [];
+     List<Transaksi> data = [];
+   
     for (var element in dummyData) {
+
+       
       data.add(Transaksi.fromMap(element));
+    
     }
+   
     return data;
   }
 

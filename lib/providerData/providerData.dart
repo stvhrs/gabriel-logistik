@@ -1,10 +1,9 @@
-import 'dart:developer';
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/supir.dart';
 
+import '../helper/format_tanggal.dart';
 import '../models/transaksi.dart';
 
 class ProviderData with ChangeNotifier {
@@ -13,8 +12,8 @@ class ProviderData with ChangeNotifier {
 
   List<Supir> listSupir = [];
   List<Mobil> listMobil = [];
-  List<Supir> backupListSupir = [];
-  List<Mobil> backupListMobil = [];
+    List<Supir> backupListSupir = [];
+    List<Mobil> backupListMobil = [];
 
   void setData(List<Transaksi> data, bool listen, List<Mobil> mobilData,
       List<Supir> supirData) {
@@ -24,10 +23,10 @@ class ProviderData with ChangeNotifier {
     listTransaksi.addAll(data);
     backupTransaksi.addAll(data);
 
-    backupListMobil = mobilData;
-    backupListSupir = supirData;
-    listMobil = mobilData;
-    listSupir = supirData;
+    backupListMobil.addAll(mobilData);
+    backupListSupir.addAll(supirData)  ;
+    listMobil.addAll(mobilData);
+    listSupir.addAll(supirData);
     (listen) ? notifyListeners() : () {};
   }
 
@@ -50,8 +49,8 @@ class ProviderData with ChangeNotifier {
   }
 
   void addSupir(Supir supir) {
-    listSupir.add(supir);
-    backupListSupir.add(supir);
+    listSupir.insert(0,supir);
+    backupListSupir.insert(0,supir);
     notifyListeners();
   }
 
@@ -64,11 +63,12 @@ class ProviderData with ChangeNotifier {
     int data =
         listSupir.indexWhere((element) => element.id_supir == supir.id_supir);
     listSupir[data] = supir;
+    notifyListeners();
   }
 
   void addTransaksi(Transaksi transaksi) {
-    listTransaksi.add(transaksi);
-    backupTransaksi.add(transaksi);
+    listTransaksi.insert(0,transaksi);
+    backupTransaksi.insert(0,transaksi);
 
     notifyListeners();
   }
@@ -81,19 +81,45 @@ class ProviderData with ChangeNotifier {
   void updateTransaksi(Transaksi transaksi) {
     int data = listTransaksi
         .indexWhere((element) => element.transaksiId == transaksi.transaksiId);
-    listTransaksi[data] = transaksi;
+        print(data);
+   listTransaksi[data] = transaksi;
+    backupTransaksi[data] = transaksi;
+   notifyListeners();
   }
+String searchmobile='';
+String searchsupir='';
+String searchtujuan='';
+bool searchPerbaikan=false;  
+String searchTanggal='';
+  void searchTransaksi() {
+    listTransaksi.clear();
+  for (Transaksi data in backupTransaksi) {
+    bool skipped = false;
 
-  void searchTransaksi(String val) {
-    if (val.isEmpty) {
-      listTransaksi.clear();
-      listTransaksi.addAll(backupTransaksi);
-    } else {
-      listTransaksi = backupTransaksi
-          .where((element) =>
-              element.supir.toLowerCase().startsWith(val.toLowerCase()))
-          .toList();
+    if (searchmobile.isNotEmpty&&!data.mobil.toLowerCase().startsWith(searchmobile.toLowerCase())) {
+      skipped = true;
     }
+    if (searchsupir.isNotEmpty&&!data.supir.toLowerCase().startsWith(searchsupir.toLowerCase())) {
+      skipped = true;
+    }
+    if (searchtujuan.isNotEmpty&&!data.tujuan.toLowerCase().startsWith(searchtujuan.toLowerCase())) {
+      skipped = true;
+    }
+     if (searchTanggal.isNotEmpty&&!FormatTanggal.formatTanggal(
+                  data.tanggalBerangkat).contains(searchTanggal.toLowerCase())) {
+      skipped = true;
+    }
+     if (searchPerbaikan&&data.listPerbaikan.isEmpty) {
+      skipped = true;
+    }
+    
+
+
+    if (!skipped) {
+      listTransaksi.add(data);
+    }
+
+  }
     notifyListeners();
   }
 
@@ -122,4 +148,5 @@ class ProviderData with ChangeNotifier {
     }
     notifyListeners();
   }
+ 
 }

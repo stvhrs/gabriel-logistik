@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
       locale: const Locale('id'),
       supportedLocales: localization.supportedLocales,
       localizationsDelegates: localization.localizationsDelegates,
-      title: 'Gabriel Logistik',
+      title: 'Logistik',
       theme: AppTheme.getAppThemeData(),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -122,10 +122,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(
                       maxHeight: 150,
-                      maxWidth: 150,
+                      maxWidth: 200,
                     ),
                     child: Image.asset(
-                      'images/logo.png',
+                      'images/logo.png',isAntiAlias: true,color: Colors.black
+                      // color: Colors.white,
                     ),
                   ),
                 ),

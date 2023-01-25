@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/supir/edit_supir.dart';
 import 'package:gabriel_logistik/supir/tambah_supir.dart';
@@ -39,9 +38,9 @@ class _DaftarSupirState extends State<DaftarSupir> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: Container(margin: EdgeInsets.only(bottom:5),
+                    child: Container(margin: const EdgeInsets.only(bottom:5),
                       height: MediaQuery.of(context).size.height / 20,
-                      child: TextFormField(decoration: InputDecoration(hintText: 'Cari'),
+                      child: TextFormField(decoration: const InputDecoration(hintText: 'Cari'),
                         onChanged: (val) {
                           Provider.of<ProviderData>(context, listen: false)
                               .searchSupir(val.toLowerCase());
@@ -49,7 +48,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
                       ),
                     ),
                   ),
-                  Expanded(flex: 4, child: SizedBox()),
+                  const Expanded(flex: 4, child: SizedBox()),
                   TambahPelanggan()
                 ],
               ),
@@ -61,9 +60,9 @@ class _DaftarSupirState extends State<DaftarSupir> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
                     Expanded(flex: 11, child: Text('Nama')),
-                    Expanded(flex: 11, child: Text('Alamat')),
+                 
                     Expanded(flex: 11, child: Text('Nomor Hp')),
-                    Expanded(flex: 3, child: Text('       Aksi'))
+                    Expanded(flex: 3, child: Text(' Aksi'))
                   ],
                 ),
               ),
@@ -84,7 +83,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
                 return SizedBox(
                     height: MediaQuery.of(context).size.height * 0.7,
                     child: ListView.builder(
-                      itemCount: c.listSupir.length,
+                      itemCount: c.listSupir.reversed.toList().length,
                       itemBuilder: (context, index) => InkWell(
                         child: Container(
                           color: index.isEven
@@ -99,23 +98,21 @@ class _DaftarSupirState extends State<DaftarSupir> {
                               Expanded(
                                   flex: 3,
                                   child: Text(c.listSupir[index].nohp_supir)),
-                              Expanded(
-                                  flex: 3,
-                                  child: Text(c.listSupir[index].nama_supir)),
+                             
                               Expanded(
                                 flex: 1,
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    EditPelanggan(c.listSupir[index]),
+                                    EditSupir(c.listSupir[index]),
                                     IconButton(
                                         onPressed: () {},
                                         icon: Icon(
                                           Icons.delete,
-                                          size: 16,
+                                        
                                           color: Colors.red.shade700,
                                         )),
-                                    const Spacer(),
+                                    const Spacer(),const Spacer(),
                                   ],
                                 ),
                               )

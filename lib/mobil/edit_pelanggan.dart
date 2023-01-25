@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 
 
 class EditMobil extends StatefulWidget {

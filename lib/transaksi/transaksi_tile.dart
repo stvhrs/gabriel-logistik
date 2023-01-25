@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
@@ -45,18 +44,15 @@ class _TransaksiTileState extends State<TransaksiTile> {
   @override
   void initState() {
     jumlahOpsi=widget._transaksi.listPerbaikan.length;
-    List<Supir> _listSupir =
-        Provider.of<ProviderData>(context, listen: false).listSupir;
-    List<Mobil> _listMobil =
-        Provider.of<ProviderData>(context, listen: false).listMobil;
+ 
 
-    _listSupir.map((e) => e.nama_supir).toList().forEach((element) {
+    Provider.of<ProviderData>(context, listen: false).listSupir.map((e) => e.nama_supir).toList().forEach((element) {
       if (listSupir.contains(element)) {
       } else {
         listSupir.add(element);
       }
     });
-    _listMobil.map((e) => e.nama_mobil).toList().forEach((element) {
+     Provider.of<ProviderData>(context, listen: false).listMobil.map((e) => e.nama_mobil).toList().forEach((element) {
       print(element);
       if (listMobil.contains(element)) {
       } else {
@@ -300,7 +296,7 @@ class _TransaksiTileState extends State<TransaksiTile> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
+                                          const Text(
                                             'Perbaikan :',
                                             style: TextStyle(fontSize: 13),
                                           ),
@@ -311,7 +307,7 @@ class _TransaksiTileState extends State<TransaksiTile> {
                                                   index, context)),
                                         ],
                                       )
-                                    : SizedBox()
+                                    : const SizedBox()
                               ],
                             ),
                           ),
@@ -329,8 +325,8 @@ class _TransaksiTileState extends State<TransaksiTile> {
         color: hover
             ? Colors.amber.shade100
             : widget.index.isEven
-                ? const Color.fromARGB(255, 181, 212, 238)
-                : Colors.grey.shade200,
+                ? Colors.grey.shade200:Color.fromARGB(255, 181, 212, 238),
+                
         padding:
             const EdgeInsets.only(top: 14, bottom: 14, left: 15, right: 15),
         child: Row(

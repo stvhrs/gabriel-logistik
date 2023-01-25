@@ -5,8 +5,10 @@ class AppTheme {
   static Color primaryColor = const Color.fromARGB(255, 75, 135, 167);
   static Color secondaryColor = const Color.fromARGB(255, 157, 208, 255);
   static ThemeData getAppThemeData() {
-    return ThemeData(scaffoldBackgroundColor: Colors.white,
-      primaryColor: primaryColor,
+    return ThemeData(scaffoldBackgroundColor: Colors.white,elevatedButtonTheme: ElevatedButtonThemeData(style:  ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(
+               Colors.green))),
+      primaryColor: primaryColor,buttonTheme: ButtonThemeData(),
       scrollbarTheme: const ScrollbarThemeData()
           .copyWith(thumbColor: MaterialStateProperty.all(secondaryColor)),
       textTheme: const TextTheme(
