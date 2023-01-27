@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/mobil/edit_pelanggan.dart';
+import 'package:gabriel_logistik/mobil/tambah_pelanggan.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/supir/tambah_supir.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +53,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
                     ),
                   ),
                   const Expanded(flex: 4, child: SizedBox()),
-                  TambahPelanggan()
+                  TambahMobil()
                 ],
               ),
               Container(

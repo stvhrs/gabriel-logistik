@@ -49,7 +49,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
                     ),
                   ),
                   const Expanded(flex: 4, child: SizedBox()),
-                  TambahPelanggan()
+                  TambahSupir()
                 ],
               ),
               Container(
