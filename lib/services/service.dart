@@ -14,17 +14,21 @@ const Map<String, String> headers = {
 List<Map<String, dynamic>> dummyData = [
   {
     'id_transaksi': 1,
-    'tgl_berangkat': '2022-07-20T20:18:04.000Z','keterangan':'test keterangan',
+    'tgl_berangkat': '2022-06-20T20:18:04.000Z',
+    'keterangan': 'test keterangan',
     'supir': 'Budi',
     'tujuan': 'Sumberlawang',
     'mobil': 'Toyota',
     'keluar': 100,
     'ongkos': 400,
-    'perbaikan_transaksi': [{'nama_perbaikan':'Ban BridgeStone','harga_perbaikan':100000}]
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Ban BridgeStone', 'harga_perbaikan': 100000}
+    ]
   },
   {
     'id_transaksi': 2,
-    'tgl_berangkat': '2022-07-20T20:18:04.000Z','keterangan':'test keterangan',
+    'tgl_berangkat': '2022-07-20T20:18:04.000Z',
+    'keterangan': 'test keterangan',
     'supir': 'Ahamad',
     'tujuan': 'Gemolong',
     'mobil': 'Honda',
@@ -34,7 +38,8 @@ List<Map<String, dynamic>> dummyData = [
   },
   {
     'id_transaksi': 3,
-    'tgl_berangkat': '2022-07-20T20:18:04.000Z','keterangan':'test keterangan',
+    'tgl_berangkat': '2022-08-20T20:18:04.000Z',
+    'keterangan': 'test keterangan',
     'supir': 'Cahyo',
     'tujuan': 'Miri',
     'mobil': 'Ford',
@@ -44,41 +49,76 @@ List<Map<String, dynamic>> dummyData = [
   },
   {
     'id_transaksi': 4,
-    'tgl_berangkat': '2022-07-20T20:18:04.000Z','keterangan':'test keterangan',
+    'tgl_berangkat': '2023-01-20T20:18:04.000Z',
+    'keterangan': 'test keterangan',
     'supir': 'Doni',
     'tujuan': 'Gemolong',
     'mobil': 'Ford',
-    'keluar': 100,
-    'ongkos': 400,
+    'keluar': 1000000,
+    'ongkos': 4000000,
     'perbaikan_transaksi': []
   },
+  {
+    'id_transaksi': 5,
+    'tgl_berangkat': '2023-01-20T20:18:04.000Z',
+    'keterangan': 'test keterangan',
+    'supir': 'Doni',
+    'tujuan': 'Gemolong',
+    'mobil': 'Ford',
+    'keluar': 10000000,
+    'ongkos': 40000000,
+    'perbaikan_transaksi': []
+  },
+  {
+    'id_transaksi': 6,
+    'tgl_berangkat': '2023-01-20T20:18:04.000Z',
+    'keterangan': 'test keterangan',
+    'supir': 'Doni',
+    'tujuan': 'Gemolong',
+    'mobil': 'Ford',
+    'keluar': 1000000,
+    'ongkos': 4000000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Ban BridgeStone', 'harga_perbaikan': 1000000}
+    ]
+  },
+   {
+    'id_transaksi': 7,
+    'tgl_berangkat': '2023-02-20T20:18:04.000Z',
+    'keterangan': 'test keterangan',
+    'supir': 'Doni',
+    'tujuan': 'Gemolong',
+    'mobil': 'Ford',
+    'keluar': 1000000,
+    'ongkos': 4000000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Ban BridgeStone', 'harga_perbaikan': 1000000}
+    ]
+  },
   
-]
-;
+];
 List<Map<String, dynamic>> dummyData2 = [
   {'id_supir': 1, 'nama_supir': 'Doni', 'nohp_supir': '085728181929'},
-    {'id_supir': 1, 'nama_supir': 'Budi', 'nohp_supir': '085728181929'},  {'id_supir': 1, 'nama_supir': 'Steve', 'nohp_supir': '085728181929'}
-    ,  {'id_supir': 1, 'nama_supir': 'Ahamad', 'nohp_supir': '085728181929'},
-      {'id_supir': 1, 'nama_supir': 'Cahyo', 'nohp_supir': '085728181929'}
+  {'id_supir': 2, 'nama_supir': 'Budi', 'nohp_supir': '085728181929'},
+  {'id_supir': 3, 'nama_supir': 'Steve', 'nohp_supir': '085728181929'},
+  {'id_supir': 4, 'nama_supir': 'Ahamad', 'nohp_supir': '085728181929'},
+  {'id_supir': 5, 'nama_supir': 'Cahyo', 'nohp_supir': '085728181929'}
 ];
 List<Map<String, dynamic>> dummyData3 = [
   {'id_mobil': 1, 'nama_mobil': 'Honda', 'nopol_mobil': 'AD 4349 AWE'},
-  {'id_mobil': 1, 'nama_mobil': 'Toyota', 'nopol_mobil': 'AD 4349 AWE'},
-  {'id_mobil': 1, 'nama_mobil': 'Ford', 'nopol_mobil': 'AD 4349 AWE'},
-  {'id_mobil': 1, 'nama_mobil': 'Avanza', 'nopol_mobil': 'AD 4349 AWE'}
+  {'id_mobil': 2, 'nama_mobil': 'Toyota', 'nopol_mobil': 'AD 4349 AWE'},
+  {'id_mobil': 3, 'nama_mobil': 'Ford', 'nopol_mobil': 'AD 4349 AWE'},
+  {'id_mobil': 4, 'nama_mobil': 'Avanza', 'nopol_mobil': 'AD 4349 AWE'}
 ];
 
 class Service {
   static Future<List<Transaksi>> getAllTransaksi() async {
-     List<Transaksi> data = [];
-   
-    for (var element in dummyData) {
+    List<Transaksi> data = [];
 
-       
+    for (var element in dummyData) {
       data.add(Transaksi.fromMap(element));
-    
     }
-   
+
     return data;
   }
 

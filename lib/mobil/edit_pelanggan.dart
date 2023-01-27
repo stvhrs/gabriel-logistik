@@ -1,143 +1,115 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
+import 'package:gabriel_logistik/models/supir.dart';
+import 'package:provider/provider.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
+import '../providerData/providerData.dart';
 
-class EditMobil extends StatefulWidget {
-  final Mobil pelanggan;
-  const EditMobil(this.pelanggan);
+class EditMobil extends StatelessWidget {
+  final Mobil supir;
+   EditMobil(this.supir);
+  final RoundedLoadingButtonController _btnController =
+      RoundedLoadingButtonController();
 
-  @override
-  State<EditMobil> createState() => _EditMobilState();
-}
-
-String namaPelanggan = '';
-String noHp = '';
-String alamat = '';
-
-class _EditMobilState extends State<EditMobil> {
-  @override
-  void initState() {
-    super.initState();
-    namaPelanggan = widget.pelanggan.nama_mobil;
-    noHp = widget.pelanggan.nopol_mobil;
-    alamat = widget.pelanggan.id_mobil.toString();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
+
+
     return IconButton(
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
-              const Color.fromARGB(255, 79, 117, 134))),
-      onPressed: () {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                title: const Text("Edit Pelanggan"),
-                content: IntrinsicHeight(
-                  child: SizedBox(
-                    width: 500,
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: TextFormField(
-                            initialValue: widget.pelanggan.nama_mobil,
-                            decoration: const InputDecoration(
-                              hintText: 'Nama Pelanggan',
-                            ),
-                            onChanged: (val) {
-                              namaPelanggan = val.toString();
-                            },
-                            maxLines: 1,
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: TextFormField(
-                              initialValue: widget.pelanggan.nopol_mobil,
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(
+                const Color.fromARGB(255, 79, 117, 134))),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
+                  title: const Text("Edit Mobil"),
+                  content: IntrinsicHeight(
+                    child: SizedBox(
+                      width: 500,
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            child: TextFormField(initialValue: supir.nama_mobil,
+                              decoration: const InputDecoration(
+                                hintText: 'Nama Mobil',
+                              ),
                               onChanged: (val) {
-                                noHp = val.toString();
+                                supir.nama_mobil = val.toString();
                               },
                               maxLines: 1,
-                              decoration: InputDecoration(
-                                hintText: 'Nomor Hp',
-                                contentPadding: const EdgeInsets.only(
-                                    left: 10, top: 10, bottom: 10),
-                                fillColor: Colors.white,
-                                hintStyle: TextStyle(
-                                    color: Colors.grey.shade600,
-                                    fontSize: 15,
-                                    height: 2),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide:
-                                      BorderSide(color: Colors.grey.shade300),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide:
-                                      BorderSide(color: Colors.grey.shade300),
-                                ),
-                              )),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: TextFormField(
-                              initialValue: widget.pelanggan.id_mobil.toString(),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            child: TextFormField(initialValue: supir.nopol_mobil,
+                              decoration: const InputDecoration(
+                                hintText: 'No Hp',
+                              ),
                               onChanged: (val) {
-                                alamat = val.toString();
+                                 supir.nopol_mobil = val.toString();
                               },
-                              maxLines: 3,
-                              decoration: InputDecoration(
-                                hintText: 'Alamat',
-                                contentPadding: const EdgeInsets.only(
-                                    left: 10, top: 10, bottom: 10),
-                                fillColor: Colors.white,
-                                hintStyle: TextStyle(
-                                    color: Colors.grey.shade600,
-                                    fontSize: 15,
-                                    height: 2),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide:
-                                      BorderSide(color: Colors.grey.shade300),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide:
-                                      BorderSide(color: Colors.grey.shade300),
-                                ),
-                              )),
-                        )
-                      ],
+                              maxLines: 1,
+                            ),
+                          ),
+                          // Container(
+                          //   margin: const EdgeInsets.only(bottom: 20),
+                          //   child: TextFormField(initialValue: supir.nama_mobil,
+                          //     decoration: const InputDecoration(
+                          //       hintText: 'Alamat',
+                          //     ),
+                          //     onChanged: (val) {
+                          //       alamat = val.toString();
+                          //     },
+                          //     maxLines: 3,
+                          //   ),
+                          // )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                actions: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      // widget.pelanggan.nohp_supir = namaPelanggan;
-                      
-                      // widget.pelanggan.nohp_supir = alamat;
-                      // widget.pelanggan.nohp_supir = noHp;
-                   
-                      Navigator.of(context).pop();
-                    },
-                    // },
-                    child: const Text("Edit Pelanggan"),
-                  ),
-                ],
-              );
-            });
-      },
-      icon: const Icon(
-        Icons.edit,
-        size: 16,
-        color: Colors.green,
-      ),
-    );
+                  actions: <Widget>[
+                    RoundedLoadingButton(
+                      color: Theme.of(context).primaryColor,
+                      elevation: 10,
+                      successColor: Colors.green,
+                      errorColor: Colors.red,
+                      child:
+                          Text('Edit', style: TextStyle(color: Colors.white)),
+                      controller: _btnController,
+                      onPressed: () async {
+                        if (supir.nama_mobil.isEmpty ||
+                          
+                            supir.nopol_mobil .isEmpty) {
+                          _btnController.error();
+                          await Future.delayed(Duration(seconds: 1));
+                          _btnController.reset();
+                          return;
+                        }
+
+                        await Future.delayed(Duration(seconds: 3), () {
+                          Provider.of<ProviderData>(context, listen: false)
+                              .updateSupir(Supir(
+                                 supir.id_mobil,
+                                    supir.nama_mobil,
+                                    supir.nama_mobil));
+                          _btnController.success();
+                        });
+                        await Future.delayed(Duration(seconds: 1), () {
+                          Navigator.of(context).pop();
+                        });
+                      },
+                    )
+                  ],
+                );
+              });
+        },
+        icon: const Icon(Icons.edit,color:      Colors.green,),
+        );
   }
 }

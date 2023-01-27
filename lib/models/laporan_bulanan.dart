@@ -1,15 +1,15 @@
 import 'package:gabriel_logistik/models/transaksi.dart';
 
-class LaporanBulanan {
+class BulanSupir {
 
   String namaSupir;
   List<Transaksi> transaksiBulanIni;
-  int totalBersih;
-  int? persenanSupir;
-  int totalPerbaikan;
-  DateTime tanggal;
+  double totalBersih;
+  double? persenanSupir;
+  double totalPerbaikan;
+  String tanggal;
 
-  LaporanBulanan(this.namaSupir, this.transaksiBulanIni, this.totalBersih,
+  BulanSupir(this.namaSupir, this.transaksiBulanIni, this.totalBersih,
       this.persenanSupir, this.totalPerbaikan, this.tanggal);
 
 

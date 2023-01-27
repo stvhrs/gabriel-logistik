@@ -36,7 +36,7 @@ class EditSupir extends StatelessWidget {
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(initialValue: supir.nama_supir,
                               decoration: const InputDecoration(
-                                hintText: 'Nama Pelanggan',
+                                hintText: 'Nama Supir',
                               ),
                               onChanged: (val) {
                                 supir.nama_supir = val.toString();

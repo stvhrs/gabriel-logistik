@@ -5,11 +5,11 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 import '../providerData/providerData.dart';
 
-class TambahPelanggan extends StatelessWidget {
+class TambahSupir extends StatelessWidget {
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
 
-  TambahPelanggan({super.key});
+  TambahSupir({super.key});
   @override
   Widget build(BuildContext context) {
     String namaSupir = '';
@@ -26,7 +26,7 @@ class TambahPelanggan extends StatelessWidget {
               builder: (context) {
                 return AlertDialog(
                   actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                  title: const Text("Tambah Pelanggan"),
+                  title: const Text("Tambah Supir"),
                   content: IntrinsicHeight(
                     child: SizedBox(
                       width: 500,
@@ -36,7 +36,7 @@ class TambahPelanggan extends StatelessWidget {
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(
                               decoration: const InputDecoration(
-                                hintText: 'Nama Pelanggan',
+                                hintText: 'Nama Supir',
                               ),
                               onChanged: (val) {
                                 namaSupir = val.toString();

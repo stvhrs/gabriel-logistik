@@ -1,12 +1,20 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:gabriel_logistik/mobil/daftar_mobil.dart';
+import 'package:gabriel_logistik/pages/daftar_mobil.dart';
+import 'package:gabriel_logistik/models/mobil.dart';
+import 'package:gabriel_logistik/models/supir.dart';
+import 'package:gabriel_logistik/pages/kas_tahun.dart';
+import 'package:gabriel_logistik/pages/laporan_bulanan.dart';
 import 'package:gabriel_logistik/pages/transaksi_page.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
+import 'package:gabriel_logistik/services/service.dart';
 import 'package:gabriel_logistik/styles/theme.dart';
-import 'package:gabriel_logistik/supir/daftar_supir.dart';
+import 'package:gabriel_logistik/pages/daftar_supir.dart';
 import 'package:provider/provider.dart';
+import 'package:web_date_picker/web_date_picker.dart';
+
+import 'models/transaksi.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,102 +71,140 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  PageController _pageController=PageController();
+  late List<Transaksi> listTransaksi;
+  late List<Supir> listSupir;
+  late List<Mobil> listMobil;
+  bool loading = true;
+  initData() async {
+    listTransaksi = await Service.getAllTransaksi();
+    listSupir = await Service.getAllSupir();
+    listMobil = await Service.getAllMobil();
+    loading = false;
+    setState(() {});
+    Provider.of<ProviderData>(context, listen: false)
+        .setData(listTransaksi, false, listMobil, listSupir);
+  }
+
+  @override
+  void initState() {
+    initData();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    PageController page = PageController();
+    SideMenuController page = SideMenuController();
     List<SideMenuItem> items = [
       SideMenuItem(
         priority: 0,
         title: 'Daftar Transaksi',
-        onTap: () => page.jumpToPage(0),
+        onTap:(s,w){_pageController.jumpToPage(s);
+        page.changePage(s);},
         icon: const Icon(Icons.wifi_protected_setup_outlined),
       ),
       SideMenuItem(
         priority: 1,
         title: 'Daftar Supir',
-        onTap: () => page.jumpToPage(1),
+        onTap:(s,w){_pageController.jumpToPage(s);
+        page.changePage(s);},
         icon: const Icon(Icons.people_rounded),
       ),
       SideMenuItem(
         priority: 2,
         title: 'Daftar Mobil',
-        onTap: () => page.jumpToPage(2),
+        onTap:(s,w){_pageController.jumpToPage(s);
+        page.changePage(s);},
         icon: const Icon(Icons.car_rental_rounded),
       ),
       SideMenuItem(
         priority: 3,
         title: 'Laporan Bulanan',
-        onTap: () => page.jumpToPage(3),
+        onTap:(s,w){_pageController.jumpToPage(s);
+        page.changePage(s);},
         icon: const Icon(Icons.document_scanner_rounded),
       ),
       SideMenuItem(
         priority: 4,
         title: 'Kas Tahunan',
-        onTap: () => page.jumpToPage(4),
+        onTap:(s,w){_pageController.jumpToPage(s);
+        page.changePage(s);},
         icon: const Icon(Icons.monetization_on),
       ),
     ];
     //
-    return Scaffold(
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SideMenu(
-            showToggle: true,
-            controller: page,
-            style: SideMenuStyle(
-              backgroundColor: Theme.of(context).primaryColor,
-              hoverColor: const Color.fromARGB(255, 101, 157, 202),
-              openSideMenuWidth: MediaQuery.of(context).size.width / 6.5,
-              selectedColor: Colors.transparent,
-              displayMode: SideMenuDisplayMode.open,
-              selectedTitleTextStyle: const TextStyle(color: Colors.white),
-              selectedIconColor: Colors.white,
-            ),
-            title: Column(
+    return !loading
+        ? Scaffold(
+            body: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      maxHeight: 150,
-                      maxWidth: 200,
-                    ),
-                    child: Image.asset(
-                      'images/logo.png',isAntiAlias: true,color: Colors.black
-                      // color: Colors.white,
+                SideMenu(
+                  showToggle: true,
+                  controller: page,
+                  style: SideMenuStyle(
+                    toggleColor: Colors.white,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    hoverColor: Theme.of(context).colorScheme.secondary,
+                    openSideMenuWidth: MediaQuery.of(context).size.width / 7.5,
+                    selectedColor: Colors.transparent,
+                    displayMode: SideMenuDisplayMode.open,
+                    unselectedTitleTextStyle:
+                        TextStyle(fontWeight: FontWeight.bold),
+                    selectedTitleTextStyle: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                    selectedIconColor: Colors.white,
+                  ),
+                  title: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            maxHeight: 300,
+                            maxWidth: 200,
+                          ),
+                          child: Image.asset(
+                            'images/logo3.png',
+
+                            // color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const Divider(
+                        indent: 8.0,
+                        endIndent: 8.0,
+                      ),
+                    ],
+                  ),
+                  footer: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      'Logistik',
+                      style: TextStyle(fontSize: 15),
                     ),
                   ),
+                  items: items,
                 ),
-                const Divider(
-                  indent: 8.0,
-                  endIndent: 8.0,
+                Expanded(
+                  child: PageView(
+                    controller: _pageController,
+                    children: [
+                    
+                      TransaksiPage(),
+                      DaftarSupir(),
+                      DaftarMobil(),  LaporanBulanan(),
+                      
+                     
+                    KasTahun()
+                    ],
+                  ),
                 ),
               ],
             ),
-            footer: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Logistik',
-                style: TextStyle(fontSize: 15),
-              ),
-            ),
-            items: items,
-          ),
-          Expanded(
-            child: PageView(
-              controller: page,
-              children: const [
-                TransaksiPage(),
-                DaftarSupir(),
-                DaftarMobil(),
-                SizedBox(),
-                SizedBox()
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+          )
+        : Center(
+            child: CircularProgressIndicator(),
+          );
   }
 }

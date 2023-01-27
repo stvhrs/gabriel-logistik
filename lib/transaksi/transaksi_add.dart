@@ -70,12 +70,31 @@ class _TransaksiAddState extends State<TransaksiAdd> {
     'perbaikan_transaksi': []
   });
   Widget _buildSize(widget, String ket, int flex) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.14 * flex,
+      margin: EdgeInsets.only(right: ket == 'Tanggal' ? 0 : 50, bottom: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              margin: const EdgeInsets.only(bottom: 7),
+              child: Text(
+                '$ket :',
+                style: const TextStyle(fontSize: 13),
+              )),
+          widget
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSizeV2(
+    widget,
+    String ket,
+  ) {
     return Expanded(
-      flex: flex,
       child: Container(
-        margin: EdgeInsets.only(
-            right: ket == 'Tanggal' || ket == 'Keterangan' ? 0 : 70,
-            bottom: 50),
+        margin: EdgeInsets.only(right: 0, bottom: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -95,12 +114,16 @@ class _TransaksiAddState extends State<TransaksiAdd> {
   @override
   Widget build(BuildContext context) {
     transaksi.transaksiId = Provider.of<ProviderData>(context, listen: false)
-        .backupTransaksi
-        .length+1;
-    return Container(margin: EdgeInsets.only(right: 15,bottom: 15),
-        child: ElevatedButton.icon(icon: Icon(Icons.add),label: Text('Tambah Transaksi'),style:  ButtonStyle(
-            padding: MaterialStateProperty.all(const EdgeInsets.all(15))),
-           
+            .backupTransaksi
+            .length +
+        1;
+    return Container(
+        margin: EdgeInsets.only(right: 15, bottom: 15),
+        child: ElevatedButton.icon(
+            icon: Icon(Icons.add),
+            label: Text('Tambah Transaksi',style: TextStyle(color: Colors.white),),
+            style: ButtonStyle(
+                padding: MaterialStateProperty.all(const EdgeInsets.all(15))),
             onPressed: () {
               showDialog(
                   barrierDismissible: false,
@@ -169,7 +192,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                   items: listSupir,
                                                 ),
                                                 'Pilih Supir',
-                                                200),
+                                                1),
                                             _buildSize(
                                                 DropDownField(
                                                   onValueChanged: (val) {
@@ -178,29 +201,27 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                   items: listMobil,
                                                 ),
                                                 'Pilih Mobil',
-                                                200),
+                                                1),
                                             _buildSize(TextFormField(
                                               onChanged: (va) {
                                                 transaksi.tujuan = va;
                                               },
-                                            ), 'Ketik Tujuan', 200),
-                                            const Spacer(),
-                                            _buildSize(
-                                                WebDatePicker(
-                                                  height: 60,
-                                                  initialDate: DateTime.now(),
-                                                  dateformat: 'dd/MM/yyyy',
-                                                  onChange: (value) {
-                                                    if (value != null) {
-                                                      transaksi
-                                                              .tanggalBerangkat =
-                                                          value
-                                                              .toIso8601String();
-                                                    }
-                                                  },
-                                                ),
-                                                'Tanggal',
-                                                200)
+                                            ), 'Ketik Tujuan', 1),
+                                            _buildSizeV2(
+                                              WebDatePicker(
+                                                width: double.infinity,
+                                                height: 60,
+                                                initialDate: DateTime.now(),
+                                                dateformat: 'dd/MM/yyyy',
+                                                onChange: (value) {
+                                                  if (value != null) {
+                                                    transaksi.tanggalBerangkat =
+                                                        value.toIso8601String();
+                                                  }
+                                                },
+                                              ),
+                                              'Tanggal',
+                                            )
                                           ],
                                         ),
                                       ),
@@ -224,7 +245,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                 ],
                                               ),
                                               'Biaya Keluar',
-                                              200),
+                                              1),
                                           _buildSize(
                                               TextFormField(
                                                 onChanged: (va) {
@@ -243,48 +264,18 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                 ],
                                               ),
                                               'Biaya Ongkos',
-                                              200),
-                                          _buildSize(
-                                              TextFormField(onChanged: (val) {
-                                            transaksi.keterangan = val;
-                                          }), 'Keterangan', 400),
+                                              1),
+                                          _buildSizeV2(
+                                            TextFormField(onChanged: (val) {
+                                              transaksi.keterangan = val;
+                                            }),
+                                            'Keterangan',
+                                          ),
                                         ],
                                       ),
-
-                                      // const Text(
-                                      //   'Perbaikan :',
-                                      //   style: TextStyle(fontSize: 13),
-                                      // ),
-                                      // const Divider(),
-                                      // ...List.generate(
-                                      //     jumlahOpsi,
-                                      //     (index) =>
-                                      //         _buildPartName(index, context)),
-                                      // Row(
-                                      //   children: [
-                                      //     const Text('Tambah Perbaikan'),
-                                      //     IconButton(
-                                      //         onPressed: () {
-                                      //           setState(() {
-                                      //             if (jumlahOpsi ==
-                                      //                 _updatedTransaksi
-                                      //                     .length) {
-                                      //               _updatedTransaksi
-                                      //                   .add(Transaksi.fromMap(
-                                      //                 {
-                                      //                   'id_transaksi': 1,
-                                      //                   'tgl_berangkat':
-                                      //                       '2022-07-20T20:18:04.000Z',
-                                      //                   'tanggalPulang':
-                                      //                       '2022-07-20T20:18:04.000Z',
-                                      //                   'supir': 'Budi',
-                                      //                   'tujuan': 'Gemolong',
-                                      //                   'mobil':
-                                      //                       'Ford AD 9999 RR',
-                                      //                   'gajiSupir': 100,
-
                                       RoundedLoadingButton(
-                                        color: Theme.of(context).primaryColor,elevation: 10,
+                                        color: Theme.of(context).primaryColor,
+                                        elevation: 10,
                                         successColor: Colors.green,
                                         errorColor: Colors.red,
                                         child: Text('Tambah',
@@ -292,7 +283,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                 TextStyle(color: Colors.white)),
                                         controller: _btnController,
                                         onPressed: () async {
-                                          if (transaksi.keluar == 0 ||
+                                          if (transaksi.keluar == 0 ||transaksi.keluar>=transaksi.ongkos||
                                               transaksi.ongkos == 0 ||
                                               transaksi.mobil == '' ||
                                               transaksi.tujuan == '' ||

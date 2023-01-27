@@ -1,27 +1,33 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/supir.dart';
+import 'package:provider/provider.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
+import '../providerData/providerData.dart';
 
 class TambahMobil extends StatelessWidget {
+  final RoundedLoadingButtonController _btnController =
+      RoundedLoadingButtonController();
+
+  TambahMobil({super.key});
   @override
   Widget build(BuildContext context) {
-    String namaSupplier = '';
+    String namaSupir = '';
     String noHp = '';
-    String alamat = '';
+
 
     return ElevatedButton.icon(
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(
-                const Color.fromARGB(255, 79, 117, 134))),
+               Colors.green)),
         onPressed: () {
           showDialog(
               context: context,
               builder: (context) {
                 return AlertDialog(
                   actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                  title: const Text("Tambah Pelanggan"),
+                  title: const Text("Tambah Mobil"),
                   content: IntrinsicHeight(
                     child: SizedBox(
                       width: 500,
@@ -31,10 +37,10 @@ class TambahMobil extends StatelessWidget {
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(
                               decoration: const InputDecoration(
-                                hintText: 'Nama Pelanggan',
+                                hintText: 'Nama Mobil',
                               ),
                               onChanged: (val) {
-                                namaSupplier = val.toString();
+                                namaSupir = val.toString();
                               },
                               maxLines: 1,
                             ),
@@ -42,80 +48,72 @@ class TambahMobil extends StatelessWidget {
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(
-                                onChanged: (val) {
-                                  noHp = val.toString();
-                                },
-                                maxLines: 1,
-                                decoration: InputDecoration(
-                                  hintText: 'Nomor Hp',
-                                  contentPadding: const EdgeInsets.only(
-                                      left: 10, top: 10, bottom: 10),
-                                  fillColor: Colors.white,
-                                  hintStyle: TextStyle(
-                                      color: Colors.grey.shade600,
-                                      fontSize: 15,
-                                      height: 2),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(7),
-                                    borderSide:
-                                        BorderSide(color: Colors.grey.shade300),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(7),
-                                    borderSide:
-                                        BorderSide(color: Colors.grey.shade300),
-                                  ),
-                                )),
+                              decoration: const InputDecoration(
+                                hintText: 'No Hp',
+                              ),
+                              onChanged: (val) {
+                                noHp = val.toString();
+                              },
+                              maxLines: 1,
+                            ),
                           ),
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(
-                                onChanged: (val) {
-                                  alamat = val.toString();
-                                },
-                                maxLines: 3,
-                                decoration: InputDecoration(
-                                  hintText: 'Alamat',
-                                  contentPadding: const EdgeInsets.only(
-                                      left: 10, top: 10, bottom: 10),
-                                  fillColor: Colors.white,
-                                  hintStyle: TextStyle(
-                                      color: Colors.grey.shade600,
-                                      fontSize: 15,
-                                      height: 2),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(7),
-                                    borderSide:
-                                        BorderSide(color: Colors.grey.shade300),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(7),
-                                    borderSide:
-                                        BorderSide(color: Colors.grey.shade300),
-                                  ),
-                                )),
-                          )
+                          // Container(
+                          //   margin: const EdgeInsets.only(bottom: 20),
+                          //   child: TextFormField(
+                          //     decoration: const InputDecoration(
+                          //       hintText: 'Alamat',
+                          //     ),
+                          //     onChanged: (val) {
+                          //       alamat = val.toString();
+                          //     },
+                          //     maxLines: 3,
+                          //   ),
+                          // )
                         ],
                       ),
                     ),
                   ),
                   actions: <Widget>[
-                    ElevatedButton(
-                      onPressed: () {
-                        // if ((namaSupplier.isNotEmpty || noHp.isNotEmpty)) {
-                        Supir p=  Supir( 
-                         999,'asdasd','ads');
-                            
-                              Navigator.of(context).pop();
-                        },
-                      // },
-                      child: const Text("Tambah Pelanggan"),
-                    ),
+                    RoundedLoadingButton(
+                      color: Theme.of(context).primaryColor,
+                      elevation: 10,
+                      successColor: Colors.green,
+                      errorColor: Colors.red,
+                      child:
+                          Text('Tambah', style: TextStyle(color: Colors.white)),
+                      controller: _btnController,
+                      onPressed: () async {
+                        if (noHp.isEmpty ||
+                        
+                            namaSupir.isEmpty) {
+                          _btnController.error();
+                          await Future.delayed(Duration(seconds: 1));
+                          _btnController.reset();
+                          return;
+                        }
+
+                        await Future.delayed(Duration(seconds: 3), () {
+                          Provider.of<ProviderData>(context, listen: false)
+                              .addMobil(Mobil(
+                                  Provider.of<ProviderData>(context,
+                                              listen: false)
+                                          .listMobil
+                                          .length +
+                                      1,
+                                  namaSupir,
+                                  noHp));
+                          _btnController.success();
+                        });
+                        await Future.delayed(Duration(seconds: 1), () {
+                          Navigator.of(context).pop();
+                        });
+                      },
+                    )
                   ],
                 );
               });
         },
         icon: const Icon(Icons.add),
-        label: const Text('Tambah Pelanggan'));
+        label: const Text('Tambah'));
   }
 }

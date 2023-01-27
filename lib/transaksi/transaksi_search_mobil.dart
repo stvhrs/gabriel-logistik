@@ -12,15 +12,14 @@ class SearchMobil extends StatefulWidget {
 class _SearchMobilState extends State<SearchMobil> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-       
+    return Container(
+        margin: EdgeInsets.only(left: 35),
         width: MediaQuery.of(context).size.width * 0.15,
         child: TextFormField(
           onChanged: (val) {
-            Provider.of<ProviderData>(context, listen: false).searchmobile=val;
-              Provider.of<ProviderData>(context, listen: false)
-                  .searchTransaksi();
-            
+            Provider.of<ProviderData>(context, listen: false).searchmobile =
+                val;
+            Provider.of<ProviderData>(context, listen: false).searchTransaksi();
           },
           decoration: const InputDecoration(
             hintText: 'Mobil',

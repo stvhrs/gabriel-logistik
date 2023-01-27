@@ -89,6 +89,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
           children: [
             _buildSize2(
                 TextFormField(
+                 
                   controller: controller,
                   onChanged: (value) {
                     if (transaksi.listPerbaikan.isNotEmpty) {
@@ -101,6 +102,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                 false),
             _buildSize2(
                 TextFormField(
+      
                   controller: controller2,
                   decoration: const InputDecoration(hintText: 'Harga'),
                   onChanged: (value) {
@@ -183,7 +185,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
   Widget _buildSize2(widget, int flex, bool ket) {
     return Container(
         width: MediaQuery.of(context).size.width * 0.14 * flex,
-        margin: EdgeInsets.only(right: ket ? 10 : 50,bottom: 10),
+        margin: EdgeInsets.only(right: ket ? 10 : 50, bottom: 10),
         child: widget);
   }
 
@@ -272,8 +274,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                 (BuildContext context, StateSetter setState) =>
                                     IntrinsicHeight(
                               child: Container(
-                                padding: const EdgeInsets.all(
-                                  25),
+                                padding: const EdgeInsets.all(25),
                                 width: MediaQuery.of(context).size.width * 0.7,
                                 child: SingleChildScrollView(
                                   child: Column(
@@ -288,6 +289,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                           children: [
                                             _buildSize(
                                                 DropDownField(
+                                                  value: transaksi.supir,
                                                   onValueChanged: (val) {
                                                     transaksi.supir = val;
                                                   },
@@ -297,6 +299,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                                 1),
                                             _buildSize(
                                                 DropDownField(
+                                                  value: transaksi.mobil,
                                                   onValueChanged: (val) {
                                                     transaksi.mobil = val;
                                                   },
@@ -304,16 +307,22 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                                 ),
                                                 'Pilih Mobil',
                                                 1),
-                                            _buildSize(TextFormField(
-                                              onChanged: (va) {
-                                                transaksi.tujuan = va;
-                                              },
-                                            ), 'Ketik Tujuan', 1),
-                                         
+                                            _buildSize(
+                                                TextFormField(
+                                                  initialValue:
+                                                      transaksi.tujuan,
+                                                  onChanged: (va) {
+                                                    transaksi.tujuan = va;
+                                                  },
+                                                ),
+                                                'Ketik Tujuan',
+                                                1),
                                             _buildSizeV2(
                                               WebDatePicker(
-                                                height: 60,width: double.infinity,
-                                                initialDate: DateTime.now(),
+                                                height: 60,
+                                                width: double.infinity,
+                                                initialDate: DateTime.parse(
+                                                    transaksi.tanggalBerangkat),
                                                 dateformat: 'dd/MM/yyyy',
                                                 onChange: (value) {
                                                   if (value != null) {
@@ -331,6 +340,8 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                         children: [
                                           _buildSize(
                                               TextFormField(
+                                                initialValue: Rupiah.format(
+                                                    transaksi.keluar),
                                                 onChanged: (va) {
                                                   if (va.isNotEmpty &&
                                                       va.startsWith('Rp')) {
@@ -350,6 +361,8 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                               1),
                                           _buildSize(
                                               TextFormField(
+                                                initialValue: Rupiah.format(
+                                                    transaksi.ongkos),
                                                 onChanged: (va) {
                                                   if (va.isNotEmpty &&
                                                       va.startsWith('Rp')) {
@@ -368,9 +381,12 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                               'Biaya Ongkos',
                                               1),
                                           _buildSizeV2(
-                                            TextFormField(onChanged: (val) {
-                                              transaksi.keterangan = val;
-                                            }),
+                                            TextFormField(
+                                                initialValue:
+                                                    transaksi.keterangan,
+                                                onChanged: (val) {
+                                                  transaksi.keterangan = val;
+                                                }),
                                             'Keterangan',
                                           ),
                                         ],
@@ -391,7 +407,10 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          const Text('Tambah Perbaikan',style: TextStyle(fontSize: 13),),
+                                          const Text(
+                                            'Tambah Perbaikan',
+                                            style: TextStyle(fontSize: 13),
+                                          ),
                                           IconButton(
                                               onPressed: () {
                                                 setState(() {
@@ -404,7 +423,10 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                                   ));
                                                 });
                                               },
-                                              icon: const Icon(Icons.add_circle_rounded,color: Colors.green,)),
+                                              icon: const Icon(
+                                                Icons.add_circle_rounded,
+                                                color: Colors.green,
+                                              )),
 
                                           // Text(jumlahOpsi.toString()),
                                         ],
@@ -415,7 +437,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                         errorColor: Colors.red,
                                         controller: _btnController,
                                         onPressed: () async {
-                                          if (transaksi.keluar == 0 ||
+                                          if (transaksi.keluar == 0 ||transaksi.keluar>=transaksi.ongkos||
                                               transaksi.ongkos == 0 ||
                                               transaksi.mobil == '' ||
                                               transaksi.tujuan == '' ||

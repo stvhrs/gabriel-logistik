@@ -12,16 +12,13 @@ class SearchNama extends StatefulWidget {
 class _SearchNamaState extends State<SearchNama> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-       
+    return Container(
+        margin: EdgeInsets.only(left: 35),
         width: MediaQuery.of(context).size.width * 0.15,
         child: TextFormField(
           onChanged: (val) {
-          
-             Provider.of<ProviderData>(context, listen: false).searchsupir=val;
-              Provider.of<ProviderData>(context, listen: false)
-                  .searchTransaksi();
-            
+            Provider.of<ProviderData>(context, listen: false).searchsupir = val;
+            Provider.of<ProviderData>(context, listen: false).searchTransaksi();
           },
           decoration: const InputDecoration(
             hintText: 'Supir',
