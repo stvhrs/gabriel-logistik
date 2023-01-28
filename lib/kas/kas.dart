@@ -127,41 +127,49 @@ class _KasState extends State<Kas> {
                 padding: const EdgeInsets.only(
                     top: 8, bottom: 8, left: 15, right: 20),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Total Bersih :',
-                            style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold)),
-                        Text('Total Perbaikan: ', style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),
-                          ),
-                        Text(
-                            textAlign: TextAlign.left,
-                            'Persen Supir: ',
-                           style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold)),
+                        Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child: Text('Total Bersih :',
+                              style:  Theme.of(context).textTheme.displaySmall),
+                        ),
+                        Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child: Text('Total Perbaikan: ', style: TextStyle(fontSize: 13),
+                          )),
                         
-                      ],
+                        Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child: Text(
+                         
+                            'Total Persen Supir: ',
+                           style:  Theme.of(context).textTheme.displaySmall),
+                        )
+                      ],    
                     ),
                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child: Text(
                             Rupiah.format(
                               widget.kasModel.totalBersih,
                             ),
                             style: Theme.of(context).textTheme.displaySmall,
-                          ),
-                          Text(
+                          )),
+                          Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child: Text(
                             textAlign: TextAlign.left,
                             Rupiah.format(widget.kasModel.totalPerbaikan),
                             style: Theme.of(context).textTheme.displaySmall,
-                          ),
-                          Text(
+                          )),
+                          Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child: Text(
                             Rupiah.format(
                                 widget.kasModel.totalPersenSupir ?? 0),
                             style: Theme.of(context).textTheme.displaySmall,
-                          ),
+                          )),
                         ],
                       ),
                     

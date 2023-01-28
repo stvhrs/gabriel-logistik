@@ -26,7 +26,7 @@ class TambahSupir extends StatelessWidget {
               builder: (context) {
                 return AlertDialog(
                   actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                  title: const Text("Tambah Supir"),
+                  title: const Text("Tambah Supir",),
                   content: IntrinsicHeight(
                     child: SizedBox(
                       width: 500,
@@ -112,7 +112,7 @@ class TambahSupir extends StatelessWidget {
                 );
               });
         },
-        icon: const Icon(Icons.add),
-        label: const Text('Tambah'));
+        icon: const Icon(Icons.add,color: Colors.white,),
+        label: const Text('Tambah',style: TextStyle(color: Colors.white),));
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/mobil/edit_pelanggan.dart';
-import 'package:gabriel_logistik/mobil/tambah_pelanggan.dart';
+import 'package:gabriel_logistik/mobil/edit_mobil.dart';
+import 'package:gabriel_logistik/mobil/tambah_mobil.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/supir/tambah_supir.dart';
 import 'package:provider/provider.dart';

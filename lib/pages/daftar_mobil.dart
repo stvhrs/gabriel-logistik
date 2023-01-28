@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/mobil/edit_pelanggan.dart';
-import 'package:gabriel_logistik/mobil/tambah_pelanggan.dart';
+import 'package:gabriel_logistik/mobil/edit_mobil.dart';
+import 'package:gabriel_logistik/mobil/tambah_mobil.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/supir/edit_supir.dart';
 import 'package:gabriel_logistik/supir/tambah_supir.dart';
@@ -58,15 +58,15 @@ class _DaftarMobilState extends State<DaftarMobil> {
                 ],
               ),
               Container(
-                color: Colors.grey.shade400,
+                color: Theme.of(context).primaryColor,
                 padding: const EdgeInsets.only(
                     top: 8, bottom: 8, left: 15, right: 15),
-                child: Row(
+                child:Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Expanded(flex: 11, child: Text('Nama')),
-                    Expanded(flex: 11, child: Text('Nomor Polisi')),
-                    Expanded(flex: 3, child: Text(' Aksi'))
+                  children:  [
+                    Expanded(flex: 11, child: Text('Nama',style: Theme.of(context).textTheme.displayMedium,)),
+                    Expanded(flex: 11, child: Text('Nomor Polisi',style: Theme.of(context).textTheme.displayMedium)),
+                    Expanded(flex: 3, child: Text(' Aksi',style: Theme.of(context).textTheme.displayMedium))
                   ],
                 ),
               ),
@@ -91,8 +91,8 @@ class _DaftarMobilState extends State<DaftarMobil> {
                       itemBuilder: (context, index) => InkWell(
                         child: Container(
                           color: index.isEven
-                              ?  Theme.of(context).colorScheme.secondary
-                              : Colors.grey.shade100,
+                             ? Color.fromARGB(255, 189, 193, 221)
+                              : Colors.grey.shade200,
                           padding: const EdgeInsets.only(left: 15, right: 0),
                           child: Row(
                             children: [

@@ -124,10 +124,7 @@ class _KasTahunState extends State<KasTahun> {
                         totalBersih - totalPerbaikan,
                         0,
                         totalPerbaikan,
-                        list[DateTime.parse(
-                                    transaksiBulanIni[0].tanggalBerangkat)
-                                .month -
-                            1]);
+                        moon);
 
                     asu.listBulananSupir.add(data);
                   }

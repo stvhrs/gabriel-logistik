@@ -113,7 +113,7 @@ class TambahMobil extends StatelessWidget {
                 );
               });
         },
-        icon: const Icon(Icons.add),
-        label: const Text('Tambah'));
+        icon: const Icon(Icons.add,color: Colors.white,),
+        label: const Text('Tambah',style: TextStyle(color: Colors.white),));
   }
 }

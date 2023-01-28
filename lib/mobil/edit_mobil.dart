@@ -18,9 +18,7 @@ class EditMobil extends StatelessWidget {
 
 
     return IconButton(
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(
-                const Color.fromARGB(255, 79, 117, 134))),
+      
         onPressed: () {
           showDialog(
               context: context,

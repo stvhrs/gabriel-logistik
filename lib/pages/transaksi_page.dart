@@ -111,16 +111,16 @@ class _TransaksiPageState extends State<TransaksiPage> {
                             'Tujuan',
                             style: Theme.of(context).textTheme.displayMedium,
                           )),
-                      Expanded(
-                          flex: 7,
-                          child: Text(
-                            'Keluar',
-                            style: Theme.of(context).textTheme.displayMedium,
-                          )),
+                    
                       Expanded(
                           flex: 7,
                           child: Text(
                             'Ongkos',
+                            style: Theme.of(context).textTheme.displayMedium,
+                          )),  Expanded(
+                          flex: 7,
+                          child: Text(
+                            'Keluar',
                             style: Theme.of(context).textTheme.displayMedium,
                           )),
                       Expanded(

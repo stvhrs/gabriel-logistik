@@ -195,7 +195,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
         child: const Icon(
           Icons.edit,
           color: Colors.green,
-          size: 18,
+ 
         ),
         onTap: () {
           test();

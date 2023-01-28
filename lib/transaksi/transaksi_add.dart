@@ -120,8 +120,14 @@ class _TransaksiAddState extends State<TransaksiAdd> {
     return Container(
         margin: EdgeInsets.only(right: 15, bottom: 15),
         child: ElevatedButton.icon(
-            icon: Icon(Icons.add),
-            label: Text('Tambah Transaksi',style: TextStyle(color: Colors.white),),
+            icon: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            label: Text(
+              'Tambah Transaksi',
+              style: TextStyle(color: Colors.white),
+            ),
             style: ButtonStyle(
                 padding: MaterialStateProperty.all(const EdgeInsets.all(15))),
             onPressed: () {
@@ -283,7 +289,9 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                 TextStyle(color: Colors.white)),
                                         controller: _btnController,
                                         onPressed: () async {
-                                          if (transaksi.keluar == 0 ||transaksi.keluar>=transaksi.ongkos||
+                                          if (transaksi.keluar == 0 ||
+                                              transaksi.keluar >=
+                                                  transaksi.ongkos ||
                                               transaksi.ongkos == 0 ||
                                               transaksi.mobil == '' ||
                                               transaksi.tujuan == '' ||

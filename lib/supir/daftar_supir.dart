@@ -53,16 +53,16 @@ class _DaftarSupirState extends State<DaftarSupir> {
                 ],
               ),
               Container(
-                color: Colors.grey.shade300,
+                color: Theme.of(context).colorScheme.primary,
                 padding: const EdgeInsets.only(
                     top: 8, bottom: 8, left: 15, right: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Expanded(flex: 11, child: Text('Nama')),
+                  children:  [
+                    Expanded(flex: 11, child: Text('Nama',style: Theme.of(context).textTheme.displayMedium,)),
                  
-                    Expanded(flex: 11, child: Text('Nomor Hp')),
-                    Expanded(flex: 3, child: Text(' Aksi'))
+                    Expanded(flex: 11, child: Text('Nomor Hp',style: Theme.of(context).textTheme.displayMedium,)),
+                    Expanded(flex: 3, child: Text(' Aksi',style: Theme.of(context).textTheme.displayMedium,))
                   ],
                 ),
               ),
@@ -87,8 +87,8 @@ class _DaftarSupirState extends State<DaftarSupir> {
                       itemBuilder: (context, index) => InkWell(
                         child: Container(
                           color: index.isEven
-                              ? const Color.fromARGB(255, 193, 216, 226)
-                              : Colors.transparent,
+                              ?Color.fromARGB(255, 189, 193, 221)
+                              : Colors.grey.shade200,
                           padding: const EdgeInsets.only(left: 15, right: 0),
                           child: Row(
                             children: [
@@ -105,13 +105,13 @@ class _DaftarSupirState extends State<DaftarSupir> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     EditSupir(c.listSupir[index]),
-                                    IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.delete,
+                                  //  InkWell(
+                                  //       onTap: () {},
+                                  //       child: Icon(
+                                  //         Icons.delete,
                                         
-                                          color: Colors.red.shade700,
-                                        )),
+                                  //         color: Colors.red.shade700,
+                                  //       )),
                                     const Spacer(),const Spacer(),
                                   ],
                                 ),

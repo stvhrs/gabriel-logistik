@@ -54,15 +54,15 @@ class _BulananState extends State<Bulanan> {
               Expanded(
                   flex: 7,
                   child: Text(element.tujuan,
+                      style: Theme.of(context).textTheme.displaySmall)), Expanded(
+                  flex: 7,
+                  child: Text(Rupiah.format(element.ongkos),
                       style: Theme.of(context).textTheme.displaySmall)),
               Expanded(
                   flex: 7,
                   child: Text(Rupiah.format(element.keluar),
                       style: Theme.of(context).textTheme.displaySmall)),
-              Expanded(
-                  flex: 7,
-                  child: Text(Rupiah.format(element.ongkos),
-                      style: Theme.of(context).textTheme.displaySmall)),
+             
               Expanded(
                   flex: 7,
                   child: Text(Rupiah.format(element.ongkos - element.keluar),
@@ -128,6 +128,11 @@ class _BulananState extends State<Bulanan> {
                         child: Text(
                           'Tujuan',
                           style: Theme.of(context).textTheme.displayMedium,
+                        )), Expanded(
+                        flex: 7,
+                        child: Text(
+                          'Ongkos',
+                          style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
                         flex: 7,
@@ -135,12 +140,7 @@ class _BulananState extends State<Bulanan> {
                           'Keluar',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
-                    Expanded(
-                        flex: 7,
-                        child: Text(
-                          'Ongkos',
-                          style: Theme.of(context).textTheme.displayMedium,
-                        )),
+                   
                     Expanded(
                         flex: 7,
                         child: Text(
@@ -161,41 +161,57 @@ class _BulananState extends State<Bulanan> {
                 padding: const EdgeInsets.only(
                     top: 8, bottom: 8, left: 15, right: 20),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Total Bersih :',
-                            style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold)),
-                        Text('Total Perbaikan: ', style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),
-                          ),
+                      Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child:   Text('Total Sisa :',
+                            style:  Theme.of(context).textTheme.displaySmall),
+                        ), Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child: Text('Total Perbaikan: ', style:  Theme.of(context).textTheme.displaySmall,
+                          )),
+                             Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child:  Text('Total Bersih :',
+                            style:  Theme.of(context).textTheme.displaySmall)), Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child: 
                         Text(
                             textAlign: TextAlign.left,
                             'Persen Supir: ',
-                           style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold)),
+                           style:  Theme.of(context).textTheme.displaySmall)),
                         
                       ],
                     ),
                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                            Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child:   Text(
+                            Rupiah.format(
+                              widget.laporanBulanan.totalBersih +widget.laporanBulanan.totalPerbaikan,
+                            ),
+                            style: Theme.of(context).textTheme.displaySmall,
+                          ),), Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child:  Text(
+                            textAlign: TextAlign.left,
+                            Rupiah.format(widget.laporanBulanan.totalPerbaikan),
+                            style: Theme.of(context).textTheme.displaySmall,
+                          )),
+                          Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child:  Text(
                             Rupiah.format(
                               widget.laporanBulanan.totalBersih,
                             ),
                             style: Theme.of(context).textTheme.displaySmall,
-                          ),
-                          Text(
-                            textAlign: TextAlign.left,
-                            Rupiah.format(widget.laporanBulanan.totalPerbaikan),
-                            style: Theme.of(context).textTheme.displaySmall,
-                          ),
-                          Text(
+                          )),
+                         
+                        Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          child:    Text(
                             Rupiah.format(
                                 widget.laporanBulanan.persenanSupir ?? 0),
                             style: Theme.of(context).textTheme.displaySmall,
-                          ),
+                          )),
                         ],
                       ),
                     

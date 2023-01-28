@@ -99,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
     List<SideMenuItem> items = [
       SideMenuItem(
         priority: 0,
-        title: 'Daftar Transaksi',
+        title: 'Riwayat Transaksi',
         onTap:(s,w){_pageController.jumpToPage(s);
         page.changePage(s);},
         icon: const Icon(Icons.wifi_protected_setup_outlined),
