@@ -165,7 +165,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
   ) {
     return Expanded(
       child: Container(
-        margin: EdgeInsets.only(right: 0, bottom: 30),
+        margin: const EdgeInsets.only(right: 0, bottom: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -191,20 +191,20 @@ class _TransaksiEditState extends State<TransaksiEdit> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        child: const Icon(
+    return IconButton(
+       icon: const Icon(
           Icons.edit,
           color: Colors.green,
  
         ),
-        onTap: () {
+        onPressed: () {
           test();
           showDialog(
               barrierDismissible: false,
               context: context,
               builder: (context) {
                 return Theme(
-                    data: ThemeData(
+                    data: ThemeData(fontFamily: 'Nunito',
                       inputDecorationTheme: InputDecorationTheme(
                         labelStyle: TextStyle(
                             fontSize: 18,
@@ -337,7 +337,27 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                         ),
                                       ),
                                       Row(
-                                        children: [
+                                        children: [ _buildSize(
+                                              TextFormField(
+                                                initialValue: Rupiah.format(
+                                                    transaksi.ongkos),
+                                                onChanged: (va) {
+                                                  if (va.isNotEmpty &&
+                                                      va.startsWith('Rp')) {
+                                                    transaksi.ongkos =
+                                                        Rupiah.parse(va);
+                                                  } else {
+                                                    transaksi.ongkos = 0;
+                                                  }
+                                                },
+                                                inputFormatters: [
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly,
+                                                  CurrencyInputFormatter()
+                                                ],
+                                              ),
+                                              'Biaya Ongkos',
+                                              1),
                                           _buildSize(
                                               TextFormField(
                                                 initialValue: Rupiah.format(
@@ -359,27 +379,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                               ),
                                               'Biaya Keluar',
                                               1),
-                                          _buildSize(
-                                              TextFormField(
-                                                initialValue: Rupiah.format(
-                                                    transaksi.ongkos),
-                                                onChanged: (va) {
-                                                  if (va.isNotEmpty &&
-                                                      va.startsWith('Rp')) {
-                                                    transaksi.ongkos =
-                                                        Rupiah.parse(va);
-                                                  } else {
-                                                    transaksi.ongkos = 0;
-                                                  }
-                                                },
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
-                                                  CurrencyInputFormatter()
-                                                ],
-                                              ),
-                                              'Biaya Ongkos',
-                                              1),
+                                         
                                           _buildSizeV2(
                                             TextFormField(
                                                 initialValue:

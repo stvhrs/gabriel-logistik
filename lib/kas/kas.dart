@@ -1,17 +1,12 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:gabriel_logistik/helper/totalPerbaikan.dart';
 
 import 'package:collection/collection.dart';
 import 'package:gabriel_logistik/models/kas_tahun.dart';
-import '../helper/format_tanggal.dart';
 import '../helper/rupiah_format.dart';
-import '../models/laporan_bulanan.dart';
 
 class Kas extends StatefulWidget {
   final KasModel kasModel;
-  Kas(this.kasModel);
+  const Kas(this.kasModel);
 
   @override
   State<Kas> createState() => _KasState();
@@ -28,7 +23,7 @@ class _KasState extends State<Kas> {
           decoration: BoxDecoration(
               color: index.isEven
                   ? Colors.grey.shade200
-                  : Theme.of(context).colorScheme.secondary,
+                  : const Color.fromARGB(255, 189, 193, 221)
              
                          ),
           width: MediaQuery.of(context).size.width * 0.43,
@@ -65,7 +60,7 @@ class _KasState extends State<Kas> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.43,
       child: Card(
         elevation: 5,
@@ -123,7 +118,7 @@ class _KasState extends State<Kas> {
                 ),
               ),
               ...buildChildren(),
-            widget.kasModel.listBulananSupir.isEmpty?SizedBox():   Padding(
+            widget.kasModel.listBulananSupir.isEmpty?const SizedBox():   Padding(
                 padding: const EdgeInsets.only(
                     top: 8, bottom: 8, left: 15, right: 20),
                 child: Row(
@@ -132,15 +127,15 @@ class _KasState extends State<Kas> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                        Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child: Text('Total Bersih :',
                               style:  Theme.of(context).textTheme.displaySmall),
                         ),
-                        Container(margin: EdgeInsets.only(top: 2,bottom: 2),
-                          child: Text('Total Perbaikan: ', style: TextStyle(fontSize: 13),
+                        Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
+                          child: const Text('Total Perbaikan: ', style: TextStyle(fontSize: 13),
                           )),
                         
-                        Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                        Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child: Text(
                          
                             'Total Persen Supir: ',
@@ -151,20 +146,20 @@ class _KasState extends State<Kas> {
                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child: Text(
                             Rupiah.format(
                               widget.kasModel.totalBersih,
                             ),
                             style: Theme.of(context).textTheme.displaySmall,
                           )),
-                          Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child: Text(
                             textAlign: TextAlign.left,
                             Rupiah.format(widget.kasModel.totalPerbaikan),
                             style: Theme.of(context).textTheme.displaySmall,
                           )),
-                          Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child: Text(
                             Rupiah.format(
                                 widget.kasModel.totalPersenSupir ?? 0),

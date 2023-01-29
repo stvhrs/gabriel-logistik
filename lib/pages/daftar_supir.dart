@@ -89,7 +89,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
                       itemBuilder: (context, index) => InkWell(
                         child: Container(
                           color: index.isEven
-                              ? Color.fromARGB(255, 189, 193, 221)
+                              ? const Color.fromARGB(255, 189, 193, 221)
                               : Colors.grey.shade200,
                           padding: const EdgeInsets.only(left: 15, right: 0),
                           child: Row(

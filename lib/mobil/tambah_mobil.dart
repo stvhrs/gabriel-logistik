@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
@@ -79,20 +78,18 @@ class TambahMobil extends StatelessWidget {
                       elevation: 10,
                       successColor: Colors.green,
                       errorColor: Colors.red,
-                      child:
-                          Text('Tambah', style: TextStyle(color: Colors.white)),
                       controller: _btnController,
                       onPressed: () async {
                         if (noHp.isEmpty ||
                         
                             namaSupir.isEmpty) {
                           _btnController.error();
-                          await Future.delayed(Duration(seconds: 1));
+                          await Future.delayed(const Duration(seconds: 1));
                           _btnController.reset();
                           return;
                         }
 
-                        await Future.delayed(Duration(seconds: 3), () {
+                        await Future.delayed(const Duration(seconds: 3), () {
                           Provider.of<ProviderData>(context, listen: false)
                               .addMobil(Mobil(
                                   Provider.of<ProviderData>(context,
@@ -104,10 +101,12 @@ class TambahMobil extends StatelessWidget {
                                   noHp));
                           _btnController.success();
                         });
-                        await Future.delayed(Duration(seconds: 1), () {
+                        await Future.delayed(const Duration(seconds: 1), () {
                           Navigator.of(context).pop();
                         });
                       },
+                      child:
+                          const Text('Tambah', style: TextStyle(color: Colors.white)),
                     )
                   ],
                 );

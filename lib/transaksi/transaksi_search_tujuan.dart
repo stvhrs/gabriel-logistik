@@ -13,7 +13,7 @@ class _SearchTujuanState extends State<SearchTujuan> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(left: 35),
+        margin: const EdgeInsets.only(left: 35),
         width: MediaQuery.of(context).size.width * 0.15,
         child: TextFormField(
           onChanged: (val) {

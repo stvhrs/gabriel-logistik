@@ -58,10 +58,10 @@ class _DaftarMobilState extends State<DaftarMobil> {
                 ],
               ),
               Container(
-                color: Theme.of(context).primaryColor,
+                color:Theme.of(context).primaryColor,
                 padding: const EdgeInsets.only(
                     top: 8, bottom: 8, left: 15, right: 15),
-                child:Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:  [
                     Expanded(flex: 11, child: Text('Nama',style: Theme.of(context).textTheme.displayMedium,)),
@@ -74,7 +74,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
                 // if (_search != '') {
                 //   // c.listMobil.clear();
                 //   for (var element in c.listMobil) {
-                //     if (element.nama_mobil
+                //     if (element.nama_supir
                 //         .toLowerCase()
                 //         .startsWith(_search.toLowerCase())) {
                 //       c.listMobil.add(element);
@@ -91,7 +91,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
                       itemBuilder: (context, index) => InkWell(
                         child: Container(
                           color: index.isEven
-                             ? Color.fromARGB(255, 189, 193, 221)
+                              ? const Color.fromARGB(255, 189, 193, 221)
                               : Colors.grey.shade200,
                           padding: const EdgeInsets.only(left: 15, right: 0),
                           child: Row(

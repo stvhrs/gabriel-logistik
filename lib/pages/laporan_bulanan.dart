@@ -1,6 +1,4 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:gabriel_logistik/bulanan/bulanan.dart';
 import 'package:gabriel_logistik/helper/totalPerbaikan.dart';
 import 'package:gabriel_logistik/models/laporan_bulanan.dart';
@@ -25,7 +23,7 @@ List<String> list = <String>[
 ];
 
 class LaporanBulanan extends StatefulWidget {
-  LaporanBulanan({super.key});
+  const LaporanBulanan({super.key});
 
   @override
   State<LaporanBulanan> createState() => _LaporanBulananState();
@@ -46,9 +44,9 @@ class _LaporanBulananState extends State<LaporanBulanan> {
       }
     }
     return Padding(
-      padding: EdgeInsets.only(left: 50, right: 50, top: 15),
+      padding: const EdgeInsets.only(left: 50, right: 50, top: 15),
       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Container(margin: EdgeInsets.only(bottom: 10),
+        Container(margin: const EdgeInsets.only(bottom: 10),
           child: Row(
             children: [ DropdownButton<int>(
                 value: ropdownValue2,
@@ -68,7 +66,7 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                   return DropdownMenuItem<int>(
                     value: value,
                     child: Text(value.toString(),
-                        style:TextStyle(fontSize: 16,fontFamily: 'Nunito',color: Colors.black)),
+                        style:const TextStyle(fontSize: 16,fontFamily: 'Nunito',color: Colors.black)),
                   );
                 }).toList(),
               ),
@@ -90,7 +88,7 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value,
-                        style:TextStyle(fontSize: 16,fontFamily: 'Nunito',color: Colors.black)),
+                        style:const TextStyle(fontSize: 16,fontFamily: 'Nunito',color: Colors.black)),
                   );
                 }).toList(),
               ),
@@ -98,7 +96,7 @@ class _LaporanBulananState extends State<LaporanBulanan> {
             ],
           ),
         ),
-        Container(
+        SizedBox(
           height: MediaQuery.of(context).size.height * 0.9,
           child: SingleChildScrollView(
             child: StaggeredGrid.count(

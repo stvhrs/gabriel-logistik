@@ -77,20 +77,18 @@ class EditMobil extends StatelessWidget {
                       elevation: 10,
                       successColor: Colors.green,
                       errorColor: Colors.red,
-                      child:
-                          Text('Edit', style: TextStyle(color: Colors.white)),
                       controller: _btnController,
                       onPressed: () async {
                         if (supir.nama_mobil.isEmpty ||
                           
                             supir.nopol_mobil .isEmpty) {
                           _btnController.error();
-                          await Future.delayed(Duration(seconds: 1));
+                          await Future.delayed(const Duration(seconds: 1));
                           _btnController.reset();
                           return;
                         }
 
-                        await Future.delayed(Duration(seconds: 3), () {
+                        await Future.delayed(const Duration(seconds: 3), () {
                           Provider.of<ProviderData>(context, listen: false)
                               .updateSupir(Supir(
                                  supir.id_mobil,
@@ -98,10 +96,12 @@ class EditMobil extends StatelessWidget {
                                     supir.nama_mobil));
                           _btnController.success();
                         });
-                        await Future.delayed(Duration(seconds: 1), () {
+                        await Future.delayed(const Duration(seconds: 1), () {
                           Navigator.of(context).pop();
                         });
                       },
+                      child:
+                          const Text('Edit', style: TextStyle(color: Colors.white)),
                     )
                   ],
                 );

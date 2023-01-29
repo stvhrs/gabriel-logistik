@@ -20,14 +20,30 @@ List<String> list = <String>[
 ];
 
 class ProviderData with ChangeNotifier {
+bool isOwner=true;
   List<Transaksi> backupTransaksi = [];
   List<Transaksi> listTransaksi = [];
-
+ bool logined=false;
   List<Supir> listSupir = [];
   List<Mobil> listMobil = [];
   List<Supir> backupListSupir = [];
   List<Mobil> backupListMobil = [];
-
+  void owner(){
+  isOwner==true;
+  notifyListeners();
+}
+void admin(){
+  isOwner=false;
+  notifyListeners();
+}
+void login(){
+  logined=true;
+  notifyListeners();
+}
+void logout(){
+  logined=false;
+  notifyListeners();
+}
   void setData(List<Transaksi> data, bool listen, List<Mobil> mobilData,
       List<Supir> supirData) {
     print('set');
@@ -90,6 +106,7 @@ class ProviderData with ChangeNotifier {
 
   void deleteTransaksi(Transaksi transaksi) {
     listTransaksi.remove(transaksi);
+     backupTransaksi.remove(transaksi);
     notifyListeners();
   }
 

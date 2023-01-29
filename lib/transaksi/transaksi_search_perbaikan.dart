@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 
-import '../helper/dropdown.dart';
 
 class SearchPerbaikan extends StatefulWidget {
   const SearchPerbaikan({super.key});
@@ -19,12 +18,12 @@ class _SearchPerbaikanState extends State<SearchPerbaikan> {
       margin: const EdgeInsets.all(8.0),
       child: Container(
         child: ChoiceChip(backgroundColor: _selected?Theme.of(context).colorScheme.secondary:Colors.grey.shade200,
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           label: Text(
             'Mengalami Perbaikan',
             style: TextStyle(color: _selected ? Colors.white : Colors.black),
           ),
-          labelPadding: EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
+          labelPadding: const EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
           selected: _selected,
           onSelected: (value) {
             setState(() {

@@ -1,16 +1,12 @@
 import 'dart:async';
 
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
-import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
-import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
@@ -94,7 +90,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
   ) {
     return Expanded(
       child: Container(
-        margin: EdgeInsets.only(right: 0, bottom: 30),
+        margin: const EdgeInsets.only(right: 0, bottom: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -118,13 +114,13 @@ class _TransaksiAddState extends State<TransaksiAdd> {
             .length +
         1;
     return Container(
-        margin: EdgeInsets.only(right: 15, bottom: 15),
+        margin: const EdgeInsets.only(right: 15, bottom: 15),
         child: ElevatedButton.icon(
-            icon: Icon(
+            icon: const Icon(
               Icons.add,
               color: Colors.white,
             ),
-            label: Text(
+            label: const Text(
               'Tambah Transaksi',
               style: TextStyle(color: Colors.white),
             ),
@@ -232,7 +228,25 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                         ),
                                       ),
                                       Row(
-                                        children: [
+                                        children: [  _buildSize(
+                                              TextFormField(
+                                                onChanged: (va) {
+                                                  if (va.isNotEmpty &&
+                                                      va.startsWith('Rp')) {
+                                                    transaksi.ongkos =
+                                                        Rupiah.parse(va);
+                                                  } else {
+                                                    transaksi.ongkos = 0;
+                                                  }
+                                                },
+                                                inputFormatters: [
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly,
+                                                  CurrencyInputFormatter()
+                                                ],
+                                              ),
+                                              'Biaya Ongkos',
+                                              1),
                                           _buildSize(
                                               TextFormField(
                                                 onChanged: (va) {
@@ -252,25 +266,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                               ),
                                               'Biaya Keluar',
                                               1),
-                                          _buildSize(
-                                              TextFormField(
-                                                onChanged: (va) {
-                                                  if (va.isNotEmpty &&
-                                                      va.startsWith('Rp')) {
-                                                    transaksi.ongkos =
-                                                        Rupiah.parse(va);
-                                                  } else {
-                                                    transaksi.ongkos = 0;
-                                                  }
-                                                },
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
-                                                  CurrencyInputFormatter()
-                                                ],
-                                              ),
-                                              'Biaya Ongkos',
-                                              1),
+                                        
                                           _buildSizeV2(
                                             TextFormField(onChanged: (val) {
                                               transaksi.keterangan = val;
@@ -284,9 +280,6 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                         elevation: 10,
                                         successColor: Colors.green,
                                         errorColor: Colors.red,
-                                        child: Text('Tambah',
-                                            style:
-                                                TextStyle(color: Colors.white)),
                                         controller: _btnController,
                                         onPressed: () async {
                                           if (transaksi.keluar == 0 ||
@@ -300,23 +293,26 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                   '') {
                                             _btnController.error();
                                             await Future.delayed(
-                                                Duration(seconds: 1));
+                                                const Duration(seconds: 1));
                                             _btnController.reset();
                                             return;
                                           }
 
                                           await Future.delayed(
-                                              Duration(seconds: 3), () {
+                                              const Duration(seconds: 3), () {
                                             Provider.of<ProviderData>(context,
                                                     listen: false)
                                                 .addTransaksi(transaksi);
                                             _btnController.success();
                                           });
                                           await Future.delayed(
-                                              Duration(seconds: 1), () {
+                                              const Duration(seconds: 1), () {
                                             Navigator.of(context).pop();
                                           });
                                         },
+                                        child: const Text('Tambah',
+                                            style:
+                                                TextStyle(color: Colors.white)),
                                       )
                                     ],
                                   ),

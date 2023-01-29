@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_add.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_search_mobil.dart';
@@ -10,9 +9,6 @@ import 'package:gabriel_logistik/transaksi/transaksi_search_tujuan.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_tile.dart';
 import 'package:provider/provider.dart';
 
-import '../models/mobil.dart';
-import '../models/supir.dart';
-import '../services/service.dart';
 
 class TransaksiPage extends StatefulWidget {
   const TransaksiPage({super.key});
@@ -41,7 +37,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                 //       : Text(
                 //           jsonDecode(snapshotx.data!)['data'].toString()),
                 Container(
-                  margin: EdgeInsets.only(bottom: 15),
+                  margin: const EdgeInsets.only(bottom: 15),
                   child: Card(
                     color: Theme.of(context).colorScheme.secondary,
                     shadowColor: Theme.of(context).colorScheme.primary,
@@ -51,15 +47,15 @@ class _TransaksiPageState extends State<TransaksiPage> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.search_rounded,
                                 size: 30,
                               ),
                               Expanded(child: SearchTanggal()),
-                              const Expanded(child: SearchNama()),
-                              const Expanded(child: SearchMobil()),
-                              const Expanded(child: SearchTujuan()),
+                              Expanded(child: SearchNama()),
+                              Expanded(child: SearchMobil()),
+                              Expanded(child: SearchTujuan()),
                               Expanded(child: SearchPerbaikan()),
                             ],
                           ),
@@ -136,7 +132,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                             style: Theme.of(context).textTheme.displayMedium,
                           )),
                       Expanded(
-                          flex: 5,
+                          flex: 7,
                           child: Text(
                             textAlign: TextAlign.center,
                             'Action',

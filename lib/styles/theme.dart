@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   AppTheme();
-  static Color primaryColor = Color.fromARGB(255, 75, 84, 167);
-  static Color secondaryColor = Color.fromARGB(255, 146, 154, 204);
+  static Color primaryColor = const Color.fromARGB(255, 75, 84, 167);
+  static Color secondaryColor = const Color.fromARGB(255, 146, 154, 204);
   static ThemeData getAppThemeData() {
     return ThemeData(
         fontFamily: 'Nunito',
         useMaterial3: true,
         dialogBackgroundColor: Colors.white,
-        dialogTheme: DialogTheme(
+        dialogTheme: const DialogTheme(
           backgroundColor: Colors.white,
         ),
         chipTheme: ChipThemeData(
@@ -28,10 +28,10 @@ class AppTheme {
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
                 textStyle:
-                    MaterialStateProperty.all(TextStyle(color: Colors.white)),
+                    MaterialStateProperty.all(const TextStyle(color: Colors.white)),
                 backgroundColor: MaterialStateProperty.all(Colors.green))),
         primaryColor: primaryColor,
-        buttonTheme: ButtonThemeData(),
+        buttonTheme: const ButtonThemeData(),
         scrollbarTheme: const ScrollbarThemeData()
             .copyWith(thumbColor: MaterialStateProperty.all(secondaryColor)),
         textTheme: const TextTheme(           displaySmall: TextStyle(

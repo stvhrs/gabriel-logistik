@@ -1,21 +1,17 @@
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
-import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gabriel_logistik/transaksi/transaksi_edit.dart';
 import 'package:intl/intl.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
 import '../helper/dropdown.dart';
-import '../helper/format_tanggal.dart';
 import '../helper/input_currency.dart';
 
 class TransaksiView extends StatefulWidget {
@@ -160,7 +156,7 @@ class _TransaksiViewState extends State<TransaksiView> {
   ) {
     return Expanded(
       child: Container(
-        margin: EdgeInsets.only(right: 0, bottom: 30),
+        margin: const EdgeInsets.only(right: 0, bottom: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -184,17 +180,19 @@ class _TransaksiViewState extends State<TransaksiView> {
         child: widget);
   }
 
-  bool hover = false;
+
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
+    return  IconButton(
+      icon:Icon(Icons.remove_red_eye_sharp,color: Colors.grey.shade700,),
+        onPressed: () {
+     
         showDialog(
             barrierDismissible: false,
             context: context,
             builder: (context) {
               return Theme(
-                  data: ThemeData(
+                  data: ThemeData(fontFamily: 'Nunito',
                     inputDecorationTheme: InputDecorationTheme(
                       labelStyle: TextStyle(
                           fontSize: 18,
@@ -280,7 +278,7 @@ class _TransaksiViewState extends State<TransaksiView> {
                                               DropDownField(
                                                 value: transaksi.supir,
                                                 enabled: false,
-                                                items: [],
+                                                items: const [],
                                               ),
                                               'Pilih Supir',
                                               1),
@@ -288,7 +286,7 @@ class _TransaksiViewState extends State<TransaksiView> {
                                               DropDownField(
                                                 value: transaksi.mobil,
                                                 enabled: false,
-                                                items: [],
+                                                items: const [],
                                               ),
                                               'Pilih Mobil',
                                               1),
@@ -322,7 +320,28 @@ class _TransaksiViewState extends State<TransaksiView> {
                                       ),
                                     ),
                                     Row(
-                                      children: [
+                                      children: [_buildSize(
+                                            TextFormField(
+                                              initialValue: Rupiah.format(
+                                                  transaksi.ongkos),
+                                              readOnly: true,
+                                              onChanged: (va) {
+                                                if (va.isNotEmpty &&
+                                                    va.startsWith('Rp')) {
+                                                  transaksi.ongkos =
+                                                      Rupiah.parse(va);
+                                                } else {
+                                                  transaksi.ongkos = 0;
+                                                }
+                                              },
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly,
+                                                CurrencyInputFormatter()
+                                              ],
+                                            ),
+                                            'Biaya Ongkos',
+                                            1),
                                         _buildSize(
                                             TextFormField(
                                               initialValue: Rupiah.format(
@@ -345,28 +364,7 @@ class _TransaksiViewState extends State<TransaksiView> {
                                             ),
                                             'Biaya Keluar',
                                             1),
-                                        _buildSize(
-                                            TextFormField(
-                                              initialValue: Rupiah.format(
-                                                  transaksi.ongkos),
-                                              readOnly: true,
-                                              onChanged: (va) {
-                                                if (va.isNotEmpty &&
-                                                    va.startsWith('Rp')) {
-                                                  transaksi.ongkos =
-                                                      Rupiah.parse(va);
-                                                } else {
-                                                  transaksi.ongkos = 0;
-                                                }
-                                              },
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly,
-                                                CurrencyInputFormatter()
-                                              ],
-                                            ),
-                                            'Biaya Ongkos',
-                                            1),
+                                        
                                         _buildSizeV2(
                                           TextFormField(
                                               initialValue:
@@ -401,11 +399,8 @@ class _TransaksiViewState extends State<TransaksiView> {
       
         });
       },
-      onHover: (v) {
-        hover = v;
-        setState(() {});
-      },
-      child:Icon(Icons.remove_red_eye_sharp,color: Colors.grey.shade700,)
+    
+    
     );
   }
 }

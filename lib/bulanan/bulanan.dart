@@ -1,15 +1,12 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:gabriel_logistik/helper/totalPerbaikan.dart';
 import 'package:gabriel_logistik/models/laporan_bulanan.dart';
 import 'package:collection/collection.dart';
-import '../helper/format_tanggal.dart';
 import '../helper/rupiah_format.dart';
 
 class Bulanan extends StatefulWidget {
   final BulanSupir laporanBulanan;
-  Bulanan(this.laporanBulanan);
+  const Bulanan(this.laporanBulanan);
 
   @override
   State<Bulanan> createState() => _BulananState();
@@ -23,7 +20,7 @@ class _BulananState extends State<Bulanan> {
       return [
         SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
-            child: Center(child: Icon(Icons.question_mark_rounded)))
+            child: const Center(child: Icon(Icons.question_mark_rounded)))
       ];
     } else {
       return widget.laporanBulanan.transaksiBulanIni.mapIndexed(
@@ -31,7 +28,7 @@ class _BulananState extends State<Bulanan> {
           decoration: BoxDecoration(
               color: index.isEven
                   ? Colors.grey.shade200
-                  : Theme.of(context).colorScheme.secondary,
+                  : const Color.fromARGB(255, 189, 193, 221)
              
                          ),
           width: MediaQuery.of(context).size.width * 0.43,
@@ -86,7 +83,7 @@ class _BulananState extends State<Bulanan> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.43,
       child: Card(
         elevation: 5,
@@ -98,9 +95,7 @@ class _BulananState extends State<Bulanan> {
               Padding(
                 padding: const EdgeInsets.only(left:15.0,top: 7.5,bottom: 7.5),
                 child: Text(
-                  widget.laporanBulanan.namaSupir +
-                      ' - ' +
-                      widget.laporanBulanan.tanggal,
+                  '${widget.laporanBulanan.namaSupir} - ${widget.laporanBulanan.tanggal}',
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ),
@@ -157,7 +152,7 @@ class _BulananState extends State<Bulanan> {
                 ),
               ),
               ...buildChildren(),
-           widget.laporanBulanan.transaksiBulanIni.isEmpty?SizedBox():   Padding(
+           widget.laporanBulanan.transaksiBulanIni.isEmpty?const SizedBox():   Padding(
                 padding: const EdgeInsets.only(
                     top: 8, bottom: 8, left: 15, right: 20),
                 child: Row(
@@ -166,15 +161,15 @@ class _BulananState extends State<Bulanan> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                      Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child:   Text('Total Sisa :',
                             style:  Theme.of(context).textTheme.displaySmall),
-                        ), Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                        ), Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child: Text('Total Perbaikan: ', style:  Theme.of(context).textTheme.displaySmall,
                           )),
-                             Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                             Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child:  Text('Total Bersih :',
-                            style:  Theme.of(context).textTheme.displaySmall)), Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                            style:  Theme.of(context).textTheme.displaySmall)), Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child: 
                         Text(
                             textAlign: TextAlign.left,
@@ -186,19 +181,19 @@ class _BulananState extends State<Bulanan> {
                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                            Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                            Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child:   Text(
                             Rupiah.format(
                               widget.laporanBulanan.totalBersih +widget.laporanBulanan.totalPerbaikan,
                             ),
                             style: Theme.of(context).textTheme.displaySmall,
-                          ),), Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          ),), Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child:  Text(
                             textAlign: TextAlign.left,
                             Rupiah.format(widget.laporanBulanan.totalPerbaikan),
                             style: Theme.of(context).textTheme.displaySmall,
                           )),
-                          Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                          Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child:  Text(
                             Rupiah.format(
                               widget.laporanBulanan.totalBersih,
@@ -206,7 +201,7 @@ class _BulananState extends State<Bulanan> {
                             style: Theme.of(context).textTheme.displaySmall,
                           )),
                          
-                        Container(margin: EdgeInsets.only(top: 2,bottom: 2),
+                        Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child:    Text(
                             Rupiah.format(
                                 widget.laporanBulanan.persenanSupir ?? 0),
