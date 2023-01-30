@@ -1,22 +1,23 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
 import 'package:gabriel_logistik/main.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/sidemenu.dart';
 import 'package:provider/provider.dart';
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart';
 
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class LoginHp extends StatefulWidget {
+  const LoginHp({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginHp> createState() => _LoginHpState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginHpState extends State<LoginHp> {
   List<Map<String, dynamic>> data = [
     {'user': 'owner', 'pass': '123', 'status': 'owner'},
     {'user': 'admin', 'pass': '123', 'status': 'admin'},
@@ -30,8 +31,8 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.3,
-          height: MediaQuery.of(context).size.width * 0.2,
+          width: MediaQuery.of(context).size.width * 0.8,
+          height: MediaQuery.of(context).size.width * 0.45,
           child: Card(
             color: Theme.of(context).primaryColor,
             child: Padding(
@@ -42,7 +43,7 @@ class _LoginState extends State<Login> {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       bottom: 10, right: 30, left: 30, top: 10),
-                  child: Column(children: [
+                  child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [
                     Padding(
                       padding: const EdgeInsets.only(
                           top: 30, bottom: 10, right: 30, left: 30),
@@ -66,9 +67,9 @@ class _LoginState extends State<Login> {
                           obscureText: true),
                     ),
                     RoundedLoadingButton(
-                      child: const AutoSizeText(maxLines: 1,'Login',
+                      child: const AutoSizeText(maxLines: 1,'LoginHp',
                           style: TextStyle(color: Colors.white)),
-                      color: Colors.green,
+                      color:TargetPlatform.windows==defaultTargetPlatform?Colors.red:Colors.green,
                       controller: _btnController,
                       successColor: Colors.green,
                       errorColor: Colors.red,

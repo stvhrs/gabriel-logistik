@@ -14,98 +14,121 @@ const Map<String, String> headers = {
 List<Map<String, dynamic>> dummyData = [
   {
     'id_transaksi': 1,
-    'tgl_berangkat': '2022-06-20T20:18:04.000Z',
+    'tgl_berangkat': '2021-02-20T20:18:04.000Z',
     'keterangan': 'test keterangan',
-    'supir': 'Budi',
-    'tujuan': 'Sumberlawang',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka CSA Keramik',
+    'mobil': 'Ford',
+    'keluar': 1200000,
+    'ongkos': 3300000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Ban MRF', 'harga_perbaikan': 100000}
+    ]
+  },
+  {
+    'id_transaksi': 2,
+    'tgl_berangkat': '2021-02-20T20:18:04.000Z',
+    'keterangan': 'test keterangan',
+    'supir': 'Arip',
+    'tujuan': 'Palangka CSA Kotak',
+    'mobil': 'Ford',
+    'keluar': 1500000,
+    'ongkos': 3200000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Olie', 'harga_perbaikan': 100000}
+
+    ]
+  },
+  {
+    'id_transaksi': 3,
+    'tgl_berangkat': '2021-02-20T20:18:04.000Z',
+    'keterangan': 'test keterangan',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka CSA Aplus',
     'mobil': 'Toyota',
-    'keluar': 100,
-    'ongkos': 400,
+    'keluar': 500000,
+    'ongkos': 3300000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Parkir', 'harga_perbaikan': 100000}
+    ]
+  },
+   {
+    'id_transaksi': 4,
+    'tgl_berangkat': '2023-02-20T20:18:04.000Z',
+    'keterangan': 'test keterangan',
+    'supir': 'Arip',
+    'tujuan': 'Palangka Beras',
+    'mobil': 'Ford',
+    'keluar': 150000,
+    'ongkos': 200000,
     'perbaikan_transaksi': [
       {'nama_perbaikan': 'Ban BridgeStone', 'harga_perbaikan': 100000}
     ]
   },
   {
-    'id_transaksi': 2,
-    'tgl_berangkat': '2022-07-20T20:18:04.000Z',
-    'keterangan': 'test keterangan',
-    'supir': 'Ahamad',
-    'tujuan': 'Gemolong',
-    'mobil': 'Honda',
-    'keluar': 100,
-    'ongkos': 400,
-    'perbaikan_transaksi': []
-  },
-  {
-    'id_transaksi': 3,
-    'tgl_berangkat': '2022-08-20T20:18:04.000Z',
-    'keterangan': 'test keterangan',
-    'supir': 'Cahyo',
-    'tujuan': 'Miri',
-    'mobil': 'Ford',
-    'keluar': 100,
-    'ongkos': 400,
-    'perbaikan_transaksi': []
-  },
-  {
-    'id_transaksi': 4,
-    'tgl_berangkat': '2023-01-20T20:18:04.000Z',
-    'keterangan': 'test keterangan',
-    'supir': 'Doni',
-    'tujuan': 'Gemolong',
-    'mobil': 'Ford',
-    'keluar': 1000000,
-    'ongkos': 4000000,
-    'perbaikan_transaksi': []
-  },
-  {
     'id_transaksi': 5,
-    'tgl_berangkat': '2023-01-20T20:18:04.000Z',
+    'tgl_berangkat': '2021-01-20T20:18:04.000Z',
     'keterangan': 'test keterangan',
-    'supir': 'Doni',
-    'tujuan': 'Gemolong',
+    'supir': 'Arip',
+    'tujuan': 'Palangka CSA Keramik',
     'mobil': 'Ford',
-    'keluar': 10000000,
-    'ongkos': 40000000,
-    'perbaikan_transaksi': []
+    'keluar': 1500000,
+    'ongkos': 2000000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Ban MRF', 'harga_perbaikan': 100000}
+    ]
   },
   {
     'id_transaksi': 6,
-    'tgl_berangkat': '2023-01-20T20:18:04.000Z',
+    'tgl_berangkat': '2021-01-20T20:18:04.000Z',
     'keterangan': 'test keterangan',
-    'supir': 'Doni',
-    'tujuan': 'Gemolong',
+    'supir': 'Arip',
+    'tujuan': 'Palangka CSA Kotak',
     'mobil': 'Ford',
-    'keluar': 1000000,
-    'ongkos': 4000000,
+    'keluar': 500000,
+    'ongkos': 1500000,
     'perbaikan_transaksi': [
-      {'nama_perbaikan': 'Ban BridgeStone', 'harga_perbaikan': 1000000}
+      {'nama_perbaikan': 'Olie', 'harga_perbaikan': 100000}
+
+    ]
+  },
+  {
+    'id_transaksi': 7,
+    'tgl_berangkat': '2021-01-20T20:18:04.000Z',
+    'keterangan': 'test keterangan',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka CSA Aplus',
+    'mobil': 'Ford',
+    'keluar': 500000,
+    'ongkos': 1700000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Parkir', 'harga_perbaikan': 100000}
     ]
   },
    {
-    'id_transaksi': 7,
-    'tgl_berangkat': '2023-02-20T20:18:04.000Z',
+    'id_transaksi': 8,
+    'tgl_berangkat': '2023-01-20T20:18:04.000Z',
     'keterangan': 'test keterangan',
-    'supir': 'Doni',
-    'tujuan': 'Gemolong',
-    'mobil': 'Ford',
-    'keluar': 1000000,
-    'ongkos': 4000000,
+    'supir': 'Arip',
+    'tujuan': 'Palangka Beras',
+    'mobil': 'Hino',
+    'keluar': 200000,
+    'ongkos': 330000,
     'perbaikan_transaksi': [
-      {'nama_perbaikan': 'Ban BridgeStone', 'harga_perbaikan': 1000000}
+      {'nama_perbaikan': 'Part', 'harga_perbaikan': 100000}
     ]
   },
   
 ];
 List<Map<String, dynamic>> dummyData2 = [
-  {'id_supir': 1, 'nama_supir': 'Doni', 'nohp_supir': '085728181929'},
+  {'id_supir': 1, 'nama_supir': 'Kolil', 'nohp_supir': '085728181929'},
   {'id_supir': 2, 'nama_supir': 'Budi', 'nohp_supir': '085728181929'},
-  {'id_supir': 3, 'nama_supir': 'Steve', 'nohp_supir': '085728181929'},
-  {'id_supir': 4, 'nama_supir': 'Ahamad', 'nohp_supir': '085728181929'},
+  {'id_supir': 3, 'nama_supir': 'Arip', 'nohp_supir': '085728181929'},
+  {'id_supir': 4, 'nama_supir': 'Ahmad', 'nohp_supir': '085728181929'},
   {'id_supir': 5, 'nama_supir': 'Cahyo', 'nohp_supir': '085728181929'}
 ];
 List<Map<String, dynamic>> dummyData3 = [
-  {'id_mobil': 1, 'nama_mobil': 'Honda', 'nopol_mobil': 'AD 4349 AWE'},
+  {'id_mobil': 1, 'nama_mobil': 'Hino', 'nopol_mobil': 'AD 4349 AWE'},
   {'id_mobil': 2, 'nama_mobil': 'Toyota', 'nopol_mobil': 'AD 4349 AWE'},
   {'id_mobil': 3, 'nama_mobil': 'Ford', 'nopol_mobil': 'AD 4349 AWE'},
   {'id_mobil': 4, 'nama_mobil': 'Avanza', 'nopol_mobil': 'AD 4349 AWE'}

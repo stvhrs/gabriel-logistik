@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
 import 'package:gabriel_logistik/mobil/edit_mobil.dart';
 import 'package:gabriel_logistik/mobil/tambah_mobil.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
@@ -31,7 +32,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
           width: MediaQuery.of(context).size.width * 0.7,
           child: Column(
             children: [
-              const Text(
+              const AutoSizeText(maxLines: 1,
                 'Daftar Mobil',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
@@ -64,9 +65,9 @@ class _DaftarMobilState extends State<DaftarMobil> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:  [
-                    Expanded(flex: 11, child: Text('Nama',style: Theme.of(context).textTheme.displayMedium,)),
-                    Expanded(flex: 11, child: Text('Nomor Polisi',style: Theme.of(context).textTheme.displayMedium)),
-                    Expanded(flex: 3, child: Text(' Aksi',style: Theme.of(context).textTheme.displayMedium))
+                    Expanded(flex: 11, child: AutoSizeText(maxLines: 1,'Nama',style: Theme.of(context).textTheme.displayMedium,)),
+                    Expanded(flex: 11, child: AutoSizeText(maxLines: 1,'Nomor Polisi',style: Theme.of(context).textTheme.displayMedium)),
+                    Expanded(flex: 3, child: AutoSizeText(maxLines: 1,' Aksi',style: Theme.of(context).textTheme.displayMedium))
                   ],
                 ),
               ),
@@ -98,10 +99,10 @@ class _DaftarMobilState extends State<DaftarMobil> {
                             children: [
                               Expanded(
                                   flex: 3,
-                                  child: Text(c.listMobil[index].nama_mobil)),
+                                  child: AutoSizeText(maxLines: 1,c.listMobil[index].nama_mobil)),
                               Expanded(
                                   flex: 3,
-                                  child: Text(c.listMobil[index].nopol_mobil)),
+                                  child: AutoSizeText(maxLines: 1,c.listMobil[index].nopol_mobil)),
                               Expanded(
                                 flex: 1,
                                 child: Row(

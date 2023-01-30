@@ -5,7 +5,7 @@ import 'package:gabriel_logistik/models/transaksi.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
@@ -74,7 +74,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
         children: [
           Container(
               margin: const EdgeInsets.only(bottom: 7),
-              child: Text(
+              child: AutoSizeText(maxLines: 1,
                 '$ket :',
                 style: const TextStyle(fontSize: 13),
               )),
@@ -96,7 +96,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
           children: [
             Container(
                 margin: const EdgeInsets.only(bottom: 7),
-                child: Text(
+                child: AutoSizeText(maxLines: 1,
                   '$ket :',
                   style: const TextStyle(fontSize: 13),
                 )),
@@ -120,7 +120,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
               Icons.add,
               color: Colors.white,
             ),
-            label: const Text(
+            label: const AutoSizeText(maxLines: 1,
               'Tambah Transaksi',
               style: TextStyle(color: Colors.white),
             ),
@@ -137,7 +137,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const SizedBox(),
-                            const Text(
+                            const AutoSizeText(maxLines: 1,
                               'Tambah Transaksi',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -310,7 +310,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             Navigator.of(context).pop();
                                           });
                                         },
-                                        child: const Text('Tambah',
+                                        child: const AutoSizeText(maxLines: 1,'Tambah',
                                             style:
                                                 TextStyle(color: Colors.white)),
                                       )

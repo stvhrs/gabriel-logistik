@@ -7,10 +7,10 @@ class BulanSupir {
   double totalBersih;
   double? persenanSupir;
   double totalPerbaikan;
-  String tanggal;
+  String bulan;
 
   BulanSupir(this.namaSupir, this.transaksiBulanIni, this.totalBersih,
-      this.persenanSupir, this.totalPerbaikan, this.tanggal);
+      this.persenanSupir, this.totalPerbaikan, this.bulan);
 
 
 }

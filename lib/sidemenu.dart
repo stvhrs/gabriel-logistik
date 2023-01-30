@@ -1,7 +1,8 @@
 import 'dart:convert';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:gabriel_logistik/login.dart';
 import 'package:gabriel_logistik/main.dart';
@@ -107,7 +108,7 @@ bool loading=true;
                         ),
                       ),
                     ),
-                    Text(
+                    AutoSizeText(maxLines: 1,
                         Provider.of<ProviderData>(context, listen: false)
                                 .isOwner
                             ? 'Hi Owner !'
@@ -139,7 +140,7 @@ bool loading=true;
                             Icons.arrow_back,
                             color: Colors.red,
                           ),
-                          const Text(
+                          const AutoSizeText(maxLines: 1,
                             'Logout',
                             style: TextStyle(
                                 fontSize: 15,

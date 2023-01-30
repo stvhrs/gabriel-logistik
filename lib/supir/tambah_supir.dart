@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
 import 'package:gabriel_logistik/models/supir.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -26,7 +26,7 @@ class TambahSupir extends StatelessWidget {
               builder: (context) {
                 return AlertDialog(
                   actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                  title: const Text("Tambah Supir",),
+                  title: const AutoSizeText(maxLines: 1,"Tambah Supir",),
                   content: IntrinsicHeight(
                     child: SizedBox(
                       width: 500,
@@ -106,13 +106,13 @@ class TambahSupir extends StatelessWidget {
                         });
                       },
                       child:
-                          const Text('Tambah', style: TextStyle(color: Colors.white)),
+                          const AutoSizeText(maxLines: 1,'Tambah', style: TextStyle(color: Colors.white)),
                     )
                   ],
                 );
               });
         },
         icon: const Icon(Icons.add,color: Colors.white,),
-        label: const Text('Tambah',style: TextStyle(color: Colors.white),));
+        label: const AutoSizeText(maxLines: 1,'Tambah',style: TextStyle(color: Colors.white),));
   }
 }

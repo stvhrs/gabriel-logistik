@@ -1,8 +1,10 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:gabriel_logistik/login.dart';
+import 'package:gabriel_logistik/loginhp.dart';
 
 import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/supir.dart';
@@ -110,7 +112,7 @@ bool loading=true;
   Widget build(BuildContext context) {
     //
     return loading?CircularProgressIndicator() :Consumer<ProviderData>(builder: (context, data, _) {
-      return data.logined ? DashBoard() : Login();
+      return data.logined ? const DashBoard() : TargetPlatform.android==defaultTargetPlatform||TargetPlatform.iOS==defaultTargetPlatform?LoginHp(): Login();
     });
   }
 }

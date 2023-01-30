@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_add.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_search_mobil.dart';
@@ -142,7 +143,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.6,
+                  height: MediaQuery.of(context).size.height * 0.7,
                   child: ListView.builder(
                       itemCount: prov.listTransaksi.length,
                       itemBuilder: (context, index) =>

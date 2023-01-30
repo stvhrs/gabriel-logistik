@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
 import 'package:gabriel_logistik/helper/totalPerbaikan.dart';
 import 'package:gabriel_logistik/kas/kas.dart';
 import 'package:gabriel_logistik/models/kas_tahun.dart';
@@ -68,7 +69,7 @@ class _KasTahunState extends State<KasTahun> {
                 items: tahun.map<DropdownMenuItem<int>>((int value) {
                   return DropdownMenuItem<int>(
                     value: value,
-                    child: Text(value.toString(),
+                    child: AutoSizeText(maxLines: 1,value.toString(),
                         style: const TextStyle(
                             fontSize: 16,
                             fontFamily: 'Nunito',
@@ -91,7 +92,7 @@ class _KasTahunState extends State<KasTahun> {
                   Provider.of<ProviderData>(context).backupListSupir.map((e) {
                     double totalBersihTahun=0;
                     double totalPerbaikanTahun=0;
-                KasModel asu = KasModel(e.nama_supir, [], 0, 0, 0);
+                KasModel asu = KasModel(e.nama_supir, [], 0, 0, 0,ropdownValue2.toString());
                 for (var moon in list) {
                   double totalBersih = 0;
                   double totalPerbaikan = 0;

@@ -8,10 +8,11 @@ class KasModel {
   double totalBersih;
   double? totalPersenSupir;
   double totalPerbaikan;
+  String tahun;
 
 
   KasModel(this.namaSupir, this.listBulananSupir, this.totalBersih,
-      this.totalPersenSupir, this.totalPerbaikan,);
+      this.totalPersenSupir, this.totalPerbaikan,this.tahun);
 
 
 }

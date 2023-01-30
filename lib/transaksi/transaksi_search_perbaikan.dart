@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +19,7 @@ class _SearchPerbaikanState extends State<SearchPerbaikan> {
       child: Container(
         child: ChoiceChip(backgroundColor: _selected?Theme.of(context).colorScheme.secondary:Colors.grey.shade200,
           padding: const EdgeInsets.all(10),
-          label: Text(
+          label: AutoSizeText(maxLines: 1,
             'Mengalami Perbaikan',
             style: TextStyle(color: _selected ? Colors.white : Colors.black),
           ),

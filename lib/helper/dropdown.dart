@@ -1,7 +1,7 @@
 
 // ignore_for_file: overridden_fields
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart';
 
 // ignore: must_be_immutable
@@ -227,7 +227,7 @@ class DropDownFieldState extends FormFieldState<String> {
   ListTile _getListTile(String text) {
     return ListTile(hoverColor: Colors.grey,
       dense: true,
-      title: Text(
+      title: AutoSizeText(maxLines: 1,
         text,
       ),
       onTap: () {

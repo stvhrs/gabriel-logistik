@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
@@ -13,7 +14,7 @@ class TransaksiTile extends StatefulWidget {
   final Transaksi _transaksi;
   final int index;
 
-  const TransaksiTile(this._transaksi, this.index);
+   TransaksiTile(this._transaksi, this.index);
 
   @override
   State<TransaksiTile> createState() => _TransaksiTileState();
@@ -42,39 +43,39 @@ class _TransaksiTileState extends State<TransaksiTile> {
             ? Colors.amber.shade100
             : widget.index.isEven
                 ? Colors.grey.shade200
-                : const Color.fromARGB(255, 189, 193, 221),
+                :  Color.fromARGB(255, 189, 193, 221),
         padding:
-            const EdgeInsets.only(top: 14, bottom: 14, left: 15, right: 15),
+             EdgeInsets.only(top: 14, bottom: 14, left: 15, right: 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
                 flex: 3,
-                child: Text(
-                  ' ${widget.index}',
+                child: AutoSizeText(maxLines:1,
+                  '1',
                 )),
             Expanded(
                 flex: 7,
-                child: Text(FormatTanggal.formatTanggal(
-                    widget._transaksi.tanggalBerangkat))),
+                child:Text(maxLines:1,FormatTanggal.formatTanggal(
+                    widget._transaksi.tanggalBerangkat).toString())),
             Expanded(
                 flex: 5,
-                child: Text(
+                child: AutoSizeText(maxLines:1,
                   widget._transaksi.supir,
                 )),
-            Expanded(flex: 7, child: Text(widget._transaksi.mobil)),
-            Expanded(flex: 10, child: Text(widget._transaksi.tujuan)),
+            Expanded(flex: 7, child: AutoSizeText(maxLines:1,widget._transaksi.mobil)),
+            Expanded(flex: 10, child: AutoSizeText(maxLines:1,widget._transaksi.tujuan)),
             Expanded(
-                flex: 7, child: Text(Rupiah.format(widget._transaksi.ongkos))),
+                flex: 7, child: AutoSizeText(maxLines:1,Rupiah.format(widget._transaksi.ongkos))),
             Expanded(
-                flex: 7, child: Text(Rupiah.format(widget._transaksi.keluar))),
+                flex: 7, child: AutoSizeText(maxLines:1,Rupiah.format(widget._transaksi.keluar))),
             Expanded(
                 flex: 7,
-                child: Text(Rupiah.format(
+                child: AutoSizeText(maxLines:1,Rupiah.format(
                     widget._transaksi.ongkos - widget._transaksi.keluar))),
             Expanded(
                 flex: 7,
-                child: Text(widget._transaksi.listPerbaikan.isEmpty
+                child: AutoSizeText(maxLines:1,widget._transaksi.listPerbaikan.isEmpty
                     ? '-'
                     : Rupiah.format(
                         totalPerbaikan(widget._transaksi.listPerbaikan)))),

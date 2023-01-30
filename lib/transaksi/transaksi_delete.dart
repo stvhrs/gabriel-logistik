@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -26,14 +26,14 @@ class TransaksiDelete extends StatelessWidget {
               builder: (context) {
                 return AlertDialog(
                   actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                  title: const Text("Delete"),
+                  title: const AutoSizeText(maxLines: 1,"Delete"),
                   content: IntrinsicHeight(
                     child: SizedBox(
                       width: 500,
                       child: 
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: const Text( 'Apakah Anda Yakin ?'),
+                            child: const AutoSizeText(maxLines: 1, 'Apakah Anda Yakin ?'),
                               ),
                               
                             
@@ -79,7 +79,7 @@ class TransaksiDelete extends StatelessWidget {
                         });
                       },
                       child:
-                          const Text('Delete', style: TextStyle(color: Colors.white)),
+                          const AutoSizeText(maxLines: 1,'Delete', style: TextStyle(color: Colors.white)),
                     )
                   ],
                 );

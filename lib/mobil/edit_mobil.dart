@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/supir.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +25,7 @@ class EditMobil extends StatelessWidget {
               builder: (context) {
                 return AlertDialog(
                   actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                  title: const Text("Edit Mobil"),
+                  title: const AutoSizeText(maxLines: 1,"Edit Mobil"),
                   content: IntrinsicHeight(
                     child: SizedBox(
                       width: 500,
@@ -101,7 +101,7 @@ class EditMobil extends StatelessWidget {
                         });
                       },
                       child:
-                          const Text('Edit', style: TextStyle(color: Colors.white)),
+                          const AutoSizeText(maxLines: 1,'Edit', style: TextStyle(color: Colors.white)),
                     )
                   ],
                 );
