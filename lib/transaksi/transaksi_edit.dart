@@ -4,7 +4,7 @@ import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
-import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -149,7 +149,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
         children: [
           Container(
               margin: const EdgeInsets.only(bottom: 7),
-              child: AutoSizeText(maxLines: 1,
+              child: Text(
                 '$ket :',
                 style: const TextStyle(fontSize: 13),
               )),
@@ -171,7 +171,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
           children: [
             Container(
                 margin: const EdgeInsets.only(bottom: 7),
-                child: AutoSizeText(maxLines: 1,
+                child: Text(
                   '$ket :',
                   style: const TextStyle(fontSize: 13),
                 )),
@@ -237,7 +237,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const SizedBox(),
-                            const AutoSizeText(maxLines: 1,
+                            const Text(
                               'Edit Transaksi',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -391,7 +391,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                           ),
                                         ],
                                       ),
-                                      const AutoSizeText(maxLines: 1,
+                                      const Text(
                                         'Perbaikan :',
                                         style: TextStyle(fontSize: 13),
                                       ),
@@ -407,7 +407,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          const AutoSizeText(maxLines: 1,
+                                          const Text(
                                             'Tambah Perbaikan',
                                             style: TextStyle(fontSize: 13),
                                           ),
@@ -428,7 +428,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                                 color: Colors.green,
                                               )),
 
-                                          // AutoSizeText(maxLines: 1,jumlahOpsi.toString()),
+                                          // Text(jumlahOpsi.toString()),
                                         ],
                                       ),
                                       RoundedLoadingButton(
@@ -463,7 +463,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                             Navigator.of(context).pop();
                                           });
                                         },
-                                        child: const AutoSizeText(maxLines: 1,'Edit',
+                                        child: const Text('Edit',
                                             style:
                                                 TextStyle(color: Colors.white)),
                                       )

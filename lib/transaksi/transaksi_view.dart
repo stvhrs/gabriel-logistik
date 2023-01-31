@@ -4,7 +4,7 @@ import 'package:gabriel_logistik/models/transaksi.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 
-import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart'; 
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -140,7 +140,7 @@ class _TransaksiViewState extends State<TransaksiView> {
         children: [
           Container(
               margin: const EdgeInsets.only(bottom: 7),
-              child: AutoSizeText(maxLines: 1,
+              child: Text(
                 '$ket :',
                 style: const TextStyle(fontSize: 13),
               )),
@@ -162,7 +162,7 @@ class _TransaksiViewState extends State<TransaksiView> {
           children: [
             Container(
                 margin: const EdgeInsets.only(bottom: 7),
-                child: AutoSizeText(maxLines: 1,
+                child: Text(
                   '$ket :',
                   style: const TextStyle(fontSize: 13),
                 )),
@@ -225,7 +225,7 @@ class _TransaksiViewState extends State<TransaksiView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const SizedBox(),
-                          const AutoSizeText(maxLines: 1,
+                          const Text(
                             'Lihat Transaksi',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -377,7 +377,7 @@ class _TransaksiViewState extends State<TransaksiView> {
                                         ),
                                       ],
                                     ),
-                                    const AutoSizeText(maxLines: 1,
+                                    const Text(
                                       'Perbaikan :',
                                       style: TextStyle(fontSize: 13),
                                     ),

@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
-import 'package:gabriel_logistik/main.dart';
+import 'package:flutter/material.dart'; 
 import 'package:gabriel_logistik/providerData/providerData.dart';
-import 'package:gabriel_logistik/sidemenu.dart';
 import 'package:provider/provider.dart';
 
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -37,7 +35,7 @@ class _LoginState extends State<Login> {
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Card(
-                color: Color.fromARGB(255, 189, 193, 221),
+                color: const Color.fromARGB(255, 189, 193, 221),
                 shadowColor: Theme.of(context).colorScheme.primary,
                 child: Padding(
                   padding: const EdgeInsets.only(
@@ -66,8 +64,6 @@ class _LoginState extends State<Login> {
                           obscureText: true),
                     ),
                     RoundedLoadingButton(
-                      child: const AutoSizeText(maxLines: 1,'Login',
-                          style: TextStyle(color: Colors.white)),
                       color: Colors.green,
                       controller: _btnController,
                       successColor: Colors.green,
@@ -101,6 +97,8 @@ class _LoginState extends State<Login> {
                           return;
                         }
                       },
+                      child: const Text('Login',
+                          style: TextStyle(color: Colors.white)),
                     )
                   ]),
                 ),

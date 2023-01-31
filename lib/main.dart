@@ -1,24 +1,15 @@
-import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart'; 
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:gabriel_logistik/login.dart';
 import 'package:gabriel_logistik/loginhp.dart';
 
-import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/supir.dart';
-import 'package:gabriel_logistik/pages/kas_tahun.dart';
-import 'package:gabriel_logistik/pages/laporan_bulanan.dart';
-import 'package:gabriel_logistik/pages/transaksi_page.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
-import 'package:gabriel_logistik/services/service.dart';
 import 'package:gabriel_logistik/sidemenu.dart';
 import 'package:gabriel_logistik/styles/theme.dart';
-import 'package:gabriel_logistik/pages/daftar_supir.dart';
 import 'package:provider/provider.dart';
 
-import 'models/transaksi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -56,7 +47,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage(title: ''),
+      home: const MyHomePage(title: ''),
       debugShowCheckedModeBanner: false,
       locale: const Locale('id'),
       supportedLocales: localization.supportedLocales,
@@ -111,8 +102,8 @@ bool loading=true;
   @override
   Widget build(BuildContext context) {
     //
-    return loading?CircularProgressIndicator() :Consumer<ProviderData>(builder: (context, data, _) {
-      return data.logined ? const DashBoard() : TargetPlatform.android==defaultTargetPlatform||TargetPlatform.iOS==defaultTargetPlatform?LoginHp(): Login();
+    return loading?const CircularProgressIndicator() :Consumer<ProviderData>(builder: (context, data, _) {
+      return data.logined ? const DashBoard() : TargetPlatform.android==defaultTargetPlatform|| TargetPlatform.iOS==defaultTargetPlatform?const LoginHp(): const Login();
     });
   }
 }

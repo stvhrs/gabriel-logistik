@@ -1,5 +1,5 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
+
+import 'package:flutter/material.dart'; 
 import 'package:gabriel_logistik/helper/totalPerbaikan.dart';
 import 'package:gabriel_logistik/kas/kas.dart';
 import 'package:gabriel_logistik/models/kas_tahun.dart';
@@ -69,7 +69,7 @@ class _KasTahunState extends State<KasTahun> {
                 items: tahun.map<DropdownMenuItem<int>>((int value) {
                   return DropdownMenuItem<int>(
                     value: value,
-                    child: AutoSizeText(maxLines: 1,value.toString(),
+                    child: Text(value.toString(),
                         style: const TextStyle(
                             fontSize: 16,
                             fontFamily: 'Nunito',

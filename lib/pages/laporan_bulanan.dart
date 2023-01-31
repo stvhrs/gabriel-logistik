@@ -1,5 +1,5 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
+
+import 'package:flutter/material.dart'; 
 import 'package:gabriel_logistik/bulanan/bulanan.dart';
 import 'package:gabriel_logistik/helper/totalPerbaikan.dart';
 import 'package:gabriel_logistik/models/laporan_bulanan.dart';
@@ -66,7 +66,7 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                 items: tahun.map<DropdownMenuItem<int>>((int value) {
                   return DropdownMenuItem<int>(
                     value: value,
-                    child: AutoSizeText(maxLines: 1,value.toString(),
+                    child: Text(value.toString(),
                         style:const TextStyle(fontSize: 16,fontFamily: 'Nunito',color: Colors.black)),
                   );
                 }).toList(),
@@ -88,7 +88,7 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                 items: list.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: AutoSizeText(maxLines: 1,value,
+                    child: Text(value,
                         style:const TextStyle(fontSize: 16,fontFamily: 'Nunito',color: Colors.black)),
                   );
                 }).toList(),

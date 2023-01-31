@@ -1,5 +1,5 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
+
+import 'package:flutter/material.dart'; 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/supir/edit_supir.dart';
 import 'package:gabriel_logistik/supir/tambah_supir.dart';
@@ -30,7 +30,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
           width: MediaQuery.of(context).size.width * 0.7,
           child: Column(
             children: [
-              const AutoSizeText(maxLines: 1,
+              const Text(
                 'Daftar Supir',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
@@ -63,9 +63,9 @@ class _DaftarSupirState extends State<DaftarSupir> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:  [
-                    Expanded(flex: 11, child: AutoSizeText(maxLines: 1,'Nama',style: Theme.of(context).textTheme.displayMedium,)),
-                    Expanded(flex: 11, child: AutoSizeText(maxLines: 1,'Nomor Hp',style: Theme.of(context).textTheme.displayMedium)),
-                    Expanded(flex: 3, child: AutoSizeText(maxLines: 1,' Aksi',style: Theme.of(context).textTheme.displayMedium))
+                    Expanded(flex: 11, child: Text('Nama',style: Theme.of(context).textTheme.displayMedium,)),
+                    Expanded(flex: 11, child: Text('Nomor Hp',style: Theme.of(context).textTheme.displayMedium)),
+                    Expanded(flex: 3, child: Text(' Aksi',style: Theme.of(context).textTheme.displayMedium))
                   ],
                 ),
               ),
@@ -97,10 +97,10 @@ class _DaftarSupirState extends State<DaftarSupir> {
                             children: [
                               Expanded(
                                   flex: 3,
-                                  child: AutoSizeText(maxLines: 1,c.listSupir[index].nama_supir)),
+                                  child: Text(c.listSupir[index].nama_supir)),
                               Expanded(
                                   flex: 3,
-                                  child: AutoSizeText(maxLines: 1,c.listSupir[index].nohp_supir)),
+                                  child: Text(c.listSupir[index].nohp_supir)),
                               Expanded(
                                 flex: 1,
                                 child: Row(

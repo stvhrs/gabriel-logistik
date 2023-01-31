@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart'; 
 
 import 'package:collection/collection.dart';
 import 'package:gabriel_logistik/models/kas_tahun.dart';
@@ -37,19 +37,19 @@ class _KasState extends State<Kas> {
               
               Expanded(
                   flex: 7,
-                  child: AutoSizeText(maxLines: 1,element.bulan,
+                  child: Text(element.bulan,
                       style: Theme.of(context).textTheme.displaySmall)),
               Expanded(
                   flex: 7,
-                  child: AutoSizeText(maxLines: 1,Rupiah.format(element.totalBersih) .toString(),
+                  child: Text(Rupiah.format(element.totalBersih) .toString(),
                       style: Theme.of(context).textTheme.displaySmall)),
               Expanded(
                   flex: 7,
-                  child: AutoSizeText(maxLines: 1, Rupiah.format(element.totalPerbaikan) .toString(),
+                  child: Text( Rupiah.format(element.totalPerbaikan) .toString(),
                       style: Theme.of(context).textTheme.displaySmall)),
                         Expanded(
                   flex: 7,
-                  child: AutoSizeText(maxLines: 1,Rupiah.format(element.persenanSupir!) .toString(),
+                  child: Text(Rupiah.format(element.persenanSupir!) .toString(),
                       style: Theme.of(context).textTheme.displaySmall)),
             ],
           ),
@@ -71,8 +71,8 @@ class _KasState extends State<Kas> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left:15.0,top: 7.5,bottom: 7.5),
-                child: AutoSizeText(maxLines: 1,
-                  widget.kasModel.namaSupir +' - '+widget.kasModel.tahun,
+                child: Text(
+                  '${widget.kasModel.namaSupir} - ${widget.kasModel.tahun}',
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ),
@@ -85,32 +85,32 @@ class _KasState extends State<Kas> {
                   children: [
                     Expanded(
                         flex: 7,
-                        child: AutoSizeText(maxLines: 1,
+                        child: Text(
                           'Bulan',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     // Expanded(
                     //     flex: 7,
-                    //     child: AutoSizeText(maxLines: 1,
+                    //     child: Text(
                     //       'Mobil',
                     //       style: Theme.of(context).textTheme.displayMedium,
                     //     )),
                  
                     Expanded(
                         flex: 7,
-                        child: AutoSizeText(maxLines: 1,
+                        child: Text(
                           'Bersih',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
                         flex: 7,
-                        child: AutoSizeText(maxLines: 1,
+                        child: Text(
                           'Perbaikan',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
                         flex: 7,
-                        child: AutoSizeText(maxLines: 1,
+                        child: Text(
                           'Persen',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
@@ -128,15 +128,15 @@ class _KasState extends State<Kas> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
-                          child: AutoSizeText(maxLines: 1,'Total Bersih :',
+                          child: Text('Total Bersih :',
                               style:  Theme.of(context).textTheme.displaySmall),
                         ),
                         Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
-                          child: const AutoSizeText(maxLines: 1,'Total Perbaikan: ', style: TextStyle(fontSize: 13),
+                          child: const Text('Total Perbaikan: ', style: TextStyle(fontSize: 13),
                           )),
                         
                         Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
-                          child: AutoSizeText(maxLines: 1,
+                          child: Text(
                          
                             'Total Persen Supir: ',
                            style:  Theme.of(context).textTheme.displaySmall),
@@ -147,20 +147,20 @@ class _KasState extends State<Kas> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
-                          child: AutoSizeText(maxLines: 1,
+                          child: Text(
                             Rupiah.format(
                               widget.kasModel.totalBersih,
                             ),
                             style: Theme.of(context).textTheme.displaySmall,
                           )),
                           Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
-                          child: AutoSizeText(maxLines: 1,
+                          child: Text(
                             textAlign: TextAlign.left,
                             Rupiah.format(widget.kasModel.totalPerbaikan),
                             style: Theme.of(context).textTheme.displaySmall,
                           )),
                           Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
-                          child: AutoSizeText(maxLines: 1,
+                          child: Text(
                             Rupiah.format(
                                 widget.kasModel.totalPersenSupir ?? 0),
                             style: Theme.of(context).textTheme.displaySmall,

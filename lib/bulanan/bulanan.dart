@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart'; 
 import 'package:gabriel_logistik/helper/totalPerbaikan.dart';
 import 'package:gabriel_logistik/models/laporan_bulanan.dart';
 import 'package:collection/collection.dart';
@@ -41,32 +41,32 @@ class _BulananState extends State<Bulanan> {
             children: [
               Expanded(
                   flex: 3,
-                  child: AutoSizeText(maxLines: 1,
+                  child: Text(
                       DateTime.parse(element.tanggalBerangkat).day.toString(),
                       style: Theme.of(context).textTheme.displaySmall)),
               // Expanded(
               //     flex: 7,
-              //     child: AutoSizeText(maxLines: 1,element.mobil,
+              //     child: Text(element.mobil,
               //         style: Theme.of(context).textTheme.displaySmall)),
               Expanded(
                   flex: 7,
-                  child: AutoSizeText(maxLines: 1,element.tujuan,
+                  child: Text(element.tujuan,
                       style: Theme.of(context).textTheme.displaySmall)), Expanded(
                   flex: 7,
-                  child: AutoSizeText(maxLines: 1,Rupiah.format(element.ongkos),
+                  child: Text(Rupiah.format(element.ongkos),
                       style: Theme.of(context).textTheme.displaySmall)),
               Expanded(
                   flex: 7,
-                  child: AutoSizeText(maxLines: 1,Rupiah.format(element.keluar),
+                  child: Text(Rupiah.format(element.keluar),
                       style: Theme.of(context).textTheme.displaySmall)),
              
               Expanded(
                   flex: 7,
-                  child: AutoSizeText(maxLines: 1,Rupiah.format(element.ongkos - element.keluar),
+                  child: Text(Rupiah.format(element.ongkos - element.keluar),
                       style: Theme.of(context).textTheme.displaySmall)),
               Expanded(
                 flex: 7,
-                child: AutoSizeText(maxLines: 1,
+                child: Text(
                     textAlign: TextAlign.left,
                     element.listPerbaikan.isEmpty
                         ? ''
@@ -94,7 +94,7 @@ class _BulananState extends State<Bulanan> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left:15.0,top: 7.5,bottom: 7.5),
-                child: AutoSizeText(maxLines: 1,
+                child: Text(
                   '${widget.laporanBulanan.namaSupir} - ${widget.laporanBulanan.bulan}',
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
@@ -108,43 +108,43 @@ class _BulananState extends State<Bulanan> {
                   children: [
                     Expanded(
                         flex: 3,
-                        child: AutoSizeText(maxLines: 1,
+                        child: Text(
                           'Tgl',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     // Expanded(
                     //     flex: 7,
-                    //     child: AutoSizeText(maxLines: 1,
+                    //     child: Text(
                     //       'Mobil',
                     //       style: Theme.of(context).textTheme.displayMedium,
                     //     )),
                     Expanded(
                         flex: 7,
-                        child: AutoSizeText(maxLines: 1,
+                        child: Text(
                           'Tujuan',
                           style: Theme.of(context).textTheme.displayMedium,
                         )), Expanded(
                         flex: 7,
-                        child: AutoSizeText(maxLines: 1,
+                        child: Text(
                           'Ongkos',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
                         flex: 7,
-                        child: AutoSizeText(maxLines: 1,
+                        child: Text(
                           'Keluar',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                    
                     Expanded(
                         flex: 7,
-                        child: AutoSizeText(maxLines: 1,
+                        child: Text(
                           'Sisa',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
                         flex: 7,
-                        child: AutoSizeText(maxLines: 1,
+                        child: Text(
                           'Perbaikan',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
@@ -162,16 +162,16 @@ class _BulananState extends State<Bulanan> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                       Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
-                          child:   AutoSizeText(maxLines: 1,'Total Sisa :',
+                          child:   Text('Total Sisa :',
                             style:  Theme.of(context).textTheme.displaySmall),
                         ), Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
-                          child: AutoSizeText(maxLines: 1,'Total Perbaikan: ', style:  Theme.of(context).textTheme.displaySmall,
+                          child: Text('Total Perbaikan: ', style:  Theme.of(context).textTheme.displaySmall,
                           )),
                              Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
-                          child:  AutoSizeText(maxLines: 1,'Total Bersih :',
+                          child:  Text('Total Bersih :',
                             style:  Theme.of(context).textTheme.displaySmall)), Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child: 
-                        AutoSizeText(maxLines: 1,
+                        Text(
                             textAlign: TextAlign.left,
                             'Persen Supir: ',
                            style:  Theme.of(context).textTheme.displaySmall)),
@@ -182,19 +182,19 @@ class _BulananState extends State<Bulanan> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                             Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
-                          child:   AutoSizeText(maxLines: 1,
+                          child:   Text(
                             Rupiah.format(
                               widget.laporanBulanan.totalBersih +widget.laporanBulanan.totalPerbaikan,
                             ),
                             style: Theme.of(context).textTheme.displaySmall,
                           ),), Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
-                          child:  AutoSizeText(maxLines: 1,
+                          child:  Text(
                             textAlign: TextAlign.left,
                             Rupiah.format(widget.laporanBulanan.totalPerbaikan),
                             style: Theme.of(context).textTheme.displaySmall,
                           )),
                           Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
-                          child:  AutoSizeText(maxLines: 1,
+                          child:  Text(
                             Rupiah.format(
                               widget.laporanBulanan.totalBersih,
                             ),
@@ -202,7 +202,7 @@ class _BulananState extends State<Bulanan> {
                           )),
                          
                         Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
-                          child:    AutoSizeText(maxLines: 1,
+                          child:    Text(
                             Rupiah.format(
                                 widget.laporanBulanan.persenanSupir ?? 0),
                             style: Theme.of(context).textTheme.displaySmall,

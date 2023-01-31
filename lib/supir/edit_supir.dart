@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart'; 
 import 'package:gabriel_logistik/models/supir.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -25,7 +25,7 @@ class EditSupir extends StatelessWidget {
               builder: (context) {
                 return AlertDialog(
                   actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                  title: const AutoSizeText(maxLines: 1,"Edit Supir"),
+                  title: const Text("Edit Supir"),
                   content: IntrinsicHeight(
                     child: SizedBox(
                       width: 500,
@@ -101,7 +101,7 @@ class EditSupir extends StatelessWidget {
                         });
                       },
                       child:
-                          const AutoSizeText(maxLines: 1,'Edit', style: TextStyle(color: Colors.white)),
+                          const Text('Edit', style: TextStyle(color: Colors.white)),
                     )
                   ],
                 );

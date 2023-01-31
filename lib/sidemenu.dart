@@ -1,11 +1,9 @@
 import 'dart:convert';
 
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:easy_sidemenu/easy_sidemenu.dart';
-import 'package:flutter/material.dart'; import 'package:auto_size_text/auto_size_text.dart';
 
-import 'package:gabriel_logistik/login.dart';
-import 'package:gabriel_logistik/main.dart';
+import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:flutter/material.dart'; 
+
 
 import 'package:gabriel_logistik/pages/daftar_supir.dart';
 import 'package:gabriel_logistik/pages/kas_tahun.dart';
@@ -72,7 +70,7 @@ bool loading=true;
 
   @override
   Widget build(BuildContext context) {
-    return loading?SizedBox(): Scaffold(
+    return loading?const SizedBox(): Scaffold(
             body: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -108,13 +106,13 @@ bool loading=true;
                         ),
                       ),
                     ),
-                    AutoSizeText(maxLines: 1,
+                    Text(
                         Provider.of<ProviderData>(context, listen: false)
                                 .isOwner
                             ? 'Hi Owner !'
                             : 'Hi Admin !',
-                        style: TextStyle(color: Colors.white)),
-                    Divider(
+                        style: const TextStyle(color: Colors.white)),
+                    const Divider(
                       indent: 8.0,
                       endIndent: 8.0,
                     ),
@@ -135,12 +133,12 @@ bool loading=true;
                     child: Card(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: const [
                           Icon(
                             Icons.arrow_back,
                             color: Colors.red,
                           ),
-                          const AutoSizeText(maxLines: 1,
+                          Text(
                             'Logout',
                             style: TextStyle(
                                 fontSize: 15,
