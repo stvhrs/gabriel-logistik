@@ -21,7 +21,7 @@ class TransaksiPage extends StatefulWidget {
 class _TransaksiPageState extends State<TransaksiPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(resizeToAvoidBottomInset: false,
         floatingActionButton: const TransaksiAdd(),
         body: Consumer<ProviderData>(builder: (context, prov, _) {
           return Padding(

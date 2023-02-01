@@ -101,9 +101,10 @@ bool loading=true;
 
   @override
   Widget build(BuildContext context) {
-    //
+   print( MediaQuery.of(context).size.width*MediaQuery.of(context).devicePixelRatio);
+     print( MediaQuery.of(context).size.height*MediaQuery.of(context).devicePixelRatio);
     return loading?const CircularProgressIndicator() :Consumer<ProviderData>(builder: (context, data, _) {
-      return data.logined ? const DashBoard() : TargetPlatform.android==defaultTargetPlatform|| TargetPlatform.iOS==defaultTargetPlatform?const LoginHp(): const Login();
+      return data.logined ? const DashBoard() : const Login();
     });
   }
 }

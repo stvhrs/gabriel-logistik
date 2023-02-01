@@ -28,8 +28,8 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.3,
-          height: MediaQuery.of(context).size.width * 0.2,
+          width: MediaQuery.of(context).size.width * 0.5,
+          height: MediaQuery.of(context).size.width * 0.4,
           child: Card(
             color: Theme.of(context).primaryColor,
             child: Padding(
@@ -62,7 +62,7 @@ class _LoginState extends State<Login> {
                             hintText: 'Password',
                           ),
                           obscureText: true),
-                    ),
+                    ),Spacer(),
                     RoundedLoadingButton(
                       color: Colors.green,
                       controller: _btnController,
@@ -99,7 +99,7 @@ class _LoginState extends State<Login> {
                       },
                       child: const Text('Login',
                           style: TextStyle(color: Colors.white)),
-                    )
+                    ),Spacer()
                   ]),
                 ),
               ),

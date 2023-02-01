@@ -4,6 +4,7 @@ import 'package:gabriel_logistik/models/supir.dart';
 
 import '../helper/format_tanggal.dart';
 import '../models/transaksi.dart';
+
 List<String> list = <String>[
   'Januari',
   'Februari',
@@ -20,30 +21,34 @@ List<String> list = <String>[
 ];
 
 class ProviderData with ChangeNotifier {
-bool isOwner=true;
+  bool isOwner = true;
   List<Transaksi> backupTransaksi = [];
   List<Transaksi> listTransaksi = [];
- bool logined=false;
+  bool logined = false;
   List<Supir> listSupir = [];
   List<Mobil> listMobil = [];
   List<Supir> backupListSupir = [];
   List<Mobil> backupListMobil = [];
-  void owner(){
-  isOwner==true;
-  notifyListeners();
-}
-void admin(){
-  isOwner=false;
-  notifyListeners();
-}
-void login(){
-  logined=true;
-  notifyListeners();
-}
-void logout(){
-  logined=false;
-  notifyListeners();
-}
+  void owner() {
+    isOwner == true;
+    notifyListeners();
+  }
+
+  void admin() {
+    isOwner = false;
+    notifyListeners();
+  }
+
+  void login() {
+    logined = true;
+    notifyListeners();
+  }
+
+  void logout() {
+    logined = false;
+    notifyListeners();
+  }
+
   void setData(List<Transaksi> data, bool listen, List<Mobil> mobilData,
       List<Supir> supirData) {
     print('set');
@@ -56,9 +61,8 @@ void logout(){
     backupListSupir.addAll(supirData);
     listMobil.addAll(mobilData);
     listSupir.addAll(supirData);
- 
-    (listen) ? notifyListeners() : () {};
 
+    (listen) ? notifyListeners() : () {};
   }
 
   void addMobil(Mobil mobil) {
@@ -101,12 +105,18 @@ void logout(){
     listTransaksi.insert(0, transaksi);
     backupTransaksi.insert(0, transaksi);
 
+    List<Map<String, dynamic>> test = [];
+    backupTransaksi.forEach((element) {
+      test.add(Transaksi.toMap(element));
+    });
+    print(test);
+     print(backupTransaksi);
     notifyListeners();
   }
 
   void deleteTransaksi(Transaksi transaksi) {
     listTransaksi.remove(transaksi);
-     backupTransaksi.remove(transaksi);
+    backupTransaksi.remove(transaksi);
     notifyListeners();
   }
 

@@ -85,11 +85,15 @@ class _TransaksiTileState extends State<TransaksiTile> {
                 mainAxisSize: MainAxisSize.min,
                
                 children: [
-                  TransaksiView(
-                    widget._transaksi,
+                  Expanded(
+                    child: TransaksiView(
+                      widget._transaksi,
+                    ),
                   ),
-                  TransaksiEdit(transaksi: widget._transaksi),
-                  TransaksiDelete(widget._transaksi),
+                  Expanded(
+                    child: TransaksiEdit(transaksi: widget._transaksi)),
+                  Expanded(
+                    child: TransaksiDelete(widget._transaksi)),
                 ],
               ),
             ),

@@ -6,4 +6,11 @@ class Perbaikan {
   factory Perbaikan.fromMap(Map<String, dynamic> data) {
     return Perbaikan(data['nama_perbaikan'], data['harga_perbaikan']);
   }
+   static toMap(Perbaikan data) {;
+    return { 'nama_perbaikan':data.nama_perbaikan, 'harga_perbaikan':data.harga_perbaikan};
+  }
+     Map<String, dynamic> toJson() => {
+        "nama_perbaikan": nama_perbaikan,
+        "harga_perbaikan": harga_perbaikan,
+    };  
 }

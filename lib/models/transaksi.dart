@@ -7,7 +7,7 @@ class Transaksi {
   String supir;
   String mobil;
   String tujuan;
-String keterangan;
+  String keterangan;
   double keluar;
   double ongkos;
   List<Perbaikan> listPerbaikan;
@@ -15,7 +15,7 @@ String keterangan;
   Transaksi(
       this.transaksiId,
       this.tanggalBerangkat,
-this.keterangan,
+      this.keterangan,
       this.supir,
       this.mobil,
       this.tujuan,
@@ -31,12 +31,29 @@ this.keterangan,
     return Transaksi(
         data['id_transaksi'],
         data['tgl_berangkat'],
-      data['keterangan'],
+        data['keterangan'],
         data['supir'],
         data['mobil'],
         data['tujuan'],
         data['keluar'],
         data['ongkos'],
         listPerbaikan);
+  }
+ 
+  static Map<String, dynamic> toMap(Transaksi data) {
+    
+
+    return {
+      'id_transaksi': data.transaksiId,
+      'tgl_berangkat': data.tanggalBerangkat,
+      'keterangan': data.keterangan,
+      'supir': data.supir,
+      'tujuan': data.tujuan,
+      'mobil': data.mobil,
+      'keluar': data.keluar,
+      'ongkos': data.ongkos,
+      'perbaikan_transaksi':
+          data.listPerbaikan.map((e) => Perbaikan.toMap(e)).toList()
+    };
   }
 }

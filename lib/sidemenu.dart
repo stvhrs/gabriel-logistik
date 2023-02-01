@@ -70,7 +70,7 @@ bool loading=true;
 
   @override
   Widget build(BuildContext context) {
-    return loading?const SizedBox(): Scaffold(
+    return loading?const SizedBox(): Scaffold(resizeToAvoidBottomInset: false,
             body: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -81,7 +81,7 @@ bool loading=true;
                   toggleColor: Colors.white,
                   backgroundColor: Theme.of(context).primaryColor,
                   hoverColor: Theme.of(context).colorScheme.secondary,
-                  openSideMenuWidth: MediaQuery.of(context).size.width / 7.5,
+                  openSideMenuWidth: MediaQuery.of(context).size.width / 7,
                   selectedColor: Colors.transparent,
                   displayMode: SideMenuDisplayMode.open,
                   unselectedTitleTextStyle:

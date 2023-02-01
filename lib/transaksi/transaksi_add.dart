@@ -129,7 +129,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
             style: ButtonStyle(
                 padding: MaterialStateProperty.all(const EdgeInsets.all(15))),
             onPressed: () {
-              showDialog(
+              showDialog( 
                   barrierDismissible: false,
                   context: context,
                   builder: (context) {
