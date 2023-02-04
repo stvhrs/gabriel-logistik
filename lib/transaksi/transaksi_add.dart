@@ -15,7 +15,8 @@ import '../helper/dropdown.dart';
 import '../helper/input_currency.dart';
 
 class TransaksiAdd extends StatefulWidget {
-  const TransaksiAdd({super.key});
+  int id;
+   TransaksiAdd(this.id);
 
   @override
   State<TransaksiAdd> createState() => _TransaksiAddState();
@@ -54,17 +55,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
 
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
-  Transaksi transaksi = Transaksi.fromMap({
-    'id_transaksi': 1,
-    'tgl_berangkat': DateTime.now().toIso8601String(),
-    'keterangan': '',
-    'supir': '',
-    'tujuan': '',
-    'mobil': '',
-    'keluar': 0,
-    'ongkos': 0,
-    'perbaikan_transaksi': []
-  });
+ late Transaksi transaksi;
   Widget _buildSize(widget, String ket, int flex) {
     print( MediaQuery.of(context).size.width);
      print( MediaQuery.of(context).size.height);
@@ -111,10 +102,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
 
   @override
   Widget build(BuildContext context) {
-    transaksi.transaksiId = Provider.of<ProviderData>(context, listen: false)
-            .backupTransaksi
-            .length +
-        1;
+   
     return Container(
         margin: const EdgeInsets.only(right: 15, bottom: 15),
         child: ElevatedButton.icon(
@@ -129,6 +117,17 @@ class _TransaksiAddState extends State<TransaksiAdd> {
             style: ButtonStyle(
                 padding: MaterialStateProperty.all(const EdgeInsets.all(15))),
             onPressed: () {
+                transaksi = Transaksi.fromMap({
+    'id_transaksi': widget.id,
+    'tgl_berangkat': DateTime.now().toIso8601String(),
+    'keterangan': '',
+    'supir': '',
+    'tujuan': '',
+    'mobil': '',
+    'keluar': 0,
+    'ongkos': 0,
+    'perbaikan_transaksi': []
+  });
               showDialog( 
                   barrierDismissible: false,
                   context: context,

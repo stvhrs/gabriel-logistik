@@ -21,10 +21,11 @@ class TransaksiPage extends StatefulWidget {
 class _TransaksiPageState extends State<TransaksiPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(resizeToAvoidBottomInset: false,
-        floatingActionButton: const TransaksiAdd(),
-        body: Consumer<ProviderData>(builder: (context, prov, _) {
-          return Padding(
+    return Consumer<ProviderData>(builder: (context, prov, _) {
+          return Scaffold(resizeToAvoidBottomInset: false,
+        floatingActionButton:  TransaksiAdd(prov.backupTransaksi.isNotEmpty?prov.backupTransaksi.first.transaksiId+1
+        :1),
+        body: Padding(
             padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,8 +151,8 @@ class _TransaksiPageState extends State<TransaksiPage> {
                           TransaksiTile(prov.listTransaksi[index], index + 1)),
                 ),
               ],
-            ),
-          );
-        }));
+            )));
+          
+        });
   }
 }

@@ -12,120 +12,136 @@ const Map<String, String> headers = {
 };
 
 List<Map<String, dynamic>> dummyData = [
-  // {
-  //   'id_transaksi': 1,
-  //   'tgl_berangkat': '2021-02-20T20:18:04.000Z',
-  //   'keterangan': 'test keterangan',
-  //   'supir': 'Kolil',
-  //   'tujuan': 'Palangka CSA Keramik',
-  //   'mobil': 'Ford',
-  //   'keluar': 1200000,
-  //   'ongkos': 3300000,
-  //   'perbaikan_transaksi': [
-  //     {'nama_perbaikan': 'Ban MRF', 'harga_perbaikan': 100000}
-  //   ]
-  // },
-  // {
-  //   'id_transaksi': 2,
-  //   'tgl_berangkat': '2021-02-20T20:18:04.000Z',
-  //   'keterangan': 'test keterangan',
-  //   'supir': 'Arip',
-  //   'tujuan': 'Palangka CSA Kotak',
-  //   'mobil': 'Ford',
-  //   'keluar': 1500000,
-  //   'ongkos': 3200000,
-  //   'perbaikan_transaksi': [
-  //     {'nama_perbaikan': 'Olie', 'harga_perbaikan': 100000}
-
-  //   ]
-  // },
-  // {
-  //   'id_transaksi': 3,
-  //   'tgl_berangkat': '2021-02-20T20:18:04.000Z',
-  //   'keterangan': 'test keterangan',
-  //   'supir': 'Kolil',
-  //   'tujuan': 'Palangka CSA Aplus',
-  //   'mobil': 'Toyota',
-  //   'keluar': 500000,
-  //   'ongkos': 3300000,
-  //   'perbaikan_transaksi': [
-  //     {'nama_perbaikan': 'Parkir', 'harga_perbaikan': 100000}
-  //   ]
-  // },
-  //  {
-  //   'id_transaksi': 4,
-  //   'tgl_berangkat': '2023-02-20T20:18:04.000Z',
-  //   'keterangan': 'test keterangan',
-  //   'supir': 'Arip',
-  //   'tujuan': 'Palangka Beras',
-  //   'mobil': 'Ford',
-  //   'keluar': 150000,
-  //   'ongkos': 200000,
-  //   'perbaikan_transaksi': [
-  //     {'nama_perbaikan': 'Ban BridgeStone', 'harga_perbaikan': 100000}
-  //   ]
-  // },
-  // {
-  //   'id_transaksi': 5,
-  //   'tgl_berangkat': '2021-01-20T20:18:04.000Z',
-  //   'keterangan': 'test keterangan',
-  //   'supir': 'Arip',
-  //   'tujuan': 'Palangka CSA Keramik',
-  //   'mobil': 'Ford',
-  //   'keluar': 1500000,
-  //   'ongkos': 2000000,
-  //   'perbaikan_transaksi': [
-  //     {'nama_perbaikan': 'Ban MRF', 'harga_perbaikan': 100000}
-  //   ]
-  // },
-  // {
-  //   'id_transaksi': 6,
-  //   'tgl_berangkat': '2021-01-20T20:18:04.000Z',
-  //   'keterangan': 'test keterangan',
-  //   'supir': 'Arip',
-  //   'tujuan': 'Palangka CSA Kotak',
-  //   'mobil': 'Ford',
-  //   'keluar': 500000,
-  //   'ongkos': 1500000,
-  //   'perbaikan_transaksi': [
-  //     {'nama_perbaikan': 'Olie', 'harga_perbaikan': 100000}
-
-  //   ]
-  // },
-  // {
-  //   'id_transaksi': 7,
-  //   'tgl_berangkat': '2021-01-20T20:18:04.000Z',
-  //   'keterangan': 'test keterangan',
-  //   'supir': 'Kolil',
-  //   'tujuan': 'Palangka CSA Aplus',
-  //   'mobil': 'Ford',
-  //   'keluar': 500000,
-  //   'ongkos': 1700000,
-  //   'perbaikan_transaksi': [
-  //     {'nama_perbaikan': 'Parkir', 'harga_perbaikan': 100000}
-  //   ]
-  // },
-   {
-    'id_transaksi': 8,
-    'tgl_berangkat': '2023-01-20T20:18:04.000Z',
-    'keterangan': 'test keterangan',
+  {
+    'id_transaksi': 10,
+    'tgl_berangkat': '2021-02-04T12:29:22.953',
+    'keterangan': 'test',
     'supir': 'Arip',
-    'tujuan': 'Palangka Beras',
+    'tujuan': 'Palangka Batu Alam',
     'mobil': 'Hino',
-    'keluar': 200000,
-    'ongkos': 330000,
+    'keluar': 1600000,
+    'ongkos': 3300000,
+    'perbaikan_transaksi': []
+  },
+  {
+    'id_transaksi': 9,
+    'tgl_berangkat': '2021-02-04T12:28:39.223',
+    'keterangan': 'test',
+    'supir': 'Arip',
+    'tujuan': 'Pangkuh Pupuk',
+    'mobil': 'Hino',
+    'keluar': 2000000,
+    'ongkos': 4200000,
+    'perbaikan_transaksi': []
+  },
+  {
+    'id_transaksi': 8,
+    'tgl_berangkat': '2021-02-04T12:26:23.728',
+    'keterangan': 'test',
+    'supir': 'Arip',
+    'tujuan': ' Palangka Besi Harapan',
+    'mobil': 'Avanza',
+    'keluar': 1500000,
+    'ongkos': 3300000,
     'perbaikan_transaksi': [
-      {'nama_perbaikan': 'Part', 'harga_perbaikan': 100000}
+      {'nama_perbaikan': 'part', 'harga_perbaikan': 95000}
     ]
   },
-  
+  {
+    'id_transaksi':7,
+    'tgl_berangkat': '2021-02-04T12:25:36.969',
+    'keterangan': 'test',
+    'supir': 'Arip',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'Toyota',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Parkir', 'harga_perbaikan': 250000}
+    ]
+  },
+  {
+    'id_transaksi': 6,
+    'tgl_berangkat': '2021-02-04T12:24:42.198',
+    'keterangan': 'test',
+    'supir': 'Arip',
+    'tujuan': ' Palangka Csa',
+    'mobil': 'Hino',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Olie', 'harga_perbaikan': 690000}
+    ]
+  },
+  {
+    'id_transaksi': 5,
+    'tgl_berangkat': '2021-03-03T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Indomoro',
+    'mobil': 'Toyota',
+    'keluar': 6000000,
+    'ongkos': 11500000,
+    'perbaikan_transaksi': [  {'nama_perbaikan': 'Tambal Ban', 'harga_perbaikan': 690000}]
+  },
+  {
+    'id_transaksi': 4,
+    'tgl_berangkat': '2021-03-03T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Indomoro',
+    'mobil': 'Toyota',
+    'keluar': 5600000,
+    'ongkos': 11500000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Tambal Ban', 'harga_perbaikan': 70000}
+    ]
+  },
+  {
+    'id_transaksi': 3,
+    'tgl_berangkat': '2021-03-03T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Csa',
+    'mobil': 'Hino',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Ban', 'harga_perbaikan': 132500}
+    ]
+  },
+  {
+    'id_transaksi': 2,
+    'tgl_berangkat': '2021-03-03T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Batu Licin Sosis',
+    'mobil': 'Hino',
+    'keluar': 1750000,
+    'ongkos': 3600000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Tier', 'harga_perbaikan': 245000}
+    ]
+  },
+  {
+    'id_transaksi': 1,
+    'tgl_berangkat': '2021-03-03T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan Besi',
+    'mobil': 'Hino',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Olie', 'harga_perbaikan': 1607500}
+    ]
+  }
 ];
 List<Map<String, dynamic>> dummyData2 = [
   {'id_supir': 1, 'nama_supir': 'Kolil', 'nohp_supir': '085728181929'},
-  {'id_supir': 2, 'nama_supir': 'Budi', 'nohp_supir': '085728181929'},
+
   {'id_supir': 3, 'nama_supir': 'Arip', 'nohp_supir': '085728181929'},
-  {'id_supir': 4, 'nama_supir': 'Ahmad', 'nohp_supir': '085728181929'},
-  {'id_supir': 5, 'nama_supir': 'Cahyo', 'nohp_supir': '085728181929'}
+
 ];
 List<Map<String, dynamic>> dummyData3 = [
   {'id_mobil': 1, 'nama_mobil': 'Hino', 'nopol_mobil': 'AD 4349 AWE'},
@@ -138,7 +154,7 @@ class Service {
   static Future<List<Transaksi>> getAllTransaksi() async {
     List<Transaksi> data = [];
 
-    for (var element in dummyData) {
+    for (var element in dummyData.reversed) {
       data.add(Transaksi.fromMap(element));
     }
 

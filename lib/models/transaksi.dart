@@ -31,7 +31,7 @@ class Transaksi {
     return Transaksi(
         data['id_transaksi'],
         data['tgl_berangkat'],
-        data['keterangan'],
+        data['keterangan']??'',
         data['supir'],
         data['mobil'],
         data['tujuan'],

@@ -106,11 +106,12 @@ class ProviderData with ChangeNotifier {
     backupTransaksi.insert(0, transaksi);
 
     List<Map<String, dynamic>> test = [];
-    backupTransaksi.forEach((element) {
+    for (var element in backupTransaksi) {
       test.add(Transaksi.toMap(element));
-    });
+      print(element.transaksiId);
+    }
     print(test);
-     print(backupTransaksi);
+   
     notifyListeners();
   }
 

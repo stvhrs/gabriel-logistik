@@ -32,18 +32,27 @@ class LaporanBulanan extends StatefulWidget {
 
 class _LaporanBulananState extends State<LaporanBulanan> {
   List<int> tahun = [];
-  final DateTime asu = DateTime.now();
+
   final innerController = ScrollController();
 
   String dropdownValue = list[DateTime.now().month - 1];
   int ropdownValue2 = DateTime.now().year;
-  @override
-  Widget build(BuildContext context) {
+@override
+  void didChangeDependencies() {
     for (var element in Provider.of<ProviderData>(context).backupTransaksi) {
       if (!tahun.contains(DateTime.parse(element.tanggalBerangkat).year)) {
         tahun.add(DateTime.parse(element.tanggalBerangkat).year);
       }
     }
+    if(!tahun.contains(ropdownValue2)){
+      tahun.add(ropdownValue2);
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+   
     return Scaffold(resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.only(left: 50, right: 50, top: 15),

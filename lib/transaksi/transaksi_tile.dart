@@ -49,10 +49,10 @@ class _TransaksiTileState extends State<TransaksiTile> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Expanded(
+             Expanded(
                 flex: 3,
                 child: Text(
-                  '1',
+                 widget.index.toString(),
                 )),
             Expanded(
                 flex: 7,
