@@ -1,9 +1,6 @@
-
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:gabriel_logistik/login.dart';
-import 'package:gabriel_logistik/loginhp.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/sidemenu.dart';
@@ -68,28 +65,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
- 
-bool loading=true;
+  bool loading = true;
   initData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var data = prefs.getString('data');
     if (data != null) {
-     
+      // ignore: use_build_context_synchronously
       Provider.of<ProviderData>(context, listen: false).login();
-       loading=false;
-       setState(() {
-         
-       });
-     
+      loading = false;
+      setState(() {});
     } else {
       Provider.of<ProviderData>(context, listen: false).logout();
-        loading=false;
-       setState(() {
-         
-       });
+      loading = false;
+      setState(() {});
       return;
     }
-   
   }
 
   @override
@@ -101,10 +91,14 @@ bool loading=true;
 
   @override
   Widget build(BuildContext context) {
-   print( MediaQuery.of(context).size.width*MediaQuery.of(context).devicePixelRatio);
-     print( MediaQuery.of(context).size.height*MediaQuery.of(context).devicePixelRatio);
-    return loading?const CircularProgressIndicator() :Consumer<ProviderData>(builder: (context, data, _) {
-      return data.logined ? const DashBoard() : const Login();
-    });
+    print(MediaQuery.of(context).size.width *
+        MediaQuery.of(context).devicePixelRatio);
+    print(MediaQuery.of(context).size.height *
+        MediaQuery.of(context).devicePixelRatio);
+    return loading
+        ? const CircularProgressIndicator()
+        : Consumer<ProviderData>(builder: (context, data, _) {
+            return data.logined ? const DashBoard() : const Login();
+          });
   }
 }

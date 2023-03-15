@@ -62,7 +62,7 @@ class _LoginState extends State<Login> {
                             hintText: 'Password',
                           ),
                           obscureText: true),
-                    ),Spacer(),
+                    ),const Spacer(),
                     RoundedLoadingButton(
                       color: Colors.green,
                       controller: _btnController,
@@ -99,7 +99,7 @@ class _LoginState extends State<Login> {
                       },
                       child: const Text('Login',
                           style: TextStyle(color: Colors.white)),
-                    ),Spacer()
+                    ),const Spacer()
                   ]),
                 ),
               ),

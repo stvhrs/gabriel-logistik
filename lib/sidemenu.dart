@@ -70,7 +70,7 @@ bool loading=true;
 
   @override
   Widget build(BuildContext context) {
-    return loading?const SizedBox(): Scaffold(resizeToAvoidBottomInset: false,
+    return loading?const Center(child: CircularProgressIndicator(),): Scaffold(resizeToAvoidBottomInset: false,
             body: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

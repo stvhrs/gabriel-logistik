@@ -135,13 +135,56 @@ List<Map<String, dynamic>> dummyData = [
     'perbaikan_transaksi': [
       {'nama_perbaikan': 'Olie', 'harga_perbaikan': 1607500}
     ]
+  },
+   {
+    'id_transaksi': 2,
+    'tgl_berangkat': '2021-03-03T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Batu Licin Sosis',
+    'mobil': 'Hino',
+    'keluar': 1750000,
+    'ongkos': 3600000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Tier', 'harga_perbaikan': 245000}
+    ]
+  },
+  {
+    'id_transaksi': 1,
+    'tgl_berangkat': '2021-03-03T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan Besi',
+    'mobil': 'Hino',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'perbaikan_transaksi': [
+      {'nama_perbaikan': 'Olie', 'harga_perbaikan': 1607500}
+    ]
   }
 ];
 List<Map<String, dynamic>> dummyData2 = [
   {'id_supir': 1, 'nama_supir': 'Kolil', 'nohp_supir': '085728181929'},
+    {'id_supir': 1, 'nama_supir': 'Kolil2', 'nohp_supir': '085728181929'},
+      {'id_supir': 1, 'nama_supir': 'Kolil3', 'nohp_supir': '085728181929'},
+        {'id_supir': 1, 'nama_supir': 'Kolil4', 'nohp_supir': '085728181929'},
+          {'id_supir': 1, 'nama_supir': 'Kolil5', 'nohp_supir': '085728181929'},
+            {'id_supir': 1, 'nama_supir': 'Kolil6', 'nohp_supir': '085728181929'},
+              {'id_supir': 1, 'nama_supir': 'Kolil7', 'nohp_supir': '085728181929'},
+               {'id_supir': 1, 'nama_supir': 'Kolil8', 'nohp_supir': '085728181929'},
+                {'id_supir': 1, 'nama_supir': 'Kolil9', 'nohp_supir': '085728181929'},
+                 {'id_supir': 1, 'nama_supir': 'Kolil10', 'nohp_supir': '085728181929'},
+                  {'id_supir': 1, 'nama_supir': 'Kolil11', 'nohp_supir': '085728181929'},
+                   {'id_supir': 1, 'nama_supir': 'Kolil12', 'nohp_supir': '085728181929'},
+                    {'id_supir': 1, 'nama_supir': 'Kolil13', 'nohp_supir': '085728181929'},
+                          {'id_supir': 1, 'nama_supir': 'Kolil14', 'nohp_supir': '085728181929'},
+                           {'id_supir': 1, 'nama_supir': 'Kolil15', 'nohp_supir': '085728181929'},
+                          {'id_supir': 1, 'nama_supir': 'Kolil16', 'nohp_supir': '085728181929'},
+                  
 
-  {'id_supir': 3, 'nama_supir': 'Arip', 'nohp_supir': '085728181929'},
 
+
+  
 ];
 List<Map<String, dynamic>> dummyData3 = [
   {'id_mobil': 1, 'nama_mobil': 'Hino', 'nopol_mobil': 'AD 4349 AWE'},

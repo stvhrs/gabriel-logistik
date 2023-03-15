@@ -67,9 +67,13 @@ class _TransaksiAddState extends State<TransaksiAdd> {
         children: [
           Container(
               margin: const EdgeInsets.only(bottom: 7),
-              child: Text(
-                '$ket :',
-                style: const TextStyle(fontSize: 13),
+              child: Row(
+                children: [
+                  Text(
+                    '$ket :',
+                    style: const TextStyle(fontSize: 13),
+                  ),
+                ],
               )),
           widget
         ],

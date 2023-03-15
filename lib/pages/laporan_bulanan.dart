@@ -1,5 +1,4 @@
-
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/bulanan/bulanan.dart';
 import 'package:gabriel_logistik/helper/totalPerbaikan.dart';
 import 'package:gabriel_logistik/models/laporan_bulanan.dart';
@@ -37,32 +36,157 @@ class _LaporanBulananState extends State<LaporanBulanan> {
 
   String dropdownValue = list[DateTime.now().month - 1];
   int ropdownValue2 = DateTime.now().year;
-@override
+  @override
   void didChangeDependencies() {
     for (var element in Provider.of<ProviderData>(context).backupTransaksi) {
       if (!tahun.contains(DateTime.parse(element.tanggalBerangkat).year)) {
         tahun.add(DateTime.parse(element.tanggalBerangkat).year);
       }
     }
-    if(!tahun.contains(ropdownValue2)){
+    if (!tahun.contains(ropdownValue2)) {
       tahun.add(ropdownValue2);
     }
+
     super.didChangeDependencies();
+  }
+
+  List<StaggeredGrid> buildPerPage() {
+    bool asu = false;
+    List<StaggeredGrid> listStager = [];
+    for (var i = 0;
+        i < Provider.of<ProviderData>(context).backupListSupir.length;
+        i++) {
+      if (i > 5 && i % 6 == 0) {
+        listStager.add(StaggeredGrid.count(
+          axisDirection: AxisDirection.down,
+          mainAxisSpacing: 50,
+          crossAxisCount: 2,
+          crossAxisSpacing: 30,
+          children: Provider.of<ProviderData>(context)
+              .backupListSupir
+              .getRange(i - 6, i)
+              .map((e) {
+            List<Transaksi> transaksiBulanIni = [];
+            double totalBersih = 0;
+            double totalPerbaikan = 0;
+            // for (Transaksi element
+            //     in Provider.of<ProviderData>(context).backupTransaksi) {
+            transaksiBulanIni = Provider.of<ProviderData>(context)
+                .backupTransaksi
+                .where((element) =>
+                    element.supir == e.nama_supir &&
+                    DateTime.parse(element.tanggalBerangkat).month ==
+                        list.indexOf(dropdownValue) + 1 &&
+                    DateTime.parse(element.tanggalBerangkat).year ==
+                        ropdownValue2)
+                .toList();
+            // if (element.supir == e.nama_supir &&
+            //     DateTime.parse(element.tanggalBerangkat).month ==
+            //         list.indexOf(dropdownValue)+1 &&
+            //     DateTime.parse(element.tanggalBerangkat).year ==
+            //         ropdownValue2) {
+            //   transaksiBulanIni.add(element);
+            // }
+            // }
+            for (var element in transaksiBulanIni) {
+              totalBersih += (element.ongkos - element.keluar);
+              totalPerbaikan +=
+                  TotalPerbaikan.totalPerbaikan(element.listPerbaikan);
+            }
+            BulanSupir data = BulanSupir(
+                e.nama_supir,
+                transaksiBulanIni,
+                totalBersih - totalPerbaikan,
+                0,
+                totalPerbaikan,
+                list[list.indexOf(dropdownValue)]);
+
+            return Bulanan(data);
+          }).toList(),
+        ));
+      } else if (Provider.of<ProviderData>(context).backupListSupir.length ==
+          (Provider.of<ProviderData>(context).backupListSupir.length - i + 1)) {
+        print('temp');
+        // asu=true;
+        listStager.insert(0,StaggeredGrid.count(
+          axisDirection: AxisDirection.down,
+          mainAxisSpacing: 50,
+          crossAxisCount: 2,
+          crossAxisSpacing: 30,
+          children: Provider.of<ProviderData>(context)
+              .backupListSupir
+              .getRange(
+                  Provider.of<ProviderData>(context).backupListSupir.length -
+                      Provider.of<ProviderData>(context)
+                              .backupListSupir
+                              .length %
+                          6 -
+                      1,
+                  Provider.of<ProviderData>(context).backupListSupir.indexOf(
+                          Provider.of<ProviderData>(context)
+                              .backupListSupir
+                              .last) +
+                      1)
+              .map((e) {
+            List<Transaksi> transaksiBulanIni = [];
+            double totalBersih = 0;
+            double totalPerbaikan = 0;
+            // for (Transaksi element
+            //     in Provider.of<ProviderData>(context).backupTransaksi) {
+            transaksiBulanIni = Provider.of<ProviderData>(context)
+                .backupTransaksi
+                .where((element) =>
+                    element.supir == e.nama_supir &&
+                    DateTime.parse(element.tanggalBerangkat).month ==
+                        list.indexOf(dropdownValue) + 1 &&
+                    DateTime.parse(element.tanggalBerangkat).year ==
+                        ropdownValue2)
+                .toList();
+            // if (element.supir == e.nama_supir &&
+            //     DateTime.parse(element.tanggalBerangkat).month ==
+            //         list.indexOf(dropdownValue)+1 &&
+            //     DateTime.parse(element.tanggalBerangkat).year ==
+            //         ropdownValue2) {
+            //   transaksiBulanIni.add(element);
+            // }
+            // }
+            for (var element in transaksiBulanIni) {
+              totalBersih += (element.ongkos - element.keluar);
+              totalPerbaikan +=
+                  TotalPerbaikan.totalPerbaikan(element.listPerbaikan);
+            }
+            BulanSupir data = BulanSupir(
+                e.nama_supir,
+                transaksiBulanIni,
+                totalBersih - totalPerbaikan,
+                0,
+                totalPerbaikan,
+                list[list.indexOf(dropdownValue)]);
+
+            return Bulanan(data);
+          }).toList(),
+        ));
+      }
+    }
+    return listStager;
   }
 
   @override
   Widget build(BuildContext context) {
-   
-    return Scaffold(resizeToAvoidBottomInset: false,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.only(left: 50, right: 50, top: 15),
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Container(margin: const EdgeInsets.only(bottom: 10),
+          Container(
+            margin: const EdgeInsets.only(bottom: 10),
             child: Row(
-              children: [ DropdownButton<int>(
+              children: [
+                DropdownButton<int>(
                   value: ropdownValue2,
                   elevation: 16,
-                  style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.secondary),
                   underline: Container(
                     height: 2.5,
                     color: Theme.of(context).colorScheme.secondary,
@@ -77,14 +201,18 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                     return DropdownMenuItem<int>(
                       value: value,
                       child: Text(value.toString(),
-                          style:const TextStyle(fontSize: 16,fontFamily: 'Nunito',color: Colors.black)),
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'Nunito',
+                              color: Colors.black)),
                     );
                   }).toList(),
                 ),
                 DropdownButton<String>(
                   value: dropdownValue,
                   elevation: 16,
-                  style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.secondary),
                   underline: Container(
                     height: 2.5,
                     color: Theme.of(context).colorScheme.secondary,
@@ -99,58 +227,21 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value,
-                          style:const TextStyle(fontSize: 16,fontFamily: 'Nunito',color: Colors.black)),
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'Nunito',
+                              color: Colors.black)),
                     );
                   }).toList(),
                 ),
-               
               ],
             ),
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.9,
             child: SingleChildScrollView(
-              child: StaggeredGrid.count(
-                axisDirection: AxisDirection.down,
-                mainAxisSpacing: 50,
-                crossAxisCount: 2,
-                crossAxisSpacing: 30,
-                children:
-                    Provider.of<ProviderData>(context).backupListSupir.map((e) {
-                  List<Transaksi> transaksiBulanIni = [];
-                  double totalBersih = 0;
-                  double totalPerbaikan = 0;
-                  // for (Transaksi element
-                  //     in Provider.of<ProviderData>(context).backupTransaksi) {
-                 transaksiBulanIni=  Provider.of<ProviderData>(context).backupTransaksi.where((element) => 
-                 element.supir==e.nama_supir&&
-                  DateTime.parse(element.tanggalBerangkat).month ==
-                            list.indexOf(dropdownValue)+1 &&
-                        DateTime.parse(element.tanggalBerangkat).year ==
-                            ropdownValue2).toList();
-                    // if (element.supir == e.nama_supir &&
-                    //     DateTime.parse(element.tanggalBerangkat).month ==
-                    //         list.indexOf(dropdownValue)+1 &&
-                    //     DateTime.parse(element.tanggalBerangkat).year ==
-                    //         ropdownValue2) {
-                    //   transaksiBulanIni.add(element);
-                    // }
-                  // }
-                  for (var element in transaksiBulanIni) {
-                    totalBersih += (element.ongkos - element.keluar);
-                    totalPerbaikan +=
-                        TotalPerbaikan.totalPerbaikan(element.listPerbaikan);
-                  }
-                  BulanSupir data = BulanSupir(
-                      e.nama_supir,
-                      transaksiBulanIni,
-                      totalBersih-totalPerbaikan,
-                      0,
-                      totalPerbaikan,
-                      list[list.indexOf(dropdownValue)  ]);
-    
-                  return Bulanan(data);
-                }).toList(),
+              child: Column(
+                children: buildPerPage(),
               ),
             ),
           ),
