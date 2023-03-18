@@ -12,7 +12,7 @@ class TambahMobil extends StatelessWidget {
   TambahMobil({super.key});
   @override
   Widget build(BuildContext context) {
-    String namaSupir = '';
+    String namaMobil = '';
     String noHp = '';
 
 
@@ -39,7 +39,7 @@ class TambahMobil extends StatelessWidget {
                                 hintText: 'Nama Mobil',
                               ),
                               onChanged: (val) {
-                                namaSupir = val.toString();
+                                namaMobil = val.toString();
                               },
                               maxLines: 1,
                             ),
@@ -82,7 +82,7 @@ class TambahMobil extends StatelessWidget {
                       onPressed: () async {
                         if (noHp.isEmpty ||
                         
-                            namaSupir.isEmpty) {
+                            namaMobil.isEmpty) {
                           _btnController.error();
                           await Future.delayed(const Duration(seconds: 1));
                           _btnController.reset();
@@ -97,7 +97,7 @@ class TambahMobil extends StatelessWidget {
                                           .listMobil
                                           .length +
                                       1,
-                                  namaSupir,
+                                  namaMobil,
                                   noHp));
                           _btnController.success();
                         });

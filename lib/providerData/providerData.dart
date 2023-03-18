@@ -111,7 +111,7 @@ class ProviderData with ChangeNotifier {
       print(element.transaksiId);
     }
     print(test);
-   
+
     notifyListeners();
   }
 
@@ -134,7 +134,9 @@ class ProviderData with ChangeNotifier {
   String searchsupir = '';
   String searchtujuan = '';
   bool searchPerbaikan = false;
-  String searchTanggal = '';
+
+  DateTime? start;
+  DateTime? end;
   void searchTransaksi() {
     listTransaksi.clear();
     for (Transaksi data in backupTransaksi) {
@@ -152,12 +154,13 @@ class ProviderData with ChangeNotifier {
           !data.tujuan.toLowerCase().startsWith(searchtujuan.toLowerCase())) {
         skipped = true;
       }
-      if (searchTanggal.isNotEmpty &&
-          !FormatTanggal.formatTanggal(data.tanggalBerangkat)
-              .contains(searchTanggal.toLowerCase())) {
-        skipped = true;
+      if (start != null) {
+        if (DateTime.parse(data.tanggalBerangkat).isBefore(start!) ||
+            DateTime.parse(data.tanggalBerangkat).isAfter(end!)) {
+          skipped = true;
+        }
       }
-      if (searchPerbaikan && data.listPerbaikan.isEmpty) {
+      if (searchPerbaikan ) {
         skipped = true;
       }
 

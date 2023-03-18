@@ -1,18 +1,13 @@
-
-import 'laporan_bulanan.dart';
+import 'keuangan_bulanan.dart';
 
 class KasModel {
-
-  String namaSupir;
-  List<BulanSupir> listBulananSupir;
+  String namaMobil;
+  List<KeuanganBulanan> listBulananSupir;
   double totalBersih;
   double? totalPersenSupir;
-  double totalPerbaikan;
+  double totalPengeluaran;
   String tahun;
 
-
-  KasModel(this.namaSupir, this.listBulananSupir, this.totalBersih,
-      this.totalPersenSupir, this.totalPerbaikan,this.tahun);
-
-
+  KasModel(this.namaMobil, this.listBulananSupir, this.totalBersih,
+      this.totalPersenSupir, this.totalPengeluaran, this.tahun);
 }

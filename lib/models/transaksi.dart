@@ -10,7 +10,8 @@ class Transaksi {
   String keterangan;
   double keluar;
   double ongkos;
-  List<Perbaikan> listPerbaikan;
+  double sisa;
+  
 
   Transaksi(
       this.transaksiId,
@@ -21,13 +22,11 @@ class Transaksi {
       this.tujuan,
       this.keluar,
       this.ongkos,
-      this.listPerbaikan);
+      this.sisa,
+     );
 
   factory Transaksi.fromMap(Map<String, dynamic> data) {
-    List<Perbaikan> listPerbaikan = [];
-    for (var element in data['perbaikan_transaksi']) {
-      listPerbaikan.add(Perbaikan.fromMap(element));
-    }
+   
     return Transaksi(
         data['id_transaksi'],
         data['tgl_berangkat'],
@@ -37,7 +36,8 @@ class Transaksi {
         data['tujuan'],
         data['keluar'],
         data['ongkos'],
-        listPerbaikan);
+        data['sisa'],
+        );
   }
  
   static Map<String, dynamic> toMap(Transaksi data) {
@@ -52,8 +52,7 @@ class Transaksi {
       'mobil': data.mobil,
       'keluar': data.keluar,
       'ongkos': data.ongkos,
-      'perbaikan_transaksi':
-          data.listPerbaikan.map((e) => Perbaikan.toMap(e)).toList()
+     
     };
   }
 }

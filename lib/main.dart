@@ -5,13 +5,15 @@ import 'package:gabriel_logistik/login.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/sidemenu.dart';
 import 'package:gabriel_logistik/styles/theme.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/intl_standalone.dart';
 import 'package:provider/provider.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+//  await findSystemLocale();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => ProviderData()),

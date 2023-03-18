@@ -45,12 +45,9 @@ class _KasState extends State<Kas> {
                       style: Theme.of(context).textTheme.displaySmall)),
               Expanded(
                   flex: 7,
-                  child: Text( Rupiah.format(element.totalPerbaikan) .toString(),
+                  child: Text( Rupiah.format(element.totalPengeluaran) .toString(),
                       style: Theme.of(context).textTheme.displaySmall)),
-                        Expanded(
-                  flex: 7,
-                  child: Text(Rupiah.format(element.persenanSupir!) .toString(),
-                      style: Theme.of(context).textTheme.displaySmall)),
+                     
             ],
           ),
         ),
@@ -72,7 +69,7 @@ class _KasState extends State<Kas> {
               Padding(
                 padding: const EdgeInsets.only(left:15.0,top: 7.5,bottom: 7.5),
                 child: Text(
-                  '${widget.kasModel.namaSupir} - ${widget.kasModel.tahun}',
+                  '${widget.kasModel.namaMobil} - ${widget.kasModel.tahun}',
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ),
@@ -156,7 +153,7 @@ class _KasState extends State<Kas> {
                           Container(margin: const EdgeInsets.only(top: 2,bottom: 2),
                           child: Text(
                             textAlign: TextAlign.left,
-                            Rupiah.format(widget.kasModel.totalPerbaikan),
+                            Rupiah.format(widget.kasModel.totalPengeluaran),
                             style: Theme.of(context).textTheme.displaySmall,
                           )),
                           Container(margin: const EdgeInsets.only(top: 2,bottom: 2),

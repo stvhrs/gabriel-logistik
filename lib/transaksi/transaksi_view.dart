@@ -25,20 +25,13 @@ class TransaksiView extends StatefulWidget {
 }
 
 class _TransaksiViewState extends State<TransaksiView> {
-  totalPerbaikan(List<Perbaikan> data) {
-    double totalHarga = 0;
-    for (var element in data) {
-      totalHarga = totalHarga + element.harga_perbaikan;
-    }
-    return totalHarga;
-  }
 
   List<String> listSupir = [];
   List<String> listMobil = [];
 
   @override
   void initState() {
-    jumlahOpsi = widget._transaksi.listPerbaikan.length;
+   
 
     Provider.of<ProviderData>(context, listen: false)
         .listSupir
@@ -67,7 +60,7 @@ class _TransaksiViewState extends State<TransaksiView> {
 
   int jumlahOpsi = 0;
 
-  final List<Perbaikan> _updatedPerbaikan = [];
+
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
   Transaksi transaksi = Transaksi.fromMap({
@@ -82,53 +75,6 @@ class _TransaksiViewState extends State<TransaksiView> {
     'perbaikan_transaksi': []
   });
 
-  Widget _buildPartName(int i, BuildContext context, StateSetter stateSetter) {
-    TextEditingController controller =
-        TextEditingController(text: transaksi.listPerbaikan[i].nama_perbaikan);
-    TextEditingController controller2 = TextEditingController(
-        text: Rupiah.format(transaksi.listPerbaikan[i].harga_perbaikan));
-    return Container(
-        key: ValueKey(i),
-        margin: const EdgeInsets.only(bottom: 10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _buildSize2(
-                TextFormField(
-                  readOnly: true,
-                  controller: controller,
-                  onChanged: (value) {
-                    if (transaksi.listPerbaikan.isNotEmpty) {
-                      transaksi.listPerbaikan[i].nama_perbaikan = value;
-                    }
-                  },
-                  decoration: const InputDecoration(hintText: 'Part'),
-                ),
-                1,
-                false),
-            _buildSize2(
-                TextFormField(
-                  readOnly: true,
-                  controller: controller2,
-                  decoration: const InputDecoration(hintText: 'Harga'),
-                  onChanged: (value) {
-                    if (transaksi.listPerbaikan.isNotEmpty) {
-                      transaksi.listPerbaikan[i].harga_perbaikan =
-                          NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ')
-                              .parse(value)
-                              .toDouble();
-                    }
-                  },
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    CurrencyInputFormatter()
-                  ],
-                ),
-                1,
-                true),
-          ],
-        ));
-  }
 
   Widget _buildSize(widget, String ket, int flex) {
     return Container(
@@ -381,13 +327,7 @@ class _TransaksiViewState extends State<TransaksiView> {
                                       'Perbaikan :',
                                       style: TextStyle(fontSize: 13),
                                     ),
-                                    const Divider(),
-                                    ...transaksi.listPerbaikan
-                                        .map((e) => _buildPartName(
-                                            transaksi.listPerbaikan.indexOf(e),
-                                            context,
-                                            setState))
-                                        .toList(),
+                                   
                                   ],
                                 ),
                               ),

@@ -21,14 +21,7 @@ class TransaksiTile extends StatefulWidget {
 }
 
 class _TransaksiTileState extends State<TransaksiTile> {
-  totalPerbaikan(List<Perbaikan> data) {
-    double totalHarga = 0;
-    for (var element in data) {
-      totalHarga = totalHarga + element.harga_perbaikan;
-    }
-    return totalHarga;
-  }
-
+ 
   bool hover = false;
   @override
   Widget build(BuildContext context) {
@@ -72,26 +65,26 @@ class _TransaksiTileState extends State<TransaksiTile> {
             Expanded(
                 flex: 7,
                 child: Text(Rupiah.format(
-                    widget._transaksi.ongkos - widget._transaksi.keluar))),
-            Expanded(
-                flex: 7,
-                child: Text(widget._transaksi.listPerbaikan.isEmpty
-                    ? '-'
-                    : Rupiah.format(
-                        totalPerbaikan(widget._transaksi.listPerbaikan)))),
+                    widget._transaksi.sisa))),
+            // Expanded(
+            //     flex: 7,
+            //     child: Text(widget._transaksi.listPerbaikan.isEmpty
+            //         ? '-'
+            //         : Rupiah.format(
+            //             totalPengeluaran(widget._transaksi.listPerbaikan)))),
             Expanded(
               flex: 7,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                
                 children: [
+                  // Expanded(
+                  //   child: TransaksiView(
+                  //     widget._transaksi,
+                  //   ),
+                  // ),
                   Expanded(
-                    child: TransaksiView(
-                      widget._transaksi,
-                    ),
-                  ),
-                  Expanded(
-                    child: TransaksiEdit(transaksi: widget._transaksi)),
+                    child: TransaksiEdit( widget._transaksi)),
                   Expanded(
                     child: TransaksiDelete(widget._transaksi)),
                 ],

@@ -100,7 +100,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
                                   child: Text(c.listMobil[index].nama_mobil)),
                               Expanded(
                                   flex: 3,
-                                  child: Text(c.listMobil[index].nopol_mobil)),
+                                  child: Text(c.listMobil[index].keterangan_mobill)),
                               Expanded(
                                 flex: 1,
                                 child: Row(

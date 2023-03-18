@@ -1,9 +1,8 @@
+import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart'; 
-import 'package:gabriel_logistik/helper/totalPerbaikan.dart';
 import 'package:gabriel_logistik/kas/kas.dart';
 import 'package:gabriel_logistik/models/kas_tahun.dart';
-import 'package:gabriel_logistik/models/laporan_bulanan.dart';
+import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
@@ -44,20 +43,20 @@ class _KasTahunState extends State<KasTahun> {
         tahun.add(DateTime.parse(element.tanggalBerangkat).year);
       }
     }
-    if(!tahun.contains(ropdownValue2)){
+    if (!tahun.contains(ropdownValue2)) {
       tahun.add(ropdownValue2);
     }
     super.didChangeDependencies();
   }
+
   @override
   Widget build(BuildContext context) {
-   
-    return Scaffold(resizeToAvoidBottomInset: false,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.only(left: 50, right: 50, top: 15),
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Container(
-       
             child: Row(
               children: [
                 DropdownButton<int>(
@@ -99,14 +98,15 @@ class _KasTahunState extends State<KasTahun> {
                 crossAxisSpacing: 30,
                 children:
                     Provider.of<ProviderData>(context).backupListSupir.map((e) {
-                      double totalBersihTahun=0;
-                      double totalPerbaikanTahun=0;
-                  KasModel asu = KasModel(e.nama_supir, [], 0, 0, 0,ropdownValue2.toString());
+                  double totalBersihTahun = 0;
+
+                  KasModel asu = KasModel(
+                      e.nama_supir, [], 0, 0, 0, ropdownValue2.toString());
                   for (var moon in list) {
                     double totalBersih = 0;
-                    double totalPerbaikan = 0;
+                    double totalPengeluaran = 0;
                     double totalPersenSupir = 0;
-    
+
                     List<Transaksi> transaksiBulanIni = [];
                     transaksiBulanIni = Provider.of<ProviderData>(context)
                         .backupTransaksi
@@ -117,30 +117,24 @@ class _KasTahunState extends State<KasTahun> {
                             DateTime.parse(element.tanggalBerangkat).year ==
                                 ropdownValue2)
                         .toList();
-                            for (var element in transaksiBulanIni) {
-                    totalBersih += (element.ongkos - element.keluar);
-                    totalPerbaikan +=
-                        TotalPerbaikan.totalPerbaikan(element.listPerbaikan);
-                        
-                  }
+                    for (var element in transaksiBulanIni) {
+                      totalBersih += (element.ongkos - element.keluar);
+                    }
                     if (transaksiBulanIni.isNotEmpty) {
-                    
-                      BulanSupir data = BulanSupir(
-                          e.nama_supir,
-                          transaksiBulanIni,
-                          totalBersih - totalPerbaikan,
-                          0,
-                          totalPerbaikan,
-                          moon);
-    
-                      asu.listBulananSupir.add(data);
+                      // KeuanganBulanan data = KeuanganBulanan(
+                      //     e.nama_supir,
+                      //     transaksiBulanIni,
+                      //     totalBersih - totalPengeluaran,
+                      //     0,
+                      //     totalPengeluaran,
+                      //     moon);
+
+                      // asu.listBulananSupir.add(data);
                     }
                   }
-       for (var element in asu.listBulananSupir) {
-                  asu.  totalBersih += element.totalBersih;
-               asu.     totalPerbaikan +=
-                        element.totalPerbaikan;
-                        
+                  for (var element in asu.listBulananSupir) {
+                    asu.totalBersih += element.totalBersih;
+                    asu.totalPengeluaran += element.totalPengeluaran;
                   }
                   return Kas(asu);
                 }).toList(),

@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
-import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
+
 import 'package:gabriel_logistik/providerData/providerData.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
@@ -15,8 +15,8 @@ import '../helper/dropdown.dart';
 import '../helper/input_currency.dart';
 
 class TransaksiEdit extends StatefulWidget {
-  final Transaksi transaksi;
-  const TransaksiEdit({required this.transaksi});
+  Transaksi transaksi;
+  TransaksiEdit(this.transaksi);
 
   @override
   State<TransaksiEdit> createState() => _TransaksiEditState();
@@ -25,23 +25,11 @@ class TransaksiEdit extends StatefulWidget {
 class _TransaksiEditState extends State<TransaksiEdit> {
   List<String> listSupir = [];
   List<String> listMobil = [];
-  final RoundedLoadingButtonController _btnController =
-      RoundedLoadingButtonController();
-  late Transaksi transaksi = Transaksi.fromMap({
-    'id_transaksi': 1,
-    'tgl_berangkat': DateTime.now().toIso8601String(),
-    'keterangan': '',
-    'supir': '',
-    'tujuan': '',
-    'mobil': '',
-    'keluar': 0,
-    'ongkos': 0,
-    'perbaikan_transaksi': []
-  });
+  TextEditingController controlerSisa = TextEditingController();
+  TextEditingController controlerKetMobil = TextEditingController();
   @override
-  void test() {
-    print('inin dialgo');
-
+  void initState() {
+    transaksi=widget.transaksi;
     Provider.of<ProviderData>(context, listen: false)
         .listSupir
         .map((e) => e.nama_supir)
@@ -57,123 +45,41 @@ class _TransaksiEditState extends State<TransaksiEdit> {
         .map((e) => e.nama_mobil)
         .toList()
         .forEach((element) {
+      print(element);
       if (listMobil.contains(element)) {
       } else {
         listMobil.add(element);
       }
     });
 
-    transaksi = Transaksi(
-        widget.transaksi.transaksiId,
-        widget.transaksi.tanggalBerangkat,
-        widget.transaksi.keterangan,
-        widget.transaksi.supir,
-        widget.transaksi.mobil,
-        widget.transaksi.tujuan,
-        widget.transaksi.keluar,
-        widget.transaksi.ongkos,
-        widget.transaksi.listPerbaikan);
-    transaksi.listPerbaikan = List.from(widget.transaksi.listPerbaikan);
+    super.initState();
   }
 
-  Widget _buildPartName(int i, BuildContext context, StateSetter stateSetter) {
-    TextEditingController controller =
-        TextEditingController(text: transaksi.listPerbaikan[i].nama_perbaikan);
-    TextEditingController controller2 = TextEditingController(
-        text: Rupiah.format(transaksi.listPerbaikan[i].harga_perbaikan));
-    return Container(
-        key: ValueKey(i),
-        margin: const EdgeInsets.only(bottom: 10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _buildSize2(
-                TextFormField(
-                 
-                  controller: controller,
-                  onChanged: (value) {
-                    if (transaksi.listPerbaikan.isNotEmpty) {
-                      transaksi.listPerbaikan[i].nama_perbaikan = value;
-                    }
-                  },
-                  decoration: const InputDecoration(hintText: 'Part'),
-                ),
-                1,
-                false),
-            _buildSize2(
-                TextFormField(
-      
-                  controller: controller2,
-                  decoration: const InputDecoration(hintText: 'Harga'),
-                  onChanged: (value) {
-                    if (transaksi.listPerbaikan.isNotEmpty) {
-                      transaksi.listPerbaikan[i].harga_perbaikan =
-                          NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ')
-                              .parse(value)
-                              .toDouble();
-                    }
-                  },
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    CurrencyInputFormatter()
-                  ],
-                ),
-                1,
-                true),
-            IconButton(
-              onPressed: () {
-                print(transaksi.listPerbaikan.length);
-                transaksi.listPerbaikan.removeAt(i);
-                print(transaksi.listPerbaikan.length);
-                stateSetter(() {});
-                for (var element in transaksi.listPerbaikan) {
-                  print(element.nama_perbaikan);
-                }
-              },
-              icon: const Icon(
-                Icons.delete,
-                color: Colors.red,
-              ),
-            ),
-          ],
-        ));
-  }
-
+  final RoundedLoadingButtonController _btnController =
+      RoundedLoadingButtonController();
+  late Transaksi transaksi;
   Widget _buildSize(widget, String ket, int flex) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.14 * flex,
-      margin: EdgeInsets.only(
-          right: ket == 'Tanggal' || ket == 'Keterangan' ? 0 : 50, bottom: 30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-              margin: const EdgeInsets.only(bottom: 7),
-              child: Text(
-                '$ket :',
-                style: const TextStyle(fontSize: 13),
-              )),
-          widget
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSizeV2(
-    widget,
-    String ket,
-  ) {
+    print(MediaQuery.of(context).size.width);
+    print(MediaQuery.of(context).size.height);
     return Expanded(
+      // width: MediaQuery.of(context).size.width * 0.14 * flex,
+      // margin: EdgeInsets.only(right: ket == 'Tanggal' ? 0 : 50, bottom: 30),
       child: Container(
-        margin: const EdgeInsets.only(right: 0, bottom: 30),
+        margin: EdgeInsets.only(
+            right: ket == 'Keterangan Mobil' || ket == 'Ketik Tujuan' ? 0 : 50,
+            bottom: ket == 'Keterangan' ? 40 : 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-                margin: const EdgeInsets.only(bottom: 7),
-                child: Text(
-                  '$ket :',
-                  style: const TextStyle(fontSize: 13),
+                margin: const EdgeInsets.only(bottom: 7, top: 7),
+                child: Row(
+                  children: [
+                    Text(
+                      '$ket :',
+                      style: const TextStyle(fontSize: 13),
+                    ),
+                  ],
                 )),
             widget
           ],
@@ -182,57 +88,24 @@ class _TransaksiEditState extends State<TransaksiEdit> {
     );
   }
 
-  Widget _buildSize2(widget, int flex, bool ket) {
-    return Container(
-        width: MediaQuery.of(context).size.width * 0.14 * flex,
-        margin: EdgeInsets.only(right: ket ? 10 : 50, bottom: 10),
-        child: widget);
-  }
-
   @override
   Widget build(BuildContext context) {
     return IconButton(
-       icon: const Icon(
-          Icons.edit,
-          color: Colors.green,
- 
-        ),
-        onPressed: () {
-          test();
-          showDialog(
-              barrierDismissible: false,
-              context: context,
-              builder: (context) {
-                return Theme(
-                    data: ThemeData(fontFamily: 'Nunito',
-                      inputDecorationTheme: InputDecorationTheme(
-                        labelStyle: TextStyle(
-                            fontSize: 18,
-                            color: Colors.grey.shade600,
-                            letterSpacing: 0.7),
-                        //        border: InputBorder.none,
-
-                        contentPadding:
-                            const EdgeInsets.only(left: 10, top: 5, bottom: 5),
-                        filled: true, //<-- SEE HERE
-                        fillColor: Colors.grey.shade200,
-
-                        // hintStyle: TextStyle(
-                        //   color: Colors.grey.shade600,
-                        //   fontSize: 14,
-                        // ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4),
-                          borderSide: const BorderSide(color: Colors.green),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4),
-                          borderSide: const BorderSide(color: Colors.green),
-                        ),
-                      ),
-                    ),
-                    child: AlertDialog(
-                        backgroundColor: Colors.green,
+       
+            icon: const Icon(
+              Icons.edit,
+              color: Colors.green),
+            
+           
+          
+            onPressed: () {
+            
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                        backgroundColor: Theme.of(context).primaryColor,
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -274,55 +147,20 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                 (BuildContext context, StateSetter setState) =>
                                     IntrinsicHeight(
                               child: Container(
-                                padding: const EdgeInsets.all(25),
-                                width: MediaQuery.of(context).size.width * 0.7,
+                                padding: const EdgeInsets.only(
+                                    bottom: 20, left: 20, right: 20, top: 15),
+                                width: MediaQuery.of(context).size.width * 0.6,
                                 child: SingleChildScrollView(
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
-                                      Container(
-                                        // margin: EdgeInsets.only(bottom: 50),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            _buildSize(
-                                                DropDownField(
-                                                  value: transaksi.supir,
-                                                  onValueChanged: (val) {
-                                                    transaksi.supir = val;
-                                                  },
-                                                  items: listSupir,
-                                                ),
-                                                'Pilih Supir',
-                                                1),
-                                            _buildSize(
-                                                DropDownField(
-                                                  value: transaksi.mobil,
-                                                  onValueChanged: (val) {
-                                                    transaksi.mobil = val;
-                                                  },
-                                                  items: listMobil,
-                                                ),
-                                                'Pilih Mobil',
-                                                1),
-                                            _buildSize(
-                                                TextFormField(
-                                                  initialValue:
-                                                      transaksi.tujuan,
-                                                  onChanged: (va) {
-                                                    transaksi.tujuan = va;
-                                                  },
-                                                ),
-                                                'Ketik Tujuan',
-                                                1),
-                                            _buildSizeV2(
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          _buildSize(
                                               WebDatePicker(
                                                 height: 60,
-                                                width: double.infinity,
-                                                initialDate: DateTime.parse(
-                                                    transaksi.tanggalBerangkat),
+                                                initialDate: DateTime.now(),
                                                 dateformat: 'dd/MM/yyyy',
                                                 onChange: (value) {
                                                   if (value != null) {
@@ -332,20 +170,67 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                                 },
                                               ),
                                               'Tanggal',
-                                            )
-                                          ],
-                                        ),
+                                              1),
+                                          _buildSize(
+                                              DropDownField(
+                                                onValueChanged: (val) {
+                                                  transaksi.supir = val;
+                                                },
+                                                items: listSupir,
+                                              ),
+                                              'Pilih Supir',
+                                              1),
+                                          _buildSize(
+                                              DropDownField(
+                                                onValueChanged: (val) {
+                                                  transaksi.mobil = val;
+                                                  controlerKetMobil
+                                                      .text = Provider.of<
+                                                              ProviderData>(
+                                                          context,
+                                                          listen: false)
+                                                      .listMobil
+                                                      .firstWhere((element) =>
+                                                          element.nama_mobil ==
+                                                          val)
+                                                      .keterangan_mobill;
+                                                },
+                                                items: listMobil,
+                                              ),
+                                              'Pilih Mobil',
+                                              1),
+                                          _buildSize(
+                                              TextFormField(
+                                                readOnly: true,
+                                                controller: controlerKetMobil,
+                                                onChanged: (val) {},
+                                              ),
+                                              'Keterangan Mobil',
+                                              1),
+                                        ],
                                       ),
                                       Row(
-                                        children: [ _buildSize(
+                                        children: [
+                                          _buildSize(
                                               TextFormField(
-                                                initialValue: Rupiah.format(
-                                                    transaksi.ongkos),
                                                 onChanged: (va) {
                                                   if (va.isNotEmpty &&
                                                       va.startsWith('Rp')) {
                                                     transaksi.ongkos =
                                                         Rupiah.parse(va);
+                                                   if (transaksi.keluar >
+                                                        Rupiah.parse(va)) {
+                                                      controlerSisa.text =
+                                                          'Tidak boleh minus';
+                                                    } else {
+                                                      controlerSisa
+                                                          .text = Rupiah.format(
+                                                              (transaksi
+                                                                      .ongkos -
+                                                                  transaksi
+                                                                      .keluar))
+                                                          .toString();
+                                                    }
                                                   } else {
                                                     transaksi.ongkos = 0;
                                                   }
@@ -360,8 +245,41 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                               1),
                                           _buildSize(
                                               TextFormField(
-                                                initialValue: Rupiah.format(
-                                                    transaksi.keluar),
+                                                onChanged: (va) {
+                                                  if (va.isNotEmpty &&
+                                                      va.startsWith('Rp')) {
+                                                    transaksi.keluar =
+                                                        Rupiah.parse(va);
+                                                    ;
+                                                    if (transaksi.ongkos <
+                                                        Rupiah.parse(va)) {
+                                                      controlerSisa.text =
+                                                          'Tidak boleh minus';
+                                                    } else {
+                                                      controlerSisa
+                                                          .text = Rupiah.format(
+                                                              (transaksi
+                                                                      .ongkos -
+                                                                  transaksi
+                                                                      .keluar))
+                                                          .toString();
+                                                    }
+                                                  } else {
+                                                    transaksi.keluar = 0;
+                                                  }
+                                                },
+                                                inputFormatters: [
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly,
+                                                  CurrencyInputFormatter()
+                                                ],
+                                              ),
+                                              'Biaya Keluar',
+                                              1),
+                                          _buildSize(
+                                              TextFormField(
+                                                controller: controlerSisa,
+                                                readOnly: true,
                                                 onChanged: (va) {
                                                   if (va.isNotEmpty &&
                                                       va.startsWith('Rp')) {
@@ -377,67 +295,48 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                                   CurrencyInputFormatter()
                                                 ],
                                               ),
-                                              'Biaya Keluar',
+                                              'Sisa',
                                               1),
-                                         
-                                          _buildSizeV2(
-                                            TextFormField(
-                                                initialValue:
-                                                    transaksi.keterangan,
-                                                onChanged: (val) {
-                                                  transaksi.keterangan = val;
-                                                }),
-                                            'Keterangan',
-                                          ),
+                                          _buildSize(TextFormField(
+                                            onChanged: (va) {
+                                              transaksi.tujuan = va;
+                                            },
+                                          ), 'Ketik Tujuan', 1),
                                         ],
                                       ),
-                                      const Text(
-                                        'Perbaikan :',
-                                        style: TextStyle(fontSize: 13),
-                                      ),
-                                      const Divider(),
-                                      ...transaksi.listPerbaikan
-                                          .map((e) => _buildPartName(
-                                              transaksi.listPerbaikan
-                                                  .indexOf(e),
-                                              context,
-                                              setState))
-                                          .toList(),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
-                                          const Text(
-                                            'Tambah Perbaikan',
-                                            style: TextStyle(fontSize: 13),
-                                          ),
-                                          IconButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  transaksi.listPerbaikan
-                                                      .add(Perbaikan.fromMap(
-                                                    {
-                                                      'nama_perbaikan': '',
-                                                      'harga_perbaikan': 0
-                                                    },
-                                                  ));
-                                                });
-                                              },
-                                              icon: const Icon(
-                                                Icons.add_circle_rounded,
-                                                color: Colors.green,
-                                              )),
-
-                                          // Text(jumlahOpsi.toString()),
+                                          _buildSize(
+                                              TextFormField(onChanged: (val) {
+                                            transaksi.keterangan = val;
+                                          }), 'Keterangan', 2),
+                                          _buildSize(SizedBox(), '', 4),
+                                          //                               ElevatedButton.icon(
+                                          // icon: const Icon(
+                                          //   Icons.add,
+                                          //   color: Colors.white,
+                                          // ),
+                                          // label: const Text(
+                                          //   'Masuk Ringkasan',
+                                          //   style: TextStyle(color: Colors.white),
+                                          // ),
+                                          // style: ButtonStyle(
+                                          //     padding: MaterialStateProperty.all(const EdgeInsets.all(15))),
+                                          // onPressed: () {})
                                         ],
                                       ),
                                       RoundedLoadingButton(
-                                        color: Colors.green,
+                                        color: Theme.of(context).primaryColor,
+                                        elevation: 10,
                                         successColor: Colors.green,
                                         errorColor: Colors.red,
                                         controller: _btnController,
                                         onPressed: () async {
-                                          if (transaksi.keluar == 0 ||transaksi.keluar>=transaksi.ongkos||
+                                          if (transaksi.keluar == 0 ||
+                                              transaksi.keluar >=
+                                                  transaksi.ongkos ||
                                               transaksi.ongkos == 0 ||
                                               transaksi.mobil == '' ||
                                               transaksi.tujuan == '' ||
@@ -459,7 +358,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                             _btnController.success();
                                           });
                                           await Future.delayed(
-                                              const Duration(seconds: 2), () {
+                                              const Duration(seconds: 1), () {
                                             Navigator.of(context).pop();
                                           });
                                         },
@@ -473,10 +372,8 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                               ),
                             ),
                           ),
-                        )));
-              }).then((value) {
-            // transaksi=widget.transaksi;
-          });
-        });
+                        ));
+                  });
+            });
   }
 }

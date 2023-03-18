@@ -45,12 +45,12 @@ class EditMobil extends StatelessWidget {
                           ),
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(initialValue: supir.nopol_mobil,
+                            child: TextFormField(initialValue: supir.keterangan_mobill,
                               decoration: const InputDecoration(
                                 hintText: 'No Hp',
                               ),
                               onChanged: (val) {
-                                 supir.nopol_mobil = val.toString();
+                                 supir.keterangan_mobill = val.toString();
                               },
                               maxLines: 1,
                             ),
@@ -81,7 +81,7 @@ class EditMobil extends StatelessWidget {
                       onPressed: () async {
                         if (supir.nama_mobil.isEmpty ||
                           
-                            supir.nopol_mobil .isEmpty) {
+                            supir.keterangan_mobill .isEmpty) {
                           _btnController.error();
                           await Future.delayed(const Duration(seconds: 1));
                           _btnController.reset();
