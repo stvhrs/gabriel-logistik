@@ -5,13 +5,12 @@ import 'package:gabriel_logistik/bulanan/bulanan.dart';
 
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/perbaikan.dart';
+import 'package:gabriel_logistik/models/pengeluaran.dart';
 import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/prints.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 List<String> list = <String>[
   'Januari',
@@ -39,14 +38,15 @@ class _LaporanBulananState extends State<LaporanBulanan> {
   List<int> tahun = [];
 
   final innerController = ScrollController();
-List<Mobil> mobil=[];
-List<Transaksi> trankaskis=[];
+  List<Mobil> mobil = [];
+  List<Transaksi> trankaskis = [];
   String dropdownValue = list[DateTime.now().month - 1];
   int ropdownValue2 = DateTime.now().year;
+  List<KeuanganBulanan> listKeuangan = [];
   @override
   void didChangeDependencies() {
-    trankaskis=Provider.of<ProviderData>(context).backupTransaksi;
-    mobil=Provider.of<ProviderData>(context).backupListMobil;
+    trankaskis = Provider.of<ProviderData>(context).backupTransaksi;
+    mobil = Provider.of<ProviderData>(context).backupListMobil;
     for (var element in Provider.of<ProviderData>(context).backupTransaksi) {
       if (!tahun.contains(DateTime.parse(element.tanggalBerangkat).year)) {
         tahun.add(DateTime.parse(element.tanggalBerangkat).year);
@@ -63,46 +63,8 @@ List<Transaksi> trankaskis=[];
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(onPressed: () {
-        List<KeuanganBulanan> asu =mobil.map((e) {
-                  List<Transaksi> transaksiBulanIni = [];
-                  List<Pengeluaran> pengeluaranBulanIni=[];
-                  double totalBersih = 0;
-                  double totalPengeluaran = 0;
-                 double totalOngkos=0;
-                     double totalKeluar=0;
-                         double totalSisa=0;
-
-                  transaksiBulanIni = Provider.of<ProviderData>(context)
-                      .backupTransaksi
-                      .where((element) =>
-                          element.mobil == e.nama_mobil &&
-                          DateTime.parse(element.tanggalBerangkat).month ==
-                              list.indexOf(dropdownValue) + 1 &&
-                          DateTime.parse(element.tanggalBerangkat).year ==
-                              ropdownValue2)
-                      .toList();
-                 
-                  // }
-                  for (var element in transaksiBulanIni) {
-                    totalBersih += element.sisa;
-             
-                  }
-                   for (var element in pengeluaranBulanIni) {
-                    totalPengeluaran += element.harga_pengeluaran;
-             
-                  }
-                  KeuanganBulanan data = KeuanganBulanan(
-                      e.nama_mobil,
-                      transaksiBulanIni,pengeluaranBulanIni,totalBersih,totalOngkos,totalKeluar,totalSisa,
-                      totalPengeluaran,
-                      
-                 
-                      list[list.indexOf(dropdownValue)]);
-
-                  return data;
-        }).toList();
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => LaporanPrint(asu),
+          builder: (context) => LaporanPrint(listKeuangan),
         ));
       }),
       body: Padding(
@@ -170,52 +132,63 @@ List<Transaksi> trankaskis=[];
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.9,
             child: ListView(
-               
-                children:
-                    Provider.of<ProviderData>(context).backupListMobil.map((e) {
-                  List<Transaksi> transaksiBulanIni = [];
-                  List<Pengeluaran> pengeluaranBulanIni=[];
-                  double totalBersih = 0;
-                  double totalPengeluaran = 0;
-                 double totalOngkos=0;
-                     double totalKeluar=0;
-                         double totalSisa=0;
+              children: Provider.of<ProviderData>(context).listMobil.map((e) {
+                List<Transaksi> transaksiBulanIni = [];
+                double totalPengeluaran = 0;
+                double totalBersih = 0;
+                List<Pengeluaran> listPengeluaran = [];
+                double totalOngkos = 0;
+                double totalKeluar = 0;
+                double totalSisa = 0;
 
-                  transaksiBulanIni = Provider.of<ProviderData>(context)
-                      .backupTransaksi
-                      .where((element) =>
-                          element.mobil == e.nama_mobil &&
-                          DateTime.parse(element.tanggalBerangkat).month ==
-                              list.indexOf(dropdownValue) + 1 &&
-                          DateTime.parse(element.tanggalBerangkat).year ==
-                              ropdownValue2)
-                      .toList();
-                 
-                  // }
-                  for (var element in transaksiBulanIni) {
-                    totalBersih += element.sisa;
-                     totalOngkos+=element.ongkos;
-                      totalKeluar+=element.keluar;
-                          totalSisa+=element.sisa;
-             
-                  }
-                   for (var element in pengeluaranBulanIni) {
-                    totalPengeluaran += element.harga_pengeluaran;
-             
-                  }
-                  KeuanganBulanan data = KeuanganBulanan(
-                      e.nama_mobil,
-                      transaksiBulanIni,pengeluaranBulanIni,totalBersih,totalOngkos,totalKeluar,totalSisa,
-                      totalPengeluaran,
-                      
-                 
-                      list[list.indexOf(dropdownValue)]);
+                transaksiBulanIni = Provider.of<ProviderData>(context)
+                    .backupTransaksi
+                    .where((element) =>
+                        element.mobil == e.nama_mobil &&
+                        DateTime.parse(element.tanggalBerangkat).month ==
+                            list.indexOf(dropdownValue) + 1 &&
+                        DateTime.parse(element.tanggalBerangkat).year ==
+                            ropdownValue2)
+                    .toList();
+e.pengeluaran=Provider.of<ProviderData>(context)
+                    .backupListPengeluaran
+                    .where((element) =>
+                        element.mobil == e.nama_mobil &&
+                        DateTime.parse(element.tanggal).month ==
+                            list.indexOf(dropdownValue) + 1 &&
+                        DateTime.parse(element.tanggal).year ==
+                            ropdownValue2)
+                    .toList();
+                    
+                // }
+                for (var element in transaksiBulanIni) {
+                  totalBersih += element.sisa;
+                  totalOngkos += element.ongkos;
+                  totalKeluar += element.keluar;
+                  totalSisa += element.sisa;
+                }
+                for (var pengeluaran in e.pengeluaran) {
+                  totalPengeluaran = totalPengeluaran + pengeluaran.harga;
+                  listPengeluaran.add(pengeluaran);
+                }
+                totalBersih -= totalPengeluaran;
 
-                  return Bulanan(data);
-                }).toList(),
-              ),
+                print(totalPengeluaran);
+                KeuanganBulanan data = KeuanganBulanan(
+                    e.nama_mobil,
+                    transaksiBulanIni,
+                    listPengeluaran,
+                    totalBersih,
+                    totalOngkos,
+                    totalKeluar,
+                    totalSisa,
+                    totalPengeluaran,
+                    list[list.indexOf(dropdownValue)]);
+                listKeuangan.add(data);
+                return Bulanan(data);
+              }).toList(),
             ),
-          
+          ),
         ]),
       ),
     );

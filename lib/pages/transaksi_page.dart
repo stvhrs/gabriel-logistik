@@ -17,14 +17,14 @@ class TransaksiPage extends StatefulWidget {
 }
 
 class _TransaksiPageState extends State<TransaksiPage> {
+  
   @override
   Widget build(BuildContext context) {
+    print('build transaksi page');
     return Consumer<ProviderData>(builder: (context, prov, _) {
       return Scaffold(
-          resizeToAvoidBottomInset: false,
-          floatingActionButton: TransaksiAdd(prov.backupTransaksi.isNotEmpty
-              ? prov.backupTransaksi.first.transaksiId + 1
-              : 1),
+          resizeToAvoidBottomInset: false,backgroundColor: Colors.grey.shade300,
+          floatingActionButton: TransaksiAdd(),
           body: Padding(
               padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
               child: Column(
@@ -37,24 +37,22 @@ class _TransaksiPageState extends State<TransaksiPage> {
                   //           ConnectionState.waiting
                   //       ? const CircularProgressIndicator()
                   //       : Text(
+
                   //           jsonDecode(snapshotx.data!)['data'].toString()),
                   Container(
                     margin: const EdgeInsets.only(bottom: 15),
                     child: Card(
-                      color: Theme.of(context).colorScheme.secondary,
-                      shadowColor: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.primary,
+                      shadowColor: Theme.of(context).colorScheme.primary,surfaceTintColor:  Theme.of(context).colorScheme.primary,
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Column(
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
+                              children:  [
                                 Expanded(
-                                  child: Icon(
-                                    Icons.search_rounded,
-                                    size: 35,
-                                  ),
+                                  child: Image.asset('images/search.png',height: 50),
                                 ),
                                 Expanded(flex: 4, child: SearchTanggal()),
                                 Expanded(flex: 4, child: SearchNama()),
@@ -71,7 +69,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
 
                   Container(
                     decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).colorScheme.primary.withBlue(150),
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(5),
                             topRight: Radius.circular(5))),

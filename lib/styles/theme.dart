@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 class AppTheme {
   AppTheme();
-  static Color primaryColor = const Color.fromARGB(255, 75, 84, 167);
-  static Color secondaryColor = const Color.fromARGB(255, 146, 154, 204);
+  static Color primaryColor = Color.fromARGB(255, 59, 59, 65);
+  static Color secondaryColor =primaryColor.withBlue(150);
   static ThemeData getAppThemeData() {
-    return ThemeData(
-        fontFamily: 'Nunito',
-        useMaterial3: true,
+    return ThemeData(iconTheme: IconThemeData(size: 19),
+        fontFamily: 'FreeSans',cardTheme: CardTheme(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
+        useMaterial3: true,backgroundColor: Colors.grey.shade300,
         dialogBackgroundColor: Colors.white,
         dialogTheme: const DialogTheme(
           backgroundColor: Colors.white,
@@ -24,19 +24,20 @@ class AppTheme {
             secondarySelectedColor: primaryColor,
             shadowColor: Colors.yellow,
             selectedShadowColor: Colors.black),
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.grey.shade300,
         elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-                textStyle:
-                    MaterialStateProperty.all(const TextStyle(color: Colors.white)),
-                backgroundColor: MaterialStateProperty.all(Colors.green))),
+            style: ButtonStyle(shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
+                textStyle: MaterialStateProperty.all(
+                     TextStyle(color: Colors.white,fontFamily: 'Nunito')),
+                backgroundColor: MaterialStateProperty.all(Colors.green.shade500  ))),
         primaryColor: primaryColor,
-        buttonTheme: const ButtonThemeData(),
+     
         scrollbarTheme: const ScrollbarThemeData()
             .copyWith(thumbColor: MaterialStateProperty.all(secondaryColor)),
-        textTheme: const TextTheme(           displaySmall: TextStyle(
+        textTheme: const TextTheme(
+            displaySmall: TextStyle(
               fontSize: 13,
-              color: Colors.black,
+              color: Colors.black,fontFamily: 'FreeSans'
             ),
             bodyLarge: TextStyle(
               fontSize: 17,
@@ -49,23 +50,16 @@ class AppTheme {
             ),
             displayMedium: TextStyle(
               fontSize: 14,
-              letterSpacing: 1,
+              letterSpacing: 1,fontFamily: 'Nunito',
               fontWeight: FontWeight.bold,
               color: Colors.white,
             )),
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(
               fontSize: 18, color: Colors.grey.shade600, letterSpacing: 0.7),
-          //        border: InputBorder.none,
-
           contentPadding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
-          filled: true, //<-- SEE HERE
+          filled: true,
           fillColor: Colors.grey.shade200,
-
-          // hintStyle: TextStyle(
-          //   color: Colors.grey.shade600,
-          //   fontSize: 14,
-          // ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(4),
             borderSide: BorderSide(color: primaryColor),

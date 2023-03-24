@@ -1,6 +1,6 @@
 
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
-import 'package:gabriel_logistik/models/perbaikan.dart';
+import 'package:gabriel_logistik/models/pengeluaran.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
-import 'package:gabriel_logistik/models/perbaikan.dart';
+import 'package:gabriel_logistik/models/pengeluaran.dart';
 
 class Transaksi {
-  int transaksiId;
+
   String tanggalBerangkat;
 
   String supir;
@@ -14,7 +14,7 @@ class Transaksi {
   
 
   Transaksi(
-      this.transaksiId,
+  
       this.tanggalBerangkat,
       this.keterangan,
       this.supir,
@@ -28,7 +28,7 @@ class Transaksi {
   factory Transaksi.fromMap(Map<String, dynamic> data) {
    
     return Transaksi(
-        data['id_transaksi'],
+
         data['tgl_berangkat'],
         data['keterangan']??'',
         data['supir'],
@@ -44,7 +44,7 @@ class Transaksi {
     
 
     return {
-      'id_transaksi': data.transaksiId,
+
       'tgl_berangkat': data.tanggalBerangkat,
       'keterangan': data.keterangan,
       'supir': data.supir,

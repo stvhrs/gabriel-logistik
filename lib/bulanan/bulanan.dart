@@ -39,50 +39,48 @@ class _BulananState extends State<Bulanan> {
           child: Row(
             children: [
               Expanded(
-                  flex: 5,
-                  child: Text(
-                      DateFormat('EEEE', "id_ID").format(
-                              DateTime.parse(element.tanggalBerangkat)) +
-                          ', ' +
-                          DateTime.parse(element.tanggalBerangkat)
+                  flex: 3,
+                  child: Text(textAlign: TextAlign.left,
+                       DateTime.parse(element.tanggalBerangkat)
                               .day
-                              .toString(),
-                      style: Theme.of(context).textTheme.displaySmall)),
+                              .toString()+', '+ DateFormat('EEEE', "id_ID").format(
+                              DateTime.parse(element.tanggalBerangkat)) )
+                      ),
+              Expanded(
+                  flex: 3,
+                  child: Text(textAlign: TextAlign.left,element.supir,
+                      )),
+              Expanded(
+                  flex: 10,
+                  child: Text(textAlign: TextAlign.left,element.tujuan,
+                      )),
               Expanded(
                   flex: 7,
-                  child: Text(element.supir,
-                      style: Theme.of(context).textTheme.displaySmall)),
+                  child: Text(textAlign: TextAlign.left,Rupiah.format(element.ongkos),
+                      )),
               Expanded(
                   flex: 7,
-                  child: Text(element.tujuan,
-                      style: Theme.of(context).textTheme.displaySmall)),
-              Expanded(
-                  flex: 7,
-                  child: Text(Rupiah.format(element.ongkos),
-                      style: Theme.of(context).textTheme.displaySmall)),
-              Expanded(
-                  flex: 7,
-                  child: Text(Rupiah.format(element.keluar),
-                      style: Theme.of(context).textTheme.displaySmall)),
+                  child: Text(textAlign: TextAlign.left,Rupiah.format(element.keluar),
+                      )),
 
               Expanded(
                   flex: 7,
-                  child: Text(Rupiah.format(element.ongkos - element.keluar),
-                      style: Theme.of(context).textTheme.displaySmall)),
+                  child: Text(textAlign: TextAlign.left,Rupiah.format(element.ongkos - element.keluar),
+                      )),
               // Expanded(
               //   flex: 7,
-              //   child: Text(
+              //   child: Text(textAlign: TextAlign.left,
               //       textAlign: TextAlign.left,
               //       element.listPerbaikan.isEmpty
               //           ? ''
               //           : Rupiah.format(totalPengeluaran.totalPengeluaran(
               //               element.listPerbaikan)),
-              //       style: Theme.of(context).textTheme.displaySmall),
+              //       ),
               // ),
-            ],
-          ),
-        ),
-      );
+            
+          ]),
+        
+      ));
     }
   }
 
@@ -100,7 +98,7 @@ buildChildren2() {
           decoration: BoxDecoration(
               color: index.isEven
                   ? Colors.grey.shade200
-                  : const Color.fromARGB(255, 189, 193, 221)),
+                  :  Colors.white),
           padding: const EdgeInsets.only(
             top: 14,
             bottom: 14,
@@ -110,36 +108,37 @@ buildChildren2() {
             children: [
               Expanded(
                   flex: 3,
-                  child: Text(
-                      DateFormat('EEEE', "id_ID").format(
-                              DateTime.parse(element.tanggal)) +
-                          ' ' +
+                  child: Text(textAlign: TextAlign.left,
+                     
                           DateTime.parse(element.tanggal)
                               .day
-                              .toString(),
-                      style: Theme.of(context).textTheme.displaySmall)),
+                              .toString()+', '+ DateFormat('EEEE', "id_ID").format(
+                              DateTime.parse(element.tanggal)) )
+                          
+                      ),
               Expanded(
                   flex: 5,
-                  child: Text(element.nama_pengeluran,
-                      style: Theme.of(context).textTheme.displaySmall)),
+                  child: Text(textAlign: TextAlign.left,element.jenis,
+                      )),
+                      
               Expanded(
                   flex: 5,
-                  child: Text(Rupiah.format( element.harga_pengeluaran),
-                      style: Theme.of(context).textTheme.displaySmall)),
+                  child: Text(textAlign: TextAlign.left,Rupiah.format( element.harga),
+                      )),
               Expanded(
                   flex: 7,
-                  child: Text(element.keterangan,
-                      style: Theme.of(context).textTheme.displaySmall)),
+                  child: Text(textAlign: TextAlign.left,element.keterangan,
+                      )),
               
               // Expanded(
               //   flex: 7,
-              //   child: Text(
+              //   child: Text(textAlign: TextAlign.left,
               //       textAlign: TextAlign.left,
               //       element.listPerbaikan.isEmpty
               //           ? ''
               //           : Rupiah.format(totalPengeluaran.totalPengeluaran(
               //               element.listPerbaikan)),
-              //       style: Theme.of(context).textTheme.displaySmall),
+              //       ),
               // ),
             ],
           ),
@@ -149,10 +148,10 @@ buildChildren2() {
   }
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(margin: EdgeInsets.only(bottom: 50),
       child: Card(
         elevation: 5,
-        color: Colors.white, surfaceTintColor: Colors.grey.shade500,
+        color: Colors.white, surfaceTintColor: Colors.white,
         shadowColor: Theme.of(context).colorScheme.primary,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,51 +160,51 @@ buildChildren2() {
               Padding(
                 padding:
                     const EdgeInsets.only(left: 15.0, top: 7.5, bottom: 7.5),
-                child: Text(
+                child: Text(textAlign: TextAlign.left,
                   '${widget.laporanBulanan.namaMobil} - ${widget.laporanBulanan .bulan}',
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 padding: const EdgeInsets.only(top: 10, bottom: 12.5, left: 15),
                 child: Row(
                   children: [
                     Expanded(
-                        flex: 5,
-                        child: Text(
+                        flex: 3,
+                        child: Text(textAlign: TextAlign.left,
                           'Tanggal',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
-                        flex: 7,
-                        child: Text(
+                        flex: 3,
+                        child: Text(textAlign: TextAlign.left,
                           'Supir',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
-                        flex: 7,
-                        child: Text(
+                        flex: 10,
+                        child: Text(textAlign: TextAlign.left,
                           'Tujuan',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
                         flex: 7,
-                        child: Text(
+                        child: Text(textAlign: TextAlign.left,
                           'Ongkos',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
                         flex: 7,
-                        child: Text(
+                        child: Text(textAlign: TextAlign.left,
                           'Keluar',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
                         flex: 7,
-                        child: Text(
+                        child: Text(textAlign: TextAlign.left,
                           'Sisa',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
@@ -213,36 +212,35 @@ buildChildren2() {
                 ),
               ),
               ...buildChildren(), 
-              
-              
-               Container(
+           
+               Container(margin: EdgeInsets.only(top: 40),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
+                  color: Colors.red.shade600
                 ),
                 padding: const EdgeInsets.only(top: 10, bottom: 12.5, left: 15),
                 child: Row(
                   children: [
                      Expanded(
                         flex: 3,
-                        child: Text(
+                        child: Text(textAlign: TextAlign.left,
                           'Tanggal',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
                         flex: 5,
-                        child: Text(
+                        child: Text(textAlign: TextAlign.left,
                           'Nama Pengeluaran',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
                         flex: 5,
-                        child: Text(
+                        child: Text(textAlign: TextAlign.left,
                           'Harga Pengeluaran',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
                         flex: 7,
-                        child: Text(
+                        child: Text(textAlign: TextAlign.left,
                           'Keterangan Pengeluaran',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
@@ -250,7 +248,9 @@ buildChildren2() {
                   ],
                 ),
               ),
-              widget.laporanBulanan.transaksiBulanIni.isEmpty
+           
+              ...buildChildren2()
+ ,             widget.laporanBulanan.transaksiBulanIni.isEmpty
                   ? const SizedBox()
                   : Padding(
                       padding: const EdgeInsets.only(
@@ -265,7 +265,7 @@ buildChildren2() {
                                 child: Container(
                                   margin:
                                       const EdgeInsets.only(top: 10, bottom: 0),
-                                  child: Text('Total Ongkos ',
+                                  child: Text(textAlign: TextAlign.left,'Total Ongkos ',
                                       style: Theme.of(context)
                                           .textTheme
                                           .displaySmall),
@@ -275,7 +275,7 @@ buildChildren2() {
                                 child: Container(
                                   margin:
                                       const EdgeInsets.only(top: 10, bottom: 0),
-                                  child: Text(textAlign:TextAlign.right,
+                                  child: Text(textAlign: TextAlign.left,
                                     Rupiah.format(
                                         widget.laporanBulanan.totalOngkos),
                                     style: Theme.of(context)
@@ -304,7 +304,7 @@ buildChildren2() {
                                 child: Container(
                                   margin:
                                       const EdgeInsets.only(top: 10, bottom: 0),
-                                  child: Text('Total Keluar ',
+                                  child: Text(textAlign: TextAlign.left,'Total Keluar ',
                                       style: Theme.of(context)
                                           .textTheme
                                           .displaySmall),
@@ -314,7 +314,7 @@ buildChildren2() {
                                 child: Container(
                                   margin:
                                       const EdgeInsets.only(top: 10, bottom: 0),
-                                  child: Text(textAlign:TextAlign.right,
+                                  child: Text(textAlign: TextAlign.left,
                                     Rupiah.format(
                                         widget.laporanBulanan.totalKeluar),
                                     style: Theme.of(context)
@@ -343,7 +343,7 @@ buildChildren2() {
                                 child: Container(
                                   margin:
                                       const EdgeInsets.only(top: 10, bottom: 0),
-                                  child: Text('Total Sisa ',
+                                  child: Text(textAlign: TextAlign.left,'Total Sisa ',
                                       style: Theme.of(context)
                                           .textTheme
                                           .displaySmall),
@@ -353,7 +353,7 @@ buildChildren2() {
                                 child: Container(
                                   margin:
                                       const EdgeInsets.only(top: 10, bottom: 0),
-                                  child: Text(textAlign:TextAlign.right,
+                                  child: Text(textAlign: TextAlign.left,
                                     Rupiah.format(
                                         widget.laporanBulanan.totalSisa),
                                     style:
@@ -380,8 +380,8 @@ buildChildren2() {
                                 child: Container(
                                     margin:
                                         const EdgeInsets.only(top: 10, bottom: 0),
-                                    child: Text(
-                                      'Total Perbaikan',
+                                    child: Text(textAlign: TextAlign.left,
+                                      'Total Pengeluaran',
                                       style: Theme.of(context)
                                           .textTheme
                                           .displaySmall,
@@ -391,7 +391,7 @@ buildChildren2() {
                                 child: Container(
                                     margin:
                                         const EdgeInsets.only(top: 10, bottom: 0),
-                                    child: Text(textAlign:TextAlign.right,
+                                    child: Text(textAlign: TextAlign.left,
                                       
                                       Rupiah.format(
                                           widget.laporanBulanan.totalPengeluaran),
@@ -419,7 +419,7 @@ buildChildren2() {
                                 child: Container(
                                     margin:
                                         const EdgeInsets.only(top: 10, bottom: 0),
-                                    child: Text('Total Bersih ',
+                                    child: Text(textAlign: TextAlign.left,'Total Bersih ',
                                         style: Theme.of(context)
                                             .textTheme
                                             .displaySmall)),
@@ -428,7 +428,7 @@ buildChildren2() {
                                 child: Container(
                                     margin:
                                         const EdgeInsets.only(top: 10, bottom: 0),
-                                    child: Text(textAlign:TextAlign.right,
+                                    child: Text(textAlign: TextAlign.left,
                                       Rupiah.format(
                                         widget.laporanBulanan.totalBersih,
                                       ),

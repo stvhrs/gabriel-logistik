@@ -43,12 +43,12 @@ dependencies:
   web_date_picker: ^1.0.0+3
   provider: ^6.0.5
   rounded_loading_button: ^2.1.0
-  flutter_staggered_grid_view: ^0.6.2
+ 
   shared_preferences: ^2.0.17
   auto_size_text: ^3.0.0
-  syncfusion_flutter_datepicker: ^20.4.53
+
   printing: ^5.9.3
-  widgets_to_image: ^0.0.2
+
   pdf: ^3.8.4
   screenshot: ^1.3.0
   path_provider: ^2.0.13
@@ -97,6 +97,12 @@ flutter:
         - asset: fonts/Nunito-Regular.ttf
         - asset: fonts/Nunito-Bold.ttf
           weight: 700
+
+    - family: FreeSans
+      fonts:
+        - asset: fonts/FreeSans.ttf
+        - asset: fonts/FreeSansBold.ttf
+          weight: 700        
   
   #
   # For details regarding fonts from package dependencies,

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/helper/format_tanggal.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class SearchTanggal extends StatefulWidget {
-  const SearchTanggal({super.key});
-
-  @override
-  State<SearchTanggal> createState() => _SearchTanggalState();
+const SearchTanggal({super.key});
+@override
+State<SearchTanggal> createState() => _SearchTanggalState();
 }
 
+
 class _SearchTanggalState extends State<SearchTanggal> {
-  String _selecteRange = 'Pilih Rentang Tanggal';
+  String _selecteRange = 'Pilih Rentang';
   DateTimeRange? picked;
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class _SearchTanggalState extends State<SearchTanggal> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Icon(Icons.date_range_rounded),
+            Icon(Icons.date_range_rounded,size: 25),
             InkWell(
               child: Text(
                 _selecteRange,
@@ -81,12 +80,12 @@ class _SearchTanggalState extends State<SearchTanggal> {
                 dateTimeRangePicker();
               },
             ),
-            _selecteRange == 'Pilih Rentang Tanggal'
-                ? SizedBox()
+            _selecteRange == 'Pilih Rentang'
+                ? IconButton(onPressed: (){}, icon: Icon(Icons.r_mobiledata,color: Colors.transparent,))
                 : IconButton(
                     onPressed: () {
                       picked = null;
-                      _selecteRange = 'Pilih Rentang Tanggal';
+                      _selecteRange = 'Pilih Rentang';
                       Provider.of<ProviderData>(context, listen: false).start =
                           null;
                       Provider.of<ProviderData>(context, listen: false).end =

@@ -137,13 +137,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_staggered_grid_view:
-    dependency: "direct main"
-    description:
-      name: flutter_staggered_grid_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.6.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -446,20 +439,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
-  syncfusion_flutter_core:
-    dependency: transitive
-    description:
-      name: syncfusion_flutter_core
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "20.4.53"
-  syncfusion_flutter_datepicker:
-    dependency: "direct main"
-    description:
-      name: syncfusion_flutter_datepicker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "20.4.53"
   term_glyph:
     dependency: transitive
     description:
@@ -495,13 +474,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0+3"
-  widgets_to_image:
-    dependency: "direct main"
-    description:
-      name: widgets_to_image
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.2"
   win32:
     dependency: transitive
     description:

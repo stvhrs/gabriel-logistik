@@ -16,8 +16,7 @@ import '../helper/format_tanggal.dart';
 import '../helper/input_currency.dart';
 
 class TransaksiAdd extends StatefulWidget {
-  int id;
-  TransaksiAdd(this.id);
+
 
   @override
   State<TransaksiAdd> createState() => _TransaksiAddState();
@@ -65,7 +64,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
   late Transaksi transaksi;
-  TextStyle small= TextStyle(fontSize: 13);
+  TextStyle small = TextStyle(fontSize: 13);
   Widget _buildSize(widget, String ket, int flex) {
     print(MediaQuery.of(context).size.width);
     print(MediaQuery.of(context).size.height);
@@ -114,7 +113,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                 padding: MaterialStateProperty.all(const EdgeInsets.all(15))),
             onPressed: () {
               transaksi = Transaksi.fromMap({
-                'id_transaksi': widget.id,
+               
                 'tgl_berangkat': DateTime.now().toIso8601String(),
                 'keterangan': '',
                 'supir': '',
@@ -123,7 +122,6 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                 'keluar': 0,
                 'ongkos': 0,
                 'sisa': 0,
-                'perbaikan_transaksi': []
               });
               showDialog(
                   barrierDismissible: false,
@@ -253,7 +251,9 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                                   .ongkos -
                                                               transaksi.keluar))
                                                           .toString();
-                                                           transaksi.sisa=transaksi.ongkos-transaksi.keluar;
+                                                  transaksi.sisa =
+                                                      transaksi.ongkos -
+                                                          transaksi.keluar;
                                                 }
                                               } else {
                                                 transaksi.ongkos = 0;
@@ -275,13 +275,15 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                   va.startsWith('Rp')) {
                                                 transaksi.keluar =
                                                     Rupiah.parse(va);
-                                                ;
+                                                
                                                 if (transaksi.ongkos <
                                                     Rupiah.parse(va)) {
                                                   controlerSisa.text =
                                                       'Tidak boleh minus';
                                                 } else {
-                                                  transaksi.sisa=transaksi.ongkos-transaksi.keluar;
+                                                  transaksi.sisa =
+                                                      transaksi.ongkos -
+                                                          transaksi.keluar;
                                                   controlerSisa.text =
                                                       Rupiah.format((transaksi
                                                                   .ongkos -
@@ -376,7 +378,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                 controlerKetMobil.text = '';
                                                 controlerTujuan.text = '';
                                                 transaksi = Transaksi.fromMap({
-                                                  'id_transaksi': widget.id,
+                                               
                                                   'tgl_berangkat':
                                                       DateTime.now()
                                                           .toIso8601String(),
@@ -427,17 +429,17 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                   .displayMedium,
                                             )),
                                         Expanded(
-                                            flex: 5,
+                                            flex: 7,
                                             child: Text(
-                                              'Supir',
+                                              'Mobil',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .displayMedium,
                                             )),
                                         Expanded(
-                                            flex: 7,
+                                            flex: 5,
                                             child: Text(
-                                              'Mobil',
+                                              'Supir',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .displayMedium,
@@ -473,12 +475,15 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .displayMedium,
-                                            )),SizedBox(child:  Text(
-                                              'Delete',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .displayMedium,
-                                            ),)
+                                            )),
+                                        SizedBox(
+                                          child: Text(
+                                            'Delete',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displayMedium,
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ),
@@ -486,94 +491,107 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                     child: ListView(
                                         children: bulkTransaksi.reversed
                                             .toList()
-                                            .mapIndexed(
-                                                (index, element) => Container(
-                                                      color: index.isEven
-                                                          ? Colors.grey.shade200
-                                                          : const Color
-                                                                  .fromARGB(255,
-                                                              189, 193, 221),
-                                                      child: Container(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  top: 10,
-                                                                  bottom: 12.5,
-                                                                  left: 15,
-                                                                  right: 15),
-                                                          child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Expanded(
-                                                                    flex: 3,
-                                                                    child: Text(style:small,
-                                                                      (index +
-                                                                              1)
-                                                                          .toString(),
-                                                                    )),
-                                                                Expanded(
-                                                                    flex: 7,
-                                                                    child: Text(style:small,
-                                                                        maxLines:
-                                                                            1,
-                                                                        FormatTanggal.formatTanggal(element.tanggalBerangkat)
-                                                                            .toString())),
-                                                                Expanded(
-                                                                    flex: 5,
-                                                                    child: Text(style:small,
-                                                                      element
-                                                                          .supir,
-                                                                    )),
-                                                                Expanded(
-                                                                    flex: 7,
-                                                                    child: Text(style:small,
+                                            .mapIndexed((index, element) =>
+                                                Container(
+                                                  color: index.isEven
+                                                      ? Colors.grey.shade200
+                                                      : const Color.fromARGB(
+                                                          255, 189, 193, 221),
+                                                  child: Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 10,
+                                                              bottom: 12.5,
+                                                              left: 15,
+                                                              right: 15),
+                                                      child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Expanded(
+                                                                flex: 3,
+                                                                child: Text(
+                                                                  style: small,
+                                                                  (index + 1)
+                                                                      .toString(),
+                                                                )),
+                                                            Expanded(
+                                                                flex: 7,
+                                                                child: Text(
+                                                                    style:
+                                                                        small,
+                                                                    maxLines: 1,
+                                                                    FormatTanggal.formatTanggal(element
+                                                                            .tanggalBerangkat)
+                                                                        .toString())),
+                                                            Expanded(
+                                                                flex: 7,
+                                                                child: Text(
+                                                                    style:
+                                                                        small,
+                                                                    element
+                                                                        .mobil)),
+                                                            Expanded(
+                                                                flex: 5,
+                                                                child: Text(
+                                                                  style: small,
+                                                                  element.supir,
+                                                                )),
+
+                                                            Expanded(
+                                                                flex: 10,
+                                                                child: Text(
+                                                                    style:
+                                                                        small,
+                                                                    element
+                                                                        .tujuan)),
+                                                            Expanded(
+                                                                flex: 7,
+                                                                child: Text(
+                                                                    style:
+                                                                        small,
+                                                                    Rupiah.format(
                                                                         element
-                                                                            .mobil)),
-                                                                Expanded(
-                                                                    flex: 10,
-                                                                    child: Text(style:small,
+                                                                            .ongkos))),
+                                                            Expanded(
+                                                                flex: 7,
+                                                                child: Text(
+                                                                    style:
+                                                                        small,
+                                                                    Rupiah.format(
                                                                         element
-                                                                            .tujuan)),
-                                                                Expanded(
-                                                                    flex: 7,
-                                                                    child: Text(style:small,
-                                                                        Rupiah.format(
-                                                                            element.ongkos))),
-                                                                Expanded(
-                                                                    flex: 7,
-                                                                    child: Text(style:small,
-                                                                        Rupiah.format(
-                                                                            element.keluar))),
-                                                                Expanded(
-                                                                    flex: 7,
-                                                                    child: Text(style:small,
-                                                                        Rupiah.format(
-                                                                            element.sisa))),
-                                                                IconButton(
-                                                                    onPressed:
-                                                                        () {
-                                                                      bulkTransaksi
-                                                                          .remove(
-                                                                              element);
-                                                                      setState(
-                                                                          () {});
-                                                                    },
-                                                                    icon: Icon(
-                                                                      Icons
-                                                                          .delete_forever,
-                                                                      color: Colors
-                                                                          .red,
-                                                                    ))
-                                                                // Expanded(
-                                                                //     flex: 7,
-                                                                //     child: Text(element.listPerbaikan.isEmpty
-                                                                //         ? '-'
-                                                                //         : Rupiah.format(
-                                                                //             totalPengeluaran(element.listPerbaikan)))),
-                                                              ])),
-                                                    ))
+                                                                            .keluar))),
+                                                            Expanded(
+                                                                flex: 7,
+                                                                child: Text(
+                                                                    style:
+                                                                        small,
+                                                                    Rupiah.format(
+                                                                        element
+                                                                            .sisa))),
+                                                            IconButton(
+                                                                onPressed: () {
+                                                                  bulkTransaksi
+                                                                      .remove(
+                                                                          element);
+                                                                  setState(
+                                                                      () {});
+                                                                },
+                                                                icon: Icon(
+                                                                  Icons
+                                                                      .delete_forever,
+                                                                  color: Colors
+                                                                      .red,
+                                                                ))
+                                                            // Expanded(
+                                                            //     flex: 7,
+                                                            //     child: Text(element.listPerbaikan.isEmpty
+                                                            //         ? '-'
+                                                            //         : Rupiah.format(
+                                                            //             totalPengeluaran(element.listPerbaikan)))),
+                                                          ])),
+                                                ))
                                             .toList()),
                                   ),
                                   bulkTransaksi.isEmpty
@@ -595,12 +613,14 @@ class _TransaksiAddState extends State<TransaksiAdd> {
 
                                             await Future.delayed(
                                                 const Duration(seconds: 3), () {
-                                                  for (var element in bulkTransaksi) {
-                                                     Provider.of<ProviderData>(context,
-                                                      listen: false)
-                                                  .addTransaksi(element);
-                                                  }
-                                             
+                                              for (var element
+                                                  in bulkTransaksi) {
+                                                Provider.of<ProviderData>(
+                                                        context,
+                                                        listen: false)
+                                                    .addTransaksi(element);
+                                              }
+
                                               _btnController.success();
                                             });
                                             await Future.delayed(

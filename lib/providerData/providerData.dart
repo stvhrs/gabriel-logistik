@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
+import 'package:gabriel_logistik/models/pengeluaran.dart';
 import 'package:gabriel_logistik/models/supir.dart';
 
 import '../helper/format_tanggal.dart';
 import '../models/transaksi.dart';
+import '../pages/jual_beli.dart';
 
 List<String> list = <String>[
   'Januari',
@@ -25,8 +28,12 @@ class ProviderData with ChangeNotifier {
   List<Transaksi> backupTransaksi = [];
   List<Transaksi> listTransaksi = [];
   bool logined = false;
-  List<Supir> listSupir = [];
+  List<JualBeliMobil> listJualBeliMobil = [];
+  List<JualBeliMobil> backuplistJualBeliMobil = [];
+  List<Pengeluaran> listPengeluaran = [];
+  List<Pengeluaran> backupListPengeluaran = [];
   List<Mobil> listMobil = [];
+  List<Supir> listSupir = [];
   List<Supir> backupListSupir = [];
   List<Mobil> backupListMobil = [];
   void owner() {
@@ -49,9 +56,24 @@ class ProviderData with ChangeNotifier {
     notifyListeners();
   }
 
-  void setData(List<Transaksi> data, bool listen, List<Mobil> mobilData,
-      List<Supir> supirData) {
+  void setData(
+      List<Transaksi> data,
+      bool listen,
+      List<Mobil> mobilData,
+      List<Supir> supirData,
+      List<Pengeluaran> pengeluaran,
+      List<JualBeliMobil> jualbeli) {
     print('set');
+    listJualBeliMobil.clear();
+    backuplistJualBeliMobil.clear();
+    listJualBeliMobil.addAll(jualbeli);
+    backuplistJualBeliMobil.addAll(jualbeli);
+
+    listPengeluaran.clear();
+    backupListPengeluaran.clear();
+    listPengeluaran.addAll(pengeluaran);
+    backupListPengeluaran.addAll(pengeluaran);
+
     listTransaksi.clear();
     backupTransaksi.clear();
     listTransaksi.addAll(data);
@@ -73,14 +95,16 @@ class ProviderData with ChangeNotifier {
 
   void deleteMobil(Mobil mobil) {
     listMobil.remove(mobil);
+    backupListMobil.remove(mobil);
     notifyListeners();
   }
 
   void updateMobil(Mobil mobil) {
-    int data =
-        listMobil.indexWhere((element) => element.id_mobil == mobil.id_mobil);
+    int data = listMobil
+        .indexWhere((element) => element.nama_mobil == mobil.nama_mobil);
 
     listMobil[data] = mobil;
+    notifyListeners();
   }
 
   void addSupir(Supir supir) {
@@ -91,13 +115,54 @@ class ProviderData with ChangeNotifier {
 
   void deleteSupir(Supir supir) {
     listSupir.remove(supir);
+    backupListSupir.remove(supir);
     notifyListeners();
   }
 
   void updateSupir(Supir supir) {
-    int data =
-        listSupir.indexWhere((element) => element.id_supir == supir.id_supir);
+    int data = listSupir
+        .indexWhere((element) => element.nama_supir == supir.nama_supir);
     listSupir[data] = supir;
+    notifyListeners();
+  }
+
+  void addJualBeliMobil(JualBeliMobil jualBeliMobil) {
+    listJualBeliMobil.insert(0, jualBeliMobil);
+    backuplistJualBeliMobil.insert(0, jualBeliMobil);
+    notifyListeners();
+  }
+
+  void deleteJualBeliMobil(JualBeliMobil supir) {
+    listJualBeliMobil.remove(supir);
+    backuplistJualBeliMobil.remove(supir);
+    notifyListeners();
+  }
+
+  void updateJualBeliMobil(JualBeliMobil jualBeliMobil) {
+    int data = listJualBeliMobil.indexWhere((element) =>
+        (element.mobil + element.tanggal) ==
+        (jualBeliMobil.mobil + jualBeliMobil.tanggal));
+    listJualBeliMobil[data] = jualBeliMobil;
+    notifyListeners();
+  }
+
+  void addPengeluaran(Pengeluaran pengeluaran) {
+    listPengeluaran.insert(0, pengeluaran);
+    backupListPengeluaran.insert(0, pengeluaran);
+    notifyListeners();
+  }
+
+  void deletePengeluaran(Pengeluaran pengeluaran) {
+    listPengeluaran.remove(pengeluaran);
+    backupListPengeluaran.remove(pengeluaran);
+    notifyListeners();
+  }
+
+  void updatePengeluaran(Pengeluaran pengeluaran) {
+    int data = listPengeluaran.indexWhere((element) =>
+        (element.mobil) ==
+        (pengeluaran.mobil));
+    listPengeluaran[data] = pengeluaran;
     notifyListeners();
   }
 
@@ -108,7 +173,6 @@ class ProviderData with ChangeNotifier {
     List<Map<String, dynamic>> test = [];
     for (var element in backupTransaksi) {
       test.add(Transaksi.toMap(element));
-      print(element.transaksiId);
     }
     print(test);
 
@@ -122,8 +186,8 @@ class ProviderData with ChangeNotifier {
   }
 
   void updateTransaksi(Transaksi transaksi) {
-    int data = listTransaksi
-        .indexWhere((element) => element.transaksiId == transaksi.transaksiId);
+    int data = listTransaksi.indexWhere(
+        (element) => element.tanggalBerangkat == transaksi.tanggalBerangkat);
     print(data);
     listTransaksi[data] = transaksi;
     backupTransaksi[data] = transaksi;
@@ -160,7 +224,7 @@ class ProviderData with ChangeNotifier {
           skipped = true;
         }
       }
-      if (searchPerbaikan ) {
+      if (searchPerbaikan) {
         skipped = true;
       }
 
@@ -179,6 +243,32 @@ class ProviderData with ChangeNotifier {
       listSupir = backupListSupir
           .where((element) =>
               element.nama_supir.toLowerCase().startsWith(val.toLowerCase()))
+          .toList();
+    }
+    notifyListeners();
+  }
+
+  void searchPengeluaran(String val) {
+    if (val.isEmpty) {
+      listPengeluaran.clear();
+      listPengeluaran.addAll(backupListPengeluaran);
+    } else {
+      listPengeluaran = backupListPengeluaran
+          .where((element) =>
+              element.mobil.toLowerCase().startsWith(val.toLowerCase()))
+          .toList();
+    }
+    notifyListeners();
+  }
+
+  void searchJual(String val) {
+    if (val.isEmpty) {
+      listJualBeliMobil.clear();
+      listJualBeliMobil.addAll(backuplistJualBeliMobil);
+    } else {
+      listJualBeliMobil = backuplistJualBeliMobil
+          .where((element) =>
+              element.mobil.toLowerCase().startsWith(val.toLowerCase()))
           .toList();
     }
     notifyListeners();

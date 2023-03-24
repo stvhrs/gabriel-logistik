@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/models/supir.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -15,18 +15,18 @@ class TambahSupir extends StatelessWidget {
     String namaMobil = '';
     String noHp = '';
 
-
     return ElevatedButton.icon(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(
-               Colors.green)),
+            backgroundColor: MaterialStateProperty.all(Colors.green)),
         onPressed: () {
           showDialog(
               context: context,
               builder: (context) {
                 return AlertDialog(
                   actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                  title: const Text("Tambah Supir",),
+                  title: const Text(
+                    "Tambah Supir",
+                  ),
                   content: IntrinsicHeight(
                     child: SizedBox(
                       width: 500,
@@ -80,9 +80,7 @@ class TambahSupir extends StatelessWidget {
                       errorColor: Colors.red,
                       controller: _btnController,
                       onPressed: () async {
-                        if (noHp.isEmpty ||
-                        
-                            namaMobil.isEmpty) {
+                        if (noHp.isEmpty || namaMobil.isEmpty) {
                           _btnController.error();
                           await Future.delayed(const Duration(seconds: 1));
                           _btnController.reset();
@@ -91,28 +89,27 @@ class TambahSupir extends StatelessWidget {
 
                         await Future.delayed(const Duration(seconds: 3), () {
                           Provider.of<ProviderData>(context, listen: false)
-                              .addSupir(Supir(
-                                  Provider.of<ProviderData>(context,
-                                              listen: false)
-                                          .listSupir
-                                          .length +
-                                      1,
-                                  namaMobil,
-                                  noHp));
+                              .addSupir(Supir(namaMobil, noHp));
                           _btnController.success();
                         });
                         await Future.delayed(const Duration(seconds: 1), () {
                           Navigator.of(context).pop();
                         });
                       },
-                      child:
-                          const Text('Tambah', style: TextStyle(color: Colors.white)),
+                      child: const Text('Tambah',
+                          style: TextStyle(color: Colors.white)),
                     )
                   ],
                 );
               });
         },
-        icon: const Icon(Icons.add,color: Colors.white,),
-        label: const Text('Tambah',style: TextStyle(color: Colors.white),));
+        icon: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        label: const Text(
+          'Tambah',
+          style: TextStyle(color: Colors.white),
+        ));
   }
 }

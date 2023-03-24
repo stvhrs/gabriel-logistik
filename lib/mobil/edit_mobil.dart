@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart'; 
 import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/supir.dart';
+import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 import '../providerData/providerData.dart';
 
 class EditMobil extends StatelessWidget {
-  final Mobil supir;
-   EditMobil(this.supir);
+  final Mobil mobil;
+   EditMobil(this.mobil);
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
 
@@ -33,31 +33,31 @@ class EditMobil extends StatelessWidget {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(initialValue: supir.nama_mobil,
+                            child: TextFormField(initialValue: mobil.nama_mobil,
                               decoration: const InputDecoration(
                                 hintText: 'Nama Mobil',
                               ),
                               onChanged: (val) {
-                                supir.nama_mobil = val.toString();
+                                mobil.nama_mobil = val.toString();
                               },
                               maxLines: 1,
                             ),
                           ),
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(initialValue: supir.keterangan_mobill,
+                            child: TextFormField(initialValue: mobil.keterangan_mobill,
                               decoration: const InputDecoration(
                                 hintText: 'No Hp',
                               ),
                               onChanged: (val) {
-                                 supir.keterangan_mobill = val.toString();
+                                 mobil.keterangan_mobill = val.toString();
                               },
                               maxLines: 1,
                             ),
                           ),
                           // Container(
                           //   margin: const EdgeInsets.only(bottom: 20),
-                          //   child: TextFormField(initialValue: supir.nama_mobil,
+                          //   child: TextFormField(initialValue: mobil.nama_mobil,
                           //     decoration: const InputDecoration(
                           //       hintText: 'Alamat',
                           //     ),
@@ -79,9 +79,9 @@ class EditMobil extends StatelessWidget {
                       errorColor: Colors.red,
                       controller: _btnController,
                       onPressed: () async {
-                        if (supir.nama_mobil.isEmpty ||
+                        if (mobil.nama_mobil.isEmpty ||
                           
-                            supir.keterangan_mobill .isEmpty) {
+                            mobil.keterangan_mobill .isEmpty) {
                           _btnController.error();
                           await Future.delayed(const Duration(seconds: 1));
                           _btnController.reset();
@@ -90,10 +90,10 @@ class EditMobil extends StatelessWidget {
 
                         await Future.delayed(const Duration(seconds: 3), () {
                           Provider.of<ProviderData>(context, listen: false)
-                              .updateSupir(Supir(
-                                 supir.id_mobil,
-                                    supir.nama_mobil,
-                                    supir.nama_mobil));
+                              .updateMobil(Mobil(
+                                
+                                    mobil.nama_mobil,
+                                    mobil.keterangan_mobill,mobil.pengeluaran));
                           _btnController.success();
                         });
                         await Future.delayed(const Duration(seconds: 1), () {

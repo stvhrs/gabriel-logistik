@@ -1,19 +1,20 @@
 
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/mobil/delete_mobil.dart'; 
-import 'package:gabriel_logistik/mobil/edit_mobil.dart';
-import 'package:gabriel_logistik/mobil/tambah_mobil.dart';
+import 'package:gabriel_logistik/jualbeli/beli_add.dart';
+import 'package:gabriel_logistik/jualbeli/jual_delete.dart'; 
 import 'package:gabriel_logistik/providerData/providerData.dart';
+import 'package:gabriel_logistik/supir/edit_supir.dart';
+import 'package:gabriel_logistik/supir/tambah_supir.dart';
 import 'package:provider/provider.dart';
 
-class DaftarMobil extends StatefulWidget {
-  const DaftarMobil({super.key});
+class JualBeli extends StatefulWidget {
+  const JualBeli({super.key});
 
   @override
-  State<DaftarMobil> createState() => _DaftarMobilState();
+  State<JualBeli> createState() => _JualBeliState();
 }
 
-class _DaftarMobilState extends State<DaftarMobil> {
+class _JualBeliState extends State<JualBeli> {
 //
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
           child: Column(
             children: [
               const Text(
-                'Daftar Mobil',
+                'Jual Beli Mobil',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               Row(
@@ -48,13 +49,14 @@ class _DaftarMobilState extends State<DaftarMobil> {
                         decoration: const InputDecoration(hintText: 'Cari'),
                         onChanged: (val) {
                           Provider.of<ProviderData>(context, listen: false)
-                              .searchMobil(val.toLowerCase());
+                              .searchSupir(val.toLowerCase());
                         },
                       ),
                     ),
                   ),
                   const Expanded(flex: 4, child: SizedBox()),
-                  TambahMobil()
+                  JualDelete(), 
+                  BeliAdd()
                 ],
               ),
               Container(
@@ -65,29 +67,29 @@ class _DaftarMobilState extends State<DaftarMobil> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:  [
                     Expanded(flex: 11, child: Text('Nama',style: Theme.of(context).textTheme.displayMedium,)),
-                    Expanded(flex: 11, child: Text('Nomor Polisi',style: Theme.of(context).textTheme.displayMedium)),
+                    Expanded(flex: 11, child: Text('Nomor Hp',style: Theme.of(context).textTheme.displayMedium)),
                     Expanded(flex: 3, child: Text(' Aksi',style: Theme.of(context).textTheme.displayMedium))
                   ],
                 ),
               ),
               Consumer<ProviderData>(builder: (context, c, h) {
                 // if (_search != '') {
-                //   // c.listMobil.clear();
-                //   for (var element in c.listMobil) {
+                //   // c.listSupir.clear();
+                //   for (var element in c.listSupir) {
                 //     if (element.nama_supir
                 //         .toLowerCase()
                 //         .startsWith(_search.toLowerCase())) {
-                //       c.listMobil.add(element);
+                //       c.listSupir.add(element);
                 //     }
                 //   }
                 // } else {
-                //   c.listMobil = c.listMobil;
+                //   c.listSupir = c.listSupir;
                 // }
 
                 return SizedBox(
                     height: MediaQuery.of(context).size.height * 0.7,
                     child: ListView.builder(
-                      itemCount: c.listMobil.reversed.toList().length,
+                      itemCount: c.listSupir.reversed.toList().length,
                       itemBuilder: (context, index) => InkWell(
                         child: Container(
                           color: index.isEven
@@ -98,17 +100,16 @@ class _DaftarMobilState extends State<DaftarMobil> {
                             children: [
                               Expanded(
                                   flex: 3,
-                                  child: Text(c.listMobil[index].nama_mobil)),
+                                  child: Text(c.listSupir[index].nama_supir)),
                               Expanded(
                                   flex: 3,
-                                  child: Text(c.listMobil[index].keterangan_mobill)),
+                                  child: Text(c.listSupir[index].nohp_supir)),
                               Expanded(
                                 flex: 1,
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    EditMobil(c.listMobil[index]),
-                                    DeleteMobil(c.listMobil[index])
+                                    EditSupir(c.listSupir[index]),
                                   ],
                                 ),
                               )

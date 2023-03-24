@@ -6,7 +6,7 @@ import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 
 List<String> list = <String>[
   'Januari',
@@ -80,7 +80,7 @@ class _KasTahunState extends State<KasTahun> {
                       child: Text(value.toString(),
                           style: const TextStyle(
                               fontSize: 16,
-                              fontFamily: 'Nunito',
+                              fontFamily: 'FreeSans',
                               color: Colors.black)),
                     );
                   }).toList(),
@@ -90,12 +90,8 @@ class _KasTahunState extends State<KasTahun> {
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.9,
-            child: SingleChildScrollView(
-              child: StaggeredGrid.count(
-                axisDirection: AxisDirection.down,
-                mainAxisSpacing: 50,
-                crossAxisCount: 2,
-                crossAxisSpacing: 30,
+            child: ListView(
+             
                 children:
                     Provider.of<ProviderData>(context).backupListSupir.map((e) {
                   double totalBersihTahun = 0;
@@ -140,7 +136,7 @@ class _KasTahunState extends State<KasTahun> {
                 }).toList(),
               ),
             ),
-          ),
+          
         ]),
       ),
     );
