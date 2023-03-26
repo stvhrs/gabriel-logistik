@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
-import 'package:gabriel_logistik/models/pengeluaran.dart';
+import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
+
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:flutter/material.dart';
@@ -10,41 +11,21 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
-import '../helper/dropdown.dart';
-import '../helper/input_currency.dart';
-import '../models/mobil.dart';
+import '../../helper/input_currency.dart';
 
-class PengelauaranAdd extends StatefulWidget {
+
+class BeliEdit extends StatefulWidget {
+  final JualBeliMobil jualBeliMobil;
+  const BeliEdit(this.jualBeliMobil);
   @override
-  State<PengelauaranAdd> createState() => _PengelauaranAddState();
+  State<BeliEdit> createState() => _BeliEditState();
 }
 
-class _PengelauaranAddState extends State<PengelauaranAdd> {
-  List<String> listMobil = [];
-
-  @override
-  void initState() {
-     List<Mobil> temp=Provider.of<ProviderData>(context, listen: false)
-        .listMobil;
-
-        temp.removeWhere((element) => element.terjual);
-    temp
-        .map((e) => e.nama_mobil)
-        .toList()
-        .forEach((element) {
-      print(element);
-      if (listMobil.contains(element)) {
-      } else {
-        listMobil.add(element);
-      }
-    });
-
-    super.initState();
-  }
-
+class _BeliEditState extends State<BeliEdit> {
+ 
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
-  late Pengeluaran pengeluaran;
+
   TextStyle small = const TextStyle(fontSize: 13);
   Widget _buildSize(widget, String ket, int flex) {
     print(MediaQuery.of(context).size.width);
@@ -76,25 +57,11 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-        icon: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        label: const Text(
-          'Tambah Pengeluaran',
-          style: TextStyle(color: Colors.white),
-        ),
-        style: ButtonStyle(
-            padding: MaterialStateProperty.all(const EdgeInsets.all(10))),
+    return  IconButton(
+    
+        icon:const Icon(Icons.edit,color: Colors.green,),
+        
         onPressed: () {
-          pengeluaran = Pengeluaran.fromMap({
-            'mobil': '',
-            'jenis': '0',
-            'harga': 0,
-            'tanggal': DateTime.now().toIso8601String(),
-            'keterangan': ''
-          });
 
           showDialog(
               barrierDismissible: false,
@@ -107,7 +74,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                       children: [
                         const SizedBox(),
                         const Text(
-                          'Tambah Pengeluaran',
+                          'Beli Mobil',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
@@ -155,7 +122,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                           dateformat: 'dd/MM/yyyy',
                                           onChange: (value) {
                                             if (value != null) {
-                                              pengeluaran.tanggal =
+                                        widget.      jualBeliMobil.tanggal =
                                                   value.toIso8601String();
                                             }
                                           },
@@ -163,26 +130,25 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                         'Tanggal',
                                         1),
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(readOnly: true,initialValue: widget.jualBeliMobil.mobil,
                                           onChanged: (va) {
-                                            pengeluaran.jenis=va;
+                                           
                                           },
                                         ),
-                                        'Jenis',
+                                        'Mobil',
                                         1),
-                                    _buildSize(
-                                        DropDownField(
-                                          onValueChanged: (val) {
-                                            pengeluaran.mobil = val;
-                                          },
-                                          items: listMobil,
+                                          _buildSize(
+                                        TextFormField(initialValue: widget.jualBeliMobil
+                                        .ketMobil,readOnly: true,
+                                         
                                         ),
-                                        'Pilih Mobil',
+                                        'Keterangan Mobil',
                                         1),
+                                    
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(initialValue: Rupiah.format(widget.jualBeliMobil.harga),
                                           onChanged: (va) {
-                                            pengeluaran.harga=Rupiah.parse(va);
+                                         widget.   jualBeliMobil.harga=Rupiah.parse(va);
                                           },
                                           inputFormatters: [
                                             FilteringTextInputFormatter
@@ -190,17 +156,15 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                             CurrencyInputFormatter()
                                           ],
                                         ),
-                                        'Pengeluaran',
+                                        'Harga',
                                         1),
                                   ],
                                 ),
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(
-                                          onChanged: (va) {
-                                            pengeluaran.keterangan=va;
-                                          },
+                                        TextFormField(initialValue: widget.jualBeliMobil.keterangan,
+                                        
                                         ),
                                         'Keterangan',
                                         2),
@@ -212,7 +176,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                           errorColor: Colors.red,
                                           controller: _btnController,
                                           onPressed: () async {
-                                            if (pengeluaran.harga==0||pengeluaran.jenis.isEmpty||pengeluaran.mobil.isEmpty) {
+                                            if (widget.jualBeliMobil.harga==0||widget.jualBeliMobil.tanggal.isEmpty||widget.jualBeliMobil.mobil.isEmpty) {
                                               _btnController.error();
                                               await Future.delayed(
                                                   const Duration(seconds: 1));
@@ -226,7 +190,8 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                                 Provider.of<ProviderData>(
                                                         context,
                                                         listen: false)
-                                                    .addPengeluaran(pengeluaran);
+                                                    .updateJualBeliMobil(widget.jualBeliMobil);
+                                                
                                               
 
                                               _btnController.success();
@@ -236,7 +201,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                               Navigator.of(context).pop();
                                             });
                                           },
-                                          child: const Text('Tambah',
+                                          child: const Text('Edit',
                                               style: TextStyle(
                                                   color: Colors.white)),
                                         )

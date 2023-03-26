@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/models/pengeluaran.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-import '../models/transaksi.dart';
 import '../providerData/providerData.dart';
 
 class PengeluaranDelete extends StatelessWidget {

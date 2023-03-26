@@ -1,11 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:gabriel_logistik/examples.dart';
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
-import 'package:gabriel_logistik/resume.dart';
-import 'package:gabriel_logistik/services/service.dart';
 import 'package:printing/printing.dart';
 
 class LaporanPrint extends StatefulWidget {
@@ -38,7 +33,7 @@ class _LaporanPrintState extends State<LaporanPrint> {
   Widget build(BuildContext context) {
     return Scaffold(
       
-      body: PdfPreview(loadingWidget: Text('Loading...'),onError: (context, error) => Text('Error...'),
+      body: PdfPreview(loadingWidget: const Text('Loading...'),onError: (context, error) => const Text('Error...'),
         maxPageWidth: 700,
         build: (format) =>examples[0].builder(format,widget.list,),shouldRepaint: true,canDebug: false,
        
@@ -46,6 +41,6 @@ class _LaporanPrintState extends State<LaporanPrint> {
         onShared: _showSharedToast,
       ),
     
-    );;
+    );
   }
 }

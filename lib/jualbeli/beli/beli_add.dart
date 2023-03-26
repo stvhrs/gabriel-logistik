@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
-import 'package:gabriel_logistik/models/pengeluaran.dart';
+import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
+import 'package:gabriel_logistik/models/mobil.dart';
+
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:flutter/material.dart';
@@ -10,41 +12,19 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
-import '../helper/dropdown.dart';
-import '../helper/input_currency.dart';
-import '../models/mobil.dart';
+import '../../helper/input_currency.dart';
 
-class PengelauaranAdd extends StatefulWidget {
+class BeliAdd extends StatefulWidget {
+
   @override
-  State<PengelauaranAdd> createState() => _PengelauaranAddState();
+  State<BeliAdd> createState() => _BeliAddState();
 }
 
-class _PengelauaranAddState extends State<PengelauaranAdd> {
-  List<String> listMobil = [];
-
-  @override
-  void initState() {
-     List<Mobil> temp=Provider.of<ProviderData>(context, listen: false)
-        .listMobil;
-
-        temp.removeWhere((element) => element.terjual);
-    temp
-        .map((e) => e.nama_mobil)
-        .toList()
-        .forEach((element) {
-      print(element);
-      if (listMobil.contains(element)) {
-      } else {
-        listMobil.add(element);
-      }
-    });
-
-    super.initState();
-  }
-
+class _BeliAddState extends State<BeliAdd> {
+ 
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
-  late Pengeluaran pengeluaran;
+  late JualBeliMobil jualBeliMobil;
   TextStyle small = const TextStyle(fontSize: 13);
   Widget _buildSize(widget, String ket, int flex) {
     print(MediaQuery.of(context).size.width);
@@ -76,25 +56,19 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-        icon: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        label: const Text(
-          'Tambah Pengeluaran',
-          style: TextStyle(color: Colors.white),
-        ),
+    return ElevatedButton(
+      
         style: ButtonStyle(
             padding: MaterialStateProperty.all(const EdgeInsets.all(10))),
         onPressed: () {
-          pengeluaran = Pengeluaran.fromMap({
-            'mobil': '',
-            'jenis': '0',
-            'harga': 0,
-            'tanggal': DateTime.now().toIso8601String(),
-            'keterangan': ''
-          });
+          jualBeliMobil = JualBeliMobil.fromMap( {
+    'nama_mobil': '', 'ket_mobil':'',
+    'harga': 0,
+   
+    'beli': true,
+    'keterangan': '',
+    'tanggal': DateTime.now().toIso8601String()
+  },);
 
           showDialog(
               barrierDismissible: false,
@@ -107,7 +81,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                       children: [
                         const SizedBox(),
                         const Text(
-                          'Tambah Pengeluaran',
+                          'Beli Mobil',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
@@ -155,7 +129,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                           dateformat: 'dd/MM/yyyy',
                                           onChange: (value) {
                                             if (value != null) {
-                                              pengeluaran.tanggal =
+                                              jualBeliMobil.tanggal =
                                                   value.toIso8601String();
                                             }
                                           },
@@ -165,24 +139,24 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                     _buildSize(
                                         TextFormField(
                                           onChanged: (va) {
-                                            pengeluaran.jenis=va;
+                                            jualBeliMobil.mobil=va;
                                           },
                                         ),
-                                        'Jenis',
+                                        'Mobil',
                                         1),
-                                    _buildSize(
-                                        DropDownField(
-                                          onValueChanged: (val) {
-                                            pengeluaran.mobil = val;
+                                          _buildSize(
+                                        TextFormField(
+                                          onChanged: (va) {
+                                            jualBeliMobil.ketMobil=va;
                                           },
-                                          items: listMobil,
                                         ),
-                                        'Pilih Mobil',
+                                        'Keterangan Mobil',
                                         1),
+                                    
                                     _buildSize(
                                         TextFormField(
                                           onChanged: (va) {
-                                            pengeluaran.harga=Rupiah.parse(va);
+                                            jualBeliMobil.harga=Rupiah.parse(va);
                                           },
                                           inputFormatters: [
                                             FilteringTextInputFormatter
@@ -190,7 +164,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                             CurrencyInputFormatter()
                                           ],
                                         ),
-                                        'Pengeluaran',
+                                        'Harga',
                                         1),
                                   ],
                                 ),
@@ -199,20 +173,20 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                     _buildSize(
                                         TextFormField(
                                           onChanged: (va) {
-                                            pengeluaran.keterangan=va;
+                                            jualBeliMobil.keterangan=va;
                                           },
                                         ),
                                         'Keterangan',
                                         2),
                                   ],
                                 ),RoundedLoadingButton(
-                                          color: Colors.green,
+                                          color:Colors.green,
                                           elevation: 10,
                                           successColor: Colors.green,
                                           errorColor: Colors.red,
                                           controller: _btnController,
                                           onPressed: () async {
-                                            if (pengeluaran.harga==0||pengeluaran.jenis.isEmpty||pengeluaran.mobil.isEmpty) {
+                                            if (jualBeliMobil.harga==0||jualBeliMobil.tanggal.isEmpty||jualBeliMobil.mobil.isEmpty) {
                                               _btnController.error();
                                               await Future.delayed(
                                                   const Duration(seconds: 1));
@@ -226,7 +200,11 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                                 Provider.of<ProviderData>(
                                                         context,
                                                         listen: false)
-                                                    .addPengeluaran(pengeluaran);
+                                                    .addJualBeliMobil(jualBeliMobil);
+                                                    Provider.of<ProviderData>(
+                                                        context,
+                                                        listen: false)
+                                                    .addMobil(Mobil(false,jualBeliMobil.mobil, jualBeliMobil.ketMobil, [  ]));
                                               
 
                                               _btnController.success();
@@ -247,6 +225,11 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                       ),
                     ));
               });
-        });
+        },
+      
+        child: const Text(
+          'Beli',
+          style: TextStyle(color: Colors.white),
+        ));
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart'; 
 import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
@@ -90,7 +89,7 @@ class EditMobil extends StatelessWidget {
 
                         await Future.delayed(const Duration(seconds: 3), () {
                           Provider.of<ProviderData>(context, listen: false)
-                              .updateMobil(Mobil(
+                              .updateMobil(Mobil(false,
                                 
                                     mobil.nama_mobil,
                                     mobil.keterangan_mobill,mobil.pengeluaran));

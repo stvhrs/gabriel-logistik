@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:gabriel_logistik/hpSidemenu.dart';
 import 'package:gabriel_logistik/login.dart';
+import 'package:gabriel_logistik/loginhp.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/sidemenu.dart';
 import 'package:gabriel_logistik/styles/theme.dart';
-import 'package:intl/intl.dart';
-import 'package:intl/intl_standalone.dart';
 import 'package:provider/provider.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -100,7 +100,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return loading
         ? const CircularProgressIndicator()
         : Consumer<ProviderData>(builder: (context, data, _) {
-            return data.logined ? const DashBoard() : const Login();
+            return data.logined
+                ? MediaQuery.of(context).size.width <= 500
+                    ? DashBoardHp()
+                    : DashBoard()
+                : MediaQuery.of(context).size.width <= 500
+                    ? LoginHp()
+                    : Login();
           });
   }
 }

@@ -13,6 +13,7 @@ import 'package:web_date_picker/web_date_picker.dart';
 
 import '../helper/dropdown.dart';
 import '../helper/input_currency.dart';
+import '../models/mobil.dart';
 
 class TransaksiEdit extends StatefulWidget {
   Transaksi transaksi;
@@ -27,8 +28,10 @@ class _TransaksiEditState extends State<TransaksiEdit> {
   List<String> listMobil = [];
   TextEditingController controlerSisa = TextEditingController();
   TextEditingController controlerKetMobil = TextEditingController();
+
   @override
   void initState() {
+
     transaksi=widget.transaksi;
     Provider.of<ProviderData>(context, listen: false)
         .listSupir
@@ -40,12 +43,17 @@ class _TransaksiEditState extends State<TransaksiEdit> {
         listSupir.add(element);
       }
     });
-    Provider.of<ProviderData>(context, listen: false)
-        .listMobil
+   List<Mobil> temp=Provider.of<ProviderData>(context, listen: false)
+        .listMobil;
+
+        temp.removeWhere((element) => element.terjual);
+    temp
         .map((e) => e.nama_mobil)
         .toList()
         .forEach((element) {
       print(element);
+      controlerKetMobil.text=temp.firstWhere((element) => element.nama_mobil==widget.transaksi.mobil).nama_mobil;
+      controlerSisa.text=widget.transaksi.sisa.toString();
       if (listMobil.contains(element)) {
       } else {
         listMobil.add(element);
@@ -67,7 +75,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
       child: Container(
         margin: EdgeInsets.only(
             right: ket == 'Keterangan Mobil' || ket == 'Ketik Tujuan' ? 0 : 50,
-            bottom: ket == 'Keterangan' ? 40 : 5),
+            bottom: ket == 'Keterangan' ? 40 : 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -160,7 +168,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                           _buildSize(
                                               WebDatePicker(
                                                 height: 60,
-                                                initialDate: DateTime.now(),
+                                                initialDate:DateTime.parse(widget.transaksi.tanggalBerangkat) ,
                                                 dateformat: 'dd/MM/yyyy',
                                                 onChange: (value) {
                                                   if (value != null) {
@@ -172,7 +180,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                               'Tanggal',
                                               1),
                                           _buildSize(
-                                              DropDownField(
+                                              DropDownField(value: widget.transaksi.supir,
                                                 onValueChanged: (val) {
                                                   transaksi.supir = val;
                                                 },
@@ -181,7 +189,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                               'Pilih Supir',
                                               1),
                                           _buildSize(
-                                              DropDownField(
+                                              DropDownField(value: widget.transaksi.mobil,
                                                 onValueChanged: (val) {
                                                   transaksi.mobil = val;
                                                   controlerKetMobil
@@ -212,7 +220,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                       Row(
                                         children: [
                                           _buildSize(
-                                              TextFormField(
+                                              TextFormField(initialValue:Rupiah.format(widget.transaksi.ongkos) ,
                                                 onChanged: (va) {
                                                   if (va.isNotEmpty &&
                                                       va.startsWith('Rp')) {
@@ -244,13 +252,12 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                               'Biaya Ongkos',
                                               1),
                                           _buildSize(
-                                              TextFormField(
+                                              TextFormField(initialValue: Rupiah.format(widget.transaksi.keluar),
                                                 onChanged: (va) {
                                                   if (va.isNotEmpty &&
                                                       va.startsWith('Rp')) {
                                                     transaksi.keluar =
                                                         Rupiah.parse(va);
-                                                    ;
                                                     if (transaksi.ongkos <
                                                         Rupiah.parse(va)) {
                                                       controlerSisa.text =
@@ -297,7 +304,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                               ),
                                               'Sisa',
                                               1),
-                                          _buildSize(TextFormField(
+                                          _buildSize(TextFormField(initialValue: widget.transaksi.tujuan,
                                             onChanged: (va) {
                                               transaksi.tujuan = va;
                                             },
@@ -309,10 +316,10 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           _buildSize(
-                                              TextFormField(onChanged: (val) {
+                                              TextFormField(initialValue: widget.transaksi.keterangan,onChanged: (val) {
                                             transaksi.keterangan = val;
                                           }), 'Keterangan', 2),
-                                          _buildSize(SizedBox(), '', 4),
+                                          _buildSize(const SizedBox(), '', 4),
                                           //                               ElevatedButton.icon(
                                           // icon: const Icon(
                                           //   Icons.add,
@@ -328,7 +335,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                         ],
                                       ),
                                       RoundedLoadingButton(
-                                        color: Theme.of(context).primaryColor,
+                                        color:Colors.green,
                                         elevation: 10,
                                         successColor: Colors.green,
                                         errorColor: Colors.red,

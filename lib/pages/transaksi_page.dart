@@ -3,7 +3,6 @@ import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_add.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_search_mobil.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_search_nama.dart';
-import 'package:gabriel_logistik/transaksi/transaksi_search_perbaikan.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_search_tanggal.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_search_tujuan.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_tile.dart';
@@ -42,8 +41,8 @@ class _TransaksiPageState extends State<TransaksiPage> {
                   Container(
                     margin: const EdgeInsets.only(bottom: 15),
                     child: Card(
-                      color: Theme.of(context).colorScheme.primary,
-                      shadowColor: Theme.of(context).colorScheme.primary,surfaceTintColor:  Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.secondary,
+                      shadowColor: Theme.of(context).colorScheme.primary,surfaceTintColor:  Theme.of(context).colorScheme.secondary,
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Column(
@@ -54,10 +53,10 @@ class _TransaksiPageState extends State<TransaksiPage> {
                                 Expanded(
                                   child: Image.asset('images/search.png',height: 50),
                                 ),
-                                Expanded(flex: 4, child: SearchTanggal()),
-                                Expanded(flex: 4, child: SearchNama()),
-                                Expanded(flex: 4, child: SearchMobil()),
-                                Expanded(flex: 4, child: SearchTujuan()),
+                                const Expanded(flex: 4, child: SearchTanggal()),
+                                const Expanded(flex: 4, child: SearchNama()),
+                                const Expanded(flex: 4, child: SearchMobil()),
+                                const Expanded(flex: 4, child: SearchTujuan()),
                                 // Expanded(child: SearchPerbaikan()),
                               ],
                             ),
@@ -69,7 +68,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
 
                   Container(
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary.withBlue(150),
+                        color: Theme.of(context).colorScheme.primary,
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(5),
                             topRight: Radius.circular(5))),

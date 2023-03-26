@@ -2,10 +2,8 @@ import 'dart:async';
 
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/models/pengeluaran.dart';
-import 'package:gabriel_logistik/models/transaksi.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -13,12 +11,12 @@ import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
 import '../helper/dropdown.dart';
-import '../helper/format_tanggal.dart';
 import '../helper/input_currency.dart';
+import '../models/mobil.dart';
 
 class PengelauaranEdit extends StatefulWidget {
   final Pengeluaran pengeluaran;
-  PengelauaranEdit(this.pengeluaran);
+  const PengelauaranEdit(this.pengeluaran);
   @override
   State<PengelauaranEdit> createState() => _PengelauaranEditState();
 }
@@ -30,8 +28,11 @@ class _PengelauaranEditState extends State<PengelauaranEdit> {
   void initState() {
     pengeluaran=widget.pengeluaran;
     mobilCont.text = widget.pengeluaran.mobil;
-    Provider.of<ProviderData>(context, listen: false)
-        .listMobil
+    List<Mobil> temp=Provider.of<ProviderData>(context, listen: false)
+        .listMobil;
+
+        temp.removeWhere((element) => element.terjual);
+    temp
         .map((e) => e.nama_mobil)
         .toList()
         .forEach((element) {
@@ -49,7 +50,7 @@ class _PengelauaranEditState extends State<PengelauaranEdit> {
       RoundedLoadingButtonController();
   final TextEditingController mobilCont = TextEditingController();
   late Pengeluaran pengeluaran;
-  TextStyle small = TextStyle(fontSize: 13);
+  TextStyle small = const TextStyle(fontSize: 13);
   Widget _buildSize(widget, String ket, int flex) {
     return Expanded(
       flex: flex,
@@ -207,7 +208,7 @@ class _PengelauaranEditState extends State<PengelauaranEdit> {
                                   ],
                                 ),
                                 RoundedLoadingButton(
-                                  color: Theme.of(context).primaryColor,
+                                  color: Colors.green,
                                   elevation: 10,
                                   successColor: Colors.green,
                                   errorColor: Colors.red,

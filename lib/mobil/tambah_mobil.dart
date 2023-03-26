@@ -91,7 +91,7 @@ class TambahMobil extends StatelessWidget {
 
                         await Future.delayed(const Duration(seconds: 3), () {
                           Provider.of<ProviderData>(context, listen: false)
-                              .addMobil(Mobil(
+                              .addMobil(Mobil(false,
                                  
                                   namaMobil,
                                   noHp,[]));

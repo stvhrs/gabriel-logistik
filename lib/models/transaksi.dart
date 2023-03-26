@@ -1,4 +1,3 @@
-import 'package:gabriel_logistik/models/pengeluaran.dart';
 
 class Transaksi {
 

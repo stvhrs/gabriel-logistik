@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:gabriel_logistik/kas/kas.dart';
 import 'package:gabriel_logistik/models/kas_tahun.dart';
-import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 
+import '../models/keuangan_bulanan.dart';
+import '../models/pengeluaran.dart';
 
 List<String> list = <String>[
   'Januari',
@@ -80,7 +81,7 @@ class _KasTahunState extends State<KasTahun> {
                       child: Text(value.toString(),
                           style: const TextStyle(
                               fontSize: 16,
-                              fontFamily: 'FreeSans',
+                              fontFamily: 'Nunito',
                               color: Colors.black)),
                     );
                   }).toList(),
@@ -91,52 +92,78 @@ class _KasTahunState extends State<KasTahun> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.9,
             child: ListView(
-             
-                children:
-                    Provider.of<ProviderData>(context).backupListSupir.map((e) {
-                  double totalBersihTahun = 0;
+              children:
+                  Provider.of<ProviderData>(context).backupListMobil.map((e) {
+                double tahunTotalPengeluaran = 0;
+                double tahunTotalBersih = 0;
+                double tahunTotalOngkos = 0;
+                double tahunTotalKeluar = 0;
+                double tahunTotalSisa = 0;
+                KasModel asu = KasModel(
+                    e.nama_mobil, [], 0, 0, 0, 0, ropdownValue2.toString());
+                for (var moon in list) {
+                  List<Transaksi> transaksiBulanIni = [];
+                  double totalPengeluaran = 0;
+                  double totalBersih = 0;
+                  double totalOngkos = 0;
+                  double totalKeluar = 0;
+                  double totalSisa = 0;
+                  List<Pengeluaran> listPengeluaran = [];
 
-                  KasModel asu = KasModel(
-                      e.nama_supir, [], 0, 0, 0, ropdownValue2.toString());
-                  for (var moon in list) {
-                    double totalBersih = 0;
-                    double totalPengeluaran = 0;
-                    double totalPersenSupir = 0;
+                  transaksiBulanIni = Provider.of<ProviderData>(context)
+                      .backupTransaksi
+                      .where((element) =>
+                          element.mobil == e.nama_mobil &&
+                          DateTime.parse(element.tanggalBerangkat).month ==
+                              list.indexOf(moon) + 1 &&
+                          DateTime.parse(element.tanggalBerangkat).year ==
+                              ropdownValue2)
+                      .toList();
+                  e.pengeluaran = Provider.of<ProviderData>(context)
+                      .backupListPengeluaran
+                      .where((element) =>
+                          element.mobil == e.nama_mobil &&
+                          DateTime.parse(element.tanggal).month ==
+                              list.indexOf(moon) + 1 &&
+                          DateTime.parse(element.tanggal).year == ropdownValue2)
+                      .toList();
 
-                    List<Transaksi> transaksiBulanIni = [];
-                    transaksiBulanIni = Provider.of<ProviderData>(context)
-                        .backupTransaksi
-                        .where((element) =>
-                            e.nama_supir == element.supir &&
-                            DateTime.parse(element.tanggalBerangkat).month ==
-                                list.indexOf(moon) + 1 &&
-                            DateTime.parse(element.tanggalBerangkat).year ==
-                                ropdownValue2)
-                        .toList();
-                    for (var element in transaksiBulanIni) {
-                      totalBersih += (element.ongkos - element.keluar);
-                    }
-                    if (transaksiBulanIni.isNotEmpty) {
-                      // KeuanganBulanan data = KeuanganBulanan(
-                      //     e.nama_supir,
-                      //     transaksiBulanIni,
-                      //     totalBersih - totalPengeluaran,
-                      //     0,
-                      //     totalPengeluaran,
-                      //     moon);
-
-                      // asu.listBulananSupir.add(data);
-                    }
+                  // }
+                  for (var element in transaksiBulanIni) {
+                    totalBersih += element.sisa;
+                    totalOngkos += element.ongkos;
+                    totalKeluar += element.keluar;
+                    totalSisa += element.sisa;
                   }
-                  for (var element in asu.listBulananSupir) {
-                    asu.totalBersih += element.totalBersih;
-                    asu.totalPengeluaran += element.totalPengeluaran;
+                  for (var pengeluaran in e.pengeluaran) {
+                    totalPengeluaran = totalPengeluaran + pengeluaran.harga;
+                    listPengeluaran.add(pengeluaran);
                   }
-                  return Kas(asu);
-                }).toList(),
-              ),
+                  totalBersih -= totalPengeluaran;
+
+                  print(totalPengeluaran);
+                  KeuanganBulanan data = KeuanganBulanan(
+                      e.nama_mobil,
+                      transaksiBulanIni,
+                      listPengeluaran,
+                      totalBersih,
+                      totalOngkos,
+                      totalKeluar,
+                      totalSisa,
+                      totalPengeluaran,
+                      list[list.indexOf(moon)]);
+
+                  asu.listBulananMobil.add(data);
+                  tahunTotalSisa += totalSisa;
+                  tahunTotalBersih += totalBersih;
+                  tahunTotalKeluar += totalKeluar;
+                  tahunTotalOngkos += totalOngkos;
+                  tahunTotalPengeluaran += totalPengeluaran;
+                }
+                return Kas(asu,tahunTotalOngkos,tahunTotalKeluar,tahunTotalSisa,tahunTotalPengeluaran,tahunTotalBersih);
+              }).toList(),
             ),
-          
+          ),
         ]),
       ),
     );

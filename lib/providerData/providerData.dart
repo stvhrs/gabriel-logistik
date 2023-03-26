@@ -4,9 +4,7 @@ import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/pengeluaran.dart';
 import 'package:gabriel_logistik/models/supir.dart';
 
-import '../helper/format_tanggal.dart';
 import '../models/transaksi.dart';
-import '../pages/jual_beli.dart';
 
 List<String> list = <String>[
   'Januari',
@@ -94,8 +92,9 @@ class ProviderData with ChangeNotifier {
   }
 
   void deleteMobil(Mobil mobil) {
-    listMobil.remove(mobil);
-    backupListMobil.remove(mobil);
+    listMobil.removeWhere((element) => mobil.nama_mobil==element.nama_mobil,);
+       backupListMobil.removeWhere((element) => mobil.nama_mobil==element.nama_mobil,);
+
     notifyListeners();
   }
 

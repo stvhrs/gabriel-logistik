@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   AppTheme();
-  static Color primaryColor = Color.fromARGB(255, 59, 59, 65);
+  static Color primaryColor = const Color.fromARGB(255, 59, 59, 65);
   static Color secondaryColor =primaryColor.withBlue(150);
   static ThemeData getAppThemeData() {
-    return ThemeData(iconTheme: IconThemeData(size: 19),
+    return ThemeData(iconTheme: const IconThemeData(size: 19),
         fontFamily: 'FreeSans',cardTheme: CardTheme(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
         useMaterial3: true,backgroundColor: Colors.grey.shade300,
         dialogBackgroundColor: Colors.white,
@@ -28,7 +28,7 @@ class AppTheme {
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
                 textStyle: MaterialStateProperty.all(
-                     TextStyle(color: Colors.white,fontFamily: 'Nunito')),
+                     const TextStyle(color: Colors.white,fontFamily: 'Nunito')),
                 backgroundColor: MaterialStateProperty.all(Colors.green.shade500  ))),
         primaryColor: primaryColor,
      
@@ -57,7 +57,7 @@ class AppTheme {
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(
               fontSize: 18, color: Colors.grey.shade600, letterSpacing: 0.7),
-          contentPadding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
+          contentPadding: const EdgeInsets.only(left: 10, top: 0, bottom: 0),
           filled: true,
           fillColor: Colors.grey.shade200,
           focusedBorder: OutlineInputBorder(

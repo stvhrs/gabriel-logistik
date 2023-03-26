@@ -20,21 +20,21 @@ class _DaftarSupirState extends State<DaftarSupir> {
       
           Container(
               padding: const EdgeInsets.only(left: 25, right: 25, top: 0,bottom: 25),
-              decoration: BoxDecoration( border: Border.all(color: Theme.of(context).primaryColor,width: 10,strokeAlign:StrokeAlign.center ),color: Colors.white, borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration( border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.2),width: 10,strokeAlign:StrokeAlign.center ),color: Colors.white, borderRadius: BorderRadius.circular(10)),
               width: MediaQuery.of(context).size.width * 0.7,
               child: Column(
                 children: [
                   Container(margin: EdgeInsets.zero,
-                    padding: EdgeInsets.only(right:10,left: 10,bottom: 5,top: 5),
+                    padding: const EdgeInsets.only(right:30,left: 30,bottom: 10,top: 5),
                     decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.only(
+                        color: Theme.of(context).colorScheme.secondary,
+                        borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(5),
                             bottomRight: Radius.circular(5))),
                     child: const Text(
                       'Daftar Supir',
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.white,fontFamily: 'Nunito',
                           fontSize: 24,
                           fontWeight: FontWeight.bold),
                     ),
@@ -45,7 +45,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
                     children: [
                       Expanded(
                         flex: 1,
-                        child: Container(
+                        child: SizedBox(
                      
                           height: MediaQuery.of(context).size.height / 20,
                           child: TextFormField(
@@ -61,8 +61,8 @@ class _DaftarSupirState extends State<DaftarSupir> {
                       TambahSupir()
                     ],
                   ),
-                  Container(margin: EdgeInsets.only(top: 15),
-                    color: Theme.of(context).colorScheme.secondary,
+                  Container(margin: const EdgeInsets.only(top: 15),
+                    color: Theme.of(context).colorScheme.primary,
                     padding: const EdgeInsets.only(
                         top: 8, bottom: 8, left: 15, right: 15),
                     child: Row(
@@ -111,19 +111,19 @@ class _DaftarSupirState extends State<DaftarSupir> {
                                   ? const Color.fromARGB(255, 189, 193, 221)
                                   : Colors.grey.shade200,
                               padding:
-                                  const EdgeInsets.only(left: 15, right: 0),
+                                  const EdgeInsets.only(left: 15, right: 15),
                               child: Row(
                                 children: [
                                   Expanded(
-                                      flex: 3,
+                                      flex: 11,
                                       child:
                                           Text(c.listSupir[index].nama_supir)),
                                   Expanded(
-                                      flex: 3,
+                                      flex: 11,
                                       child:
                                           Text(c.listSupir[index].nohp_supir)),
                                   Expanded(
-                                    flex: 1,
+                                    flex: 3,
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [

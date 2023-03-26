@@ -39,8 +39,13 @@ class _DashBoardState extends State<DashBoard> {
   late List<Pengeluaran> listPengeluaran;
   late List<JualBeliMobil> listJualBeliMobil;
   bool loading = true;
-
+  String test = '';
   initData() async {
+//    test=      await Service.test2();
+// await Service.test();
+// await Service.postSupir();
+// await Service.deleteSupir();
+// await Service.test3();
     listTransaksi = await Service.getAllTransaksi();
     listSupir = await Service.getAllSupir();
     listPengeluaran = await Service.getAllPengeluaran();
@@ -94,19 +99,21 @@ class _DashBoardState extends State<DashBoard> {
                       // itemBorderRadius:BorderRadius.all(Radius.circular(0) ),decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5.0)),),
                       toggleColor: Colors.white,
                       backgroundColor: Theme.of(context).primaryColor,
-                      hoverColor:  Theme.of(context).colorScheme.secondary,
+                      hoverColor:
+                          Theme.of(context).colorScheme.primary.withBlue(150),
                       openSideMenuWidth:
                           MediaQuery.of(context).size.width / 6.5,
                       selectedColor: Theme.of(context).colorScheme.secondary,
                       unselectedIconColor: Colors.white,
                       displayMode: SideMenuDisplayMode.open,
-                      itemOuterPadding: EdgeInsets.only(
+                      itemOuterPadding: const EdgeInsets.only(
                         bottom: 5,
                       ),
-                      itemBorderRadius: BorderRadius.all(Radius.circular(0)),
+                      itemBorderRadius:
+                          const BorderRadius.all(Radius.circular(0)),
                       unselectedTitleTextStyle: TextStyle(
                           fontFamily: 'Nunito',
-                          fontSize: 14,
+                          fontSize: 15,
                           color: Colors.grey.shade300),
                       selectedTitleTextStyle: const TextStyle(
                           fontFamily: 'Nunito',
@@ -118,17 +125,23 @@ class _DashBoardState extends State<DashBoard> {
                     title: Column(
                       children: [
                         ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                maxHeight: 100,
-                                maxWidth: 200,
-                              ),
-                              child:  Container(margin: EdgeInsets.all(10),decoration: BoxDecoration(color: Colors.white,shape: BoxShape.circle ),
-                          child:Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(
-                                 Provider.of<ProviderData>(context, listen: false)
-                                    .isOwner?'images/boss.png' : 'images/admin.png', 
-                        
+                          constraints: const BoxConstraints(
+                            maxHeight: 100,
+                            maxWidth: 200,
+                          ),
+                          child: Container(
+                            margin: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                                color: Colors.white, shape: BoxShape.circle),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.asset(
+                                Provider.of<ProviderData>(context,
+                                            listen: false)
+                                        .isOwner
+                                    ? 'images/boss.png'
+                                    : 'images/admin.png',
+
                                 // color: Colors.white,
                               ),
                             ),
@@ -158,15 +171,12 @@ class _DashBoardState extends State<DashBoard> {
                           Provider.of<ProviderData>(context, listen: false)
                               .logout();
                         },
-                        child:
-                              Text(
-                                'Logout',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold),
-                              
-                          
+                        child: Text(
+                          'Logout',
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

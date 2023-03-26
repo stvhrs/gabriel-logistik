@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/pengeluaran.dart';
@@ -9,11 +8,6 @@ import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:pdf/pdf.dart';
-import 'package:printing/printing.dart';
-import 'dart:io';
-
-import 'package:pdf/widgets.dart' as pw;
 
 // Future<Uint8List> printPdf(List<Uint8List> listUint8list) async {
 //   final document = pw.Document();
@@ -40,7 +34,21 @@ const Map<String, String> headers = {
 List<Map<String, dynamic>> pengeluaran = [
   {
     'jenis': 'Pajak',
-    'mobil':'AD 1234 FF',
+    'mobil': 'AD 1234 FF',
+    'harga': 10000,
+    'tanggal': DateTime.now().toIso8601String(),
+    'keterangan': 'keterangan'
+  },
+  {
+    'jenis': 'Servis',
+    'mobil': 'AD 1234 FF',
+    'harga': 10000,
+    'tanggal': DateTime.now().toIso8601String(),
+    'keterangan': 'keterangan'
+  },
+  {
+    'jenis': 'Cucis',
+    'mobil': 'AD 1234 FF',
     'harga': 10000,
     'tanggal': DateTime.now().toIso8601String(),
     'keterangan': 'keterangan'
@@ -50,8 +58,9 @@ List<Map<String, dynamic>> jualBeli = [
   {
     'nama_mobil': 'AD 1234 FF',
     'harga': 0,
+    'ket_mobil': 'Head Tronton',
     'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan',
+    'keterangan': 'Ini adalah test ketenarangan asdasdas',
     'tanggal': DateTime.now().toIso8601String()
   },
 ];
@@ -61,7 +70,17 @@ List<Map<String, dynamic>> transaksi = [
     'tgl_berangkat': '2023-03-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan Besi',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 1234 FF',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-03-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
     'mobil': 'AD 1234 FF',
     'keluar': 1500000,
     'ongkos': 3300000,
@@ -73,73 +92,96 @@ List<Map<String, dynamic>> supir = [
   {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
-  },{
+  },
+  {
     'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
   },
@@ -148,6 +190,11 @@ List<Map<String, dynamic>> supir = [
 List<Map<String, dynamic>> mobil = [
   {
     'nama_mobil': 'AD 1234 FF',
+    'keterangan_mobill': 'HEAD TRONTON',
+    'terjual': false,
+  },
+  {
+    'nama_mobil': 'AD 1234 FF2',
     'keterangan_mobill': 'HEAD TRONTON',
     'terjual': false,
   },
@@ -191,18 +238,23 @@ class Service {
   static Future<List<Mobil>> getAllMobil(List<Pengeluaran> list) async {
     List<Mobil> data = [];
     for (var te in mobil) {
-  List<Pengeluaran> asu= list.where((element) => (te['nama_mobil'] as String).trim()==element.mobil.trim()).toList();
-      data.add(Mobil.fromMap(te,asu));
+      List<Pengeluaran> asu = list
+          .where((element) =>
+              (te['nama_mobil'] as String).trim() == element.mobil.trim())
+          .toList();
+      data.add(Mobil.fromMap(te, asu));
     }
     return data;
   }
 
-  static Future<String> test() async {
-    final response = await http.get(
-        Uri.parse(
-          'http://localhost/logistik/api/pengirimanConfirmed_read',
-        ),
-        headers: headers);
+  static Future<String> postSupir() async {
+    log('post SUpir');
+    final response = await http.post(
+      body: {"nama_supir": "Tanpa ID", "no_hp": "85677899983"},
+      Uri.parse(
+        'https://logistik-project.000webhostapp.com/api/supir',
+      ),
+    );
 
     print(response.statusCode);
     if (response.body.isNotEmpty) {
@@ -212,24 +264,81 @@ class Service {
     }
   }
 
-  static Future<String> test2() async {
-    Uri uri = Uri.https(
-      'localhost',
-      '/logistik/api/pengirimanConfirmed_read',
+  static Future<String> updateSupir() async {
+    log('post SUpir');
+    final response = await http.post(
+      body: {"id_supir": "1", "nama_supir": "222", "no_hp": "85677899983"},
+      Uri.parse(
+        'https://logistik-project.000webhostapp.com/api/supir',
+      ),
     );
-    var response = await http.get(
-      uri,
-    );
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      print('Asu');
-      debugPrint('${response.body}asu2');
-      log(response.body.toString());
-      debugPrint(response.body.toString());
+
+    print(response.statusCode);
+    if (response.body.isNotEmpty) {
       return response.body.toString();
     } else {
-      throw json.decode(response.body);
+      return 'Eroorrrrrr';
     }
+  }
+
+  static Future<String> deleteSupir() async {
+    log('Delte supir');
+    final response = await http.delete(
+      body: {"id_supir": '2'},
+      Uri.parse(
+        'https://logistik-project.000webhostapp.com/api/supir/1',
+      ),
+    );
+
+    print(response.statusCode);
+    if (response.body.isNotEmpty) {
+      return response.body.toString();
+    } else {
+      return 'Eroorrrrrr';
+    }
+  }
+
+  static Future<String> test3() async {
+    log('tes get');
+    final response = await http.get(
+      Uri.parse(
+        'https://logistik-project.000webhostapp.com/api/supir',
+      ),
+    );
+
+    print(response.body);
+    if (response.body.isNotEmpty) {
+      return response.body.toString();
+    } else {
+      return 'Eroorrrrrr';
+    }
+  }
+
+  static Future<void> pengeluarasn() async {
+    log('tes post');
+    final response = await http.post(
+      body: {
+        "id_pengeluaran": "2",
+        "plat_mobil": "AD 2345 HWEzz",
+        "jenis_p": "Servizzs",
+        "harga_p": "30000000",
+        "ket_p": "keterangan",
+        "tgl_p": "2023-03-01"
+      },
+      // headers: {"Content-Type": "application/json"},
+      Uri.parse(
+        'https://logistik-project.000webhostapp.com/api/pengeluaran',
+      ),
+    );
+    log(response.body);
+  }
+
+  static Future<String> test2() async {
+    log('tes get');
+    var response = await http
+        .get(Uri.parse('https://logistik-project.000webhostapp.com/api/supir'));
+    return response.body;
+    log(response.body);
+    log(response.statusCode.toString());
   }
 }

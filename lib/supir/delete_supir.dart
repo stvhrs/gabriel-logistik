@@ -4,7 +4,6 @@ import 'package:gabriel_logistik/models/supir.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-import '../models/transaksi.dart';
 import '../providerData/providerData.dart';
 
 class SupirDelete extends StatelessWidget {
@@ -30,20 +29,7 @@ class SupirDelete extends StatelessWidget {
                       margin: const EdgeInsets.only(bottom: 20),
                       child: const Text('Apakah Anda Yakin ?'),
                     ),
-                  ),
-
-                  // Container(
-                  //   margin: const EdgeInsets.only(bottom: 20),
-                  //   child: TextFormField(initialValue: Transaksi.nama_Transaksi,
-                  //     decoration: const InputDecoration(
-                  //       hintText: 'Alamat',
-                  //     ),
-                  //     onChanged: (val) {
-                  //       alamat = val.toString();
-                  //     },
-                  //     maxLines: 3,
-                  //   ),
-                  // )
+                  ),                
                 ),
                 actions: <Widget>[
                   RoundedLoadingButton(

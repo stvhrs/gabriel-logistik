@@ -1,6 +1,5 @@
 
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
-import 'package:gabriel_logistik/models/pengeluaran.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 
 import 'package:flutter/material.dart';
@@ -83,6 +82,8 @@ class _TransaksiTileState extends State<TransaksiTile> {
                   //     widget._transaksi,
                   //   ),
                   // ),
+                    Expanded(
+                    child: TransaksiView( widget._transaksi)),
                   Expanded(
                     child: TransaksiEdit( widget._transaksi)),
                   Expanded(

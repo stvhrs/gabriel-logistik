@@ -1,12 +1,9 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/bulanan/bulanan.dart';
 
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/pengeluaran.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/prints.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
@@ -62,11 +59,13 @@ class _LaporanBulananState extends State<LaporanBulanan> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => LaporanPrint(listKeuangan),
-        ));
-      }),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.print),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => LaporanPrint(listKeuangan),
+            ));
+          }),
       body: Padding(
         padding: const EdgeInsets.only(left: 50, right: 50, top: 15),
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -150,16 +149,15 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                         DateTime.parse(element.tanggalBerangkat).year ==
                             ropdownValue2)
                     .toList();
-e.pengeluaran=Provider.of<ProviderData>(context)
+                e.pengeluaran = Provider.of<ProviderData>(context)
                     .backupListPengeluaran
                     .where((element) =>
                         element.mobil == e.nama_mobil &&
                         DateTime.parse(element.tanggal).month ==
                             list.indexOf(dropdownValue) + 1 &&
-                        DateTime.parse(element.tanggal).year ==
-                            ropdownValue2)
+                        DateTime.parse(element.tanggal).year == ropdownValue2)
                     .toList();
-                    
+
                 // }
                 for (var element in transaksiBulanIni) {
                   totalBersih += element.sisa;
@@ -185,7 +183,9 @@ e.pengeluaran=Provider.of<ProviderData>(context)
                     totalPengeluaran,
                     list[list.indexOf(dropdownValue)]);
                 listKeuangan.add(data);
-                return Bulanan(data);
+                return transaksiBulanIni.isEmpty && e.pengeluaran.isEmpty
+                    ? SizedBox()
+                    : Bulanan(data);
               }).toList(),
             ),
           ),

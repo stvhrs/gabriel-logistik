@@ -1,27 +1,27 @@
 import 'dart:async';
 
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
-import 'package:gabriel_logistik/models/pengeluaran.dart';
-import 'package:gabriel_logistik/models/transaksi.dart';
+
+import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
-import '../helper/dropdown.dart';
-import '../helper/format_tanggal.dart';
-import '../helper/input_currency.dart';
+import '../../helper/dropdown.dart';
+import '../../helper/input_currency.dart';
 
-class JualDelete extends StatefulWidget {
+class JualEdit extends StatefulWidget {
+  final JualBeliMobil jualBeliMobil;
+  const JualEdit(this.jualBeliMobil);
   @override
-  State<JualDelete> createState() => _JualDeleteState();
+  State<JualEdit> createState() => _JualEditState();
 }
 
-class _JualDeleteState extends State<JualDelete> {
+class _JualEditState extends State<JualEdit> {
   List<String> listMobil = [];
 
   @override
@@ -40,11 +40,11 @@ class _JualDeleteState extends State<JualDelete> {
 
     super.initState();
   }
-
+ 
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
-  late Pengeluaran pengeluaran;
-  TextStyle small = TextStyle(fontSize: 13);
+ 
+  TextStyle small = const TextStyle(fontSize: 13);
   Widget _buildSize(widget, String ket, int flex) {
     print(MediaQuery.of(context).size.width);
     print(MediaQuery.of(context).size.height);
@@ -75,25 +75,12 @@ class _JualDeleteState extends State<JualDelete> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-        icon: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        label: const Text(
-          'Tambah Pengeluaran',
-          style: TextStyle(color: Colors.white),
-        ),
-        style: ButtonStyle(
-            padding: MaterialStateProperty.all(const EdgeInsets.all(10))),
+    return IconButton(
+    
+        icon:const Icon(Icons.edit,color: Colors.green,),
+        
         onPressed: () {
-          pengeluaran = Pengeluaran.fromMap({
-            'mobil': '',
-            'jenis': '0',
-            'harga': 0,
-            'tanggal': DateTime.now().toIso8601String(),
-            'keterangan': ''
-          });
+
 
           showDialog(
               barrierDismissible: false,
@@ -106,7 +93,7 @@ class _JualDeleteState extends State<JualDelete> {
                       children: [
                         const SizedBox(),
                         const Text(
-                          'Tambah Pengeluaran',
+                          'Jual Mobil',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
@@ -150,38 +137,39 @@ class _JualDeleteState extends State<JualDelete> {
                                     _buildSize(
                                         WebDatePicker(
                                           height: 60,
-                                          initialDate: DateTime.now(),
+                                          initialDate:DateTime.parse(widget.jualBeliMobil.tanggal) ,
                                           dateformat: 'dd/MM/yyyy',
                                           onChange: (value) {
                                             if (value != null) {
-                                              pengeluaran.tanggal =
+                                              widget.jualBeliMobil.tanggal =
                                                   value.toIso8601String();
                                             }
                                           },
                                         ),
                                         'Tanggal',
                                         1),
+                                  
                                     _buildSize(
-                                        TextFormField(
-                                          onChanged: (va) {
-                                            pengeluaran.jenis=va;
-                                          },
-                                        ),
-                                        'Jenis',
-                                        1),
-                                    _buildSize(
-                                        DropDownField(
+                                        DropDownField(value: widget.jualBeliMobil.mobil,enabled: false,
                                           onValueChanged: (val) {
-                                            pengeluaran.mobil = val;
+                                            widget.jualBeliMobil.mobil = val;
+                                            
                                           },
                                           items: listMobil,
                                         ),
                                         'Pilih Mobil',
+                                        1),  _buildSize(
+                                        TextFormField(readOnly: true,initialValue: widget.jualBeliMobil.ketMobil,
+                                          onChanged: (va) {
+                                            widget.jualBeliMobil.ketMobil=va;
+                                          },
+                                        ),
+                                        'Keterangan Mobil',
                                         1),
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(initialValue:Rupiah.format( widget.jualBeliMobil.harga),
                                           onChanged: (va) {
-                                            pengeluaran.harga=Rupiah.parse(va);
+                                            widget.jualBeliMobil.harga=Rupiah.parse(va);
                                           },
                                           inputFormatters: [
                                             FilteringTextInputFormatter
@@ -189,29 +177,29 @@ class _JualDeleteState extends State<JualDelete> {
                                             CurrencyInputFormatter()
                                           ],
                                         ),
-                                        'Pengeluaran',
+                                        'Harga',
                                         1),
                                   ],
                                 ),
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(initialValue: widget.jualBeliMobil.keterangan,
                                           onChanged: (va) {
-                                            pengeluaran.keterangan=va;
+                                            widget.jualBeliMobil.keterangan=va;
                                           },
                                         ),
                                         'Keterangan',
                                         2),
                                   ],
                                 ),RoundedLoadingButton(
-                                          color: Theme.of(context).primaryColor,
+                                          color:Colors.green,
                                           elevation: 10,
                                           successColor: Colors.green,
                                           errorColor: Colors.red,
                                           controller: _btnController,
                                           onPressed: () async {
-                                            if (pengeluaran.harga==0||pengeluaran.jenis.isEmpty||pengeluaran.mobil.isEmpty) {
+                                            if (widget.jualBeliMobil.harga==0||widget.jualBeliMobil.tanggal.isEmpty||widget.jualBeliMobil.mobil.isEmpty) {
                                               _btnController.error();
                                               await Future.delayed(
                                                   const Duration(seconds: 1));
@@ -225,9 +213,9 @@ class _JualDeleteState extends State<JualDelete> {
                                                 Provider.of<ProviderData>(
                                                         context,
                                                         listen: false)
-                                                    .addPengeluaran(pengeluaran);
+                                                  .updateJualBeliMobil(widget.jualBeliMobil);
                                               
-
+ 
                                               _btnController.success();
                                             });
                                             await Future.delayed(
@@ -235,7 +223,7 @@ class _JualDeleteState extends State<JualDelete> {
                                               Navigator.of(context).pop();
                                             });
                                           },
-                                          child: const Text('Tambah',
+                                          child: const Text('Edit',
                                               style: TextStyle(
                                                   color: Colors.white)),
                                         )

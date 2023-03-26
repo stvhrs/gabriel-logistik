@@ -22,7 +22,7 @@ class _SearchTanggalState extends State<SearchTanggal> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Icon(Icons.date_range_rounded,size: 25),
+            const Icon(Icons.date_range_rounded,size: 25),
             InkWell(
               child: Text(
                 _selecteRange,
@@ -37,18 +37,18 @@ class _SearchTanggalState extends State<SearchTanggal> {
                         return Column(
                           children: [
                             ConstrainedBox(
-                                constraints: BoxConstraints(
+                                constraints: const BoxConstraints(
                                     maxWidth: 600, minHeight: 500),
                                 child: Theme(
                                   data: ThemeData(
-                                    colorScheme: ColorScheme.light(
-                                      primary: const Color.fromARGB(
+                                    colorScheme: const ColorScheme.light(
+                                      primary: Color.fromARGB(
                                           255, 75, 84, 167),
                                       surface: Color.fromARGB(255, 75, 84, 167),
                                     ),
 
                                     // Here I Chaged the overline to my Custom TextStyle.
-                                    textTheme: TextTheme(
+                                    textTheme: const TextTheme(
                                         overline: TextStyle(fontSize: 16)),
                                     dialogBackgroundColor:
                                         Theme.of(context).colorScheme.primary,
@@ -74,14 +74,13 @@ class _SearchTanggalState extends State<SearchTanggal> {
                     setState(() {});
                   }
 
-                  ;
                 }
 
                 dateTimeRangePicker();
               },
             ),
             _selecteRange == 'Pilih Rentang'
-                ? IconButton(onPressed: (){}, icon: Icon(Icons.r_mobiledata,color: Colors.transparent,))
+                ? IconButton(onPressed: (){}, icon: const Icon(Icons.r_mobiledata,color: Colors.transparent,))
                 : IconButton(
                     onPressed: () {
                       picked = null;
@@ -94,7 +93,7 @@ class _SearchTanggalState extends State<SearchTanggal> {
                           .searchTransaksi();
                       setState(() {});
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.close,
                       color: Colors.red,
                     ))

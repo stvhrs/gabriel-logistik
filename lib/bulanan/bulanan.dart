@@ -41,10 +41,9 @@ class _BulananState extends State<Bulanan> {
               Expanded(
                   flex: 3,
                   child: Text(textAlign: TextAlign.left,
-                       DateTime.parse(element.tanggalBerangkat)
-                              .day
-                              .toString()+', '+ DateFormat('EEEE', "id_ID").format(
-                              DateTime.parse(element.tanggalBerangkat)) )
+                       '${DateTime.parse(element.tanggalBerangkat)
+                              .day}, ${DateFormat('EEEE', "id_ID").format(
+                              DateTime.parse(element.tanggalBerangkat))}' )
                       ),
               Expanded(
                   flex: 3,
@@ -98,7 +97,7 @@ buildChildren2() {
           decoration: BoxDecoration(
               color: index.isEven
                   ? Colors.grey.shade200
-                  :  Colors.white),
+                  :  const Color.fromARGB(255, 189, 193, 221)),
           padding: const EdgeInsets.only(
             top: 14,
             bottom: 14,
@@ -110,10 +109,9 @@ buildChildren2() {
                   flex: 3,
                   child: Text(textAlign: TextAlign.left,
                      
-                          DateTime.parse(element.tanggal)
-                              .day
-                              .toString()+', '+ DateFormat('EEEE', "id_ID").format(
-                              DateTime.parse(element.tanggal)) )
+                          '${DateTime.parse(element.tanggal)
+                              .day}, ${DateFormat('EEEE', "id_ID").format(
+                              DateTime.parse(element.tanggal))}' )
                           
                       ),
               Expanded(
@@ -126,7 +124,7 @@ buildChildren2() {
                   child: Text(textAlign: TextAlign.left,Rupiah.format( element.harga),
                       )),
               Expanded(
-                  flex: 7,
+                  flex:6,
                   child: Text(textAlign: TextAlign.left,element.keterangan,
                       )),
               
@@ -148,7 +146,7 @@ buildChildren2() {
   }
   @override
   Widget build(BuildContext context) {
-    return Container(margin: EdgeInsets.only(bottom: 50),
+    return Container(margin: const EdgeInsets.only(bottom: 50),
       child: Card(
         elevation: 5,
         color: Colors.white, surfaceTintColor: Colors.white,
@@ -213,7 +211,7 @@ buildChildren2() {
               ),
               ...buildChildren(), 
            
-               Container(margin: EdgeInsets.only(top: 40),
+               Container(margin: const EdgeInsets.only(top: 40),
                 decoration: BoxDecoration(
                   color: Colors.red.shade600
                 ),
@@ -229,19 +227,19 @@ buildChildren2() {
                     Expanded(
                         flex: 5,
                         child: Text(textAlign: TextAlign.left,
-                          'Nama Pengeluaran',
+                          'Jenis',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
                         flex: 5,
                         child: Text(textAlign: TextAlign.left,
-                          'Harga Pengeluaran',
+                          'Harga',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
-                        flex: 7,
+                        flex: 6,
                         child: Text(textAlign: TextAlign.left,
-                          'Keterangan Pengeluaran',
+                          'Keterangan',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                    
@@ -254,7 +252,7 @@ buildChildren2() {
                   ? const SizedBox()
                   : Padding(
                       padding: const EdgeInsets.only(
-                          top: 8, bottom: 8, left: 15, right: 20),
+                          top: 40, bottom: 8, left: 15, right: 20),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -284,7 +282,7 @@ buildChildren2() {
                                   ),
                                 ),
                               ),
-                              Expanded(flex: 7, child: SizedBox()),
+                              const Expanded(flex: 7, child: SizedBox()),
                             ],
                           ),
                             Row(
@@ -295,7 +293,7 @@ buildChildren2() {
                                                        
                                   color: Colors.grey.shade900,
                                 ),
-                              ),Expanded(flex: 9,child: SizedBox())
+                              ),const Expanded(flex: 9,child: SizedBox())
                             ],
                           ),
                           Row(
@@ -323,7 +321,7 @@ buildChildren2() {
                                   ),
                                 ),
                               ),
-                              Expanded(flex: 7, child: SizedBox()),
+                              const Expanded(flex: 7, child: SizedBox()),
                             ],
                           ),
                             Row(
@@ -334,7 +332,7 @@ buildChildren2() {
                                                        
                                   color: Colors.grey.shade900,
                                 ),
-                              ),Expanded(flex: 9,child: SizedBox())
+                              ),const Expanded(flex: 9,child: SizedBox())
                             ],
                           ),
                           Row(
@@ -360,7 +358,7 @@ buildChildren2() {
                                         Theme.of(context).textTheme.displaySmall,
                                   ),
                                 ),
-                              ),  Expanded(flex: 7, child: SizedBox()),
+                              ),  const Expanded(flex: 7, child: SizedBox()),
                             ],
                           ),
                             Row(
@@ -371,7 +369,7 @@ buildChildren2() {
                                                        
                                   color: Colors.grey.shade900,
                                 ),
-                              ),Expanded(flex: 9,child: SizedBox())
+                              ),const Expanded(flex: 9,child: SizedBox())
                             ],
                           ),
                           Row(
@@ -399,7 +397,7 @@ buildChildren2() {
                                           .textTheme
                                           .displaySmall,
                                     )),
-                              ),  Expanded(flex: 7, child: SizedBox()),
+                              ),  const Expanded(flex: 7, child: SizedBox()),
                             ],
                           ),
                             Row(
@@ -410,7 +408,7 @@ buildChildren2() {
                                                        
                                   color: Colors.grey.shade900,
                                 ),
-                              ),Expanded(flex: 9,child: SizedBox())
+                              ),const Expanded(flex: 9,child: SizedBox())
                             ],
                           ),
                           Row(
@@ -436,7 +434,7 @@ buildChildren2() {
                                           .textTheme
                                           .displaySmall,
                                     )),
-                              ),  Expanded(flex: 7, child: SizedBox()),
+                              ),  const Expanded(flex: 7, child: SizedBox()),
                             ],
                           ),
                             Row(
@@ -447,7 +445,7 @@ buildChildren2() {
                                                        
                                   color: Colors.grey.shade900,
                                 ),
-                              ),Expanded(flex: 9,child: SizedBox())
+                              ),const Expanded(flex: 9,child: SizedBox())
                             ],
                           ),
                         ],

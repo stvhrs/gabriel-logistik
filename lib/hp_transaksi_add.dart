@@ -16,14 +16,14 @@ import '../helper/dropdown.dart';
 import '../helper/format_tanggal.dart';
 import '../helper/input_currency.dart';
 
-class TransaksiAdd extends StatefulWidget {
+class HpTransaksiAdd extends StatefulWidget {
 
 
   @override
-  State<TransaksiAdd> createState() => _TransaksiAddState();
+  State<HpTransaksiAdd> createState() => _HpTransaksiAddState();
 }
 
-class _TransaksiAddState extends State<TransaksiAdd> {
+class _HpTransaksiAddState extends State<HpTransaksiAdd> {
   List<String> listSupir = [];
   List<String> listMobil = [];
   List<Transaksi> bulkTransaksi = [];
@@ -68,7 +68,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
   late Transaksi transaksi;
-  TextStyle small = const TextStyle(fontSize: 13);
+  TextStyle small = const TextStyle(fontSize: 7);
   Widget _buildSize(widget, String ket, int flex) {
     print(MediaQuery.of(context).size.width);
     print(MediaQuery.of(context).size.height);
@@ -89,7 +89,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                   children: [
                     Text(
                       '$ket :',
-                      style: const TextStyle(fontSize: 13),
+                      style: const TextStyle(fontSize: 6),
                     ),
                   ],
                 )),
@@ -104,17 +104,12 @@ class _TransaksiAddState extends State<TransaksiAdd> {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(right: 15, bottom: 15),
-        child: ElevatedButton.icon(
-            icon: const Icon(
+        child: FloatingActionButton(backgroundColor: Colors.green,
+            child: const Icon(
               Icons.add,
               color: Colors.white,
             ),
-            label: const Text(
-              'Tambah Transaksi',
-              style: TextStyle(color: Colors.white),
-            ),
-            style: ButtonStyle(
-                padding: MaterialStateProperty.all(const EdgeInsets.all(15))),
+            
             onPressed: () {
               transaksi = Transaksi.fromMap({
                
@@ -186,7 +181,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                     children: [
                                       _buildSize(
                                           WebDatePicker(
-                                            height: 40,
+                                            height: 60,
                                             initialDate: DateTime.now(),
                                             dateformat: 'dd/MM/yyyy',
                                             onChange: (value) {
@@ -351,258 +346,13 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                           'Keterangan',
                                           2),
                                       const Expanded(flex: 1, child: SizedBox()),
-                                      Expanded(
-                                        child: Container(
-                                          child: ElevatedButton.icon(
-                                              icon: const Icon(
-                                                Icons.arrow_circle_down_rounded,
-                                                color: Colors.white,
-                                              ),
-                                              label: const Text(
-                                                'Masuk Ringkasan',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 13),
-                                              ),
-                                              style: ButtonStyle(
-                                                  padding:
-                                                      MaterialStateProperty.all(
-                                                          const EdgeInsets.only(
-                                                              right: 15,
-                                                              left: 15))),
-                                              onPressed: () {
-                                                bulkTransaksi.add(transaksi);
-                                                controlerKetMobil.text = '';
-                                                controlerMobil.text = '';
-                                                controlerKeterangan.text = '';
-                                                controlerOngkos.text = '';
-                                                controlerKeluar.text = '';
-                                                controlerSisa.text = '';
-                                                controlerSupir.text = '';
-                                                controlerKetMobil.text = '';
-                                                controlerTujuan.text = '';
-                                                transaksi = Transaksi.fromMap({
-                                               
-                                                  'tgl_berangkat':
-                                                      DateTime.now()
-                                                          .toIso8601String(),
-                                                  'keterangan': '',
-                                                  'supir': '',
-                                                  'tujuan': '',
-                                                  'mobil': '',
-                                                  'keluar': 0,
-                                                  'ongkos': 0,
-                                                  'sisa': 0,
-                                                });
-
-                                                setState(() {});
-                                              }),
-                                        ),
-                                      )
+                                     
                                     ],
                                   ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Theme.of(context).primaryColor,
-                                        borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(5),
-                                            topRight: Radius.circular(5))),
-                                    padding: const EdgeInsets.only(
-                                        top: 10,
-                                        bottom: 12.5,
-                                        left: 15,
-                                        right: 15),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                            flex: 3,
-                                            child: Text(
-                                              'No',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .displayMedium,
-                                            )),
-                                        Expanded(
-                                            flex: 7,
-                                            child: Text(
-                                              'Berangkat',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .displayMedium,
-                                            )),
-                                        Expanded(
-                                            flex: 7,
-                                            child: Text(
-                                              'Mobil',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .displayMedium,
-                                            )),
-                                        Expanded(
-                                            flex: 5,
-                                            child: Text(
-                                              'Supir',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .displayMedium,
-                                            )),
-                                        Expanded(
-                                            flex: 10,
-                                            child: Text(
-                                              'Tujuan',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .displayMedium,
-                                            )),
-                                        Expanded(
-                                            flex: 7,
-                                            child: Text(
-                                              'Ongkos',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .displayMedium,
-                                            )),
-                                        Expanded(
-                                            flex: 7,
-                                            child: Text(
-                                              'Keluar',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .displayMedium,
-                                            )),
-                                        Expanded(
-                                            flex: 7,
-                                            child: Text(
-                                              'Sisa',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .displayMedium,
-                                            )),
-                                        Expanded(flex: 4,
-                                          child: Text(
-                                            'Delete',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .displayMedium,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: ListView(padding: EdgeInsets.zero,
-                                        children: bulkTransaksi.reversed
-                                            .toList()
-                                            .mapIndexed((index, element) =>
-                                                Container(
-                                                  color: index.isEven
-                                                      ? Colors.grey.shade200
-                                                      : const Color.fromARGB(
-                                                          255, 189, 193, 221),
-                                                  child: Container(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 10,
-                                                              bottom: 12.5,
-                                                              left: 15,
-                                                              right: 15),
-                                                      child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Expanded(
-                                                                flex: 3,
-                                                                child: Text(
-                                                                  style: small,
-                                                                  (index + 1)
-                                                                      .toString(),
-                                                                )),
-                                                            Expanded(
-                                                                flex: 7,
-                                                                child: Text(
-                                                                    style:
-                                                                        small,
-                                                                    maxLines: 1,
-                                                                    FormatTanggal.formatTanggal(element
-                                                                            .tanggalBerangkat)
-                                                                        .toString())),
-                                                            Expanded(
-                                                                flex: 7,
-                                                                child: Text(
-                                                                    style:
-                                                                        small,
-                                                                    element
-                                                                        .mobil)),
-                                                            Expanded(
-                                                                flex: 5,
-                                                                child: Text(
-                                                                  style: small,
-                                                                  element.supir,
-                                                                )),
-
-                                                            Expanded(
-                                                                flex: 10,
-                                                                child: Text(
-                                                                    style:
-                                                                        small,
-                                                                    element
-                                                                        .tujuan)),
-                                                            Expanded(
-                                                                flex: 7,
-                                                                child: Text(
-                                                                    style:
-                                                                        small,
-                                                                    Rupiah.format(
-                                                                        element
-                                                                            .ongkos))),
-                                                            Expanded(
-                                                                flex: 7,
-                                                                child: Text(
-                                                                    style:
-                                                                        small,
-                                                                    Rupiah.format(
-                                                                        element
-                                                                            .keluar))),
-                                                            Expanded(
-                                                                flex: 7,
-                                                                child: Text(
-                                                                    style:
-                                                                        small,
-                                                                    Rupiah.format(
-                                                                        element
-                                                                            .sisa))),
-                                                            Expanded(flex: 4,
-                                                              child: IconButton(
-                                                                  onPressed: () {
-                                                                    bulkTransaksi
-                                                                        .remove(
-                                                                            element);
-                                                                    setState(
-                                                                        () {});
-                                                                  },
-                                                                  icon: const Icon(
-                                                                    Icons
-                                                                        .delete_forever,
-                                                                    color: Colors
-                                                                        .red,
-                                                                  )),
-                                                            )
-                                                            // Expanded(
-                                                            //     flex: 7,
-                                                            //     child: Text(element.listPerbaikan.isEmpty
-                                                            //         ? '-'
-                                                            //         : Rupiah.format(
-                                                            //             totalPengeluaran(element.listPerbaikan)))),
-                                                          ])),
-                                                ))
-                                            .toList()),
-                                  ),
-                                  bulkTransaksi.isEmpty
-                                      ? const SizedBox()
-                                      : RoundedLoadingButton(
+                                 
+                                
+                               
+                                 RoundedLoadingButton(
                                           color: Colors.green,
                                           elevation: 10,
                                           successColor: Colors.green,

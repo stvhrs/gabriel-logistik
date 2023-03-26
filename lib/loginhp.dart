@@ -28,10 +28,10 @@ class _LoginHpState extends State<LoginHp> {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: MediaQuery.of(context).size.width * 0.3,
+          width: MediaQuery.of(context).size.width * 0.7,
+          height: MediaQuery.of(context).size.width * 0.8,
           child: Card(
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).colorScheme.secondary,
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Card(
@@ -41,11 +41,10 @@ class _LoginHpState extends State<LoginHp> {
                   padding: const EdgeInsets.only(),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Padding(
+                      children: [Spacer(),
+                         Padding(
                             padding: const EdgeInsets.only(
-                                top: 30, bottom: 10, right: 30, left: 30),
+                                top: 5, bottom: 5, right: 30, left: 30),
                             child: TextFormField(
                                 onChanged: (val) {
                                   _userControler = val;
@@ -53,11 +52,9 @@ class _LoginHpState extends State<LoginHp> {
                                 decoration: const InputDecoration(
                                     hintText: 'Username')),
                           ),
-                        ),
-                        Expanded(
-                            child:Padding(
+                       Padding(
                             padding: const EdgeInsets.only(
-                                top: 30, bottom: 10, right: 30, left: 30),
+                                top: 5, bottom: 5, right: 30, left: 30),
                           child: TextFormField(
                               onChanged: (val) {
                                 _passwordControler = val;
@@ -66,48 +63,51 @@ class _LoginHpState extends State<LoginHp> {
                                 hintText: 'Password',
                               ),
                               obscureText: true),
-                        )),
-                        Expanded(
-                            child: RoundedLoadingButton(
-                          color: TargetPlatform.windows == defaultTargetPlatform
-                              ? Colors.red
-                              : Colors.green,
-                          controller: _btnController,
-                          successColor: Colors.green,
-                          errorColor: Colors.red,
-                          onPressed: () async {
-                            SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            bool valid = false;
-                            var userData = {};
-                            for (var element in data) {
-                              if (_passwordControler == element['pass'] &&
-                                  _userControler == element['user']) {
-                                userData = element;
-                                valid = true;
-                              }
-                            }
-
-                            if (valid) {
-                              _btnController.success();
-                              await Future.delayed(
-                                  const Duration(milliseconds: 500));
-                              await prefs.setString(
-                                  'data', jsonEncode(userData));
-
-                              Provider.of<ProviderData>(context, listen: false)
-                                  .login();
-                            } else {
-                              _btnController.error();
-                              await Future.delayed(
-                                  const Duration(milliseconds: 500));
-                              _btnController.reset();
-                              return;
-                            }
-                          },
-                          child: const Text('LoginHp',
-                              style: TextStyle(color: Colors.white)),
-                        ))
+                        ),Spacer(),
+                       Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: SizedBox(width:  MediaQuery.of(context).size.width * 0.3,height: 28,
+                           child: RoundedLoadingButton(
+                              color: 
+                                 Colors.green,
+                              controller: _btnController,
+                              successColor: Colors.green,
+                              errorColor: Colors.red,
+                              onPressed: () async {
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                bool valid = false;
+                                var userData = {};
+                                for (var element in data) {
+                                  if (_passwordControler == element['pass'] &&
+                                      _userControler == element['user']) {
+                                    userData = element;
+                                    valid = true;
+                                  }
+                                }
+                         
+                                if (valid) {
+                                  _btnController.success();
+                                  await Future.delayed(
+                                      const Duration(milliseconds: 500));
+                                  await prefs.setString(
+                                      'data', jsonEncode(userData));
+                         
+                                  Provider.of<ProviderData>(context, listen: false)
+                                      .login();
+                                } else {
+                                  _btnController.error();
+                                  await Future.delayed(
+                                      const Duration(milliseconds: 500));
+                                  _btnController.reset();
+                                  return;
+                                }
+                              },
+                              child: const Text('Login',
+                                  style: TextStyle(color: Colors.white)),
+                            ),
+                         ),
+                       ),Spacer()
                       ]),
                 ),
               ),

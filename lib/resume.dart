@@ -15,10 +15,8 @@
  */
 
 import 'dart:async';
-import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -38,7 +36,7 @@ Future<Uint8List> generateResume(
   for (var element in as) {
 
 
-    document.addPage(pw.Page(margin: pw.EdgeInsets.all(5),
+    document.addPage(pw.Page(margin: const pw.EdgeInsets.all(5),
        
         build: ((pw.Context context) {
           return pw.Container(
@@ -59,7 +57,7 @@ Future<Uint8List> generateResume(
                 ),
               ),
               pw.Container(
-                decoration: pw.BoxDecoration(
+                decoration: const pw.BoxDecoration(
                   // color: Theme.of(context).colorScheme.primary,
                 ),
                 padding: const pw. EdgeInsets.only(top: 10, bottom: 12.5, left: 15),
@@ -106,8 +104,8 @@ Future<Uint8List> generateResume(
               ),
               // ...buildChildren(), 
            
-               pw.Container(margin: pw. EdgeInsets.only(top: 40),
-                decoration:pw. BoxDecoration(
+               pw.Container(margin: const pw. EdgeInsets.only(top: 40),
+                decoration:const pw. BoxDecoration(
                   // color: Colors.red.shade600
                 ),
                 padding: const pw. EdgeInsets.only(top: 10, bottom: 12.5, left: 15),
@@ -328,7 +326,7 @@ Future<Uint8List> generateResume(
                     ),
             ]), // This trailing comma makes auto-formatting nicer for build methods.
       ),
-    );;
+    );
         })));
   }
   // await Printing.layoutPdf(
