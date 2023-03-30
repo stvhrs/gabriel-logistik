@@ -86,31 +86,62 @@ class _DashBoardHpState extends State<DashBoardHp> {
 
   @override
   Widget build(BuildContext context) {
-    print('build transaksi page');
+
     return loading
         ? Center(
             child: CircularProgressIndicator(),
           )
         : Consumer<ProviderData>(builder: (context, prov, _) {
-            return Scaffold(
-                resizeToAvoidBottomInset: false,
+            return Scaffold(resizeToAvoidBottomInset: false,extendBody: true,
+                appBar: AppBar(
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  title: Text('Riwayat Transaksi',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Nunito',
+                          letterSpacing: 1.1)),
+                  leading: Padding(
+                    padding: const EdgeInsets.all(13.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.white),
+                      child: InkWell(
+                        child: Icon(
+                          Icons.restart_alt_rounded,
+                          color: Colors.red,
+                        ),
+                        onTap: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.clear();
+
+                          // Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => MyHomePage(title: ''),));
+                          Provider.of<ProviderData>(context, listen: false)
+                              .logout();
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                
                 backgroundColor: Colors.grey.shade300,
                 floatingActionButton: HpTransaksiAdd(),
                 body: Padding(
-                    padding: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                     
                         Container(
                           decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.primary,
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5))),
+                              // borderRadius: const BorderRadius.only(
+                              //     topLeft: Radius.circular(5),
+                              //     topRight: Radius.circular(5))
+                                  ),
                           margin: const EdgeInsets.only(top: 10),
                           padding: const EdgeInsets.only(
-                              top: 10, bottom: 12.5, left: 3, right: 0),
+                              top: 10, bottom: 12.5, left: 10, right: 0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -164,51 +195,16 @@ class _DashBoardHpState extends State<DashBoardHp> {
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                   )),
-                              Expanded(
-                                  flex: 7,
-                                  child: Text(
-                                    'Sisa',
-                                    style: TextStyle(
-                                        fontFamily: 'Nunito',
-                                        fontSize: 10,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  )),
                             ],
                           ),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.7,
+                          height: MediaQuery.of(context).size.height * 0.8,
                           child: ListView.builder(
                               itemCount: prov.listTransaksi.length,
                               itemBuilder: (context, index) => HpTransaksiTile(
                                   prov.listTransaksi[index], index + 1)),
                         ),
-                        Row(
-                          children: [
-                            InkWell(
-                              onTap: () async {
-                                SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
-                                prefs.clear();
-
-                                // Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => MyHomePage(title: ''),));
-                                Provider.of<ProviderData>(context,
-                                        listen: false)
-                                    .logout();
-                              },
-                              child: Card(
-                                child: Text(
-                                  'Logout',
-                                  style: TextStyle(
-                                      fontSize: 10,
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
                       ],
                     )));
           });

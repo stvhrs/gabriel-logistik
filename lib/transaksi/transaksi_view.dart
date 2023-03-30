@@ -51,7 +51,7 @@ class _TransaksiViewState extends State<TransaksiView> {
         .map((e) => e.nama_mobil)
         .toList()
         .forEach((element) {
-      print(element);
+      
       controlerKetMobil.text=temp.firstWhere((element) => element.nama_mobil==widget.transaksi.mobil).nama_mobil;
       controlerSisa.text=widget.transaksi.sisa.toString();
       if (listMobil.contains(element)) {
@@ -66,8 +66,7 @@ class _TransaksiViewState extends State<TransaksiView> {
 
   late Transaksi transaksi;
   Widget _buildSize(widget, String ket, int flex) {
-    print(MediaQuery.of(context).size.width);
-    print(MediaQuery.of(context).size.height);
+
     return Expanded(
       // width: MediaQuery.of(context).size.width * 0.14 * flex,
       // margin: EdgeInsets.only(right: ket == 'Tanggal' ? 0 : 50, bottom: 30),
@@ -165,7 +164,7 @@ class _TransaksiViewState extends State<TransaksiView> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           _buildSize(
-                                              WebDatePicker(
+                                                   WebDatePicker(lastDate: DateTime.now(),
                                                 height: 60,
                                                 initialDate:DateTime.parse(widget.transaksi.tanggalBerangkat) ,
                                                 dateformat: 'dd/MM/yyyy',
@@ -179,17 +178,17 @@ class _TransaksiViewState extends State<TransaksiView> {
                                               'Tanggal',
                                               1),
                                           _buildSize(
-                                              DropDownField(value: widget.transaksi.supir,enabled: false,
-                                                onValueChanged: (val) {
+                                             TextFormField(readOnly: true,initialValue: widget.transaksi.supir,enabled: false,
+                                                onChanged: (val) {
                                                   transaksi.supir = val;
                                                 },
-                                                items: listSupir,
+                                              
                                               ),
                                               'Pilih Supir',
                                               1),
                                           _buildSize(
-                                              DropDownField(value: widget.transaksi.mobil,enabled: false,
-                                                onValueChanged: (val) {
+                                             TextFormField(readOnly: true,initialValue: widget.transaksi.mobil,enabled: false,
+                                                onChanged: (val) {
                                                   transaksi.mobil = val;
                                                   controlerKetMobil
                                                       .text = Provider.of<
@@ -202,7 +201,7 @@ class _TransaksiViewState extends State<TransaksiView> {
                                                           val)
                                                       .keterangan_mobill;
                                                 },
-                                                items: listMobil,
+                                             
                                               ),
                                               'Pilih Mobil',
                                               1),
@@ -284,7 +283,7 @@ class _TransaksiViewState extends State<TransaksiView> {
                                               1),
                                           _buildSize(
                                               TextFormField(readOnly:true,
-                                                controller: controlerSisa,
+                                               initialValue: Rupiah.format(widget.transaksi.sisa),
                                           
                                                 onChanged: (va) {
                                                   if (va.isNotEmpty &&

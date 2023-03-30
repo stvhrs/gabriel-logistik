@@ -16,16 +16,15 @@ class TransaksiPage extends StatefulWidget {
 }
 
 class _TransaksiPageState extends State<TransaksiPage> {
-  
   @override
   Widget build(BuildContext context) {
-    print('build transaksi page');
     return Consumer<ProviderData>(builder: (context, prov, _) {
       return Scaffold(
-          resizeToAvoidBottomInset: false,backgroundColor: Colors.grey.shade300,
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.grey.shade300,
           floatingActionButton: TransaksiAdd(),
           body: Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
+              padding: const EdgeInsets.only(left: 25, right: 25, top: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -42,16 +41,18 @@ class _TransaksiPageState extends State<TransaksiPage> {
                     margin: const EdgeInsets.only(bottom: 15),
                     child: Card(
                       color: Theme.of(context).colorScheme.secondary,
-                      shadowColor: Theme.of(context).colorScheme.primary,surfaceTintColor:  Theme.of(context).colorScheme.secondary,
+                      shadowColor: Theme.of(context).colorScheme.primary,
+                      surfaceTintColor: Theme.of(context).colorScheme.secondary,
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Column(
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children:  [
+                              children: [
                                 Expanded(
-                                  child: Image.asset('images/search.png',height: 50),
+                                  child: Image.asset('images/search.png',
+                                      height: 50),
                                 ),
                                 const Expanded(flex: 4, child: SearchTanggal()),
                                 const Expanded(flex: 4, child: SearchNama()),

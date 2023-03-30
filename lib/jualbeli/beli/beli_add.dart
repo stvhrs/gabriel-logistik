@@ -27,8 +27,7 @@ class _BeliAddState extends State<BeliAdd> {
   late JualBeliMobil jualBeliMobil;
   TextStyle small = const TextStyle(fontSize: 13);
   Widget _buildSize(widget, String ket, int flex) {
-    print(MediaQuery.of(context).size.width);
-    print(MediaQuery.of(context).size.height);
+
     return Expanded(
       flex: flex,
       child: Container(
@@ -123,7 +122,7 @@ class _BeliAddState extends State<BeliAdd> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     _buildSize(
-                                        WebDatePicker(
+                                             WebDatePicker(lastDate: DateTime.now(),
                                           height: 60,
                                           initialDate: DateTime.now(),
                                           dateformat: 'dd/MM/yyyy',

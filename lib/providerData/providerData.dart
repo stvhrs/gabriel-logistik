@@ -173,7 +173,7 @@ class ProviderData with ChangeNotifier {
     for (var element in backupTransaksi) {
       test.add(Transaksi.toMap(element));
     }
-    print(test);
+
 
     notifyListeners();
   }
@@ -187,7 +187,7 @@ class ProviderData with ChangeNotifier {
   void updateTransaksi(Transaksi transaksi) {
     int data = listTransaksi.indexWhere(
         (element) => element.tanggalBerangkat == transaksi.tanggalBerangkat);
-    print(data);
+
     listTransaksi[data] = transaksi;
     backupTransaksi[data] = transaksi;
     notifyListeners();

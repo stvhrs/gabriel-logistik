@@ -31,29 +31,29 @@ class _HpTransaksiTileState extends State<HpTransaksiTile> {
                 ? Colors.grey.shade200
                 :  const Color.fromARGB(255, 189, 193, 221),
         padding:
-             const EdgeInsets.only(top: 14, bottom: 14,left: 3),
+             const EdgeInsets.only(top: 14, bottom: 14,left: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             
             Expanded(
                 flex: 7,
-                child:Text(style:TextStyle(fontSize: 8, ),maxLines:1,FormatTanggal.formatTanggal(
+                child:Text(style:TextStyle(fontSize: 10, ),maxLines:1,FormatTanggal.formatTanggal(
                     widget._transaksi.tanggalBerangkat).toString())),
          
-            Expanded(flex: 7, child: Text(style:TextStyle(fontSize: 8, ),widget._transaksi.mobil)),
-            Expanded(flex: 10, child: Text(style:TextStyle(fontSize: 8, ),widget._transaksi.tujuan)),
+            Expanded(flex: 7, child: Text(style:TextStyle(fontSize: 10, ),widget._transaksi.mobil)),
+            Expanded(flex: 10, child: Text(style:TextStyle(fontSize: 10, ),widget._transaksi.tujuan)),
             Expanded(
-                flex: 7, child: Text(style:TextStyle(fontSize: 8, ),Rupiah.format(widget._transaksi.ongkos))),
+                flex: 7, child: Text(style:TextStyle(fontSize: 10, ),Rupiah.format(widget._transaksi.ongkos))),
             Expanded(
-                flex: 7, child: Text(style:TextStyle(fontSize: 8, ),Rupiah.format(widget._transaksi.keluar))),
-            Expanded(
-                flex: 7,
-                child: Text(style:TextStyle(fontSize: 8, ),Rupiah.format(
-                    widget._transaksi.sisa))),
+                flex: 7, child: Text(style:TextStyle(fontSize: 10, ),Rupiah.format(widget._transaksi.keluar))),
             // Expanded(
             //     flex: 7,
-            //     child: Text(style:TextStyle(fontSize: 8, ),widget._transaksi.listPerbaikan.isEmpty
+            //     child: Text(style:TextStyle(fontSize: 10, ),Rupiah.format(
+            //         widget._transaksi.sisa))),
+            // Expanded(
+            //     flex: 7,
+            //     child: Text(style:TextStyle(fontSize: 10, ),widget._transaksi.listPerbaikan.isEmpty
             //         ? '-'
             //         : Rupiah.format(
             //             totalPengeluaran(widget._transaksi.listPerbaikan)))),

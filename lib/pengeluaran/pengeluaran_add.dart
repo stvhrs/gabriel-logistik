@@ -32,7 +32,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
         .map((e) => e.nama_mobil)
         .toList()
         .forEach((element) {
-      print(element);
+      
       if (listMobil.contains(element)) {
       } else {
         listMobil.add(element);
@@ -47,8 +47,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
   late Pengeluaran pengeluaran;
   TextStyle small = const TextStyle(fontSize: 13);
   Widget _buildSize(widget, String ket, int flex) {
-    print(MediaQuery.of(context).size.width);
-    print(MediaQuery.of(context).size.height);
+
     return Expanded(
       flex: flex,
       child: Container(
@@ -149,7 +148,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     _buildSize(
-                                        WebDatePicker(
+                                             WebDatePicker(lastDate: DateTime.now(),
                                           height: 60,
                                           initialDate: DateTime.now(),
                                           dateformat: 'dd/MM/yyyy',

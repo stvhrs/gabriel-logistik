@@ -51,7 +51,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
         .map((e) => e.nama_mobil)
         .toList()
         .forEach((element) {
-      print(element);
+      
       controlerKetMobil.text=temp.firstWhere((element) => element.nama_mobil==widget.transaksi.mobil).nama_mobil;
       controlerSisa.text=widget.transaksi.sisa.toString();
       if (listMobil.contains(element)) {
@@ -59,7 +59,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
         listMobil.add(element);
       }
     });
-
+controlerSisa.text=  Rupiah.format(widget.transaksi.sisa);
     super.initState();
   }
 
@@ -67,8 +67,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
       RoundedLoadingButtonController();
   late Transaksi transaksi;
   Widget _buildSize(widget, String ket, int flex) {
-    print(MediaQuery.of(context).size.width);
-    print(MediaQuery.of(context).size.height);
+
     return Expanded(
       // width: MediaQuery.of(context).size.width * 0.14 * flex,
       // margin: EdgeInsets.only(right: ket == 'Tanggal' ? 0 : 50, bottom: 30),
@@ -166,7 +165,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           _buildSize(
-                                              WebDatePicker(
+                                                   WebDatePicker(lastDate: DateTime.now(),
                                                 height: 60,
                                                 initialDate:DateTime.parse(widget.transaksi.tanggalBerangkat) ,
                                                 dateformat: 'dd/MM/yyyy',

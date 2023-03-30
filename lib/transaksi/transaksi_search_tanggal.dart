@@ -58,7 +58,7 @@ class _SearchTanggalState extends State<SearchTanggal> {
                           ],
                         );
                       });
-                  print(picked);
+         
                   if (picked != null) {
                     _selecteRange = FormatTanggal.formatTanggal(
                             picked!.start.toIso8601String()) +

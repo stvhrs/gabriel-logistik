@@ -10,7 +10,7 @@ class Mobil {
   factory Mobil.fromMap(Map<String, dynamic> data,List<Pengeluaran> list) {
 
 
-    return Mobil(data['terjual'],
-        data['nama_mobil'], data['keterangan_mobill'], list);
+    return Mobil(data['terjual']=='true'?true:false,
+        data['plat_mobil'], data['ket_mobil'], list);
   }
 }

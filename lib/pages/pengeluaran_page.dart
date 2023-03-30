@@ -18,14 +18,14 @@ class _PengeluaranPageState extends State<PengeluaranPage> {
 //
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+    return
          Container(
               padding: const EdgeInsets.only(left: 25, right: 25, top: 0,bottom: 25),
               decoration: BoxDecoration( border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.2),width: 10,strokeAlign:StrokeAlign.center ),color: Colors.white, borderRadius: BorderRadius.circular(10)),
               width: MediaQuery.of(context).size.width * 0.7,
               child: Column(
                 children: [
-                  Container(margin: EdgeInsets.zero,
+                  Container(margin: EdgeInsets.only(bottom: 30),
                     padding: const EdgeInsets.only(right:30,left: 30,bottom: 10,top: 5),
                     decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.secondary,
@@ -77,7 +77,7 @@ class _PengeluaranPageState extends State<PengeluaranPage> {
                         )),
                     Expanded(
                         flex: 11,
-                        child: Text('Mobil',
+                        child: Text('No Pol',
                             style: Theme.of(context).textTheme.displayMedium)),
                     Expanded(
                         flex: 11,
@@ -145,11 +145,11 @@ class _PengeluaranPageState extends State<PengeluaranPage> {
                                       c.listPengeluaran[index].keterangan)),
                               Expanded(
                                   flex: 2,
-                                  child: PengeluaranDelete(
-                                      c.listPengeluaran[index])),
+                                  child: Provider.of<ProviderData>(context).isOwner? PengeluaranDelete(
+                                      c.listPengeluaran[index]):SizedBox()),
                               Expanded(
                                   flex: 2,
-                                  child: PengelauaranEdit(
+                                  child:PengelauaranEdit(
                                       c.listPengeluaran[index]))
                             ],
                           ),
@@ -158,7 +158,7 @@ class _PengeluaranPageState extends State<PengeluaranPage> {
                     ));
               })
             ],
-          ))
-    ]);
+          ));
+    
   }
 }

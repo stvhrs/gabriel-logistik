@@ -21,12 +21,31 @@ class TambahMobil extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all(
                Colors.green)),
         onPressed: () {
-          showDialog(
+          showDialog(barrierDismissible: false,
               context: context,
               builder: (context) {
                 return AlertDialog(
                   actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                  title: const Text("Tambah Mobil"),
+                  title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text("Tambah Mobil"), Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CircleAvatar(
+                                radius: 12,
+                                backgroundColor: Colors.white,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Icon(
+                                    Icons.close,
+                                    
+                                    color: Colors.red,
+                                  ),
+                                )),
+                          ),
+                  ],
+                ),
                   content: IntrinsicHeight(
                     child: SizedBox(
                       width: 500,
@@ -36,7 +55,7 @@ class TambahMobil extends StatelessWidget {
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(
                               decoration: const InputDecoration(
-                                hintText: 'Nama Mobil',
+                                hintText: 'No Pol',
                               ),
                               onChanged: (val) {
                                 namaMobil = val.toString();
@@ -48,7 +67,7 @@ class TambahMobil extends StatelessWidget {
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(
                               decoration: const InputDecoration(
-                                hintText: 'No Hp',
+                                hintText: 'Keterangan',
                               ),
                               onChanged: (val) {
                                 noHp = val.toString();

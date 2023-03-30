@@ -17,14 +17,14 @@ class _DaftarMobilState extends State<DaftarMobil> {
 //
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+    return
         Container(
               padding: const EdgeInsets.only(left: 25, right: 25, top: 0,bottom: 25),
               decoration: BoxDecoration( border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.2),width: 10,strokeAlign:StrokeAlign.center ),color: Colors.white, borderRadius: BorderRadius.circular(10)),
               width: MediaQuery.of(context).size.width * 0.7,
               child: Column(
                 children: [
-                  Container(margin: EdgeInsets.zero,
+                  Container(margin: EdgeInsets.only(bottom: 30),
                     padding: const EdgeInsets.only(right:30,left: 30,bottom: 10,top: 5),
                     decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.secondary,
@@ -68,8 +68,8 @@ class _DaftarMobilState extends State<DaftarMobil> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:  [
-                    Expanded(flex: 11, child: Text('Nama',style: Theme.of(context).textTheme.displayMedium,)),
-                    Expanded(flex: 11, child: Text('Nomor Polisi',style: Theme.of(context).textTheme.displayMedium)),
+                    Expanded(flex: 11, child: Text('No Pol',style: Theme.of(context).textTheme.displayMedium,)),
+                    Expanded(flex: 11, child: Text('Keterangan',style: Theme.of(context).textTheme.displayMedium)),
                     Expanded(flex: 3, child: Text(' Aksi',style: Theme.of(context).textTheme.displayMedium))
                   ],
                 ),
@@ -112,7 +112,8 @@ class _DaftarMobilState extends State<DaftarMobil> {
                                 
                                   children: [
                                     EditMobil(c.listMobil[index]),
-                                    DeleteMobil(c.listMobil[index])
+                                   Provider.of<ProviderData>(context, listen: false)
+                                    .isOwner?   DeleteMobil(c.listMobil[index]):SizedBox()
                                   ],
                                 ),
                               )
@@ -123,7 +124,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
                     ));
               })
             ],
-          ))
-    ]);
+          ));
+   
   }
 }

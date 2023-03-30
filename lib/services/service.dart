@@ -34,21 +34,21 @@ const Map<String, String> headers = {
 List<Map<String, dynamic>> pengeluaran = [
   {
     'jenis': 'Pajak',
-    'mobil': 'AD 1234 FF',
+    'mobil': 'AD 2345 HWE',
     'harga': 10000,
     'tanggal': DateTime.now().toIso8601String(),
     'keterangan': 'keterangan'
   },
   {
     'jenis': 'Servis',
-    'mobil': 'AD 1234 FF',
+    'mobil': 'AD 2345 HWE',
     'harga': 10000,
     'tanggal': DateTime.now().toIso8601String(),
     'keterangan': 'keterangan'
   },
   {
     'jenis': 'Cucis',
-    'mobil': 'AD 1234 FF',
+    'mobil': 'AD 2345 HWE',
     'harga': 10000,
     'tanggal': DateTime.now().toIso8601String(),
     'keterangan': 'keterangan'
@@ -56,7 +56,7 @@ List<Map<String, dynamic>> pengeluaran = [
 ];
 List<Map<String, dynamic>> jualBeli = [
   {
-    'nama_mobil': 'AD 1234 FF',
+    'nama_mobil': 'AD 2345 HWE',
     'harga': 0,
     'ket_mobil': 'Head Tronton',
     'beli': true,
@@ -67,11 +67,150 @@ List<Map<String, dynamic>> jualBeli = [
 
 List<Map<String, dynamic>> transaksi = [
   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+    {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+    {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+    {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+    {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+    {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+    {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },{
     'tgl_berangkat': '2023-03-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
     'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 1234 FF',
+    'mobil': 'AD 2345 HWE',
     'keluar': 1500000,
     'ongkos': 3300000,
     'sisa': 1800000
@@ -81,7 +220,127 @@ List<Map<String, dynamic>> transaksi = [
     'keterangan': 'test',
     'supir': 'Kolil',
     'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 1234 FF',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+    {
+    'tgl_berangkat': '2023-03-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-03-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+    {
+    'tgl_berangkat': '2023-03-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-03-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+    {
+    'tgl_berangkat': '2023-03-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-03-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+    {
+    'tgl_berangkat': '2023-03-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-03-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+    {
+    'tgl_berangkat': '2023-03-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-03-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+    {
+    'tgl_berangkat': '2023-03-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 1500000,
+    'ongkos': 3300000,
+    'sisa': 1800000
+  },
+  {
+    'tgl_berangkat': '2023-03-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
     'keluar': 1500000,
     'ongkos': 3300000,
     'sisa': 1800000
@@ -90,23 +349,23 @@ List<Map<String, dynamic>> transaksi = [
 
 List<Map<String, dynamic>> supir = [
   {
-    'nama_supir': 'Kolil',
+    'nama_supir': 'Kolil2',
     'nohp_supir': '085728181929',
   },
   {
-    'nama_supir': 'Kolil',
+    'nama_supir': 'Kolil3',
     'nohp_supir': '085728181929',
   },
   {
-    'nama_supir': 'Kolil',
+    'nama_supir': 'Kolil4',
     'nohp_supir': '085728181929',
   },
   {
-    'nama_supir': 'Kolil',
+    'nama_supir': 'Kolil5',
     'nohp_supir': '085728181929',
   },
   {
-    'nama_supir': 'Kolil',
+    'nama_supir': 'Kolil6',
     'nohp_supir': '085728181929',
   },
   {
@@ -189,13 +448,13 @@ List<Map<String, dynamic>> supir = [
 
 List<Map<String, dynamic>> mobil = [
   {
-    'nama_mobil': 'AD 1234 FF',
-    'keterangan_mobill': 'HEAD TRONTON',
+    'plat_mobil': 'AD 2345 HWE',
+    'ket_mobil': 'HEAD TRONTON',
     'terjual': false,
   },
   {
-    'nama_mobil': 'AD 1234 FF2',
-    'keterangan_mobill': 'HEAD TRONTON',
+    'plat_mobil': 'AD 2345 HWE2',
+    'ket_mobil': 'HEAD TRONTON',
     'terjual': false,
   },
 ];
@@ -236,11 +495,29 @@ class Service {
   }
 
   static Future<List<Mobil>> getAllMobil(List<Pengeluaran> list) async {
+
+    final response = await http.get(
+      Uri.parse(
+        'https://logistik-project.000webhostapp.com/api/mobil',
+      ),
+    );
+
+    print(response.body);
+    if (response.body.isNotEmpty) {
+     
+    } else {
+    
+    }
+    List<Map<String, dynamic>> data2=[];
+  for (var element in jsonDecode(response.body) ) {
+    data2.add(element);
+  }
+
     List<Mobil> data = [];
     for (var te in mobil) {
       List<Pengeluaran> asu = list
           .where((element) =>
-              (te['nama_mobil'] as String).trim() == element.mobil.trim())
+              (te['plat_mobil'] as String).trim() == element.mobil.trim())
           .toList();
       data.add(Mobil.fromMap(te, asu));
     }
@@ -338,7 +615,6 @@ class Service {
     var response = await http
         .get(Uri.parse('https://logistik-project.000webhostapp.com/api/supir'));
     return response.body;
-    log(response.body);
-    log(response.statusCode.toString());
+  
   }
 }

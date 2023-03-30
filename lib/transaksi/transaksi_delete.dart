@@ -52,14 +52,12 @@ class TransaksiDelete extends StatelessWidget {
                     errorColor: Colors.red,
                     controller: _btnController,
                     onPressed: () async {
-                      if (false)
-                       {
+                      if (false) {
                         _btnController.error();
                         await Future.delayed(const Duration(seconds: 1));
                         _btnController.reset();
                         return;
                       }
-
 
                       await Future.delayed(const Duration(seconds: 3), () {
                         Provider.of<ProviderData>(context, listen: false)

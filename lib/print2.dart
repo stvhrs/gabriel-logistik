@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/examples.dart';
+import 'package:gabriel_logistik/kas/kas.dart';
+import 'package:gabriel_logistik/models/kas_tahun.dart';
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:printing/printing.dart';
 
-class LaporanPrint extends StatefulWidget {
-  final List<KeuanganBulanan> list;
+class TahunPrint extends StatefulWidget {
+  final List<KasModel> list;
 
-  const LaporanPrint(
+  const TahunPrint(
     this.list,
   );
 
   @override
-  State<LaporanPrint> createState() => _LaporanPrintState();
+  State<TahunPrint> createState() => _TahunPrintState();
 }
 
-class _LaporanPrintState extends State<LaporanPrint> {
+class _TahunPrintState extends State<TahunPrint> {
   void _showPrintedToast(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -44,9 +46,9 @@ class _LaporanPrintState extends State<LaporanPrint> {
           loadingWidget: const Text('Loading...'),
           onError: (context, error) => const Text('Error...'),
           maxPageWidth: 700,
-          pdfFileName: 'Laporan_Bulanan',
+          pdfFileName: 'Laporan_Tahunan',
           canDebug: false,
-          build: (format) => examples[0].builder(
+          build: (format) => examples2[0].builder(
             format,
             widget.list,
           ),

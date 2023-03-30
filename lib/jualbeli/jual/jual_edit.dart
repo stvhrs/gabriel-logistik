@@ -31,7 +31,7 @@ class _JualEditState extends State<JualEdit> {
         .map((e) => e.nama_mobil)
         .toList()
         .forEach((element) {
-      print(element);
+
       if (listMobil.contains(element)) {
       } else {
         listMobil.add(element);
@@ -46,8 +46,7 @@ class _JualEditState extends State<JualEdit> {
  
   TextStyle small = const TextStyle(fontSize: 13);
   Widget _buildSize(widget, String ket, int flex) {
-    print(MediaQuery.of(context).size.width);
-    print(MediaQuery.of(context).size.height);
+
     return Expanded(
       flex: flex,
       child: Container(
@@ -135,7 +134,7 @@ class _JualEditState extends State<JualEdit> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     _buildSize(
-                                        WebDatePicker(
+                                             WebDatePicker(lastDate: DateTime.now(),
                                           height: 60,
                                           initialDate:DateTime.parse(widget.jualBeliMobil.tanggal) ,
                                           dateformat: 'dd/MM/yyyy',

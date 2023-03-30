@@ -67,7 +67,7 @@ class _LaporanBulananState extends State<LaporanBulanan> {
             ));
           }),
       body: Padding(
-        padding: const EdgeInsets.only(left: 50, right: 50, top: 15),
+        padding: const EdgeInsets.only(left: 50, right: 50, top: 10),
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Container(
             margin: const EdgeInsets.only(bottom: 10),
@@ -129,7 +129,7 @@ class _LaporanBulananState extends State<LaporanBulanan> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.9,
+            height: MediaQuery.of(context).size.height * 0.89,
             child: ListView(
               children: Provider.of<ProviderData>(context).listMobil.map((e) {
                 List<Transaksi> transaksiBulanIni = [];
@@ -171,7 +171,6 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                 }
                 totalBersih -= totalPengeluaran;
 
-                print(totalPengeluaran);
                 KeuanganBulanan data = KeuanganBulanan(
                     e.nama_mobil,
                     transaksiBulanIni,
@@ -182,7 +181,10 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                     totalSisa,
                     totalPengeluaran,
                     list[list.indexOf(dropdownValue)]);
-                listKeuangan.add(data);
+                    if(transaksiBulanIni.isNotEmpty && e.pengeluaran.isNotEmpty){
+                        listKeuangan.add(data);
+                    }
+              
                 return transaksiBulanIni.isEmpty && e.pengeluaran.isEmpty
                     ? SizedBox()
                     : Bulanan(data);

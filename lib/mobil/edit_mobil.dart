@@ -19,12 +19,31 @@ class EditMobil extends StatelessWidget {
     return IconButton(
       
         onPressed: () {
-          showDialog(
+          showDialog(barrierDismissible: false,
               context: context,
               builder: (context) {
                 return AlertDialog(
                   actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                  title: const Text("Edit Mobil"),
+                  title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text("Edit Mobil"), Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CircleAvatar(
+                                radius: 12,
+                                backgroundColor: Colors.white,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Icon(
+                                    Icons.close,
+                                    
+                                    color: Colors.red,
+                                  ),
+                                )),
+                          ),
+                  ],
+                ),
                   content: IntrinsicHeight(
                     child: SizedBox(
                       width: 500,
@@ -34,7 +53,7 @@ class EditMobil extends StatelessWidget {
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(initialValue: mobil.nama_mobil,
                               decoration: const InputDecoration(
-                                hintText: 'Nama Mobil',
+                                hintText: 'No Pol',
                               ),
                               onChanged: (val) {
                                 mobil.nama_mobil = val.toString();
@@ -46,7 +65,7 @@ class EditMobil extends StatelessWidget {
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(initialValue: mobil.keterangan_mobill,
                               decoration: const InputDecoration(
-                                hintText: 'No Hp',
+                                hintText: 'Keterangan',
                               ),
                               onChanged: (val) {
                                  mobil.keterangan_mobill = val.toString();

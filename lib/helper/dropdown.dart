@@ -56,16 +56,16 @@ class DropDownField extends FormField<String> {
                 border: InputBorder.none,
                 filled: true,
                 icon: icon,
-                // suffixIcon: IconButton(
-                //     icon: const Icon(Icons.arrow_drop_down,
-                //         size: 30.0, color: Colors.black),
-                //     onPressed: () {
-                //       SystemChannels.textInput.invokeMethod('TextInput.hide');
-                //       // ignore: invalid_use_of_protected_member
-                //       state.setState(() {
-                //         state._showdropdown = !state._showdropdown;
-                //       });
-                //     }),
+                suffixIcon: IconButton(
+                    icon: const Icon(Icons.arrow_drop_down,
+                         color: Colors.black),
+                    onPressed: () {
+                      SystemChannels.textInput.invokeMethod('TextInput.hide');
+                      // ignore: invalid_use_of_protected_member
+                      state.setState(() {
+                        state._showdropdown = !state._showdropdown;
+                      });
+                    }),
                 hintStyle: hintStyle,
                 labelStyle: labelStyle,
                 hintText: hintText,
@@ -77,39 +77,41 @@ class DropDownField extends FormField<String> {
                 Row(
                   children: <Widget>[
                     Expanded(
-                      child: TextFormField(
-                        // autovalidate: true,
-                        controller: state._effectiveController,
-                        decoration: effectiveDecoration.copyWith(
-                            errorText: field.errorText),
-                        style: textStyle,
-                        textAlign: TextAlign.start,
-                        autofocus: false,
-                        obscureText: false,
-                        //     maxLengthEnforced: true,
-                        maxLines: 1,
-                        validator: (String? newValue) {
-                          if (required) {
-                            if (newValue == null || newValue.isEmpty) {
-                              return 'This field cannot be empty!';
+                      child: SizedBox(
+                        child: TextFormField(
+                          // autovalidate: true,
+                          controller: state._effectiveController,
+                          decoration: effectiveDecoration.copyWith(
+                              errorText: field.errorText),
+                          style: textStyle,
+                          textAlign: TextAlign.start,
+                          autofocus: false,
+                          obscureText: false,
+                          //     maxLengthEnforced: true,
+                          maxLines: 1,
+                          validator: (String? newValue) {
+                            if (required) {
+                              if (newValue == null || newValue.isEmpty) {
+                                return 'This field cannot be empty!';
+                              }
                             }
-                          }
-
-                          //Items null check added since there could be an initial brief period of time
-                          //when the dropdown items will not have been loaded
-                          if (items != null) {
-                            if (strict &&
-                                newValue!.isNotEmpty &&
-                                !items.contains(newValue)) {
-                              return 'Invalid value in this field!';
+                      
+                            //Items null check added since there could be an initial brief period of time
+                            //when the dropdown items will not have been loaded
+                            if (items != null) {
+                              if (strict &&
+                                  newValue!.isNotEmpty &&
+                                  !items.contains(newValue)) {
+                                return 'Invalid value in this field!';
+                              }
                             }
-                          }
-
-                          return null;
-                        },
-                        onSaved: setter,
-                        enabled: enabled,
-                        inputFormatters: inputFormatters,
+                      
+                            return null;
+                          },
+                          onSaved: setter,
+                          enabled: enabled,
+                          inputFormatters: inputFormatters,
+                        ),
                       ),
                     ),
                   ],

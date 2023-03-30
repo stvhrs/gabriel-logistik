@@ -36,7 +36,7 @@ class _PengelauaranEditState extends State<PengelauaranEdit> {
         .map((e) => e.nama_mobil)
         .toList()
         .forEach((element) {
-      print(element);
+      
       if (listMobil.contains(element)) {
       } else {
         listMobil.add(element);
@@ -143,7 +143,7 @@ class _PengelauaranEditState extends State<PengelauaranEdit> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     _buildSize(
-                                        WebDatePicker(
+                                             WebDatePicker(lastDate: DateTime.now(),
                                           height: 60,
                                           initialDate: DateTime.parse(
                                               widget.pengeluaran.tanggal),

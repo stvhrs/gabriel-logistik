@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:gabriel_logistik/hpSidemenu.dart';
-import 'package:gabriel_logistik/login.dart';
-import 'package:gabriel_logistik/loginhp.dart';
+
+import 'package:gabriel_logistik/login/login_screen.dart';
+
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/sidemenu.dart';
@@ -93,6 +94,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+        print(MediaQuery.of(context).size.width 
+        );
+    print(MediaQuery.of(context).size.height 
+       );
     print(MediaQuery.of(context).size.width *
         MediaQuery.of(context).devicePixelRatio);
     print(MediaQuery.of(context).size.height *
@@ -104,9 +109,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ? MediaQuery.of(context).size.width <= 500
                     ? DashBoardHp()
                     : DashBoard()
-                : MediaQuery.of(context).size.width <= 500
-                    ? LoginHp()
-                    : Login();
+                
+                    : LoginScreen();
           });
   }
 }

@@ -112,14 +112,14 @@ class _DashBoardState extends State<DashBoard> {
                       itemBorderRadius:
                           const BorderRadius.all(Radius.circular(0)),
                       unselectedTitleTextStyle: TextStyle(
-                          fontFamily: 'Nunito',
+                          fontFamily: 'Nunito',overflow: TextOverflow.visible,
                           fontSize: 15,
                           color: Colors.grey.shade300),
                       selectedTitleTextStyle: const TextStyle(
-                          fontFamily: 'Nunito',
+                          fontFamily: 'Nunito',overflow: TextOverflow.visible,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18),
+                          fontSize: 16),
                       selectedIconColor: Colors.white,
                     ),
                     title: Column(
@@ -153,7 +153,7 @@ class _DashBoardState extends State<DashBoard> {
                                 ? 'Hi Owner !'
                                 : 'Hi Admin !',
                             style: const TextStyle(color: Colors.white)),
-                        const Divider(
+                        const Divider( 
                           indent: 8.0,
                           endIndent: 8.0,
                         ),
@@ -174,7 +174,7 @@ class _DashBoardState extends State<DashBoard> {
                         child: Text(
                           'Logout',
                           style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 15,overflow: TextOverflow.visible,
                               color: Colors.red,
                               fontWeight: FontWeight.bold),
                         ),
@@ -183,7 +183,7 @@ class _DashBoardState extends State<DashBoard> {
                     items: [
                       SideMenuItem(
                         priority: 0,
-                        title: 'Riwayat Transaksi',
+                        title: 'Transaksi',icon: Icon(Icons.currency_exchange_rounded),
                         onTap: (s, w) {
                           page.jumpToPage(s);
                           sideMenu.changePage(s);
@@ -192,7 +192,7 @@ class _DashBoardState extends State<DashBoard> {
                       ),
                       SideMenuItem(
                         priority: 1,
-                        title: 'Daftar Supir',
+                        title: 'Daftar Supir',icon: Icon(Icons.people),
                         onTap: (s, w) {
                           page.jumpToPage(s);
                           sideMenu.changePage(s);
@@ -201,7 +201,7 @@ class _DashBoardState extends State<DashBoard> {
                       ),
                       SideMenuItem(
                         priority: 2,
-                        title: 'Daftar Mobil',
+                        title: 'Daftar Mobil',icon: Icon(Icons.fire_truck),
                         onTap: (s, w) {
                           page.jumpToPage(s);
                           sideMenu.changePage(s);
@@ -210,7 +210,7 @@ class _DashBoardState extends State<DashBoard> {
                       ),
                       SideMenuItem(
                         priority: 3,
-                        title: 'Jual Beli Mobil',
+                        title: 'Inventory',icon: Icon(Icons.inventory),
                         onTap: (s, w) {
                           page.jumpToPage(s);
                           sideMenu.changePage(s);
@@ -219,7 +219,7 @@ class _DashBoardState extends State<DashBoard> {
                       ),
                       SideMenuItem(
                         priority: 4,
-                        title: 'Pengeluaran',
+                        title: 'Pengeluaran',icon: Icon(Icons.engineering_rounded),
                         onTap: (s, w) {
                           page.jumpToPage(s);
                           sideMenu.changePage(s);
@@ -228,7 +228,7 @@ class _DashBoardState extends State<DashBoard> {
                       ),
                       SideMenuItem(
                         priority: 5,
-                        title: 'Keuangan Bulanan',
+                        title: 'Keuangan Bulanan',icon: Icon(Icons.monitor_heart_rounded),
                         onTap: (s, w) {
                           page.jumpToPage(s);
                           sideMenu.changePage(s);
@@ -237,7 +237,7 @@ class _DashBoardState extends State<DashBoard> {
                       ),
                       SideMenuItem(
                         priority: 6,
-                        title: 'Keuangan Tahunan',
+                        title: 'Keuangan Tahunan',icon: Icon(Icons.attach_money_rounded),
                         onTap: (s, w) {
                           page.jumpToPage(s);
                           sideMenu.changePage(s);

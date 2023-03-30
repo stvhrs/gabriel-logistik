@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/kas/kas.dart';
 import 'package:gabriel_logistik/models/kas_tahun.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
+import 'package:gabriel_logistik/print2.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +34,7 @@ class KasTahun extends StatefulWidget {
 
 class _KasTahunState extends State<KasTahun> {
   List<int> tahun = [];
-
+List<KasModel> listKas=[];
   final innerController = ScrollController();
 
   int ropdownValue2 = DateTime.now().year;
@@ -53,9 +54,15 @@ class _KasTahunState extends State<KasTahun> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,  floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.print),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => TahunPrint(listKas),
+            ));
+          }),
       body: Padding(
-        padding: const EdgeInsets.only(left: 50, right: 50, top: 15),
+        padding: const EdgeInsets.only(left: 50, right: 50, top: 10),
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Container(
             child: Row(
@@ -99,7 +106,7 @@ class _KasTahunState extends State<KasTahun> {
                 double tahunTotalOngkos = 0;
                 double tahunTotalKeluar = 0;
                 double tahunTotalSisa = 0;
-                KasModel asu = KasModel(
+                KasModel kasModel = KasModel(
                     e.nama_mobil, [], 0, 0, 0, 0, ropdownValue2.toString());
                 for (var moon in list) {
                   List<Transaksi> transaksiBulanIni = [];
@@ -141,7 +148,7 @@ class _KasTahunState extends State<KasTahun> {
                   }
                   totalBersih -= totalPengeluaran;
 
-                  print(totalPengeluaran);
+
                   KeuanganBulanan data = KeuanganBulanan(
                       e.nama_mobil,
                       transaksiBulanIni,
@@ -153,14 +160,21 @@ class _KasTahunState extends State<KasTahun> {
                       totalPengeluaran,
                       list[list.indexOf(moon)]);
 
-                  asu.listBulananMobil.add(data);
+                  kasModel.listBulananMobil.add(data);
+               
                   tahunTotalSisa += totalSisa;
                   tahunTotalBersih += totalBersih;
                   tahunTotalKeluar += totalKeluar;
                   tahunTotalOngkos += totalOngkos;
                   tahunTotalPengeluaran += totalPengeluaran;
                 }
-                return Kas(asu,tahunTotalOngkos,tahunTotalKeluar,tahunTotalSisa,tahunTotalPengeluaran,tahunTotalBersih);
+                if(tahunTotalOngkos<1){
+                     return 
+                     SizedBox();
+                }
+                   listKas.add(kasModel);
+            
+                     return Kas(kasModel,tahunTotalOngkos,tahunTotalKeluar,tahunTotalSisa,tahunTotalPengeluaran,tahunTotalBersih);
               }).toList(),
             ),
           ),

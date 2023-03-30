@@ -16,7 +16,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
 //
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+    return 
       
           Container(
               padding: const EdgeInsets.only(left: 25, right: 25, top: 0,bottom: 25),
@@ -24,7 +24,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
               width: MediaQuery.of(context).size.width * 0.7,
               child: Column(
                 children: [
-                  Container(margin: EdgeInsets.zero,
+                  Container(margin: EdgeInsets.only(bottom: 30),
                     padding: const EdgeInsets.only(right:30,left: 30,bottom: 10,top: 5),
                     decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.secondary,
@@ -128,7 +128,8 @@ class _DaftarSupirState extends State<DaftarSupir> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         EditSupir(c.listSupir[index]),
-                                        SupirDelete(c.listSupir[index])
+                                      Provider.of<ProviderData>(context, listen: false)
+                                    .isOwner?     SupirDelete(c.listSupir[index]):SizedBox()
                                       ],
                                     ),
                                   )
@@ -139,8 +140,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
                         ));
                   })
                 ],
-              )),
+              ));
       
-    ]);
-  }
+      }
 }
