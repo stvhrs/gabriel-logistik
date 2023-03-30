@@ -128,7 +128,7 @@ class _DashBoardHpState extends State<DashBoardHp> {
                 backgroundColor: Colors.grey.shade300,
                 floatingActionButton: HpTransaksiAdd(),
                 body: Padding(
-                    padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
+                    padding: const EdgeInsets.only(top: 0, ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -156,7 +156,7 @@ class _DashBoardHpState extends State<DashBoardHp> {
                                         fontWeight: FontWeight.bold),
                                   )),
                               Expanded(
-                                  flex: 7,
+                                  flex: 8,
                                   child: Text(
                                     'Mobil',
                                     style: TextStyle(

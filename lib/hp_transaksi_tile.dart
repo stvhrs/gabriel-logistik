@@ -41,7 +41,7 @@ class _HpTransaksiTileState extends State<HpTransaksiTile> {
                 child:Text(style:TextStyle(fontSize: 10, ),maxLines:1,FormatTanggal.formatTanggal(
                     widget._transaksi.tanggalBerangkat).toString())),
          
-            Expanded(flex: 7, child: Text(style:TextStyle(fontSize: 10, ),widget._transaksi.mobil)),
+            Expanded(flex: 8, child: Text(style:TextStyle(fontSize: 10, ),widget._transaksi.mobil)),
             Expanded(flex: 10, child: Text(style:TextStyle(fontSize: 10, ),widget._transaksi.tujuan)),
             Expanded(
                 flex: 7, child: Text(style:TextStyle(fontSize: 10, ),Rupiah.format(widget._transaksi.ongkos))),

@@ -511,6 +511,7 @@ class Service {
     List<Map<String, dynamic>> data2=[];
   for (var element in jsonDecode(response.body) ) {
     data2.add(element);
+    print(data2);
   }
 
     List<Mobil> data = [];

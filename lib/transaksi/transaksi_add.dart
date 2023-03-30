@@ -213,7 +213,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Tanggal',
                                             1),
                                         _buildSize(
-                                            PopupMenuButton<String>(
+                                            PopupMenuButton<String>(color:Colors.grey.shade300 ,
                                               elevation: 2,
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
@@ -276,7 +276,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Pilih Supir',
                                             1),
                                         _buildSize(
-                                            PopupMenuButton<String>(
+                                            PopupMenuButton<String>(color:Colors.grey.shade300 ,
                                               elevation: 2,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
@@ -315,6 +315,9 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                 return PopupMenuItem<String>(
                                                   onTap: () {
                                                     setState(() {
+                                                      if(value=='Pilih Mobil'){
+                                                        return;
+                                                      }
                                                       controlerMobil.text =
                                                           value;
                                                       transaksi.mobil = value;
@@ -508,7 +511,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                       controlerKetMobil.text =
                                                           '';
                                                       controlerMobil.text =
-                                                          'Pililh Mobil';
+                                                          'Pilih Mobil';
                                                       controlerKeterangan.text =
                                                           '';
                                                       controlerOngkos.text = '';
@@ -526,7 +529,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                         'keterangan': '',
                                                         'supir': 'Pilih Supir',
                                                         'tujuan': '',
-                                                        'mobil': 'Pililh Mobil',
+                                                        'mobil': 'Pilih Mobil',
                                                         'keluar': 0,
                                                         'ongkos': 0,
                                                         'sisa': 0,
