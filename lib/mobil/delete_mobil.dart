@@ -54,7 +54,7 @@ class DeleteMobil extends StatelessWidget {
 
                   // Container(
                   //   margin: const EdgeInsets.only(bottom: 20),
-                  //   child: TextFormField(initialValue: Transaksi.nama_Transaksi,
+                  //   child: TextFormField(textInputAction: TextInputAction.next,initialValue: Transaksi.nama_Transaksi,
                   //     decoration: const InputDecoration(
                   //       hintText: 'Alamat',
                   //     ),

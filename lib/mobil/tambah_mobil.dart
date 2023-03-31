@@ -53,7 +53,7 @@ class TambahMobil extends StatelessWidget {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(
+                            child: TextFormField(textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'No Pol',
                               ),
@@ -65,7 +65,7 @@ class TambahMobil extends StatelessWidget {
                           ),
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(
+                            child: TextFormField(textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'Keterangan',
                               ),
@@ -77,7 +77,7 @@ class TambahMobil extends StatelessWidget {
                           ),
                           // Container(
                           //   margin: const EdgeInsets.only(bottom: 20),
-                          //   child: TextFormField(
+                          //   child: TextFormField(textInputAction: TextInputAction.next,
                           //     decoration: const InputDecoration(
                           //       hintText: 'Alamat',
                           //     ),

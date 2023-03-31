@@ -158,7 +158,7 @@ class _PengelauaranEditState extends State<PengelauaranEdit> {
                                         'Tanggal',
                                         1),
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(textInputAction: TextInputAction.next,
                                           initialValue: pengeluaran.jenis,
                                           onChanged: (va) {
                                             pengeluaran.jenis = va;
@@ -177,7 +177,7 @@ class _PengelauaranEditState extends State<PengelauaranEdit> {
                                         'Pilih Mobil',
                                         1),
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(textInputAction: TextInputAction.next,
                                           initialValue:
                                               Rupiah.format(pengeluaran.harga),
                                           onChanged: (va) {
@@ -197,7 +197,7 @@ class _PengelauaranEditState extends State<PengelauaranEdit> {
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(textInputAction: TextInputAction.next,
                                           initialValue: pengeluaran.keterangan,
                                           onChanged: (va) {
                                             pengeluaran.keterangan = va;

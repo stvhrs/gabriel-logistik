@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
       RoundedLoadingButtonController();
   String _userControler = '';
   String _passwordControler = '';
-
+bool hidden=true;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   fontWeight: FontWeight.normal,
                                 )),
                             TextSpan(
-                              text: ' Log in 👇',
+                              text: ' Log in ',
                               style: ralewayStyle.copyWith(
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.blueDarkColor,
@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(0),
                           color: AppColors.whiteColor,
                         ),
-                        child: TextFormField(onChanged: (val){
+                        child: TextFormField(textInputAction: TextInputAction.next,onChanged: (val){
                               _userControler = val;
                         },
 
@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(0),
                           color: AppColors.whiteColor,
                         ),
-                        child: TextFormField( onChanged: (val) {
+                        child: TextFormField(textInputAction: TextInputAction.next, onChanged: (val) {
                             _passwordControler = val;
                           },
 
@@ -159,13 +159,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: AppColors.blueDarkColor,
                             fontSize: 12.0,
                           ),
-                          obscureText: true,
+                          obscureText: hidden,
 
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             suffixIcon: IconButton(
-                              onPressed: (){},
-                              icon: Image.asset(AppIcons.eyeIcon),
+                              onPressed: (){
+                                hidden=!hidden;
+                                setState(() {
+                                  
+                                });
+                              },
+                              icon:hidden? Image.asset(AppIcons.eyeIcon):Icon(Icons.remove_red_eye_rounded),
                             ),
                             prefixIcon: IconButton(
                               onPressed: (){},
@@ -213,6 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               .login();
                         } else {
                           _btnController.error();
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(backgroundColor: Colors.red,content: Text('Username / Password Salah')));
                           await Future.delayed(
                               const Duration(milliseconds: 500));
                           _btnController.reset();

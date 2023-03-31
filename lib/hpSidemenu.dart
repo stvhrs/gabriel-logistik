@@ -92,8 +92,8 @@ class _DashBoardHpState extends State<DashBoardHp> {
             child: CircularProgressIndicator(),
           )
         : Consumer<ProviderData>(builder: (context, prov, _) {
-            return Scaffold(resizeToAvoidBottomInset: false,extendBody: true,
-                appBar: AppBar(
+            return Scaffold(resizeToAvoidBottomInset: false,
+                appBar: AppBar(  automaticallyImplyLeading: false,
                   backgroundColor: Theme.of(context).colorScheme.secondary,
                   title: Text('Riwayat Transaksi',
                       style: TextStyle(
@@ -139,7 +139,7 @@ class _DashBoardHpState extends State<DashBoardHp> {
                               //     topLeft: Radius.circular(5),
                               //     topRight: Radius.circular(5))
                                   ),
-                          margin: const EdgeInsets.only(top: 10),
+                          margin: const EdgeInsets.only(top: 0),
                           padding: const EdgeInsets.only(
                               top: 10, bottom: 12.5, left: 10, right: 0),
                           child: Row(
@@ -198,8 +198,8 @@ class _DashBoardHpState extends State<DashBoardHp> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.8,
+                        Expanded(
+                 
                           child: ListView.builder(
                               itemCount: prov.listTransaksi.length,
                               itemBuilder: (context, index) => HpTransaksiTile(

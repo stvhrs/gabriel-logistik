@@ -129,7 +129,7 @@ class _BeliEditState extends State<BeliEdit> {
                                         'Tanggal',
                                         1),
                                     _buildSize(
-                                        TextFormField(readOnly: true,initialValue: widget.jualBeliMobil.mobil,
+                                        TextFormField(textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.jualBeliMobil.mobil,
                                           onChanged: (va) {
                                            
                                           },
@@ -137,7 +137,7 @@ class _BeliEditState extends State<BeliEdit> {
                                         'Mobil',
                                         1),
                                           _buildSize(
-                                        TextFormField(initialValue: widget.jualBeliMobil
+                                        TextFormField(textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil
                                         .ketMobil,readOnly: true,
                                          
                                         ),
@@ -145,7 +145,7 @@ class _BeliEditState extends State<BeliEdit> {
                                         1),
                                     
                                     _buildSize(
-                                        TextFormField(initialValue: Rupiah.format(widget.jualBeliMobil.harga),
+                                        TextFormField(textInputAction: TextInputAction.next,initialValue: Rupiah.format(widget.jualBeliMobil.harga),
                                           onChanged: (va) {
                                          widget.   jualBeliMobil.harga=Rupiah.parse(va);
                                           },
@@ -162,7 +162,7 @@ class _BeliEditState extends State<BeliEdit> {
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(initialValue: widget.jualBeliMobil.keterangan,
+                                        TextFormField(textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,
                                         
                                         ),
                                         'Keterangan',

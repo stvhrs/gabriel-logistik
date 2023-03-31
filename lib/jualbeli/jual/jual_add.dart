@@ -170,7 +170,7 @@ class _JualAddState extends State<JualAdd> {
                                         ),
                                         'Pilih Mobil',
                                         1),  _buildSize(
-                                        TextFormField(readOnly: true,controller: controlerKetMobil,
+                                        TextFormField(textInputAction: TextInputAction.next,readOnly: true,controller: controlerKetMobil,
                                           onChanged: (va) {
                                             jualBeliMobil.ketMobil=va;
                                           },
@@ -178,7 +178,7 @@ class _JualAddState extends State<JualAdd> {
                                         'Keterangan Mobil',
                                         1),
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.harga=Rupiah.parse(va);
                                           },
@@ -195,7 +195,7 @@ class _JualAddState extends State<JualAdd> {
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.keterangan=va;
                                           },

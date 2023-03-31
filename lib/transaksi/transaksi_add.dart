@@ -141,7 +141,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      backgroundColor: Theme.of(context).primaryColor,
+                      backgroundColor: Theme.of(context).primaryColor,contentPadding: EdgeInsets.all(0),
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -178,7 +178,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                         width: MediaQuery.of(context).size.width * 0.9,
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10))),
                         child: StatefulBuilder(
                           builder:
                               (BuildContext context, StateSetter setState) =>
@@ -354,7 +354,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Pilih Mobil',
                                             1),
                                         _buildSize(
-                                            TextFormField(
+                                            TextFormField(textInputAction: TextInputAction.next,
                                               readOnly: true,
                                               controller: controlerKetMobil,
                                               onChanged: (val) {},
@@ -362,7 +362,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Keterangan Mobil',
                                             1),
                                         _buildSize(
-                                            TextFormField(
+                                            TextFormField(textInputAction: TextInputAction.next,
                                               controller: controlerOngkos,
                                               onChanged: (va) {
                                                 if (va.isNotEmpty &&
@@ -399,7 +399,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Biaya Ongkos',
                                             1),
                                         _buildSize(
-                                            TextFormField(
+                                            TextFormField(textInputAction: TextInputAction.next,
                                               controller: controlerKeluar,
                                               onChanged: (va) {
                                                 if (va.isNotEmpty &&
@@ -437,7 +437,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Biaya Keluar',
                                             1),
                                         _buildSize(
-                                            TextFormField(
+                                            TextFormField(textInputAction: TextInputAction.next,
                                               controller: controlerSisa,
                                               readOnly: true,
                                               onChanged: (va) {
@@ -458,7 +458,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Sisa',
                                             1),
                                         _buildSize(
-                                            TextFormField(
+                                            TextFormField(textInputAction: TextInputAction.next,
                                               controller: controlerTujuan,
                                               onChanged: (va) {
                                                 transaksi.tujuan = va;
@@ -470,7 +470,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Ketik Tujuan',
                                             1),
                                         _buildSize(
-                                            TextFormField(
+                                            TextFormField(textInputAction: TextInputAction.next,
                                                 controller: controlerKeterangan,
                                                 onChanged: (val) {
                                                   transaksi.keterangan = val; setState(() {

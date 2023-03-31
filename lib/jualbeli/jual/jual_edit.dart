@@ -158,7 +158,7 @@ class _JualEditState extends State<JualEdit> {
                                         ),
                                         'Pilih Mobil',
                                         1),  _buildSize(
-                                        TextFormField(readOnly: true,initialValue: widget.jualBeliMobil.ketMobil,
+                                        TextFormField(textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.jualBeliMobil.ketMobil,
                                           onChanged: (va) {
                                             widget.jualBeliMobil.ketMobil=va;
                                           },
@@ -166,7 +166,7 @@ class _JualEditState extends State<JualEdit> {
                                         'Keterangan Mobil',
                                         1),
                                     _buildSize(
-                                        TextFormField(initialValue:Rupiah.format( widget.jualBeliMobil.harga),
+                                        TextFormField(textInputAction: TextInputAction.next,initialValue:Rupiah.format( widget.jualBeliMobil.harga),
                                           onChanged: (va) {
                                             widget.jualBeliMobil.harga=Rupiah.parse(va);
                                           },
@@ -183,7 +183,7 @@ class _JualEditState extends State<JualEdit> {
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(initialValue: widget.jualBeliMobil.keterangan,
+                                        TextFormField(textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,
                                           onChanged: (va) {
                                             widget.jualBeliMobil.keterangan=va;
                                           },

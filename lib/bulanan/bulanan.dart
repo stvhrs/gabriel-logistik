@@ -22,7 +22,7 @@ class _BulananState extends State<Bulanan> {
       return [
         SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
-            child: const Center(child: Icon(Icons.question_mark_rounded)))
+            child: const Center(child: Text('Tidak Ada Transaksi')))
       ];
     } else {
       return widget.laporanBulanan.transaksiBulanIni
@@ -94,7 +94,7 @@ class _BulananState extends State<Bulanan> {
       return [
         SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
-            child: const Center(child: Icon(Icons.question_mark_rounded)))
+            child: const Center(child: Text('Tidak Ada Pengeluaran')))
       ];
     } else {
       return widget.laporanBulanan.pengeluranBulanIni.mapIndexed(
@@ -161,8 +161,8 @@ class _BulananState extends State<Bulanan> {
   }
 
   final children = <int, Widget>{
-    0: Text('Transaksi'),
-    1: Text('Pengeluaran'),
+    0: Text('Transaksi',style: TextStyle(fontFamily: 'Nunito')),
+    1: Text('Pengeluaran',style: TextStyle(fontFamily: 'Nunito')),
   };
   @override
   Widget build(BuildContext context) {

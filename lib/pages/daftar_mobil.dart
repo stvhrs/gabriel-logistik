@@ -48,7 +48,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
                     child: Container(
                       margin: const EdgeInsets.only(bottom: 5),
                       height: MediaQuery.of(context).size.height / 20,
-                      child: TextFormField(
+                      child: TextFormField(textInputAction: TextInputAction.next,
                         decoration: const InputDecoration(hintText: 'Cari'),
                         onChanged: (val) {
                           Provider.of<ProviderData>(context, listen: false)

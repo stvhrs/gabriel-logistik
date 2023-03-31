@@ -78,7 +78,7 @@ class DropDownField extends FormField<String> {
                   children: <Widget>[
                     Expanded(
                       child: SizedBox(
-                        child: TextFormField(
+                        child: TextFormField(textInputAction: TextInputAction.next,
                           // autovalidate: true,
                           controller: state._effectiveController,
                           decoration: effectiveDecoration.copyWith(

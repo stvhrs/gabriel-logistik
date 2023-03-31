@@ -162,7 +162,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                         'Tanggal',
                                         1),
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             pengeluaran.jenis=va;
                                           },
@@ -179,7 +179,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                         'Pilih Mobil',
                                         1),
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             pengeluaran.harga=Rupiah.parse(va);
                                           },
@@ -196,7 +196,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             pengeluaran.keterangan=va;
                                           },

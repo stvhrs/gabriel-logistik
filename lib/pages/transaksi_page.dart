@@ -137,8 +137,8 @@ class _TransaksiPageState extends State<TransaksiPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.7,
+                  Expanded(
+                     // height: MediaQuery.of(context).size.height * 0.7,
                     child: ListView.builder(
                         itemCount: prov.listTransaksi.length,
                         itemBuilder: (context, index) => TransaksiTile(

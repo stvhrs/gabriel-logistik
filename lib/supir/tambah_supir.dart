@@ -51,7 +51,7 @@ class TambahSupir extends StatelessWidget {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(
+                            child: TextFormField(textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'Nama Supir',
                               ),
@@ -63,7 +63,7 @@ class TambahSupir extends StatelessWidget {
                           ),
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(
+                            child: TextFormField(textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'No Hp',
                               ),
@@ -75,7 +75,7 @@ class TambahSupir extends StatelessWidget {
                           ),
                           // Container(
                           //   margin: const EdgeInsets.only(bottom: 20),
-                          //   child: TextFormField(
+                          //   child: TextFormField(textInputAction: TextInputAction.next,
                           //     decoration: const InputDecoration(
                           //       hintText: 'Alamat',
                           //     ),

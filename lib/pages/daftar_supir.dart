@@ -48,7 +48,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
                         child: SizedBox(
                      
                           height: MediaQuery.of(context).size.height / 20,
-                          child: TextFormField(
+                          child: TextFormField(textInputAction: TextInputAction.next,
                             decoration: const InputDecoration(hintText: 'Cari'),
                             onChanged: (val) {
                               Provider.of<ProviderData>(context, listen: false)

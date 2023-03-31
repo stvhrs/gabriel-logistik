@@ -136,7 +136,7 @@ class _BeliAddState extends State<BeliAdd> {
                                         'Tanggal',
                                         1),
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.mobil=va;
                                           },
@@ -144,7 +144,7 @@ class _BeliAddState extends State<BeliAdd> {
                                         'Mobil',
                                         1),
                                           _buildSize(
-                                        TextFormField(
+                                        TextFormField(textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.ketMobil=va;
                                           },
@@ -153,7 +153,7 @@ class _BeliAddState extends State<BeliAdd> {
                                         1),
                                     
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.harga=Rupiah.parse(va);
                                           },
@@ -170,7 +170,7 @@ class _BeliAddState extends State<BeliAdd> {
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(
+                                        TextFormField(textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.keterangan=va;
                                           },
