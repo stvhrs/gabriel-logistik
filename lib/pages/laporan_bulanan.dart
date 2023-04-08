@@ -181,13 +181,12 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                     totalSisa,
                     totalPengeluaran,
                     list[list.indexOf(dropdownValue)]);
-                    if(transaksiBulanIni.isNotEmpty && e.pengeluaran.isNotEmpty){
-                        listKeuangan.add(data);
+                    if(transaksiBulanIni.isEmpty && e.pengeluaran.isEmpty){
+                      return SizedBox();
                     }
+  listKeuangan.add(data);
               
-                return transaksiBulanIni.isEmpty && e.pengeluaran.isEmpty
-                    ? SizedBox()
-                    : Bulanan(data);
+                return Bulanan(data);
               }).toList(),
             ),
           ),

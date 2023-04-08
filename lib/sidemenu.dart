@@ -6,10 +6,13 @@ import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
 import 'package:gabriel_logistik/models/pengeluaran.dart';
 
 import 'package:gabriel_logistik/pages/daftar_supir.dart';
+import 'package:gabriel_logistik/pages/dashboard..dart';
 import 'package:gabriel_logistik/pages/jual_beli.dart';
 import 'package:gabriel_logistik/pages/kas_tahun.dart';
 import 'package:gabriel_logistik/pages/laporan_bulanan.dart';
+import 'package:gabriel_logistik/pages/mutasi_saldo.dart';
 import 'package:gabriel_logistik/pages/pengeluaran_page.dart';
+import 'package:gabriel_logistik/pages/saldo_page.dart';
 import 'package:gabriel_logistik/pages/transaksi_page.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/services/service.dart';
@@ -49,7 +52,7 @@ class _DashBoardState extends State<DashBoard> {
     listTransaksi = await Service.getAllTransaksi();
     listSupir = await Service.getAllSupir();
     listPengeluaran = await Service.getAllPengeluaran();
-    print(listPengeluaran);
+
     listJualBeliMobil = await Service.getAlljualBeli();
     listMobil = await Service.getAllMobil(listPengeluaran);
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -95,7 +98,7 @@ class _DashBoardState extends State<DashBoard> {
                     showToggle: false,
                     controller: sideMenu,
                     style: SideMenuStyle(
-                      itemHeight: 55,
+                      itemHeight: 45,
                       // itemBorderRadius:BorderRadius.all(Radius.circular(0) ),decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5.0)),),
                       toggleColor: Colors.white,
                       backgroundColor: Theme.of(context).primaryColor,
@@ -244,6 +247,33 @@ class _DashBoardState extends State<DashBoard> {
                         },
                         // icon: const Icon(Icons.monetization_on),
                       ),
+                        SideMenuItem(
+                        priority: 7,
+                        title: 'Saldo',icon: Icon(Icons.attach_money_rounded),
+                        onTap: (s, w) {
+                          page.jumpToPage(s);
+                          sideMenu.changePage(s);
+                        },
+                        // icon: const Icon(Icons.monetization_on),
+                      ),
+                        SideMenuItem(
+                        priority: 8,
+                        title: 'Mutasi Saldo',icon: Icon(Icons.attach_money_rounded),
+                        onTap: (s, w) {
+                          page.jumpToPage(s);
+                          sideMenu.changePage(s);
+                        },
+                        // icon: const Icon(Icons.monetization_on),
+                      ),
+                        SideMenuItem(
+                        priority: 9,
+                        title: 'Dashboard',icon: Icon(Icons.attach_money_rounded),
+                        onTap: (s, w) {
+                          page.jumpToPage(s);
+                          sideMenu.changePage(s);
+                        },
+                        // icon: const Icon(Icons.monetization_on),
+                      ),
                     ],
                   ),
                 ),
@@ -258,6 +288,9 @@ class _DashBoardState extends State<DashBoard> {
                       PengeluaranPage(),
                       LaporanBulanan(),
                       KasTahun(),
+                      SaldoPage(),
+                      MutasiSaldo(),
+                      DashBoardPage()
                     ],
                   ),
                 ),

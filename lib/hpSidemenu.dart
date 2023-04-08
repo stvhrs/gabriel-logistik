@@ -57,7 +57,7 @@ class _DashBoardHpState extends State<DashBoardHp> {
     listTransaksi = await Service.getAllTransaksi();
     listSupir = await Service.getAllSupir();
     listPengeluaran = await Service.getAllPengeluaran();
-    print(listPengeluaran);
+   
     listJualBeliMobil = await Service.getAlljualBeli();
     listMobil = await Service.getAllMobil(listPengeluaran);
     SharedPreferences prefs = await SharedPreferences.getInstance();

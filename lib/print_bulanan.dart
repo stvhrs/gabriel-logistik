@@ -33,9 +33,12 @@ const sep = 120.0;
 
 Future<Uint8List> generateResume(
     PdfPageFormat format, List<KeuanganBulanan> as) async {
+      print(as.length);
   pw.TextStyle med = pw.TextStyle(fontSize: 10);
   DateTime dateTime = DateTime.parse(DateTime.now().toIso8601String());
   String yourDateTime = DateFormat('hh:mm dd-MM-yyyy').format(dateTime);
+
+  
   buildChildren(List<Transaksi> list) {
     if (as.isEmpty) {
       return [pw.SizedBox()];
@@ -184,6 +187,7 @@ Future<Uint8List> generateResume(
 
   var pagetheme = await _myPageTheme(format);
   for (var element in as) {
+  print(element.bulan+element.namaMobil);
     document.addPage(pw.Page(
         pageFormat: PdfPageFormat.a4,
         margin: const pw.EdgeInsets.all(16),

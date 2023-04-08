@@ -203,7 +203,7 @@ class _BeliAddState extends State<BeliAdd> {
                                                     Provider.of<ProviderData>(
                                                         context,
                                                         listen: false)
-                                                    .addMobil(Mobil(false,jualBeliMobil.mobil, jualBeliMobil.ketMobil, [  ]));
+                                                    .addMobil(Mobil(false,jualBeliMobil.mobil, jualBeliMobil.ketMobil,[] ));
                                               
 
                                               _btnController.success();

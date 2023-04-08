@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       locale: const Locale('id'),
       supportedLocales: localization.supportedLocales,
       localizationsDelegates: localization.localizationsDelegates,
-      title: 'Logistik',
+      title: 'Cahaya Trans',
       theme: AppTheme.getAppThemeData(),
     );
   }
