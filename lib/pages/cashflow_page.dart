@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/cashflow/tambah_pendaptan.dart';
+
 import 'package:gabriel_logistik/helper/format_tanggal.dart';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/jualbeli/beli/beli_add.dart';
@@ -9,14 +11,14 @@ import 'package:gabriel_logistik/jualbeli/jual/jual_edit.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 
-class JualBeli extends StatefulWidget {
-  const JualBeli({super.key});
+class CashFlow extends StatefulWidget {
+  const CashFlow({super.key});
 
   @override
-  State<JualBeli> createState() => _JualBeliState();
+  State<CashFlow> createState() => _CashFlowState();
 }
 
-class _JualBeliState extends State<JualBeli> {
+class _CashFlowState extends State<CashFlow> {
   int currentSegment = 0;
   void onValueChanged(int? newValue) {
     setState(() {
@@ -25,8 +27,8 @@ class _JualBeliState extends State<JualBeli> {
   }
 
   final children = <int, Widget>{
-    0: const Text('Beli',style: TextStyle(fontFamily: 'Nunito')),
-    1: const Text('Jual',style: TextStyle(fontFamily: 'Nunito')),
+    0: const Text('Masuk',style: TextStyle(fontFamily: 'Nunito')),
+    1: const Text('Keluar',style: TextStyle(fontFamily: 'Nunito')),
   };
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,7 @@ class _JualBeliState extends State<JualBeli> {
                       bottomLeft: Radius.circular(5),
                       bottomRight: Radius.circular(5))),
               child: const Text(
-                'Inventory',
+                'Uang Keluar Masuk',
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Nunito',
@@ -83,7 +85,7 @@ class _JualBeliState extends State<JualBeli> {
                                     .isOwner
                                 ? [
                                     const Spacer(),
-                                    currentSegment == 0 ? BeliAdd() : JualAdd(),
+                                  TambahPendapatan(currentSegment==0) 
                                   ]
                                 : []),
                   ),
@@ -105,16 +107,13 @@ class _JualBeliState extends State<JualBeli> {
                       )),
                   Expanded(
                       flex: 3,
-                      child: Text('Mobil',
+                      child: Text('Keterangan',
                           style: Theme.of(context).textTheme.displayMedium)),
                   Expanded(
                       flex: 3,
-                      child: Text('Harga',
+                      child: Text('Total Mutasi',
                           style: Theme.of(context).textTheme.displayMedium)),
-                  Expanded(
-                      flex: 6,
-                      child: Text('Keterangan',
-                          style: Theme.of(context).textTheme.displayMedium)),
+                 
                   Expanded(
                       flex: 1,
                       child: Text('Aksi',
@@ -126,9 +125,9 @@ class _JualBeliState extends State<JualBeli> {
               return SizedBox(
                   height: MediaQuery.of(context).size.height * 0.7,
                   child: ListView.builder(
-                    itemCount: c.listJualBeliMobil.reversed.toList().length,
+                    itemCount: c.listMutasiSaldo.reversed.toList().length,
                     itemBuilder: (context, index) => (c
-                                .listJualBeliMobil[index].beli &&
+                                .listMutasiSaldo[index].pendapatan &&
                             currentSegment == 0)
                         ? InkWell(
                             child: Container(
@@ -142,25 +141,25 @@ class _JualBeliState extends State<JualBeli> {
                                   Expanded(
                                       flex: 3,
                                       child: Text(FormatTanggal.formatTanggal(
-                                          c.listJualBeliMobil[index].tanggal))),
+                                          c.listMutasiSaldo[index].tanggal))),
                                   Expanded(
                                       flex: 3,
                                       child: Text(
-                                          c.listJualBeliMobil[index].mobil)),
+                                          c.listMutasiSaldo[index].keterangan)),
                                   Expanded(
                                       flex: 3,
                                       child: Text(Rupiah.format(
-                                          c.listJualBeliMobil[index].harga))),
+                                          c.listMutasiSaldo[index].totalMutasi))),
                                   Expanded(
                                       flex: 6,
-                                      child: Text(c.listJualBeliMobil[index]
+                                      child: Text(c.listMutasiSaldo[index]
                                           .keterangan)),
-                                  Expanded(
-                                      flex: 1,
-                                      child: currentSegment == 1
-                                          ? JualEdit(c.listJualBeliMobil[index])
-                                          : BeliEdit(
-                                              c.listJualBeliMobil[index]))
+                                  // Expanded(
+                                  //     flex: 1,
+                                  //     child: currentSegment == 1
+                                  //         ? JualEdit(c.listMutasiSaldo[index])
+                                  //         : BeliEdit(
+                                  //             c.listMutasiSaldo[index]))
                                 ],
                               ),
                             ),

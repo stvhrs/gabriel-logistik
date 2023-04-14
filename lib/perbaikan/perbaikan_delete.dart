@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/models/pengeluaran.dart';
+import 'package:gabriel_logistik/models/perbaikan.dart';
 
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 import '../providerData/providerData.dart';
 
-class PengeluaranDelete extends StatelessWidget {
-  final Pengeluaran supir;
-  PengeluaranDelete(this.supir);
+class PerbaikanDelete extends StatelessWidget {
+  final Perbaikan supir;
+  PerbaikanDelete(this.supir);
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
 
@@ -63,7 +63,7 @@ class PengeluaranDelete extends StatelessWidget {
 
                       await Future.delayed(const Duration(seconds: 3), () {
                         Provider.of<ProviderData>(context, listen: false)
-                            .deletePengeluaran(supir);
+                            .deletePerbaikan(supir);
                         _btnController.success();
                       });
                       await Future.delayed(const Duration(seconds: 1), () {

@@ -37,7 +37,7 @@ class _TransaksiTileState extends State<TransaksiTile> {
                 ? Colors.grey.shade200
                 : const Color.fromARGB(255, 189, 193, 221),
         padding:
-            const EdgeInsets.only(top: 14, bottom: 14, left: 15, right: 15),
+            const EdgeInsets.only(top: 5, bottom: 5, left: 15, right: 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -71,7 +71,7 @@ class _TransaksiTileState extends State<TransaksiTile> {
             //     child: Text(widget._transaksi.listPerbaikan.isEmpty
             //         ? '-'
             //         : Rupiah.format(
-            //             totalPengeluaran(widget._transaksi.listPerbaikan)))),
+            //             totalPerbaikan(widget._transaksi.listPerbaikan)))),
             Expanded(
               flex: 7,
               child: Row(
@@ -88,11 +88,11 @@ class _TransaksiTileState extends State<TransaksiTile> {
                       : DateTime.parse(widget._transaksi.tanggalBerangkat)
                                   .month !=
                               DateTime.now().month
-                          ? Expanded(child: IconButton(onPressed: null,icon: Icon(Icons.dangerous,color: Colors.transparent,),))
+                          ? const Expanded(child: IconButton(onPressed: null,icon: Icon(Icons.dangerous,color: Colors.transparent,),))
                           : Expanded(child: TransaksiEdit(widget._transaksi)),
                   Provider.of<ProviderData>(context, listen: false).isOwner
                       ? Expanded(child: TransaksiDelete(widget._transaksi))
-                      : SizedBox(),
+                      : const SizedBox(),
                 ],
               ),
             ),

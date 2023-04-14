@@ -17,17 +17,14 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:collection/collection.dart';
-import 'package:gabriel_logistik/kas/kas.dart';
 import 'package:gabriel_logistik/models/kas_tahun.dart';
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
-import 'package:gabriel_logistik/models/pengeluaran.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
 import 'helper/rupiah_format.dart';
-import 'models/transaksi.dart';
 
 const PdfColor green = PdfColor.fromInt(0xff9ce5d0);
 const PdfColor lightGreen = PdfColor.fromInt(0xffcdf1e7);
@@ -39,7 +36,7 @@ Future<Uint8List> generateResume2(
 String yourDateTime = DateFormat('hh:mm dd-MM-yyyy').format(dateTime);
   final document = pw.Document();
   pw.TextStyle bold = pw.TextStyle(fontWeight: pw.FontWeight.bold);
-  pw.TextStyle small = pw.TextStyle(fontSize: 10);
+  pw.TextStyle small = const pw.TextStyle(fontSize: 10);
 
   buildChildren(List<KeuanganBulanan> bulanans) {
     return bulanans.mapIndexed(
@@ -67,7 +64,7 @@ String yourDateTime = DateFormat('hh:mm dd-MM-yyyy').format(dateTime);
             pw.Expanded(
                 flex: 7,
                 child: pw.Text(
-                    Rupiah.format(element.totalPengeluaran).toString(),
+                    Rupiah.format(element.totalPerbaikan).toString(),
                     style: small)),
             pw.Expanded(
                 flex: 7,
@@ -81,7 +78,7 @@ String yourDateTime = DateFormat('hh:mm dd-MM-yyyy').format(dateTime);
 
   var pagetheme = await _myPageTheme(format);
   for (var element in as) {
-    double tahunTotalPengeluaran = 0;
+    double tahunTotalPerbaikan = 0;
     double tahunTotalBersih = 0;
     double tahunTotalOngkos = 0;
     double tahunTotalKeluar = 0;
@@ -92,7 +89,7 @@ for (var listBulananMobil in element.listBulananMobil) {
     tahunTotalBersih += listBulananMobil.totalBersih;
     tahunTotalKeluar += listBulananMobil.totalKeluar;
     tahunTotalOngkos += listBulananMobil.totalOngkos;
-    tahunTotalPengeluaran += listBulananMobil.totalPengeluaran;
+    tahunTotalPerbaikan += listBulananMobil.totalPerbaikan;
 }
     document.addPage(pw.Page(
         pageFormat: PdfPageFormat.a4,
@@ -120,7 +117,7 @@ for (var listBulananMobil in element.listBulananMobil) {
                           ),
                     ),pw.Spacer(),
                               pw.Text(yourDateTime, style: small)
-                              ,pw.Text('   '+(as.indexOf(element)+1).toString()+'/'+as.length.toString()+'    ')])
+                              ,pw.Text('   ${as.indexOf(element)+1}/${as.length}    ')])
                    ,
           
                     pw.Container(
@@ -140,7 +137,7 @@ for (var listBulananMobil in element.listBulananMobil) {
                           pw.Expanded(
                               flex: 7, child: pw.Text('Sisa', style: bold)),
                           pw.Expanded(
-                              flex: 7, child: pw.Text('Pengeluaran', style: bold)),
+                              flex: 7, child: pw.Text('Perbaikan', style: bold)),
                           pw.Expanded(
                               flex: 7, child: pw.Text('Bersih', style: bold)),
                         ],
@@ -273,7 +270,7 @@ for (var listBulananMobil in element.listBulananMobil) {
                                       child: pw.Container(
                                           margin: const pw.EdgeInsets.only(
                                               top: 4, bottom: 0),
-                                          child: pw.Text('Total Pengeluaran',
+                                          child: pw.Text('Total Perbaikan',
                                               style: small)),
                                     ),
                                     pw.Expanded(
@@ -284,7 +281,7 @@ for (var listBulananMobil in element.listBulananMobil) {
                                           child: pw.Text(
                                               textAlign: pw.TextAlign.right,
                                               Rupiah.format(
-                                                  tahunTotalPengeluaran),
+                                                  tahunTotalPerbaikan),
                                               style: small)),
                                     ),
                                     pw.Expanded(flex: 5, child: pw.SizedBox()),

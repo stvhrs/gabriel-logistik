@@ -8,7 +8,8 @@ import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 
 import '../models/keuangan_bulanan.dart';
-import '../models/pengeluaran.dart';
+
+import '../models/perbaikan.dart';
 
 List<String> list = <String>[
   'Januari',
@@ -40,7 +41,7 @@ List<KasModel> listKas=[];
   int ropdownValue2 = DateTime.now().year;
   @override
   void didChangeDependencies() {
-    for (var element in Provider.of<ProviderData>(context).backupTransaksi) {
+    for (var element in Provider.of<ProviderData>(context).listTransaksi) {
       if (!tahun.contains(DateTime.parse(element.tanggalBerangkat).year)) {
         tahun.add(DateTime.parse(element.tanggalBerangkat).year);
       }
@@ -55,7 +56,7 @@ List<KasModel> listKas=[];
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,  floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.print),
+          child: const Icon(Icons.print),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => TahunPrint(listKas),
@@ -101,7 +102,7 @@ List<KasModel> listKas=[];
             child: ListView(
               children:
                   Provider.of<ProviderData>(context).backupListMobil.map((e) {
-                double tahunTotalPengeluaran = 0;
+                double tahunTotalPerbaikan = 0;
                 double tahunTotalBersih = 0;
                 double tahunTotalOngkos = 0;
                 double tahunTotalKeluar = 0;
@@ -110,15 +111,15 @@ List<KasModel> listKas=[];
                     e.nama_mobil, [], 0, 0, 0, 0, ropdownValue2.toString());
                 for (var moon in list) {
                   List<Transaksi> transaksiBulanIni = [];
-                  double totalPengeluaran = 0;
+                  double totalPerbaikan = 0;
                   double totalBersih = 0;
                   double totalOngkos = 0;
                   double totalKeluar = 0;
                   double totalSisa = 0;
-                  List<Pengeluaran> listPengeluaran = [];
+                  List<Perbaikan> listPerbaikan = [];
 
                   transaksiBulanIni = Provider.of<ProviderData>(context)
-                      .backupTransaksi
+                      .listTransaksi
                       .where((element) =>
                           element.mobil == e.nama_mobil &&
                           DateTime.parse(element.tanggalBerangkat).month ==
@@ -126,8 +127,8 @@ List<KasModel> listKas=[];
                           DateTime.parse(element.tanggalBerangkat).year ==
                               ropdownValue2)
                       .toList();
-                  e.pengeluaran = Provider.of<ProviderData>(context)
-                      .backupListPengeluaran
+                  e.perbaikan = Provider.of<ProviderData>(context)
+                      .backupListPerbaikan
                       .where((element) =>
                           element.mobil == e.nama_mobil &&
                           DateTime.parse(element.tanggal).month ==
@@ -142,22 +143,22 @@ List<KasModel> listKas=[];
                     totalKeluar += element.keluar;
                     totalSisa += element.sisa;
                   }
-                  for (var pengeluaran in e.pengeluaran) {
-                    totalPengeluaran = totalPengeluaran + pengeluaran.harga;
-                    listPengeluaran.add(pengeluaran);
+                  for (var perbaikan in e.perbaikan) {
+                    totalPerbaikan = totalPerbaikan + perbaikan.harga;
+                    listPerbaikan.add(perbaikan);
                   }
-                  totalBersih -= totalPengeluaran;
+                  totalBersih -= totalPerbaikan;
 
 
                   KeuanganBulanan data = KeuanganBulanan(
                       e.nama_mobil,
                       transaksiBulanIni,
-                      listPengeluaran,
+                      listPerbaikan,
                       totalBersih,
                       totalOngkos,
                       totalKeluar,
                       totalSisa,
-                      totalPengeluaran,
+                      totalPerbaikan,
                       list[list.indexOf(moon)]);
 
                   kasModel.listBulananMobil.add(data);
@@ -166,15 +167,15 @@ List<KasModel> listKas=[];
                   tahunTotalBersih += totalBersih;
                   tahunTotalKeluar += totalKeluar;
                   tahunTotalOngkos += totalOngkos;
-                  tahunTotalPengeluaran += totalPengeluaran;
+                  tahunTotalPerbaikan += totalPerbaikan;
                 }
                 if(tahunTotalOngkos<1){
                      return 
-                     SizedBox();
+                     const SizedBox();
                 }
                    listKas.add(kasModel);
             
-                     return Kas(kasModel,tahunTotalOngkos,tahunTotalKeluar,tahunTotalSisa,tahunTotalPengeluaran,tahunTotalBersih);
+                     return Kas(kasModel,tahunTotalOngkos,tahunTotalKeluar,tahunTotalSisa,tahunTotalPerbaikan,tahunTotalBersih);
               }).toList(),
             ),
           ),

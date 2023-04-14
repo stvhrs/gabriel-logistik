@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/examples.dart';
-import 'package:gabriel_logistik/kas/kas.dart';
 import 'package:gabriel_logistik/models/kas_tahun.dart';
-import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:printing/printing.dart';
 
 class TahunPrint extends StatefulWidget {
@@ -38,7 +36,7 @@ class _TahunPrintState extends State<TahunPrint> {
     return Scaffold(
       body: Theme(
         data: ThemeData(
-            iconTheme: IconThemeData(
+            iconTheme: const IconThemeData(
               color: Colors.white,
             ),
             primaryColor: const Color.fromARGB(255, 59, 59, 65)),

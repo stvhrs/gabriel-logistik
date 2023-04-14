@@ -24,7 +24,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
               width: MediaQuery.of(context).size.width * 0.7,
               child: Column(
                 children: [
-                  Container(margin: EdgeInsets.only(bottom: 30),
+                  Container(margin: const EdgeInsets.only(bottom: 30),
                     padding: const EdgeInsets.only(right:30,left: 30,bottom: 10,top: 5),
                     decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.secondary,
@@ -129,7 +129,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
                                       children: [
                                         EditSupir(c.listSupir[index]),
                                       Provider.of<ProviderData>(context, listen: false)
-                                    .isOwner?     SupirDelete(c.listSupir[index]):SizedBox()
+                                    .isOwner?     SupirDelete(c.listSupir[index]):const SizedBox()
                                       ],
                                     ),
                                   )

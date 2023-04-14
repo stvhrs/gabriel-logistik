@@ -3,9 +3,6 @@ import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/transaksi/transaksi_delete.dart';
-import 'package:gabriel_logistik/transaksi/transaksi_edit.dart';
-import 'package:gabriel_logistik/transaksi/transaksi_view.dart';
 
 import '../helper/format_tanggal.dart';
 
@@ -38,15 +35,15 @@ class _HpTransaksiTileState extends State<HpTransaksiTile> {
             
             Expanded(
                 flex: 7,
-                child:Text(style:TextStyle(fontSize: 10, ),maxLines:1,FormatTanggal.formatTanggal(
+                child:Text(style:const TextStyle(fontSize: 10, ),maxLines:1,FormatTanggal.formatTanggal(
                     widget._transaksi.tanggalBerangkat).toString())),
          
-            Expanded(flex: 8, child: Text(style:TextStyle(fontSize: 10, ),widget._transaksi.mobil)),
-            Expanded(flex: 10, child: Text(style:TextStyle(fontSize: 10, ),widget._transaksi.tujuan)),
+            Expanded(flex: 8, child: Text(style:const TextStyle(fontSize: 10, ),widget._transaksi.mobil)),
+            Expanded(flex: 10, child: Text(style:const TextStyle(fontSize: 10, ),widget._transaksi.tujuan)),
             Expanded(
-                flex: 7, child: Text(style:TextStyle(fontSize: 10, ),Rupiah.format(widget._transaksi.ongkos))),
+                flex: 7, child: Text(style:const TextStyle(fontSize: 10, ),Rupiah.format(widget._transaksi.ongkos))),
             Expanded(
-                flex: 7, child: Text(style:TextStyle(fontSize: 10, ),Rupiah.format(widget._transaksi.keluar))),
+                flex: 7, child: Text(style:const TextStyle(fontSize: 10, ),Rupiah.format(widget._transaksi.keluar))),
             // Expanded(
             //     flex: 7,
             //     child: Text(style:TextStyle(fontSize: 10, ),Rupiah.format(
@@ -56,7 +53,7 @@ class _HpTransaksiTileState extends State<HpTransaksiTile> {
             //     child: Text(style:TextStyle(fontSize: 10, ),widget._transaksi.listPerbaikan.isEmpty
             //         ? '-'
             //         : Rupiah.format(
-            //             totalPengeluaran(widget._transaksi.listPerbaikan)))),
+            //             totalPerbaikan(widget._transaksi.listPerbaikan)))),
            
           ],
         ),

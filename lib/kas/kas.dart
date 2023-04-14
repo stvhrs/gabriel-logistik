@@ -5,14 +5,14 @@ import 'package:gabriel_logistik/models/kas_tahun.dart';
 import '../helper/rupiah_format.dart';
 
 class Kas extends StatefulWidget {
-  final double tahunTotalPengeluaran;
+  final double tahunTotalPerbaikan;
   final double tahunTotalBersih;
   final double tahunTotalOngkos;
   final double tahunTotalKeluar;
   final double tahunTotalSisa;
   final KasModel kasModel;
   const Kas(this.kasModel, this.tahunTotalOngkos, this.tahunTotalKeluar,
-      this.tahunTotalSisa, this.tahunTotalPengeluaran, this.tahunTotalBersih);
+      this.tahunTotalSisa, this.tahunTotalPerbaikan, this.tahunTotalBersih);
 
   @override
   State<Kas> createState() => _KasState();
@@ -53,7 +53,7 @@ class _KasState extends State<Kas> {
                     style: Theme.of(context).textTheme.displaySmall)),
             Expanded(
                 flex: 7,
-                child: Text(Rupiah.format(element.totalPengeluaran).toString(),
+                child: Text(Rupiah.format(element.totalPerbaikan).toString(),
                     style: Theme.of(context).textTheme.displaySmall)),
             Expanded(
                 flex: 7,
@@ -67,7 +67,7 @@ class _KasState extends State<Kas> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(margin: EdgeInsets.only(bottom: 50),
+    return Container(margin: const EdgeInsets.only(bottom: 50),
       width: MediaQuery.of(context).size.width * 0.43,
       child: Card(
         elevation: 5,
@@ -126,7 +126,7 @@ class _KasState extends State<Kas> {
                     Expanded(
                         flex: 7,
                         child: Text(
-                          'Pengeluaran',
+                          'Perbaikan',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
@@ -270,7 +270,7 @@ class _KasState extends State<Kas> {
                                     margin:
                                         const EdgeInsets.only(top: 10, bottom: 0),
                                     child: Text(textAlign: TextAlign.left,
-                                      'Total Pengeluaran',
+                                      'Total Perbaikan',
                                       style: Theme.of(context)
                                           .textTheme
                                           .displaySmall,
@@ -283,7 +283,7 @@ class _KasState extends State<Kas> {
                                     child: Text(textAlign: TextAlign.left,
                                       
                                       Rupiah.format(
-                                          widget.tahunTotalPengeluaran),
+                                          widget.tahunTotalPerbaikan),
                                       style: Theme.of(context)
                                           .textTheme
                                           .displaySmall,

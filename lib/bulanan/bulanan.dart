@@ -80,7 +80,7 @@ class _BulananState extends State<Bulanan> {
                   //       textAlign: TextAlign.left,
                   //       element.listPerbaikan.isEmpty
                   //           ? ''
-                  //           : Rupiah.format(totalPengeluaran.totalPengeluaran(
+                  //           : Rupiah.format(totalPerbaikan.totalPerbaikan(
                   //               element.listPerbaikan)),
                   //       ),
                   // ),4
@@ -94,7 +94,7 @@ class _BulananState extends State<Bulanan> {
       return [
         SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
-            child: const Center(child: Text('Tidak Ada Pengeluaran')))
+            child: const Center(child: Text('Tidak Ada Perbaikan')))
       ];
     } else {
       return widget.laporanBulanan.pengeluranBulanIni.mapIndexed(
@@ -142,7 +142,7 @@ class _BulananState extends State<Bulanan> {
               //       textAlign: TextAlign.left,
               //       element.listPerbaikan.isEmpty
               //           ? ''
-              //           : Rupiah.format(totalPengeluaran.totalPengeluaran(
+              //           : Rupiah.format(totalPerbaikan.totalPerbaikan(
               //               element.listPerbaikan)),
               //       ),
               // ),
@@ -161,8 +161,8 @@ class _BulananState extends State<Bulanan> {
   }
 
   final children = <int, Widget>{
-    0: Text('Transaksi',style: TextStyle(fontFamily: 'Nunito')),
-    1: Text('Pengeluaran',style: TextStyle(fontFamily: 'Nunito')),
+    0: const Text('Transaksi',style: TextStyle(fontFamily: 'Nunito')),
+    1: const Text('Perbaikan',style: TextStyle(fontFamily: 'Nunito')),
   };
   @override
   Widget build(BuildContext context) {
@@ -298,7 +298,7 @@ class _BulananState extends State<Bulanan> {
                                     flex: 5,
                                     child: Text(
                                       textAlign: TextAlign.left,
-                                      'Pengeluaran',
+                                      'Perbaikan',
                                       style:
                                           Theme.of(context).textTheme.displayMedium,
                                     )),
@@ -465,7 +465,7 @@ class _BulananState extends State<Bulanan> {
                                           top: 10, bottom: 0),
                                       child: Text(
                                         textAlign: TextAlign.left,
-                                        'Total Pengeluaran',
+                                        'Total Perbaikan',
                                         style: Theme.of(context)
                                             .textTheme
                                             .displaySmall,
@@ -478,7 +478,7 @@ class _BulananState extends State<Bulanan> {
                                       child: Text(
                                         textAlign: TextAlign.left,
                                         Rupiah.format(widget
-                                            .laporanBulanan.totalPengeluaran),
+                                            .laporanBulanan.totalPerbaikan),
                                         style: Theme.of(context)
                                             .textTheme
                                             .displaySmall,

@@ -17,6 +17,17 @@ class TransaksiPage extends StatefulWidget {
 
 class _TransaksiPageState extends State<TransaksiPage> {
   @override
+  void initState() {
+    Provider.of<ProviderData>(context, listen: false).start = null;
+    Provider.of<ProviderData>(context, listen: false).end = null;
+    Provider.of<ProviderData>(context, listen: false).searchsupir = '';
+    Provider.of<ProviderData>(context, listen: false).searchtujuan = '';
+    Provider.of<ProviderData>(context, listen: false).searchmobile = '';
+     Provider.of<ProviderData>(context, listen: false).searchTransaksi();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Consumer<ProviderData>(builder: (context, prov, _) {
       return Scaffold(
@@ -138,7 +149,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                     ),
                   ),
                   Expanded(
-                     // height: MediaQuery.of(context).size.height * 0.7,
+                    // height: MediaQuery.of(context).size.height * 0.7,
                     child: ListView.builder(
                         itemCount: prov.listTransaksi.length,
                         itemBuilder: (context, index) => TransaksiTile(

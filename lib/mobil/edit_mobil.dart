@@ -111,7 +111,7 @@ class EditMobil extends StatelessWidget {
                               .updateMobil(Mobil(false,
                                 
                                     mobil.nama_mobil,
-                                    mobil.keterangan_mobill,mobil.pengeluaran));
+                                    mobil.keterangan_mobill,mobil.perbaikan));
                           _btnController.success();
                         });
                         await Future.delayed(const Duration(seconds: 1), () {

@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
@@ -7,11 +6,9 @@ import 'package:gabriel_logistik/providerData/providerData.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
-import '../helper/dropdown.dart';
 import '../helper/input_currency.dart';
 import '../models/mobil.dart';
 
@@ -52,7 +49,7 @@ class _TransaksiViewState extends State<TransaksiView> {
         .toList()
         .forEach((element) {
       
-       controlerKetMobil.text=temp.firstWhere((element) => element.nama_mobil==widget.transaksi.mobil).nama_mobil;
+      //  controlerKetMobil.text=temp.firstWhere((element) => element.nama_mobil==widget.transaksi.mobil).nama_mobil;
       controlerSisa.text=widget.transaksi.sisa.toString();
       if (listMobil.contains(element)) {
       } else {

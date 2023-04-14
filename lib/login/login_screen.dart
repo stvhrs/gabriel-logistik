@@ -170,7 +170,7 @@ bool hidden=true;
                                   
                                 });
                               },
-                              icon:hidden? Image.asset(AppIcons.eyeIcon):Icon(Icons.remove_red_eye_rounded),
+                              icon:hidden? Image.asset(AppIcons.eyeIcon):const Icon(Icons.remove_red_eye_rounded),
                             ),
                             prefixIcon: IconButton(
                               onPressed: (){},
@@ -218,7 +218,7 @@ bool hidden=true;
                               .login();
                         } else {
                           _btnController.error();
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(backgroundColor: Colors.red,content: Text('Username / Password Salah')));
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(backgroundColor: Colors.red,content: Text('Username / Password Salah')));
                           await Future.delayed(
                               const Duration(milliseconds: 500));
                           _btnController.reset();

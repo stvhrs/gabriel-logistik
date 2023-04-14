@@ -1,13 +1,18 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:flutter/cupertino.dart';
+
 import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/pengeluaran.dart';
+import 'package:gabriel_logistik/models/mutasi_child.dart';
+
 import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
+import 'package:gabriel_logistik/pages/mutasi_saldo.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+
+import '../models/mutasi_saldo.dart';
+import '../models/perbaikan.dart';
 
 // Future<Uint8List> printPdf(List<Uint8List> listUint8list) async {
 //   final document = pw.Document();
@@ -31,220 +36,26 @@ import 'package:http/http.dart' as http;
 const Map<String, String> headers = {
   HttpHeaders.contentTypeHeader: 'application/json',
 };
-List<Map<String, dynamic>> pengeluaran = [
+List<Map<String, dynamic>> perbaikan2 = [
   {
     'jenis': 'Pajak',
     'mobil': 'AD 2345 HWE',
-    'harga': 10000,
+    'harga': 100,
     'tanggal': DateTime.now().toIso8601String(),
     'keterangan': 'keterangan'
   },
-  {
-    'jenis': 'Servis',
-    'mobil': 'AD 2345 HWE',
-    'harga': 10000,
-    'tanggal': DateTime.now().toIso8601String(),
-    'keterangan': 'keterangan'
-  },
-  {
-    'jenis': 'Cucis',
-    'mobil': 'AD 2345 HWE',
-    'harga': 10000,
-    'tanggal': DateTime.now().toIso8601String(),
-    'keterangan': 'keterangan'
-  }
+ 
 ];
 List<Map<String, dynamic>> jualBeli = [
   {
     'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
+    'harga': 20,
     'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
-    'keterangan': 'Ini adalah test ketenarangan asdasdas',
-    'tanggal': DateTime.now().toIso8601String()
-  },{
-    'nama_mobil': 'AD 2345 HWE',
-    'harga': 0,
-    'ket_mobil': 'Head Tronton',
-    'beli': true,
+    'beli': false,
     'keterangan': 'Ini adalah test ketenarangan asdasdas',
     'tanggal': DateTime.now().toIso8601String()
   },
+ 
 ];
 
 List<Map<String, dynamic>> transaksi = [
@@ -254,118 +65,350 @@ List<Map<String, dynamic>> transaksi = [
     'supir': 'Kolil',
     'tujuan': 'Palangka Harapan',
     'mobil': 'AD 2345 HWE',
-    'keluar': 1500000,
-    'ongkos': 3300000,
-    'sisa': 1800000
-  },
-  {
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
     'tujuan': 'Palangka Harapan',
     'mobil': 'AD 2345 HWE',
-    'keluar': 1500000,
-    'ongkos': 3300000,
-    'sisa': 1800000
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
   },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },{
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+   
+  
   
 ];
 
 List<Map<String, dynamic>> supir = [
   {
     'nama_supir': 'Kolil2',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil3',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil4',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil5',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil6',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
-    'nohp_supir': '085728181929',
-  },
-  {
-    'nama_supir': 'Kolil',
     'nohp_supir': '085728181929',
   },
 ];
@@ -376,149 +419,47 @@ List<Map<String, dynamic>> mobil = [
     'ket_mobil': 'HEAD TRONTON',
     'terjual': false,
   },
+];
+
+List<Map<String, dynamic>> mutasiSaldo = [
   {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
+    'pendapatan': true,
+    'keterangan':'Keterangan',
+    'id': '1',
+    'tanggal': '2023-02-02T20:06:32.561',
+    'mutasi': [
+     {'keterangan': 'Sewa Ruko', 'harga': 10000, 'qty': 1,'total':0},
+      {'keterangan': 'Tanah', 'harga': 10000, 'qty': 1,'total':0}
+    ],
+    'totalMutasi': 1000
   },
   {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  }, {
-    'plat_mobil': 'AD 2345 HWE',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
-  },
-  {
-    'plat_mobil': 'AD 2345 HWE2',
-    'ket_mobil': 'HEAD TRONTON',
-    'terjual': false,
+    'pendapatan': false,
+    'id': '2',
+    'keterangan':'Keterangan',
+    'tanggal': '2023-02-02T20:06:32.561',
+    'mutasi': [
+      {'keterangan': 'Sewa Ruko', 'harga': 10000, 'qty': 1,'total':0},
+      {'keterangan': 'Tanah', 'harga': 10000, 'qty': 1,'total':0}
+    ],
+    'totalMutasi': 2000
   },
 ];
 
 class Service {
+  static Future<List<MutasiSaldo>> getAllMutasiSaldo() async {
+    List<MutasiSaldo> data = [];
+    for (var element in mutasiSaldo) {
+      List<MutasiChild> mutasiChild = [];
+      for (var e in element['mutasi']) {
+        mutasiChild.add(MutasiChild.fromMap(e));
+      }
+      element['mutasi']=mutasiChild;
+      data.add(MutasiSaldo.fromMap(element,));
+    }
+    return data;
+  }
+
   static Future<List<Transaksi>> getAllTransaksi() async {
     List<Transaksi> data = [];
 
@@ -537,10 +478,10 @@ class Service {
     return data;
   }
 
-  static Future<List<Pengeluaran>> getAllPengeluaran() async {
-    List<Pengeluaran> data = [];
-    for (var element in pengeluaran) {
-      data.add(Pengeluaran.fromMap(element));
+  static Future<List<Perbaikan>> getAllPerbaikan() async {
+    List<Perbaikan> data = [];
+    for (var element in perbaikan2) {
+      data.add(Perbaikan.fromMap(element));
     }
     return data;
   }
@@ -553,33 +494,20 @@ class Service {
     return data;
   }
 
-  static Future<List<Mobil>> getAllMobil(List<Pengeluaran> list) async {
-
-    final response = await http.get(
-      Uri.parse(
-        'http://cahayaover.site/api/mobil',
-      ),
-    );
-
-    print(response.body);
-    if (response.body.isNotEmpty) {
-     
-    } else {
-    
-    }
-    List<Map<String, dynamic>> data2=[];
-  for (var element in jsonDecode(response.body) ) {
-    data2.add(element);
-    print(data2);
-  }
+  static Future<List<Mobil>> getAllMobil(List<Perbaikan> list) async {
+    // final response = await http.get(
+    //   Uri.parse(
+    //     'https://cahayaover.site/api/mobil',
+    //   ),
+    // );
 
     List<Mobil> data = [];
-    for (var te in data2) {
-      List<Pengeluaran> asu = list
+    for (var te in mobil) {
+      List<Perbaikan> listPerbaikan = list
           .where((element) =>
               (te['plat_mobil'] as String).trim() == element.mobil.trim())
           .toList();
-      data.add(Mobil.fromMap(te, asu));
+      data.add(Mobil.fromMap(te, listPerbaikan));
     }
     return data;
   }
@@ -635,27 +563,11 @@ class Service {
     }
   }
 
-  static Future<String> test3() async {
-    log('tes get');
-    final response = await http.get(
-      Uri.parse(
-        'https://logistik-project.000webhostapp.com/api/supir',
-      ),
-    );
-
-    print(response.body);
-    if (response.body.isNotEmpty) {
-      return response.body.toString();
-    } else {
-      return 'Eroorrrrrr';
-    }
-  }
-
   static Future<void> pengeluarasn() async {
     log('tes post');
     final response = await http.post(
       body: {
-        "id_pengeluaran": "2",
+        "id_Perbaikan": "2",
         "plat_mobil": "AD 2345 HWEzz",
         "jenis_p": "Servizzs",
         "harga_p": "30000000",
@@ -664,17 +576,9 @@ class Service {
       },
       // headers: {"Content-Type": "application/json"},
       Uri.parse(
-        'https://logistik-project.000webhostapp.com/api/pengeluaran',
+        'https://logistik-project.000webhostapp.com/api/Perbaikan',
       ),
     );
     log(response.body);
-  }
-
-  static Future<String> test2() async {
-    log('tes get');
-    var response = await http
-        .get(Uri.parse('https://logistik-project.000webhostapp.com/api/supir'));
-    return response.body;
-  
   }
 }

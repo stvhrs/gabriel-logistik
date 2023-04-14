@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
-import 'package:gabriel_logistik/models/pengeluaran.dart';
+import 'package:gabriel_logistik/models/perbaikan.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:flutter/material.dart';
@@ -14,17 +14,21 @@ import '../helper/dropdown.dart';
 import '../helper/input_currency.dart';
 import '../models/mobil.dart';
 
-class PengelauaranAdd extends StatefulWidget {
+class PerbaikanEdit extends StatefulWidget {
+  final Perbaikan perbaikan;
+  const PerbaikanEdit(this.perbaikan);
   @override
-  State<PengelauaranAdd> createState() => _PengelauaranAddState();
+  State<PerbaikanEdit> createState() => _PerbaikanEditState();
 }
 
-class _PengelauaranAddState extends State<PengelauaranAdd> {
+class _PerbaikanEditState extends State<PerbaikanEdit> {
   List<String> listMobil = [];
 
   @override
   void initState() {
-     List<Mobil> temp=Provider.of<ProviderData>(context, listen: false)
+    perbaikan=widget.perbaikan;
+    mobilCont.text = widget.perbaikan.mobil;
+    List<Mobil> temp=Provider.of<ProviderData>(context, listen: false)
         .listMobil;
 
         temp.removeWhere((element) => element.terjual);
@@ -44,15 +48,16 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
 
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
-  late Pengeluaran pengeluaran;
+  final TextEditingController mobilCont = TextEditingController();
+  late Perbaikan perbaikan;
   TextStyle small = const TextStyle(fontSize: 13);
   Widget _buildSize(widget, String ket, int flex) {
-
     return Expanded(
       flex: flex,
       child: Container(
         width: MediaQuery.of(context).size.width * 0.14 * flex,
-        margin: EdgeInsets.only(left: ket=='Tanggal'||ket=='Keterangan'?0: 50, bottom: 30),
+        margin: EdgeInsets.only(
+            left: ket == 'Tanggal' || ket == 'Keterangan' ? 0 : 50, bottom: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -75,25 +80,15 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
+    return IconButton(
         icon: const Icon(
-          Icons.add,
-          color: Colors.white,
+          Icons.edit,
+          color: Colors.green,
         ),
-        label: const Text(
-          'Tambah Pengeluaran',
-          style: TextStyle(color: Colors.white),
-        ),
-        style: ButtonStyle(
-            padding: MaterialStateProperty.all(const EdgeInsets.all(10))),
+       
+        
         onPressed: () {
-          pengeluaran = Pengeluaran.fromMap({
-            'mobil': '',
-            'jenis': '0',
-            'harga': 0,
-            'tanggal': DateTime.now().toIso8601String(),
-            'keterangan': ''
-          });
+         
 
           showDialog(
               barrierDismissible: false,
@@ -106,7 +101,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                       children: [
                         const SizedBox(),
                         const Text(
-                          'Tambah Pengeluaran',
+                          'Edit Perbaikan',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
@@ -150,11 +145,12 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                     _buildSize(
                                              WebDatePicker(lastDate: DateTime.now(),
                                           height: 60,
-                                          initialDate: DateTime.now(),
+                                          initialDate: DateTime.parse(
+                                              widget.perbaikan.tanggal),
                                           dateformat: 'dd/MM/yyyy',
                                           onChange: (value) {
                                             if (value != null) {
-                                              pengeluaran.tanggal =
+                                              perbaikan.tanggal =
                                                   value.toIso8601String();
                                             }
                                           },
@@ -163,16 +159,18 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                         1),
                                     _buildSize(
                                         TextFormField(textInputAction: TextInputAction.next,
+                                          initialValue: perbaikan.jenis,
                                           onChanged: (va) {
-                                            pengeluaran.jenis=va;
+                                            perbaikan.jenis = va;
                                           },
                                         ),
                                         'Jenis',
                                         1),
                                     _buildSize(
                                         DropDownField(
+                                          controller: mobilCont,
                                           onValueChanged: (val) {
-                                            pengeluaran.mobil = val;
+                                            perbaikan.mobil = val;
                                           },
                                           items: listMobil,
                                         ),
@@ -180,8 +178,11 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                         1),
                                     _buildSize(
                                         TextFormField(textInputAction: TextInputAction.next,
+                                          initialValue:
+                                              Rupiah.format(perbaikan.harga),
                                           onChanged: (va) {
-                                            pengeluaran.harga=Rupiah.parse(va);
+                                            perbaikan.harga =
+                                                Rupiah.parse(va);
                                           },
                                           inputFormatters: [
                                             FilteringTextInputFormatter
@@ -189,7 +190,7 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                             CurrencyInputFormatter()
                                           ],
                                         ),
-                                        'Pengeluaran',
+                                        'Perbaikan',
                                         1),
                                   ],
                                 ),
@@ -197,48 +198,48 @@ class _PengelauaranAddState extends State<PengelauaranAdd> {
                                   children: [
                                     _buildSize(
                                         TextFormField(textInputAction: TextInputAction.next,
+                                          initialValue: perbaikan.keterangan,
                                           onChanged: (va) {
-                                            pengeluaran.keterangan=va;
+                                            perbaikan.keterangan = va;
                                           },
                                         ),
                                         'Keterangan',
                                         2),
                                   ],
-                                ),RoundedLoadingButton(
-                                          color: Colors.green,
-                                          elevation: 10,
-                                          successColor: Colors.green,
-                                          errorColor: Colors.red,
-                                          controller: _btnController,
-                                          onPressed: () async {
-                                            if (pengeluaran.harga==0||pengeluaran.jenis.isEmpty||pengeluaran.mobil.isEmpty) {
-                                              _btnController.error();
-                                              await Future.delayed(
-                                                  const Duration(seconds: 1));
-                                              _btnController.reset();
-                                              return;
-                                            }
+                                ),
+                                RoundedLoadingButton(
+                                  color: Colors.green,
+                                  elevation: 10,
+                                  successColor: Colors.green,
+                                  errorColor: Colors.red,
+                                  controller: _btnController,
+                                  onPressed: () async {
+                                    if (perbaikan.harga == 0 ||
+                                        perbaikan.jenis.isEmpty ||
+                                        perbaikan.mobil.isEmpty) {
+                                      _btnController.error();
+                                      await Future.delayed(
+                                          const Duration(seconds: 1));
+                                      _btnController.reset();
+                                      return;
+                                    }
 
-                                            await Future.delayed(
-                                                const Duration(seconds: 3), () {
-                                            
-                                                Provider.of<ProviderData>(
-                                                        context,
-                                                        listen: false)
-                                                    .addPengeluaran(pengeluaran);
-                                              
+                                    await Future.delayed(
+                                        const Duration(seconds: 3), () {
+                                      Provider.of<ProviderData>(context,
+                                              listen: false)
+                                          .updatePerbaikan(perbaikan);
 
-                                              _btnController.success();
-                                            });
-                                            await Future.delayed(
-                                                const Duration(seconds: 1), () {
-                                              Navigator.of(context).pop();
-                                            });
-                                          },
-                                          child: const Text('Tambah',
-                                              style: TextStyle(
-                                                  color: Colors.white)),
-                                        )
+                                      _btnController.success();
+                                    });
+                                    await Future.delayed(
+                                        const Duration(seconds: 1), () {
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                  child: const Text('Edit',
+                                      style: TextStyle(color: Colors.white)),
+                                )
                               ],
                             ),
                           ),

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:gabriel_logistik/kas/kas.dart';
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:gabriel_logistik/print_bulanan.dart';
 import 'package:gabriel_logistik/print_tahunan.dart';

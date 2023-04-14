@@ -3,7 +3,7 @@ import 'package:gabriel_logistik/bulanan/bulanan.dart';
 
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/pengeluaran.dart';
+import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/prints.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
@@ -60,7 +60,7 @@ class _LaporanBulananState extends State<LaporanBulanan> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.print),
+          child: const Icon(Icons.print),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => LaporanPrint(listKeuangan),
@@ -133,9 +133,9 @@ class _LaporanBulananState extends State<LaporanBulanan> {
             child: ListView(
               children: Provider.of<ProviderData>(context).listMobil.map((e) {
                 List<Transaksi> transaksiBulanIni = [];
-                double totalPengeluaran = 0;
+                double totalPerbaikan = 0;
                 double totalBersih = 0;
-                List<Pengeluaran> listPengeluaran = [];
+                List<Perbaikan> listPerbaikan = [];
                 double totalOngkos = 0;
                 double totalKeluar = 0;
                 double totalSisa = 0;
@@ -149,8 +149,8 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                         DateTime.parse(element.tanggalBerangkat).year ==
                             ropdownValue2)
                     .toList();
-                e.pengeluaran = Provider.of<ProviderData>(context)
-                    .backupListPengeluaran
+                e.perbaikan = Provider.of<ProviderData>(context)
+                    .backupListPerbaikan
                     .where((element) =>
                         element.mobil == e.nama_mobil &&
                         DateTime.parse(element.tanggal).month ==
@@ -165,24 +165,24 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                   totalKeluar += element.keluar;
                   totalSisa += element.sisa;
                 }
-                for (var pengeluaran in e.pengeluaran) {
-                  totalPengeluaran = totalPengeluaran + pengeluaran.harga;
-                  listPengeluaran.add(pengeluaran);
+                for (var Perbaikan in e.perbaikan) {
+                  totalPerbaikan = totalPerbaikan + Perbaikan.harga;
+                  listPerbaikan.add(Perbaikan);
                 }
-                totalBersih -= totalPengeluaran;
+                totalBersih -= totalPerbaikan;
 
                 KeuanganBulanan data = KeuanganBulanan(
                     e.nama_mobil,
                     transaksiBulanIni,
-                    listPengeluaran,
+                    listPerbaikan,
                     totalBersih,
                     totalOngkos,
                     totalKeluar,
                     totalSisa,
-                    totalPengeluaran,
+                    totalPerbaikan,
                     list[list.indexOf(dropdownValue)]);
-                    if(transaksiBulanIni.isEmpty && e.pengeluaran.isEmpty){
-                      return SizedBox();
+                    if(transaksiBulanIni.isEmpty && e.perbaikan.isEmpty){
+                      return const SizedBox();
                     }
   listKeuangan.add(data);
               

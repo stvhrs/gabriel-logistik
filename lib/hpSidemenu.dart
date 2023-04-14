@@ -2,34 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/hp_transaksi_add.dart';
 import 'package:gabriel_logistik/hp_transaksi_tile.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
-import 'package:gabriel_logistik/transaksi/transaksi_add.dart';
-import 'package:gabriel_logistik/transaksi/transaksi_search_mobil.dart';
-import 'package:gabriel_logistik/transaksi/transaksi_search_nama.dart';
-import 'package:gabriel_logistik/transaksi/transaksi_search_tanggal.dart';
-import 'package:gabriel_logistik/transaksi/transaksi_search_tujuan.dart';
-import 'package:gabriel_logistik/transaksi/transaksi_tile.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 
-import 'package:easy_sidemenu/easy_sidemenu.dart';
-import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
-import 'package:gabriel_logistik/models/pengeluaran.dart';
 
-import 'package:gabriel_logistik/pages/daftar_supir.dart';
-import 'package:gabriel_logistik/pages/jual_beli.dart';
-import 'package:gabriel_logistik/pages/kas_tahun.dart';
-import 'package:gabriel_logistik/pages/laporan_bulanan.dart';
-import 'package:gabriel_logistik/pages/pengeluaran_page.dart';
-import 'package:gabriel_logistik/pages/transaksi_page.dart';
-import 'package:gabriel_logistik/providerData/providerData.dart';
+
+
 import 'package:gabriel_logistik/services/service.dart';
-import 'package:provider/provider.dart';
+
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'pages/daftar_mobil.dart';
+
 import 'models/mobil.dart';
+import 'models/mutasi_saldo.dart';
+import 'models/perbaikan.dart';
 import 'models/supir.dart';
 import 'models/transaksi.dart';
 
@@ -41,11 +29,15 @@ class DashBoardHp extends StatefulWidget {
 }
 
 class _DashBoardHpState extends State<DashBoardHp> {
+  PageController page = PageController();
+
+
   late List<Transaksi> listTransaksi;
   late List<Supir> listSupir;
   late List<Mobil> listMobil;
-  late List<Pengeluaran> listPengeluaran;
+  late List<Perbaikan> listPerbaikan;
   late List<JualBeliMobil> listJualBeliMobil;
+  late List<MutasiSaldo> listMutasiSaldo;
   bool loading = true;
   String test = '';
   initData() async {
@@ -56,10 +48,11 @@ class _DashBoardHpState extends State<DashBoardHp> {
 // await Service.test3();
     listTransaksi = await Service.getAllTransaksi();
     listSupir = await Service.getAllSupir();
-    listPengeluaran = await Service.getAllPengeluaran();
-   
+    listPerbaikan = await Service.getAllPerbaikan();
+
     listJualBeliMobil = await Service.getAlljualBeli();
-    listMobil = await Service.getAllMobil(listPengeluaran);
+    listMobil = await Service.getAllMobil(listPerbaikan);
+    listMutasiSaldo=await Service.getAllMutasiSaldo();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var data = prefs.getString('data');
     if (jsonDecode(data!)['status'] == 'owner') {
@@ -71,8 +64,8 @@ class _DashBoardHpState extends State<DashBoardHp> {
     }
 
     Provider.of<ProviderData>(context, listen: false).setData(listTransaksi,
-        false, listMobil, listSupir, listPengeluaran, listJualBeliMobil);
-
+        false, listMobil, listSupir, listPerbaikan, listJualBeliMobil,listMutasiSaldo);
+    
     loading = false;
     setState(() {});
   }
@@ -83,19 +76,18 @@ class _DashBoardHpState extends State<DashBoardHp> {
 
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
 
     return loading
-        ? Center(
+        ? const Center(
             child: CircularProgressIndicator(),
           )
         : Consumer<ProviderData>(builder: (context, prov, _) {
             return Scaffold(resizeToAvoidBottomInset: false,
                 appBar: AppBar(  automaticallyImplyLeading: false,
                   backgroundColor: Theme.of(context).colorScheme.secondary,
-                  title: Text('Riwayat Transaksi',
+                  title: const Text('Riwayat Transaksi',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -104,10 +96,10 @@ class _DashBoardHpState extends State<DashBoardHp> {
                   leading: Padding(
                     padding: const EdgeInsets.all(13.0),
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Colors.white),
                       child: InkWell(
-                        child: Icon(
+                        child: const Icon(
                           Icons.restart_alt_rounded,
                           color: Colors.red,
                         ),
@@ -144,7 +136,7 @@ class _DashBoardHpState extends State<DashBoardHp> {
                               top: 10, bottom: 12.5, left: 10, right: 0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
+                            children: const [
                               Expanded(
                                   flex: 7,
                                   child: Text(

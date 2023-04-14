@@ -52,7 +52,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
         .toList()
         .forEach((element) {
       
-      controlerKetMobil.text=temp.firstWhere((element) => element.nama_mobil==widget.transaksi.mobil).nama_mobil;
+      // controlerKetMobil.text=temp.firstWhere((element) => element.nama_mobil==widget.transaksi.mobil).nama_mobil;
       controlerSisa.text=widget.transaksi.sisa.toString();
       if (listMobil.contains(element)) {
       } else {

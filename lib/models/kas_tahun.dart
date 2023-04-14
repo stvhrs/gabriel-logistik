@@ -7,10 +7,10 @@ class KasModel {
 double totalKeluar;
 double totalOngkos;
 
-double totalPengeluaran;
+double totalPerbaikan;
 
   String tahun;
 
   KasModel(this.namaMobil, this.listBulananMobil, this.totalSisa,
-      this.totalKeluar,this.totalOngkos, this.totalPengeluaran, this.tahun);
+      this.totalKeluar,this.totalOngkos, this.totalPerbaikan, this.tahun);
 }

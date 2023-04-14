@@ -162,7 +162,9 @@ class _BeliEditState extends State<BeliEdit> {
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,
+                                        TextFormField(textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,onChanged: (val){
+                                       widget.     jualBeliMobil.keterangan=val;
+                                        },
                                         
                                         ),
                                         'Keterangan',

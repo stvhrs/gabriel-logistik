@@ -12,7 +12,6 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
-import '../helper/dropdown.dart';
 import '../helper/format_tanggal.dart';
 import '../helper/input_currency.dart';
 
@@ -84,7 +83,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
         //             style: const TextStyle(fontSize: 13),
         //           )),
         Container(
-      margin: EdgeInsets.only(bottom: 15, left: 10),
+      margin: const EdgeInsets.only(bottom: 15, left: 10),
       height: 36,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -127,21 +126,21 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                 padding: MaterialStateProperty.all(const EdgeInsets.all(15))),
             onPressed: () {
               transaksi = Transaksi.fromMap({
-                'tgl_berangkat': DateTime.now().toIso8601String(),
-                'keterangan': '',
-                'supir': 'Pilih Supir',
-                'tujuan': '',
-                'mobil': 'Pilih Mobil',
-                'keluar': 0,
-                'ongkos': 0,
-                'sisa': 0,
-              });
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+   'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },);
               showDialog(
                   barrierDismissible: false,
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      backgroundColor: Theme.of(context).primaryColor,contentPadding: EdgeInsets.all(0),
+                      backgroundColor: Theme.of(context).primaryColor,contentPadding: const EdgeInsets.all(0),
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -176,7 +175,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                               BorderRadius.all(Radius.circular(10.0))),
                       content: Container(
                         width: MediaQuery.of(context).size.width * 0.9,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10))),
                         child: StatefulBuilder(
@@ -192,7 +191,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     width: MediaQuery.of(context).size.width *
                                         0.26,
                                     child: Column(
@@ -219,7 +218,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                   borderRadius:
                                                       BorderRadius.circular(5)),
                                               child: Container(
-                                                padding: EdgeInsets.only(
+                                                padding: const EdgeInsets.only(
                                                     top: 5, left: 5, bottom: 5),
                                                 decoration: BoxDecoration(
                                                     color: Colors.grey.shade200,
@@ -238,7 +237,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                                 'Nunito',
                                                             color:
                                                                 Colors.black)),
-                                                    Icon(Icons
+                                                    const Icon(Icons
                                                         .arrow_drop_down_sharp)
                                                   ],
                                                 ),
@@ -251,7 +250,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                 return PopupMenuItem<String>(
                                                   onTap: () {
                                                     setState(() {
-                                                      transaksi.supir = value!;
+                                                      transaksi.supir = value;
                                                       controlerSupir.text =
                                                           value;
                                                     });
@@ -267,7 +266,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                                       'Nunito',
                                                                   color: Colors
                                                                       .black)),
-                                                      Divider(height: 0),
+                                                      const Divider(height: 0),
                                                     ],
                                                   ),
                                                 );
@@ -283,7 +282,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                     BorderRadius.circular(5),
                                               ),
                                               child: Container(
-                                                padding: EdgeInsets.only(
+                                                padding: const EdgeInsets.only(
                                                     top: 5, left: 5, bottom: 5),
                                                 decoration: BoxDecoration(
                                                     color: Colors.grey.shade200,
@@ -302,7 +301,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                                 'Nunito',
                                                             color:
                                                                 Colors.black)),
-                                                    Icon(Icons
+                                                    const Icon(Icons
                                                         .arrow_drop_down_sharp)
                                                   ],
                                                 ),
@@ -345,7 +344,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                                       'Nunito',
                                                                   color: Colors
                                                                       .black)),
-                                                      Divider(height: 0),
+                                                      const Divider(height: 0),
                                                     ],
                                                   ),
                                                 );
@@ -479,7 +478,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                 }),
                                             'Keterangan',
                                             2),
-                                        Spacer(),
+                                        const Spacer(),
                                         Container(
                                           child: ElevatedButton.icon(
                                               icon: const Icon(
@@ -541,9 +540,9 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                       ],
                                     ),
                                   ),
-                                  VerticalDivider(),
+                                  const VerticalDivider(),
                                   Container(
-                                    margin: EdgeInsets.only(right: 10),
+                                    margin: const EdgeInsets.only(right: 10),
                                     width:
                                         MediaQuery.of(context).size.width * 0.6,
                                     child: Column(
@@ -749,7 +748,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                                       //     child: Text(element.listPerbaikan.isEmpty
                                                                       //         ? '-'
                                                                       //         : Rupiah.format(
-                                                                      //             totalPengeluaran(element.listPerbaikan)))),
+                                                                      //             totalPerbaikan(element.listPerbaikan)))),
                                                                     ])),
                                                           ))
                                                   .toList()),

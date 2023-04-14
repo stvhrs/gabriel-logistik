@@ -18,7 +18,7 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'package:collection/collection.dart';
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
-import 'package:gabriel_logistik/models/pengeluaran.dart';
+import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -34,7 +34,7 @@ const sep = 120.0;
 Future<Uint8List> generateResume(
     PdfPageFormat format, List<KeuanganBulanan> as) async {
       print(as.length);
-  pw.TextStyle med = pw.TextStyle(fontSize: 10);
+  pw.TextStyle med = const pw.TextStyle(fontSize: 10);
   DateTime dateTime = DateTime.parse(DateTime.now().toIso8601String());
   String yourDateTime = DateFormat('hh:mm dd-MM-yyyy').format(dateTime);
 
@@ -50,7 +50,7 @@ Future<Uint8List> generateResume(
                 //     color: index.isEven
                 //         ? Colors.grey.shade200
                 //         : const Color.fromARGB(255, 189, 193, 221)),
-                padding: pw.EdgeInsets.only(
+                padding: const pw.EdgeInsets.only(
                   top: 7,
                   bottom: 7,
                   left: 15,
@@ -104,7 +104,7 @@ Future<Uint8List> generateResume(
                   //       textAlign: TextAlign.left,
                   //       element. listPerbaikan.isEmpty
                   //           ? ''
-                  //           : Rupiah.format(totalPengeluaran.totalPengeluaran(
+                  //           : Rupiah.format(totalPerbaikan.totalPerbaikan(
                   //               element. listPerbaikan)),
                   //       ),
                   // ),
@@ -114,7 +114,7 @@ Future<Uint8List> generateResume(
     }
   }
 
-  buildChildren2(List<Pengeluaran> list) {
+  buildChildren2(List<Perbaikan> list) {
     if (list.isEmpty) {
       return [];
     } else {
@@ -126,7 +126,7 @@ Future<Uint8List> generateResume(
               //     color: index.isEven
               //         ? Colors.grey.shade200
               //         :  const Color.fromARGB(255, 189, 193, 221)),
-              padding: pw.EdgeInsets.only(
+              padding: const pw.EdgeInsets.only(
                 top: 7,
                 bottom: 7,
                 left: 15,
@@ -168,7 +168,7 @@ Future<Uint8List> generateResume(
                   //       textAlign: TextAlign.left,
                   //       element.listPerbaikan.isEmpty
                   //           ? ''
-                  //           : Rupiah.format(totalPengeluaran.totalPengeluaran(
+                  //           : Rupiah.format(totalPerbaikan.totalPerbaikan(
                   //               element.listPerbaikan)),
                   //       ),
                   // ),
@@ -183,7 +183,7 @@ Future<Uint8List> generateResume(
   final document = pw.Document();
   pw.TextStyle bold = pw.TextStyle(fontWeight: pw.FontWeight.bold);
     pw.TextStyle bold2 = pw.TextStyle(fontSize: 15,fontWeight: pw.FontWeight.bold);
-  pw.TextStyle small = pw.TextStyle(fontSize: 10);
+  pw.TextStyle small = const pw.TextStyle(fontSize: 10);
 
   var pagetheme = await _myPageTheme(format);
   for (var element in as) {
@@ -217,15 +217,11 @@ Future<Uint8List> generateResume(
                       ),
                       pw.Spacer(),
                       pw.Text(yourDateTime, style: small),
-                      pw.Text('   ' +
-                          (as.indexOf(element) + 1).toString() +
-                          '/' +
-                          as.length.toString() +
-                          '    ')
+                      pw.Text('   ${as.indexOf(element) + 1}/${as.length}    ')
                     ]),
                   pw.Container(
                         margin: const pw.EdgeInsets.only(top: 10, bottom: 3),
-                        decoration: pw.BoxDecoration(
+                        decoration: const pw.BoxDecoration(
                             border: pw.Border(top: pw.BorderSide())),
                         child: pw.Center(
                           child: pw.Text(
@@ -259,12 +255,12 @@ Future<Uint8List> generateResume(
                     ...buildChildren(element.transaksiBulanIni),
                     pw.Container(
                         margin: const pw.EdgeInsets.only(top: 20, bottom: 3),
-                        decoration: pw.BoxDecoration(
+                        decoration: const pw.BoxDecoration(
                             border: pw.Border(top: pw.BorderSide())),
                         child: pw.Center(
                           child: pw.Text(
                               textAlign: pw.TextAlign.center,
-                              'Pengeluaran',
+                              'Perbaikan',
                               style: bold2),
                         )),
                     pw.Container(
@@ -281,7 +277,7 @@ Future<Uint8List> generateResume(
                               flex: 3, child: pw.Text('Jenis', style: bold)),
                           pw.Expanded(
                               flex: 5,
-                              child: pw.Text('Pengeluaran', style: bold)),
+                              child: pw.Text('Perbaikan', style: bold)),
                           pw.Expanded(
                               flex: 7,
                               child: pw.Text('Keterangan', style: bold)),
@@ -415,7 +411,7 @@ Future<Uint8List> generateResume(
                                       child: pw.Container(
                                           margin: const pw.EdgeInsets.only(
                                               top: 4, bottom: 0),
-                                          child: pw.Text('Total Pengeluaran',
+                                          child: pw.Text('Total Perbaikan',
                                               style: small)),
                                     ),
                                     pw.Expanded(
@@ -426,7 +422,7 @@ Future<Uint8List> generateResume(
                                           child: pw.Text(
                                               textAlign: pw.TextAlign.right,
                                               Rupiah.format(
-                                                  element.totalPengeluaran),
+                                                  element.totalPerbaikan),
                                               style: small)),
                                     ),
                                     pw.Expanded(flex: 5, child: pw.SizedBox()),

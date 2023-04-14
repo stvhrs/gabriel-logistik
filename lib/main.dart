@@ -107,10 +107,10 @@ class _MyHomePageState extends State<MyHomePage> {
         : Consumer<ProviderData>(builder: (context, data, _) {
             return data.logined
                 ? MediaQuery.of(context).size.width <= 500
-                    ? DashBoardHp()
-                    : DashBoard()
+                    ? const DashBoardHp()
+                    : const DashBoard()
                 
-                    : LoginScreen();
+                    : const LoginScreen();
           });
   }
 }

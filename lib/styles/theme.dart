@@ -13,11 +13,10 @@ class AppTheme {
           backgroundColor: Colors.white,
         ),
         chipTheme: ChipThemeData(
-            backgroundColor: Colors.white,
-            surfaceTintColor: Colors.red,
-            disabledColor: Colors.greenAccent,
-            elevation: 0,
-            selectedColor: Colors.pink,
+            backgroundColor: Colors.grey.shade500,
+           labelStyle: TextStyle(fontFamily: 'Nunito',color: Colors.white),
+          
+            selectedColor:secondaryColor.withOpacity(0.9),
             checkmarkColor: Colors.green,
             showCheckmark: false,
             deleteIconColor: Colors.amber,
@@ -32,9 +31,11 @@ class AppTheme {
                 backgroundColor: MaterialStateProperty.all(Colors.green.shade500  ))),
         primaryColor: primaryColor,
      
-        scrollbarTheme: const ScrollbarThemeData()
+        scrollbarTheme:  ScrollbarThemeData(
+          thumbVisibility: MaterialStateProperty.all<bool>(true),
+        )
             .copyWith(thumbColor: MaterialStateProperty.all(secondaryColor)),
-        textTheme: const TextTheme(
+        textTheme:  TextTheme(
             displaySmall: TextStyle(
               fontSize: 13,
               color: Colors.black,fontFamily: 'FreeSans'
@@ -54,18 +55,18 @@ class AppTheme {
               fontWeight: FontWeight.bold,
               color: Colors.white,
             )),
-        inputDecorationTheme: InputDecorationTheme(
+        inputDecorationTheme: InputDecorationTheme(hintStyle: TextStyle(fontSize: 13,fontFamily: 'Nunito'),
           labelStyle: TextStyle(
               fontSize: 18, color: Colors.grey.shade600, letterSpacing: 0.7),
-          contentPadding: const EdgeInsets.only(left: 10, top: 0, bottom: 0),
+          contentPadding: const EdgeInsets.only(left: 5,right: 5, top: 0, bottom: 0),
           filled: true,
-          fillColor: Colors.grey.shade200,
+          fillColor: Colors.grey.shade100,
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(3),
             borderSide: BorderSide(color: primaryColor),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(3),
             borderSide: BorderSide(color: primaryColor),
           ),
         ),

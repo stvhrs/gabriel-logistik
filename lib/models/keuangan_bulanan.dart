@@ -1,15 +1,15 @@
-import 'package:gabriel_logistik/models/pengeluaran.dart';
+import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 
 class KeuanganBulanan {
   String namaMobil;
   List<Transaksi> transaksiBulanIni;
-  List<Pengeluaran> pengeluranBulanIni;
+  List<Perbaikan> pengeluranBulanIni;
   double totalBersih;
   double totalOngkos;
   double totalKeluar;
   double totalSisa;
-  double totalPengeluaran;
+  double totalPerbaikan;
   String bulan;
 
   KeuanganBulanan(
@@ -20,6 +20,6 @@ class KeuanganBulanan {
       this.totalOngkos,
       this.totalKeluar,
       this.totalSisa,
-      this.totalPengeluaran,
+      this.totalPerbaikan,
       this.bulan);
 }

@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
 
 
-TextStyle ralewayStyle = TextStyle(fontFamily: 'Nunito');
+TextStyle ralewayStyle = const TextStyle(fontFamily: 'Nunito');

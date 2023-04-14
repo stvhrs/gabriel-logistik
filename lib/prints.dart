@@ -36,7 +36,7 @@ class _LaporanPrintState extends State<LaporanPrint> {
     return Scaffold(
       body: Theme(
         data: ThemeData(
-            iconTheme: IconThemeData(
+            iconTheme: const IconThemeData(
               color: Colors.white,
             ),
             primaryColor: const Color.fromARGB(255, 59, 59, 65)),

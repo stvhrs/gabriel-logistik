@@ -5,15 +5,12 @@ import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
-import '../helper/dropdown.dart';
-import '../helper/format_tanggal.dart';
 import '../helper/input_currency.dart';
 
 class HpTransaksiAdd extends StatefulWidget {
@@ -69,7 +66,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
   Widget _buildSize(widget, String ket, int flex) {
     return Container(
         height: 70,
-        margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+        margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
         // margin: EdgeInsets.only(
         //     right: ket == 'Keterangan Mobil' || ket == 'Ketik Tujuan' ? 0 : 50,
         //     bottom: ket == 'Keterangan' ? 20 : 5),
@@ -139,10 +136,10 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                   isScrollControlled: true,
                   context: context,
                   builder: (context) {
-                    return SingleChildScrollView(padding: EdgeInsets.all(0),
+                    return SingleChildScrollView(padding: const EdgeInsets.all(0),
                         
                             child: Container(
-                              padding: EdgeInsets.only(left: 10,right: 10,bottom: 10),
+                              padding: const EdgeInsets.only(left: 10,right: 10,bottom: 10),
                               width: MediaQuery.of(context).size.width * 0.95,
                               decoration: BoxDecoration(
                                   color: Colors.white,
@@ -216,7 +213,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                                     .circular(
                                                                         5)),
                                                     child: Container(
-                                                      padding: EdgeInsets.only(
+                                                      padding: const EdgeInsets.only(
                                                           top: 5,
                                                           left: 5,
                                                           bottom: 5),
@@ -240,7 +237,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                                       'Nunito',
                                                                   color: Colors
                                                                       .black)),
-                                                          Icon(Icons
+                                                          const Icon(Icons
                                                               .arrow_drop_down_sharp)
                                                         ],
                                                       ),
@@ -255,9 +252,9 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                         onTap: () {
                                                           setState(() {
                                                             transaksi.supir =
-                                                                value!;
+                                                                value;
                                                             controlerSupir
-                                                                .text = value!;
+                                                                .text = value;
                                                           });
                                                         },
                                                         value: value,
@@ -273,7 +270,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                                         'Nunito',
                                                                     color: Colors
                                                                         .black)),
-                                                            Divider(height: 0),
+                                                            const Divider(height: 0),
                                                           ],
                                                         ),
                                                       );
@@ -292,7 +289,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                               5),
                                                     ),
                                                     child: Container(
-                                                      padding: EdgeInsets.only(
+                                                      padding: const EdgeInsets.only(
                                                           top: 5,
                                                           left: 5,
                                                           bottom: 5),
@@ -316,7 +313,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                                       'Nunito',
                                                                   color: Colors
                                                                       .black)),
-                                                          Icon(Icons
+                                                          const Icon(Icons
                                                               .arrow_drop_down_sharp)
                                                         ],
                                                       ),
@@ -362,7 +359,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                                         'Nunito',
                                                                     color: Colors
                                                                         .black)),
-                                                            Divider(height: 0),
+                                                            const Divider(height: 0),
                                                           ],
                                                         ),
                                                       );
