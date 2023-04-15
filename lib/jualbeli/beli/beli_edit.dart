@@ -26,7 +26,7 @@ class _BeliEditState extends State<BeliEdit> {
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
 
-  TextStyle small = const TextStyle(fontSize: 13);
+  TextStyle small = const TextStyle(fontSize: 13.5);
   Widget _buildSize(widget, String ket, int flex) {
 
     return Expanded(
@@ -43,7 +43,7 @@ class _BeliEditState extends State<BeliEdit> {
                   children: [
                     Text(
                       '$ket :',
-                      style: const TextStyle(fontSize: 13),
+                      style: const TextStyle(fontSize: 13.5),
                     ),
                   ],
                 )),
@@ -129,7 +129,8 @@ class _BeliEditState extends State<BeliEdit> {
                                         'Tanggal',
                                         1),
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.jualBeliMobil.mobil,
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.jualBeliMobil.mobil,
                                           onChanged: (va) {
                                            
                                           },
@@ -137,7 +138,8 @@ class _BeliEditState extends State<BeliEdit> {
                                         'Mobil',
                                         1),
                                           _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil
                                         .ketMobil,readOnly: true,
                                          
                                         ),
@@ -145,7 +147,8 @@ class _BeliEditState extends State<BeliEdit> {
                                         1),
                                     
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,initialValue: Rupiah.format(widget.jualBeliMobil.harga),
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: Rupiah.format(widget.jualBeliMobil.harga),
                                           onChanged: (va) {
                                          widget.   jualBeliMobil.harga=Rupiah.parse(va);
                                           },
@@ -162,7 +165,8 @@ class _BeliEditState extends State<BeliEdit> {
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,onChanged: (val){
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,onChanged: (val){
                                        widget.     jualBeliMobil.keterangan=val;
                                         },
                                         

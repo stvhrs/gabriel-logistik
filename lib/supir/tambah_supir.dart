@@ -19,31 +19,33 @@ class TambahSupir extends StatelessWidget {
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.green)),
         onPressed: () {
-          showDialog(barrierDismissible: false,
+          showDialog(
+              barrierDismissible: false,
               context: context,
               builder: (context) {
                 return AlertDialog(
                   actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                  title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Tambah Supir"), Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CircleAvatar(
-                                radius: 12,
-                                backgroundColor: Colors.white,
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Icon(
-                                    Icons.close,
-                                    
-                                    color: Colors.red,
-                                  ),
-                                )),
-                          ),
-                  ],
-                ),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Tambah Supir"),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CircleAvatar(
+                            radius: 12,
+                            backgroundColor: Colors.white,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Icon(
+                                Icons.close,
+                                color: Colors.red,
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
                   content: IntrinsicHeight(
                     child: SizedBox(
                       width: 500,
@@ -51,7 +53,9 @@ class TambahSupir extends StatelessWidget {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(textInputAction: TextInputAction.next,
+                            child: TextFormField(
+                              style: TextStyle(fontSize: 13.5),
+                              textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'Nama Supir',
                               ),
@@ -63,7 +67,9 @@ class TambahSupir extends StatelessWidget {
                           ),
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(textInputAction: TextInputAction.next,
+                            child: TextFormField(
+                              style: TextStyle(fontSize: 13.5),
+                              textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'No Hp',
                               ),
@@ -73,18 +79,6 @@ class TambahSupir extends StatelessWidget {
                               maxLines: 1,
                             ),
                           ),
-                          // Container(
-                          //   margin: const EdgeInsets.only(bottom: 20),
-                          //   child: TextFormField(textInputAction: TextInputAction.next,
-                          //     decoration: const InputDecoration(
-                          //       hintText: 'Alamat',
-                          //     ),
-                          //     onChanged: (val) {
-                          //       alamat = val.toString();
-                          //     },
-                          //     maxLines: 3,
-                          //   ),
-                          // )
                         ],
                       ),
                     ),

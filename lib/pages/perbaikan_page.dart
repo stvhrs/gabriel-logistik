@@ -60,6 +60,7 @@ class _PerbaikanPageState extends State<PerbaikanPage> {
                     margin: const EdgeInsets.only(bottom: 5),
                     height: MediaQuery.of(context).size.height / 20,
                     child: TextFormField(
+                              style: TextStyle(fontSize:13),
                       textInputAction: TextInputAction.next,
                       decoration: const InputDecoration(hintText: 'Cari'),
                       onChanged: (val) {

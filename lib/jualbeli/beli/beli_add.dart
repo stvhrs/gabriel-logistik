@@ -25,7 +25,7 @@ class _BeliAddState extends State<BeliAdd> {
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
   late JualBeliMobil jualBeliMobil;
-  TextStyle small = const TextStyle(fontSize: 13);
+  TextStyle small = const TextStyle(fontSize: 13.5);
   Widget _buildSize(widget, String ket, int flex) {
 
     return Expanded(
@@ -42,7 +42,7 @@ class _BeliAddState extends State<BeliAdd> {
                   children: [
                     Text(
                       '$ket :',
-                      style: const TextStyle(fontSize: 13),
+                      style: const TextStyle(fontSize: 13.5),
                     ),
                   ],
                 )),
@@ -136,7 +136,8 @@ class _BeliAddState extends State<BeliAdd> {
                                         'Tanggal',
                                         1),
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.mobil=va;
                                           },
@@ -144,7 +145,8 @@ class _BeliAddState extends State<BeliAdd> {
                                         'Mobil',
                                         1),
                                           _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.ketMobil=va;
                                           },
@@ -153,7 +155,8 @@ class _BeliAddState extends State<BeliAdd> {
                                         1),
                                     
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.harga=Rupiah.parse(va);
                                           },
@@ -170,7 +173,8 @@ class _BeliAddState extends State<BeliAdd> {
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.keterangan=va;
                                           },

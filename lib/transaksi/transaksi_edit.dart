@@ -84,7 +84,7 @@ controlerSisa.text=  Rupiah.format(widget.transaksi.sisa);
                   children: [
                     Text(
                       '$ket :',
-                      style: const TextStyle(fontSize: 13),
+                      style: const TextStyle(fontSize: 13.5),
                     ),
                   ],
                 )),
@@ -207,7 +207,8 @@ controlerSisa.text=  Rupiah.format(widget.transaksi.sisa);
                                               'Pilih Mobil',
                                               1),
                                           _buildSize(
-                                              TextFormField(textInputAction: TextInputAction.next,
+                                              TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                                 readOnly: true,
                                                 controller: controlerKetMobil,
                                                 onChanged: (val) {},
@@ -219,7 +220,8 @@ controlerSisa.text=  Rupiah.format(widget.transaksi.sisa);
                                       Row(
                                         children: [
                                           _buildSize(
-                                              TextFormField(textInputAction: TextInputAction.next,initialValue:Rupiah.format(widget.transaksi.ongkos) ,
+                                              TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue:Rupiah.format(widget.transaksi.ongkos) ,
                                                 onChanged: (va) {
                                                   if (va.isNotEmpty &&
                                                       va.startsWith('Rp')) {
@@ -251,7 +253,8 @@ controlerSisa.text=  Rupiah.format(widget.transaksi.sisa);
                                               'Biaya Ongkos',
                                               1),
                                           _buildSize(
-                                              TextFormField(textInputAction: TextInputAction.next,initialValue: Rupiah.format(widget.transaksi.keluar),
+                                              TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: Rupiah.format(widget.transaksi.keluar),
                                                 onChanged: (va) {
                                                   if (va.isNotEmpty &&
                                                       va.startsWith('Rp')) {
@@ -283,7 +286,8 @@ controlerSisa.text=  Rupiah.format(widget.transaksi.sisa);
                                               'Biaya Keluar',
                                               1),
                                           _buildSize(
-                                              TextFormField(textInputAction: TextInputAction.next,
+                                              TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                                 controller: controlerSisa,
                                                 readOnly: true,
                                                 onChanged: (va) {
@@ -303,7 +307,8 @@ controlerSisa.text=  Rupiah.format(widget.transaksi.sisa);
                                               ),
                                               'Sisa',
                                               1),
-                                          _buildSize(TextFormField(textInputAction: TextInputAction.next,initialValue: widget.transaksi.tujuan,
+                                          _buildSize(TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.transaksi.tujuan,
                                             onChanged: (va) {
                                               transaksi.tujuan = va;
                                             },
@@ -315,7 +320,8 @@ controlerSisa.text=  Rupiah.format(widget.transaksi.sisa);
                                             CrossAxisAlignment.center,
                                         children: [
                                           _buildSize(
-                                              TextFormField(textInputAction: TextInputAction.next,initialValue: widget.transaksi.keterangan,onChanged: (val) {
+                                              TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.transaksi.keterangan,onChanged: (val) {
                                             transaksi.keterangan = val;
                                           }), 'Keterangan', 2),
                                           _buildSize(const SizedBox(), '', 4),

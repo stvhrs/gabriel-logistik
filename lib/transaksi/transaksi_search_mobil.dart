@@ -15,7 +15,8 @@ class _SearchMobilState extends State<SearchMobil> {
     return Container(
         margin: const EdgeInsets.only(left: 35),
         width: MediaQuery.of(context).size.width * 0.15,
-        child: TextFormField(textInputAction: TextInputAction.next,
+        child: TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
           onChanged: (val) {
             Provider.of<ProviderData>(context, listen: false).searchmobile =
                 val;

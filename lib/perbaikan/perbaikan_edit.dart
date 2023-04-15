@@ -50,7 +50,7 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
       RoundedLoadingButtonController();
   final TextEditingController mobilCont = TextEditingController();
   late Perbaikan perbaikan;
-  TextStyle small = const TextStyle(fontSize: 13);
+  TextStyle small = const TextStyle(fontSize: 13.5);
   Widget _buildSize(widget, String ket, int flex) {
     return Expanded(
       flex: flex,
@@ -67,7 +67,7 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                   children: [
                     Text(
                       '$ket :',
-                      style: const TextStyle(fontSize: 13),
+                      style: const TextStyle(fontSize: 13.5),
                     ),
                   ],
                 )),
@@ -158,7 +158,8 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                                         'Tanggal',
                                         1),
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                           initialValue: perbaikan.jenis,
                                           onChanged: (va) {
                                             perbaikan.jenis = va;
@@ -177,7 +178,8 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                                         'Pilih Mobil',
                                         1),
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                           initialValue:
                                               Rupiah.format(perbaikan.harga),
                                           onChanged: (va) {
@@ -197,7 +199,8 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                           initialValue: perbaikan.keterangan,
                                           onChanged: (va) {
                                             perbaikan.keterangan = va;

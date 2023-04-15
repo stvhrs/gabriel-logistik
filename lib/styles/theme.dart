@@ -32,9 +32,8 @@ class AppTheme {
         primaryColor: primaryColor,
      
         scrollbarTheme:  ScrollbarThemeData(
-          thumbVisibility: MaterialStateProperty.all<bool>(true),
-        )
-            .copyWith(thumbColor: MaterialStateProperty.all(secondaryColor)),
+          thumbVisibility: MaterialStateProperty.all<bool>(true),thickness: MaterialStateProperty.all(5))
+            .copyWith(thumbColor: MaterialStateProperty.all(secondaryColor.withOpacity(0.5))),
         textTheme:  TextTheme(
             displaySmall: TextStyle(
               fontSize: 13,

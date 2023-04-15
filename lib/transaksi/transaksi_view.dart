@@ -80,7 +80,7 @@ class _TransaksiViewState extends State<TransaksiView> {
                   children: [
                     Text(
                       '$ket :',
-                      style: const TextStyle(fontSize: 13),
+                      style: const TextStyle(fontSize: 13.5),
                     ),
                   ],
                 )),
@@ -175,7 +175,8 @@ class _TransaksiViewState extends State<TransaksiView> {
                                               'Tanggal',
                                               1),
                                           _buildSize(
-                                             TextFormField(textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.transaksi.supir,enabled: false,
+                                             TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.transaksi.supir,enabled: false,
                                                 onChanged: (val) {
                                                   transaksi.supir = val;
                                                 },
@@ -184,7 +185,8 @@ class _TransaksiViewState extends State<TransaksiView> {
                                               'Pilih Supir',
                                               1),
                                           _buildSize(
-                                             TextFormField(textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.transaksi.mobil,enabled: false,
+                                             TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.transaksi.mobil,enabled: false,
                                                 onChanged: (val) {
                                                   transaksi.mobil = val;
                                                   controlerKetMobil
@@ -203,7 +205,8 @@ class _TransaksiViewState extends State<TransaksiView> {
                                               'Pilih Mobil',
                                               1),
                                           _buildSize(
-                                              TextFormField(textInputAction: TextInputAction.next,readOnly:true,
+                                              TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,
                                               
                                                 controller: controlerKetMobil,
                                                 onChanged: (val) {},
@@ -215,7 +218,8 @@ class _TransaksiViewState extends State<TransaksiView> {
                                       Row(
                                         children: [
                                           _buildSize(
-                                              TextFormField(textInputAction: TextInputAction.next,readOnly:true,initialValue:Rupiah.format(widget.transaksi.ongkos) ,
+                                              TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,initialValue:Rupiah.format(widget.transaksi.ongkos) ,
                                                 onChanged: (va) {
                                                   if (va.isNotEmpty &&
                                                       va.startsWith('Rp')) {
@@ -247,7 +251,8 @@ class _TransaksiViewState extends State<TransaksiView> {
                                               'Biaya Ongkos',
                                               1),
                                           _buildSize(
-                                              TextFormField(textInputAction: TextInputAction.next,readOnly:true,initialValue: Rupiah.format(widget.transaksi.keluar),
+                                              TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,initialValue: Rupiah.format(widget.transaksi.keluar),
                                                 onChanged: (va) {
                                                   if (va.isNotEmpty &&
                                                       va.startsWith('Rp')) {
@@ -279,7 +284,8 @@ class _TransaksiViewState extends State<TransaksiView> {
                                               'Biaya Keluar',
                                               1),
                                           _buildSize(
-                                              TextFormField(textInputAction: TextInputAction.next,readOnly:true,
+                                              TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,
                                                initialValue: Rupiah.format(widget.transaksi.sisa),
                                           
                                                 onChanged: (va) {
@@ -299,7 +305,8 @@ class _TransaksiViewState extends State<TransaksiView> {
                                               ),
                                               'Sisa',
                                               1),
-                                          _buildSize(TextFormField(textInputAction: TextInputAction.next,readOnly:true,initialValue: widget.transaksi.tujuan,
+                                          _buildSize(TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,initialValue: widget.transaksi.tujuan,
                                             onChanged: (va) {
                                               transaksi.tujuan = va;
                                             },
@@ -311,7 +318,8 @@ class _TransaksiViewState extends State<TransaksiView> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           _buildSize(
-                                              TextFormField(textInputAction: TextInputAction.next,readOnly:true,initialValue: widget.transaksi.keterangan,onChanged: (val) {
+                                              TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,initialValue: widget.transaksi.keterangan,onChanged: (val) {
                                             transaksi.keterangan = val;
                                           }), 'Keterangan', 2),
                                           _buildSize(const SizedBox(), '', 4),

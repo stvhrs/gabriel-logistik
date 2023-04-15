@@ -64,7 +64,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
   late Transaksi transaksi;
-  TextStyle small = const TextStyle(fontSize: 13);
+  TextStyle small = const TextStyle(fontSize: 13.5);
   Widget _buildSize(widget, String ket, int flex) {
     return
         //  Container(height: 50,
@@ -80,7 +80,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
         //           ),
         //           child: Text(
         //             '$ket :',
-        //             style: const TextStyle(fontSize: 13),
+        //             style: const TextStyle(fontSize: 13.5),
         //           )),
         Container(
       margin: const EdgeInsets.only(bottom: 15, left: 10),
@@ -353,7 +353,8 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Pilih Mobil',
                                             1),
                                         _buildSize(
-                                            TextFormField(textInputAction: TextInputAction.next,
+                                            TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                               readOnly: true,
                                               controller: controlerKetMobil,
                                               onChanged: (val) {},
@@ -361,7 +362,8 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Keterangan Mobil',
                                             1),
                                         _buildSize(
-                                            TextFormField(textInputAction: TextInputAction.next,
+                                            TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                               controller: controlerOngkos,
                                               onChanged: (va) {
                                                 if (va.isNotEmpty &&
@@ -398,7 +400,8 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Biaya Ongkos',
                                             1),
                                         _buildSize(
-                                            TextFormField(textInputAction: TextInputAction.next,
+                                            TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                               controller: controlerKeluar,
                                               onChanged: (va) {
                                                 if (va.isNotEmpty &&
@@ -436,7 +439,8 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Biaya Keluar',
                                             1),
                                         _buildSize(
-                                            TextFormField(textInputAction: TextInputAction.next,
+                                            TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                               controller: controlerSisa,
                                               readOnly: true,
                                               onChanged: (va) {
@@ -457,7 +461,8 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Sisa',
                                             1),
                                         _buildSize(
-                                            TextFormField(textInputAction: TextInputAction.next,
+                                            TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                               controller: controlerTujuan,
                                               onChanged: (va) {
                                                 transaksi.tujuan = va;
@@ -469,7 +474,8 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             'Ketik Tujuan',
                                             1),
                                         _buildSize(
-                                            TextFormField(textInputAction: TextInputAction.next,
+                                            TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                                 controller: controlerKeterangan,
                                                 onChanged: (val) {
                                                   transaksi.keterangan = val; setState(() {

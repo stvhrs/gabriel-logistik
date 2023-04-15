@@ -53,7 +53,8 @@ class TambahMobil extends StatelessWidget {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(textInputAction: TextInputAction.next,
+                            child: TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'No Pol',
                               ),
@@ -65,7 +66,8 @@ class TambahMobil extends StatelessWidget {
                           ),
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(textInputAction: TextInputAction.next,
+                            child: TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'Keterangan',
                               ),
@@ -75,18 +77,7 @@ class TambahMobil extends StatelessWidget {
                               maxLines: 1,
                             ),
                           ),
-                          // Container(
-                          //   margin: const EdgeInsets.only(bottom: 20),
-                          //   child: TextFormField(textInputAction: TextInputAction.next,
-                          //     decoration: const InputDecoration(
-                          //       hintText: 'Alamat',
-                          //     ),
-                          //     onChanged: (val) {
-                          //       alamat = val.toString();
-                          //     },
-                          //     maxLines: 3,
-                          //   ),
-                          // )
+                        
                         ],
                       ),
                     ),

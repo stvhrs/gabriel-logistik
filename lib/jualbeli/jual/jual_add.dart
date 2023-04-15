@@ -43,7 +43,7 @@ class _JualAddState extends State<JualAdd> {
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
   late JualBeliMobil jualBeliMobil;
-  TextStyle small = const TextStyle(fontSize: 13);
+  TextStyle small = const TextStyle(fontSize: 13.5);
   Widget _buildSize(widget, String ket, int flex) {
 
     return Expanded(
@@ -60,7 +60,7 @@ class _JualAddState extends State<JualAdd> {
                   children: [
                     Text(
                       '$ket :',
-                      style: const TextStyle(fontSize: 13),
+                      style: const TextStyle(fontSize: 13.5),
                     ),
                   ],
                 )),
@@ -170,7 +170,8 @@ class _JualAddState extends State<JualAdd> {
                                         ),
                                         'Pilih Mobil',
                                         1),  _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,readOnly: true,controller: controlerKetMobil,
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,controller: controlerKetMobil,
                                           onChanged: (va) {
                                             jualBeliMobil.ketMobil=va;
                                           },
@@ -178,7 +179,8 @@ class _JualAddState extends State<JualAdd> {
                                         'Keterangan Mobil',
                                         1),
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.harga=Rupiah.parse(va);
                                           },
@@ -195,7 +197,8 @@ class _JualAddState extends State<JualAdd> {
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.keterangan=va;
                                           },

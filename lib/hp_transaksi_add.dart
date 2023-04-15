@@ -62,7 +62,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
   late Transaksi transaksi;
-  TextStyle small = const TextStyle(fontSize: 13);
+  TextStyle small = const TextStyle(fontSize: 13.5);
   Widget _buildSize(widget, String ket, int flex) {
     return Container(
         height: 70,
@@ -77,7 +77,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
               ),
               child: Text(
                 '$ket :',
-                style: const TextStyle(fontSize: 13),
+                style: const TextStyle(fontSize: 13.5),
               )),
           widget
         ]));
@@ -368,7 +368,8 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                   'Pilih Mobil',
                                                   1),
                                               _buildSize(
-                                                  TextFormField(textInputAction: TextInputAction.next,
+                                                  TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                                     readOnly: true,
                                                     controller:
                                                         controlerKetMobil,
@@ -381,7 +382,8 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                   'Keterangan Mobil',
                                                   1),
                                               _buildSize(
-                                                  TextFormField(textInputAction: TextInputAction.next,
+                                                  TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                                     controller: controlerOngkos,
                                                     keyboardType:
                                                         TextInputType.number,
@@ -420,7 +422,8 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                   'Biaya Ongkos',
                                                   1),
                                               _buildSize(
-                                                  TextFormField(textInputAction: TextInputAction.next,
+                                                  TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                                     controller: controlerKeluar,
                                                     keyboardType:
                                                         TextInputType.number,
@@ -463,7 +466,8 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                   'Biaya Keluar',
                                                   1),
                                               _buildSize(
-                                                  TextFormField(textInputAction: TextInputAction.next,
+                                                  TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                                     keyboardType:
                                                         TextInputType.number,
                                                     controller: controlerSisa,
@@ -489,7 +493,8 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                   'Sisa',
                                                   1),
                                               _buildSize(
-                                                  TextFormField(textInputAction: TextInputAction.next,
+                                                  TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                                     controller: controlerTujuan,
                                                     onChanged: (va) {
                                                       transaksi.tujuan = va;
@@ -501,7 +506,8 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                   'Ketik Tujuan',
                                                   1),
                                               _buildSize(
-                                                  TextFormField(textInputAction: TextInputAction.done,
+                                                  TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.done,
                                                       controller:
                                                           controlerKeterangan,
                                                       onChanged: (val) {

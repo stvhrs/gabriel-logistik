@@ -44,7 +44,7 @@ class _JualEditState extends State<JualEdit> {
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
  
-  TextStyle small = const TextStyle(fontSize: 13);
+  TextStyle small = const TextStyle(fontSize: 13.5);
   Widget _buildSize(widget, String ket, int flex) {
 
     return Expanded(
@@ -61,7 +61,7 @@ class _JualEditState extends State<JualEdit> {
                   children: [
                     Text(
                       '$ket :',
-                      style: const TextStyle(fontSize: 13),
+                      style: const TextStyle(fontSize: 13.5),
                     ),
                   ],
                 )),
@@ -149,16 +149,17 @@ class _JualEditState extends State<JualEdit> {
                                         1),
                                   
                                     _buildSize(
-                                        DropDownField(value: widget.jualBeliMobil.mobil,enabled: false,
-                                          onValueChanged: (val) {
+                                        TextFormField(initialValue: widget.jualBeliMobil.mobil,enabled: false,
+                                          onChanged: (val) {
                                             widget.jualBeliMobil.mobil = val;
                                             
                                           },
-                                          items: listMobil,
+                                       
                                         ),
                                         'Pilih Mobil',
                                         1),  _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.jualBeliMobil.ketMobil,
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.jualBeliMobil.ketMobil,
                                           onChanged: (va) {
                                             widget.jualBeliMobil.ketMobil=va;
                                           },
@@ -166,7 +167,8 @@ class _JualEditState extends State<JualEdit> {
                                         'Keterangan Mobil',
                                         1),
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,initialValue:Rupiah.format( widget.jualBeliMobil.harga),
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue:Rupiah.format( widget.jualBeliMobil.harga),
                                           onChanged: (va) {
                                             widget.jualBeliMobil.harga=Rupiah.parse(va);
                                           },
@@ -183,7 +185,8 @@ class _JualEditState extends State<JualEdit> {
                                 Row(
                                   children: [
                                     _buildSize(
-                                        TextFormField(textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,
+                                        TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,
                                           onChanged: (va) {
                                             widget.jualBeliMobil.keterangan=va;
                                           },

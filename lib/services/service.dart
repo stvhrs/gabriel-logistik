@@ -55,6 +55,14 @@ List<Map<String, dynamic>> jualBeli = [
     'keterangan': 'Ini adalah test ketenarangan asdasdas',
     'tanggal': DateTime.now().toIso8601String()
   },
+   {
+    'nama_mobil': 'AD 2345 HWE',
+    'harga': 200000,
+    'ket_mobil': 'Head Tronton',
+    'beli': true,
+    'keterangan': 'Ini adalah test ketenarangan asdasdas',
+    'tanggal': DateTime.now().toIso8601String()
+  },
  
 ];
 

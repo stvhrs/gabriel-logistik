@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/models/mutasi_saldo.dart';
 
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -6,9 +7,9 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../models/transaksi.dart';
 import '../providerData/providerData.dart';
 
-class TransaksiDelete extends StatelessWidget {
-  final Transaksi transaksi;
-  TransaksiDelete(this.transaksi);
+class DeletePendaptan extends StatelessWidget {
+  final MutasiSaldo transaksi;
+  DeletePendaptan(this.transaksi);
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
 
@@ -21,7 +22,7 @@ class TransaksiDelete extends StatelessWidget {
             builder: (context) {
               return AlertDialog(
                 actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                title:Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text("Delete"), Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -69,7 +70,7 @@ class TransaksiDelete extends StatelessWidget {
 
                       await Future.delayed(const Duration(seconds: 3), () {
                         Provider.of<ProviderData>(context, listen: false)
-                            .deleteTransaksi(transaksi);
+                            .deleteMutasi(transaksi);
                         _btnController.success();
                       });
                       await Future.delayed(const Duration(seconds: 1), () {

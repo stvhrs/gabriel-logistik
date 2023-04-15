@@ -47,7 +47,8 @@ class EditSupir extends StatelessWidget {
                       children: [
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
-                          child: TextFormField(textInputAction: TextInputAction.next,
+                          child: TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                             initialValue: supir.nama_supir,
                             decoration: const InputDecoration(
                               hintText: 'Nama Supir',
@@ -60,7 +61,8 @@ class EditSupir extends StatelessWidget {
                         ),
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
-                          child: TextFormField(textInputAction: TextInputAction.next,
+                          child: TextFormField(
+                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                             initialValue: supir.nohp_supir,
                             decoration: const InputDecoration(
                               hintText: 'No Hp',
@@ -71,18 +73,7 @@ class EditSupir extends StatelessWidget {
                             maxLines: 1,
                           ),
                         ),
-                        // Container(
-                        //   margin: const EdgeInsets.only(bottom: 20),
-                        //   child: TextFormField(textInputAction: TextInputAction.next,initialValue: supir.nama_supir,
-                        //     decoration: const InputDecoration(
-                        //       hintText: 'Alamat',
-                        //     ),
-                        //     onChanged: (val) {
-                        //       alamat = val.toString();
-                        //     },
-                        //     maxLines: 3,
-                        //   ),
-                        // )
+                      
                       ],
                     ),
                   ),

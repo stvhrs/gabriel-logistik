@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/cashflow/edit_pendapta.dart';
 import 'package:gabriel_logistik/cashflow/tambah_pendaptan.dart';
 
 import 'package:gabriel_logistik/helper/format_tanggal.dart';
@@ -8,6 +9,7 @@ import 'package:gabriel_logistik/jualbeli/beli/beli_add.dart';
 import 'package:gabriel_logistik/jualbeli/beli/beli_edit.dart';
 import 'package:gabriel_logistik/jualbeli/jual/jual_add.dart';
 import 'package:gabriel_logistik/jualbeli/jual/jual_edit.dart';
+import 'package:gabriel_logistik/models/mutasi_saldo.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +32,7 @@ class _CashFlowState extends State<CashFlow> {
     0: const Text('Masuk',style: TextStyle(fontFamily: 'Nunito')),
     1: const Text('Keluar',style: TextStyle(fontFamily: 'Nunito')),
   };
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,8 +56,8 @@ class _CashFlowState extends State<CashFlow> {
                   borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(5),
                       bottomRight: Radius.circular(5))),
-              child: const Text(
-                'Uang Keluar Masuk',
+              child:  Text(
+                'Uang '+(currentSegment==0?'Masuk':'Keluar'),
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Nunito',
@@ -111,7 +114,7 @@ class _CashFlowState extends State<CashFlow> {
                           style: Theme.of(context).textTheme.displayMedium)),
                   Expanded(
                       flex: 3,
-                      child: Text('Total Mutasi',
+                      child: Text('Total '+(currentSegment==0?"Masuk":"Keluar") ,
                           style: Theme.of(context).textTheme.displayMedium)),
                  
                   Expanded(
@@ -122,14 +125,28 @@ class _CashFlowState extends State<CashFlow> {
               ),
             ),
             Consumer<ProviderData>(builder: (context, c, h) {
-              return SizedBox(
+               List<MutasiSaldo> listMutasi=[];
+                List<MutasiSaldo> listMutasi2=[];
+                      if(currentSegment==0){
+                        for (var element in c.listMutasiSaldo) {
+                          if(element.pendapatan){  listMutasi.add(element);}
+                        
+                        }
+                      }
+                      if(currentSegment==1){
+                        for (var element in c.listMutasiSaldo) {
+                          if(!element.pendapatan){  listMutasi2.add(element);}
+                        
+                        }
+                      }
+              return currentSegment==0? SizedBox(
                   height: MediaQuery.of(context).size.height * 0.7,
                   child: ListView.builder(
-                    itemCount: c.listMutasiSaldo.reversed.toList().length,
-                    itemBuilder: (context, index) => (c
-                                .listMutasiSaldo[index].pendapatan &&
-                            currentSegment == 0)
-                        ? InkWell(
+                    itemCount: listMutasi.length,
+                    itemBuilder: (context, index) {
+                      
+                     
+                      return  InkWell(
                             child: Container(
                               color: index.isEven
                                   ? const Color.fromARGB(255, 189, 193, 221)
@@ -141,30 +158,82 @@ class _CashFlowState extends State<CashFlow> {
                                   Expanded(
                                       flex: 3,
                                       child: Text(FormatTanggal.formatTanggal(
-                                          c.listMutasiSaldo[index].tanggal))),
+                                 listMutasi[index].tanggal))),
                                   Expanded(
                                       flex: 3,
                                       child: Text(
-                                          c.listMutasiSaldo[index].keterangan)),
+                                 listMutasi[index].keterangan)),
                                   Expanded(
                                       flex: 3,
                                       child: Text(Rupiah.format(
-                                          c.listMutasiSaldo[index].totalMutasi))),
+                                          listMutasi[index].totalMutasi))),
                                   Expanded(
-                                      flex: 6,
-                                      child: Text(c.listMutasiSaldo[index]
-                                          .keterangan)),
+                                      flex:1,
+                                      child: Row(
+                                        children: [
+                                        EditPendaptan(currentSegment
+                                        ==0
+                                        ,listMutasi[index] )
+                                        ],
+                                      )),
                                   // Expanded(
                                   //     flex: 1,
                                   //     child: currentSegment == 1
-                                  //         ? JualEdit(c.listMutasiSaldo[index])
+                                  //         ? JualEdit(listMutasi[index])
                                   //         : BeliEdit(
-                                  //             c.listMutasiSaldo[index]))
+                                  //             listMutasi[index]))
                                 ],
                               ),
                             ),
-                          )
-                        : const SizedBox(),
+                          );}
+                       
+                  )):SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  child: ListView.builder(
+                    itemCount: listMutasi2.length,
+                    itemBuilder: (context, index) {
+                      
+                     
+                      return  InkWell(
+                            child: Container(
+                              color: index.isEven
+                                  ? const Color.fromARGB(255, 189, 193, 221)
+                                  : Colors.grey.shade200,
+                              padding:
+                                  const EdgeInsets.only(left: 15, right: 15),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                      flex: 3,
+                                      child: Text(FormatTanggal.formatTanggal(
+                                        listMutasi2[index].tanggal))),
+                                  Expanded(
+                                      flex: 3,
+                                      child: Text(
+                                listMutasi2[index].keterangan)),
+                                  Expanded(
+                                      flex: 3,
+                                      child: Text(Rupiah.format(
+                                 listMutasi2[index].totalMutasi))),
+                                  Expanded(
+                                      flex:1,
+                                      child: Row(
+                                        children: [
+                                        EditPendaptan(currentSegment
+                                        ==0,listMutasi2[index] )
+                                        ],
+                                      )),
+                                  // Expanded(
+                                  //     flex: 1,
+                                  //     child: currentSegment == 1
+                                  //         ? JualEdit(listMutasi[index])
+                                  //         : BeliEdit(
+                                  //             listMutasi[index]))
+                                ],
+                              ),
+                            ),
+                          );}
+                       
                   ));
             })
           ],

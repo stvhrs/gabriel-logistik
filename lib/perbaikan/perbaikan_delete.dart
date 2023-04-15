@@ -31,18 +31,7 @@ class PerbaikanDelete extends StatelessWidget {
                     ),
                   ),
 
-                  // Container(
-                  //   margin: const EdgeInsets.only(bottom: 20),
-                  //   child: TextFormField(textInputAction: TextInputAction.next,initialValue: Transaksi.nama_Transaksi,
-                  //     decoration: const InputDecoration(
-                  //       hintText: 'Alamat',
-                  //     ),
-                  //     onChanged: (val) {
-                  //       alamat = val.toString();
-                  //     },
-                  //     maxLines: 3,
-                  //   ),
-                  // )
+               
                 ),
                 actions: <Widget>[
                   RoundedLoadingButton(

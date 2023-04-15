@@ -104,7 +104,8 @@ bool hidden=true;
                           borderRadius: BorderRadius.circular(0),
                           color: AppColors.whiteColor,
                         ),
-                        child: TextFormField(textInputAction: TextInputAction.next,onChanged: (val){
+                        child: TextFormField(
+                      textInputAction: TextInputAction.next,onChanged: (val){
                               _userControler = val;
                         },
 
@@ -150,7 +151,8 @@ bool hidden=true;
                           borderRadius: BorderRadius.circular(0),
                           color: AppColors.whiteColor,
                         ),
-                        child: TextFormField(textInputAction: TextInputAction.next, onChanged: (val) {
+                        child: TextFormField(
+                            textInputAction: TextInputAction.next, onChanged: (val) {
                             _passwordControler = val;
                           },
 

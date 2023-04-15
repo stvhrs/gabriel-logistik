@@ -55,9 +55,9 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
   }
 
   List<TextEditingController> total = [TextEditingController()];
-  
+
   List<TextEditingController> qty = [TextEditingController()];
-  
+
   List<TextEditingController> harga = [TextEditingController()];
   TextEditingController totalMutasi = TextEditingController();
   Widget _buildPartName(int i, BuildContext context) {
@@ -71,8 +71,8 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                         flex: 4,
                         child: SizedBox(
                             height: 36,
-                            child: TextFormField(
-                              style: TextStyle(fontSize: 13),
+                            child: TextFormField(textInputAction: TextInputAction.next,
+                              style: TextStyle(fontSize: 13.5),
                               onChanged: (value) {
                                 if (_updatedmutasi.isNotEmpty) {
                                   _updatedmutasi[i].keterangan = value;
@@ -86,15 +86,18 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                         child: Container(
                           height: 36,
                           margin: const EdgeInsets.only(left: 20),
-                          child: TextFormField(controller: harga[i],
+                          child: TextFormField(textInputAction: TextInputAction.next,
+                            style: TextStyle(fontSize: 13.5),
+                            controller: harga[i],
                             decoration:
                                 const InputDecoration(hintText: 'Harga'),
                             onChanged: (value) {
                               if (_updatedmutasi.isNotEmpty) {
-                                _updatedmutasi[i].harga = Rupiah
-                                    .parse(value)
-                                    .toDouble();
-                                    harga[i].text=Rupiah.format(_updatedmutasi[i].harga);
+                                _updatedmutasi[i].harga =
+                                    Rupiah.parse(value).toDouble();
+                                total[i].text = Rupiah.format(
+                                 _updatedmutasi[i].qty *
+                                     _updatedmutasi[i].harga);
                               }
                               if (_updatedmutasi.isNotEmpty) {
                                 _updatedmutasi[i].total =
@@ -122,11 +125,13 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                         child: Container(
                           height: 36,
                           margin: const EdgeInsets.only(left: 20),
-                          child: TextFormField(controller: qty[i],
+                          child: TextFormField(textInputAction: TextInputAction.next,
+                            style: TextStyle(fontSize: 13.5),
+                            controller: qty[i],
                             decoration: const InputDecoration(hintText: 'Qty'),
                             onChanged: (value) {
                               _updatedmutasi[i].qty = double.parse(value);
-                                qty[i].text=double.parse(value).toString();
+                              // qty[i].text = double.parse(value).toString();
                               total[i].text = Rupiah.format(
                                   _updatedmutasi[i].qty *
                                       _updatedmutasi[i].harga);
@@ -156,7 +161,8 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                         child: Container(
                           height: 36,
                           margin: const EdgeInsets.only(left: 20),
-                          child: TextFormField(
+                          child: TextFormField(textInputAction: TextInputAction.next,
+                            style: TextStyle(fontSize: 13.5),
                             readOnly: true,
                             controller: total[i],
                             decoration:
@@ -168,7 +174,6 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                             ],
                           ),
                         )),
-                 
                   ],
                 )));
   }
@@ -244,8 +249,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                               padding: const EdgeInsets.only(
                                   bottom: 20, left: 20, right: 20, top: 15),
                               width: MediaQuery.of(context).size.width * 0.52,
-                              child: SingleChildScrollView(
-                                child: Column(
+                              child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
@@ -273,7 +277,8 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                         SizedBox(
                                           width: 150,
                                           height: 36,
-                                          child: TextFormField(
+                                          child: TextFormField(textInputAction: TextInputAction.next,
+                                            style: TextStyle(fontSize: 13.5),
                                             decoration: InputDecoration(
                                                 hintText: 'Keterangan'),
                                             onChanged: (v) {
@@ -283,8 +288,8 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                         )
                                       ],
                                     )),
-                                    const Divider(height: 16),
-                                    const Divider(height: 16),
+                                    const Divider(height: 12),
+                                    const Divider(height: 12),
                                     Container(
                                       margin: EdgeInsets.only(bottom: 5),
                                       decoration: BoxDecoration(
@@ -346,138 +351,197 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                           Spacer(),
                                         ],
                                       ),
-                                    ),
-                                    ...List.generate(
+                                    ),Container(height: MediaQuery.of(context).size.height*0.35,
+                                      child: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                      ...List.generate(
                                         jumlahOpsi,
-                                        (index) =>
-                                           
-                                                  Row(crossAxisAlignment: CrossAxisAlignment.end,
-                                                  children: [
-                                                    Expanded(flex: 15,child: _buildPartName(index, context)),   Expanded(flex: 1,
-                                                      child:index==0?SizedBox(): Container(
-                                                                          margin: EdgeInsets.only(left: 5),
-                                                                          child: IconButton(
-                                                                              onPressed: () {
-                                                                                if(jumlahOpsi>1){
-                                                     _updatedmutasi.remove(_updatedmutasi[index]);
-                                                                                jumlahOpsi = jumlahOpsi - 1;
-                                                                                total.remove(total[index]);
-                                                                                 harga.remove(harga[index]);
-                                                                                  qty.remove(qty[index]);
-                                                                                    double calculateTotalAll = 0;
+                                        (index) => Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Expanded(
+                                                flex: 15,
+                                                child: _buildPartName(
+                                                    index, context)),
+                                            Expanded(
+                                              flex: 1,
+                                              child: index == 0
+                                                  ? SizedBox()
+                                                  : Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 5),
+                                                      child: IconButton(
+                                                          onPressed: () {
+                                                            if (jumlahOpsi > 1) {
+                                                              _updatedmutasi.remove(
+                                                                  _updatedmutasi[
+                                                                      index]);
+                                                              jumlahOpsi =
+                                                                  jumlahOpsi - 1;
+                                                              total.remove(
+                                                                  total[index]);
+                                                              harga.remove(
+                                                                  harga[index]);
+                                                              qty.remove(
+                                                                  qty[index]);
+                                                              double
+                                                                  calculateTotalAll =
+                                                                  0;
 
-                                for (var element in _updatedmutasi) {
-                                  calculateTotalAll += element.total;
-                                }
-                                totalMutasi.text =
-                                    Rupiah.format(calculateTotalAll);
-                                mutasi.totalMutasi = calculateTotalAll;
-                                print(calculateTotalAll);
-                                                                                setState(() {});
-                                                                                }
-                                                                               
-                                                                              },
-                                                                              icon: Icon(
-                                                                                Icons.delete,
-                                                                                color: Colors.red,
-                                                                              )),
-                                                                        ),
+                                                              for (var element
+                                                                  in _updatedmutasi) {
+                                                                calculateTotalAll +=
+                                                                    element.total;
+                                                              }
+                                                              totalMutasi.text =
+                                                                  Rupiah.format(
+                                                                      calculateTotalAll);
+                                                              mutasi.totalMutasi =
+                                                                  calculateTotalAll;
+                                                              print(
+                                                                  calculateTotalAll);
+                                                              setState(() {});
+                                                            }
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.delete,
+                                                            color: Colors.red,
+                                                          )),
                                                     ),
-                                                  ],
-                                                ),
                                             ),
-                                   
-                                        Center(
-                                          child: IconButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  if (jumlahOpsi ==
-                                                      _updatedmutasi.length) {
-                                                    _updatedmutasi.add(
-                                                      MutasiChild.fromMap({
-                                                        'keterangan': '',
-                                                        'harga': 0,
-                                                        'qty': 1,
-                                                        'total': 0
-                                                      }),
-                                                    );
-
-                                                    jumlahOpsi = jumlahOpsi + 1;
-                                                    total.add(
-                                                        TextEditingController());
-                                                                                                            harga.add(
-                                                        TextEditingController());
-                                                                                                            qty.add(
-                                                        TextEditingController());
-                                                  }
-                                                });
-                                              },
-                                              icon: const Icon(
-                                                Icons.add_circle,
-                                                color: Colors.green,size: 25,
-                                              )),
+                                          ],
                                         ),
-                                     
-                                    SizedBox(
-                                        height: 36,
-                                        width: 150,
-                                        child: TextFormField(
-                                          style: TextStyle(fontSize: 13),
-                                          readOnly: true,
-                                          controller: totalMutasi,
-                                          decoration: InputDecoration(
-                                              hintText: 'Total'),
-                                        )),
-                                    RoundedLoadingButton(
-                                      color: Theme.of(context).primaryColor,
-                                      successColor: Colors.green,
-                                      errorColor: Colors.red,
-                                      child: Text('Tambah',
-                                          style:
-                                              TextStyle(color: Colors.white)),
-                                      controller: _btnController,
-                                      onPressed: () async {
-                                        bool empty = false;
+                                      )])),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Center(
+                                        child: IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                if (jumlahOpsi ==
+                                                    _updatedmutasi.length) {
+                                                  _updatedmutasi.add(
+                                                    MutasiChild.fromMap({
+                                                      'keterangan': '',
+                                                      'harga': 0,
+                                                      'qty': 1,
+                                                      'total': 0
+                                                    }),
+                                                  );
 
-                                        for (var element in _updatedmutasi) {
-                                          if (element.keterangan == '' ||
-                                              mutasi.keterangan == '' ||
-                                              element.total <= 0) {
-                                            empty = true;
-                                          }
-                                        }
-                                        if (empty) {
-                                          _btnController.error();
-                                          _btnController.reset();
-                                          return;
-                                        } else {
+                                                  jumlahOpsi = jumlahOpsi + 1;
+                                                  total.add(
+                                                      TextEditingController());
+                                                  harga.add(
+                                                      TextEditingController());
+                                                  qty.add(
+                                                      TextEditingController());
+                                                }
+                                              });
+                                            },
+                                            icon: const Icon(
+                                              Icons.add_circle,
+                                              color: Colors.green,
+                                              size: 25,
+                                            )),
+                                      ),
+                                    ),
+                                       const Divider(height: 12),
+                                    const Divider(height: 12),
+                                    Spacer(),
+                                    Row(
+                                      children: [
+                                        Text('Total '+(widget.pendapatan?"Masuk :":"Keluar :"),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+                                        SizedBox(
+                                            height: 36,
+                                            width: 150,
+                                            child: TextFormField(textInputAction: TextInputAction.next,
+                                             style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),
+                                              readOnly: true,
+                                              controller: totalMutasi,
+                                              decoration: InputDecoration(
+                                                  focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(3),
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(3),
+            borderSide: BorderSide(color: Colors.white),
+          ),
+                                                  
+                                                  fillColor: Colors.white,
+                                                  hintText: ''),
+                                            )),
+                                      ],
+                                    ),Spacer(),
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: RoundedLoadingButton(
+                                        color: Colors.green,
+                                        successColor: Colors.green,
+                                        errorColor: Colors.red,
+                                        child: Text('Tambah',
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                        controller: _btnController,
+                                        onPressed: () async {
+                                          bool empty = false;
+
                                           for (var element in _updatedmutasi) {
-                                            mutasi.listMutasi.add(element);
+                                            if (element.keterangan == '' ||
+                                                mutasi.keterangan == '' ||
+                                                element.total <= 0) {
+                                              empty = true;
+                                            }
                                           }
-                                        }
+                                          if (empty) {
+                                            _btnController.error();
+                                            _btnController.reset();
+                                            return;
+                                          } else {
+                                            for (var element
+                                                in _updatedmutasi) {
+                                              mutasi.listMutasi.add(element);
+                                            }
+                                          }
 
-                                        await Future.delayed(
-                                            Duration(seconds: 3), () {
-                                          Provider.of<ProviderData>(context,
-                                                  listen: false)
-                                              .addmutasi(mutasi);
-                                          _btnController.success();
-                                        });
-                                        await Future.delayed(
-                                            Duration(seconds: 2), () {
-                                          Navigator.of(context).pop();
-                                        });
-                                      },
-                                    )
+                                          await Future.delayed(
+                                              Duration(seconds: 3), () {
+                                            Provider.of<ProviderData>(context,
+                                                    listen: false)
+                                                .addmutasi(mutasi);
+                                            _btnController.success();
+                                          });
+                                          await Future.delayed(
+                                              Duration(seconds: 2), () {
+                                            Navigator.of(context).pop();
+                                          });
+                                        },
+                                      ),
+                                    ),Spacer()
                                   ],
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
+                      
                     );
                   }).then((value) {
+                    jumlahOpsi=1;
+                    total.clear();
+                    qty.clear();
+                    harga.clear();
+                       total.add(
+                                                      TextEditingController());
+                                                  harga.add(
+                                                      TextEditingController());
+                                                  qty.add(
+                                                      TextEditingController());
                 _updatedmutasi.clear();
                 _updatedmutasi.add(MutasiChild.fromMap(
                   {'keterangan': '', 'harga': 0, 'qty': 1, 'total': 0},
@@ -491,7 +555,11 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                     'mutasi': [].map((e) => MutasiChild.fromMap(e)).toList(),
                     'totalMutasi': 0
                   },
+                  
                 );
+                setState(() {
+                  
+                });
               });
             }));
   }
