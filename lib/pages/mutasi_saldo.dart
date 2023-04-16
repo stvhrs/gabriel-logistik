@@ -9,6 +9,7 @@ import 'package:gabriel_logistik/jualbeli/beli/beli_edit.dart';
 import 'package:gabriel_logistik/jualbeli/jual/jual_add.dart';
 import 'package:gabriel_logistik/jualbeli/jual/jual_edit.dart';
 import 'package:gabriel_logistik/mutasiSaldo/mutasi_search.dart';
+import 'package:gabriel_logistik/print3.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 
@@ -30,9 +31,9 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
     Provider.of<ProviderData>(context, listen: false).searchsupir = '';
     Provider.of<ProviderData>(context, listen: false).searchtujuan = '';
     Provider.of<ProviderData>(context, listen: false).searchmobile = '';
-     Provider.of<ProviderData>(context, listen: false).searchTransaksi();
+     Provider.of<ProviderData>(context, listen: false).searchTransaksi(false);
        Provider.of<ProviderData>(context, listen: false).calculateSaldo();
-     Provider.of<ProviderData>(context, listen: false).searchHistorySaldo();
+    //  Provider.of<ProviderData>(context, listen: false).searchHistorySaldo();
      Provider.of<ProviderData>(context, listen: false).calculateMutasi();
     log('calucalte mutasi page');
     super.initState();
@@ -41,15 +42,15 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
   bool transaksi = true;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(floatingActionButton: FloatingActionButton(
+    return Consumer<ProviderData>(
+        builder: (context, value, child) => Scaffold(floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.print),
           onPressed: () {
-            // Navigator.of(context).push(MaterialPageRoute(
-            //   builder: (context) => LaporanPrint(listKeuangan),
-            // ));
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => MutasiPrint(  value.listHistorySaldo),
+            ));
           }),
-      body: Consumer<ProviderData>(
-        builder: (context, value, child) => Container(
+      body: Container(
             padding:
                 const EdgeInsets.only(left: 25, right: 25, top: 0, bottom: 25),
             decoration: BoxDecoration(

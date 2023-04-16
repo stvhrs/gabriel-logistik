@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/logout.dart';
 import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
 
@@ -171,25 +172,7 @@ class _DashBoardState extends State<DashBoard> {
                     ),
                     footer: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: InkWell(
-                        onTap: () async {
-                          SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
-                          prefs.clear();
-
-                          // Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => MyHomePage(title: ''),));
-                          Provider.of<ProviderData>(context, listen: false)
-                              .logout();
-                        },
-                        child: const Text(
-                          'Logout',
-                          style: TextStyle(
-                              fontSize: 15,
-                              overflow: TextOverflow.visible,
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                      child:Logout()
                     ),
                     items: [
                       SideMenuItem(

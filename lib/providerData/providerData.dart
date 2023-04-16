@@ -339,7 +339,7 @@ class ProviderData with ChangeNotifier {
    DateTime? startMutasi;
   DateTime? endMutasi;
    void searchHistorySaldo() {
-    int panjangHistoy=listHistorySaldo.length;
+
     listHistorySaldo.clear();
     for (var element in backupListHistorySaldo) {
       
@@ -359,9 +359,9 @@ class ProviderData with ChangeNotifier {
         listHistorySaldo.add( element);
       }
     }
-    // notifyListeners();
+     notifyListeners();
   }
-  void searchTransaksi() {
+  void searchTransaksi(bool listen) {
     listTransaksi.clear();
     for (Transaksi data in backupTransaksi) {
       bool skipped = false;
@@ -392,10 +392,11 @@ class ProviderData with ChangeNotifier {
         listTransaksi.add(data);
       }
     }
+    listen? notifyListeners():'';
     
   }
 
-  void searchSupir(String val) {
+  void searchSupir(String val,bool listen) {
     if (val.isEmpty) {
       listSupir.clear();
       listSupir.addAll(backupListSupir);
@@ -405,10 +406,10 @@ class ProviderData with ChangeNotifier {
               element.nama_supir.toLowerCase().startsWith(val.toLowerCase()))
           .toList();
     }
-    notifyListeners();
+    listen? notifyListeners():'';
   }
 
-  void searchperbaikan(String val) {
+  void searchperbaikan(String val,bool listen) {
     if (val.isEmpty) {
       listPerbaikan.clear();
       listPerbaikan.addAll(backupListPerbaikan);
@@ -418,10 +419,10 @@ class ProviderData with ChangeNotifier {
               element.mobil.toLowerCase().startsWith(val.toLowerCase()))
           .toList();
     }
-    notifyListeners();
+   listen? notifyListeners():'';
   }
 
-  void searchJual(String val) {
+  void searchJual(String val,bool listen) {
     if (val.isEmpty) {
       listJualBeliMobil.clear();
       listJualBeliMobil.addAll(backuplistJualBeliMobil);
@@ -431,10 +432,10 @@ class ProviderData with ChangeNotifier {
               element.mobil.toLowerCase().startsWith(val.toLowerCase()))
           .toList();
     }
-    notifyListeners();
+    listen? notifyListeners():'';
   }
 
-  void searchMobil(String val) {
+  void searchMobil(String val,bool listen) {
     if (val.isEmpty) {
       listMobil.clear();
       listMobil.addAll(backupListMobil);
@@ -444,6 +445,6 @@ class ProviderData with ChangeNotifier {
               element.nama_mobil.toLowerCase().startsWith(val.toLowerCase()))
           .toList();
     }
-    notifyListeners();
+    listen? notifyListeners():'';
   }
 }

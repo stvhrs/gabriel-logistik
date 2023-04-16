@@ -30,7 +30,7 @@ class _SearchMutasiState extends State<SearchMutasi> {
                   picked = await showDateRangePicker(
                       context: context,
                       firstDate: DateTime(DateTime.now().year - 4),
-                      lastDate: DateTime.now(),
+                      lastDate: DateTime.now().add(Duration(days: 1)),
                       builder: (context, child) {
                         return Column(
                           children: [

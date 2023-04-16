@@ -70,7 +70,7 @@ class _SearchTanggalState extends State<SearchTanggal> {
                     Provider.of<ProviderData>(context, listen: false).end =
                         picked!.end;
                     Provider.of<ProviderData>(context, listen: false)
-                        .searchTransaksi();
+                        .searchTransaksi(true);
                     setState(() {});
                   }
 
@@ -90,7 +90,7 @@ class _SearchTanggalState extends State<SearchTanggal> {
                       Provider.of<ProviderData>(context, listen: false).end =
                           null;
                       Provider.of<ProviderData>(context, listen: false)
-                          .searchTransaksi();
+                          .searchTransaksi(true);
                       setState(() {});
                     },
                     icon: const Icon(

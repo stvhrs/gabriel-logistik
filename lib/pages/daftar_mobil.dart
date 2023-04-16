@@ -14,6 +14,12 @@ class DaftarMobil extends StatefulWidget {
 }
 
 class _DaftarMobilState extends State<DaftarMobil> {
+  @override
+  void initState() {
+     Provider.of<ProviderData>(context, listen: false)
+                              .searchMobil('',false);
+    super.initState();
+  }
 //
   @override
   Widget build(BuildContext context) {
@@ -53,7 +59,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
                         decoration: const InputDecoration(hintText: 'Cari'),
                         onChanged: (val) {
                           Provider.of<ProviderData>(context, listen: false)
-                              .searchMobil(val.toLowerCase());
+                              .searchMobil(val.toLowerCase(),true);
                         },
                       ),
                     ),

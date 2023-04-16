@@ -17,6 +17,12 @@ class PerbaikanPage extends StatefulWidget {
 }
 
 class _PerbaikanPageState extends State<PerbaikanPage> {
+  @override
+  void initState() {
+                          Provider.of<ProviderData>(context, listen: false)
+                            .searchperbaikan('',false);
+    super.initState();
+  }
 //
   @override
   Widget build(BuildContext context) {
@@ -65,7 +71,7 @@ class _PerbaikanPageState extends State<PerbaikanPage> {
                       decoration: const InputDecoration(hintText: 'Cari'),
                       onChanged: (val) {
                         Provider.of<ProviderData>(context, listen: false)
-                            .searchperbaikan(val.toLowerCase());
+                            .searchperbaikan(val.toLowerCase(),true);
                       },
                     ),
                   ),

@@ -23,7 +23,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
     Provider.of<ProviderData>(context, listen: false).searchsupir = '';
     Provider.of<ProviderData>(context, listen: false).searchtujuan = '';
     Provider.of<ProviderData>(context, listen: false).searchmobile = '';
-     Provider.of<ProviderData>(context, listen: false).searchTransaksi();
+     Provider.of<ProviderData>(context, listen: false).searchTransaksi(false);
     super.initState();
   }
 

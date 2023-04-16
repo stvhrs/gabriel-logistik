@@ -20,7 +20,7 @@ class _SearchMobilState extends State<SearchMobil> {
           onChanged: (val) {
             Provider.of<ProviderData>(context, listen: false).searchmobile =
                 val;
-            Provider.of<ProviderData>(context, listen: false).searchTransaksi();
+            Provider.of<ProviderData>(context, listen: false).searchTransaksi(true);
           },
           decoration: const InputDecoration(
             hintText: 'Mobil',

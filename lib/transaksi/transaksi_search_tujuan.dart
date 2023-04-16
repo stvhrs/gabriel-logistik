@@ -20,7 +20,7 @@ class _SearchTujuanState extends State<SearchTujuan> {
           onChanged: (val) {
             Provider.of<ProviderData>(context, listen: false).searchtujuan =
                 val;
-            Provider.of<ProviderData>(context, listen: false).searchTransaksi();
+            Provider.of<ProviderData>(context, listen: false).searchTransaksi(true);
           },
           decoration: const InputDecoration(
             hintText: 'Tujuan',

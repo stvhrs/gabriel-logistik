@@ -19,7 +19,7 @@ class _SearchNamaState extends State<SearchNama> {
                               style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
           onChanged: (val) {
             Provider.of<ProviderData>(context, listen: false).searchsupir = val;
-            Provider.of<ProviderData>(context, listen: false).searchTransaksi();
+            Provider.of<ProviderData>(context, listen: false).searchTransaksi(true);
           },
           decoration: const InputDecoration(
             hintText: 'Supir',

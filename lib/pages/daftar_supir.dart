@@ -13,7 +13,12 @@ class DaftarSupir extends StatefulWidget {
 }
 
 class _DaftarSupirState extends State<DaftarSupir> {
-//
+@override
+  void initState() {
+   Provider.of<ProviderData>(context, listen: false)
+                                  .searchSupir('',false);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return 
@@ -53,7 +58,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
                             decoration: const InputDecoration(hintText: 'Cari'),
                             onChanged: (val) {
                               Provider.of<ProviderData>(context, listen: false)
-                                  .searchSupir(val.toLowerCase());
+                                  .searchSupir(val.toLowerCase(),true);
                             },
                           ),
                         ),

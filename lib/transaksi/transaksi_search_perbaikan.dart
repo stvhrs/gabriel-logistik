@@ -31,7 +31,7 @@ class _SearchPerbaikanState extends State<SearchPerbaikan> {
               Provider.of<ProviderData>(context, listen: false)
                   .searchPerbaikan = _selected;
               Provider.of<ProviderData>(context, listen: false)
-                  .searchTransaksi();
+                  .searchTransaksi(true);
             });
           },
         ),

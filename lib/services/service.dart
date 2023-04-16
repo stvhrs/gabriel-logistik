@@ -473,7 +473,20 @@ class Service {
 
     for (var element in transaksi.reversed) {
       data.add(Transaksi.fromMap(element));
+    } for (var element in transaksi.reversed) {
+      data.add(Transaksi.fromMap(element));
+    }for (var element in transaksi.reversed) {
+      data.add(Transaksi.fromMap(element));
+    }for (var element in transaksi.reversed) {
+      data.add(Transaksi.fromMap(element));
+    }for (var element in transaksi.reversed) {
+      data.add(Transaksi.fromMap(element));
+    }for (var element in transaksi.reversed) {
+      data.add(Transaksi.fromMap(element));
+    }for (var element in transaksi.reversed) {
+      data.add(Transaksi.fromMap(element));
     }
+    
 
     return data;
   }
