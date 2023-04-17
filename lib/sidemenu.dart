@@ -60,7 +60,7 @@ class _DashBoardState extends State<DashBoard> {
 
     listJualBeliMobil = await Service.getAlljualBeli();
     listMobil = await Service.getAllMobil(listPerbaikan);
-    listMutasiSaldo=await Service.getAllMutasiSaldo();
+    listMutasiSaldo = await Service.getAllMutasiSaldo();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var data = prefs.getString('data');
     if (jsonDecode(data!)['status'] == 'owner') {
@@ -71,8 +71,14 @@ class _DashBoardState extends State<DashBoard> {
       Provider.of<ProviderData>(context, listen: false).admin();
     }
 
-    Provider.of<ProviderData>(context, listen: false).setData(listTransaksi,
-        false, listMobil, listSupir, listPerbaikan, listJualBeliMobil,listMutasiSaldo);
+    Provider.of<ProviderData>(context, listen: false).setData(
+        listTransaksi,
+        false,
+        listMobil,
+        listSupir,
+        listPerbaikan,
+        listJualBeliMobil,
+        listMutasiSaldo);
     sideMenu.addListener((p0) {
       page.jumpToPage(p0);
     });
@@ -87,6 +93,19 @@ class _DashBoardState extends State<DashBoard> {
     super.initState();
   }
 
+  int _selectedIndex = 0;
+  List<Widget> wid = [
+    DashBoardPage(),
+    TransaksiPage(),
+    DaftarSupir(),
+    DaftarMobil(),
+    JualBeli(),
+    PerbaikanPage(),
+    LaporanBulanan(),
+    KasTahun(),
+    CashFlow(),
+    MutasiSaldoPage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return loading
@@ -98,201 +117,314 @@ class _DashBoardState extends State<DashBoard> {
             body: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(0),
-                  child: SideMenu(
-                    showToggle: false,
-                    controller: sideMenu,
-                    style: SideMenuStyle(
-                      itemHeight: 40,iconSize: 16,
-                      // itemBorderRadius:BorderRadius.all(Radius.circular(0) ),decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5.0)),),
-                      toggleColor: Colors.white,
-                      backgroundColor: Theme.of(context).primaryColor,
-                      hoverColor:
-                          Theme.of(context).colorScheme.primary.withBlue(150),
-                      openSideMenuWidth:
-                          MediaQuery.of(context).size.width / 6.5,
-                      selectedColor: Theme.of(context).colorScheme.secondary,
-                      unselectedIconColor: Colors.white,
-                      displayMode: SideMenuDisplayMode.open,
-                      itemOuterPadding: const EdgeInsets.only(
-                        bottom: 5,
+                NavigationRail(
+                  minWidth: MediaQuery.of(context).size.width * 0.14,
+                  indicatorColor: Theme.of(context).primaryColor,
+                  useIndicator: false,
+                  selectedIndex: _selectedIndex,
+                  onDestinationSelected: (int index) {
+                    setState(() {
+                      _selectedIndex = index;
+                    });
+                  },
+                  labelType: NavigationRailLabelType.all,
+                  leading: Column(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.075,
+                        decoration: BoxDecoration(shape: BoxShape.circle),
+                        child: Image.asset('images/cahaya.png'),
                       ),
-                      itemBorderRadius:
-                          const BorderRadius.all(Radius.circular(0)),
-                      unselectedTitleTextStyle: TextStyle(
-                          fontFamily: 'Nunito',
-                          overflow: TextOverflow.visible,
-                          fontSize: 15,
-                          color: Colors.grey.shade300),
-                      selectedTitleTextStyle: const TextStyle(
-                          fontFamily: 'Nunito',
-                          overflow: TextOverflow.visible,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
-                      selectedIconColor: Colors.white,
-                    ),
-                    title: Column(
-                      children: [
-                        ConstrainedBox(
-                          constraints: const BoxConstraints(
-                            maxHeight: 100,
-                            maxWidth: 200,
-                          ),
-                          child: Container(
-                            margin: const EdgeInsets.all(10),
-                            decoration: const BoxDecoration(
-                                color: Colors.white, shape: BoxShape.circle),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image.asset(
-                                Provider.of<ProviderData>(context,
-                                            listen: false)
-                                        .isOwner
-                                    ? 'images/boss.png'
-                                    : 'images/admin.png',
+                      Divider(
+                        color: Colors.white,thickness: 2,height: 2,
+                      )
+                    ],
+                  ),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  destinations: <NavigationRailDestination>[
+                    // navigation destinations
 
-                                // color: Colors.white,
+                    NavigationRailDestination(
+                      padding: EdgeInsets.zero,
+                      icon: Container(
+                        height: 10,
+                      ),
+                      label: Container(
+                        width: MediaQuery.of(context).size.width * 0.14,
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.dashboard_rounded,
+                              color: _selectedIndex == 0
+                                  ? Colors.white
+                                  : Colors.grey.shade500,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Dashboard',
+                                style: TextStyle(fontFamily: 'Nunito'),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                        Text(
-                            Provider.of<ProviderData>(context, listen: false)
-                                    .isOwner
-                                ? 'Hi Owner !'
-                                : 'Hi Admin !',
-                            style: const TextStyle(color: Colors.white)),
-                        const Divider(
-                          indent: 8.0,
-                          endIndent: 8.0,
+                      ),
+                    ),
+                    NavigationRailDestination(
+                      padding: EdgeInsets.zero,
+                      icon: Container(
+                        height: 10,
+                      ),
+                      label: Container(
+                        width: MediaQuery.of(context).size.width * 0.14,
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.currency_exchange_rounded,
+                              color: _selectedIndex == 1
+                                  ? Colors.white
+                                  : Colors.grey.shade500,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Transaksi',
+                                style: TextStyle(fontFamily: 'Nunito'),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                    footer: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child:Logout()
+                    NavigationRailDestination(
+                      padding: EdgeInsets.zero,
+                      icon: Container(
+                        height: 10,
+                      ),
+                      label: Container(
+                        width: MediaQuery.of(context).size.width * 0.14,
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.people,
+                              color: _selectedIndex == 2
+                                  ? Colors.white
+                                  : Colors.grey.shade500,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Daftar Supir',
+                                style: TextStyle(fontFamily: 'Nunito'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    items: [
-                      SideMenuItem(
-                        priority: 0,
-                        title: 'Dashboard',
-                        icon: const Icon(Icons.dashboard),
-                        onTap: (s, w) {
-                          page.jumpToPage(s);
-                          sideMenu.changePage(s);
-                        },
-                        // icon: const Icon(Icons.monetization_on),
+                    NavigationRailDestination(
+                      padding: EdgeInsets.zero,
+                      icon: Container(
+                        height: 10,
                       ),
-                      SideMenuItem(
-                        priority: 1,
-                        title: 'Transaksi',
-                        icon: const Icon(Icons.currency_exchange_rounded),
-                        onTap: (s, w) {
-                          page.jumpToPage(s);
-                          sideMenu.changePage(s);
-                        },
-                        // icon: const Icon(Icons.wifi_protected_setup_outlined),
+                      label: Container(
+                        width: MediaQuery.of(context).size.width * 0.14,
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.fire_truck,
+                              color: _selectedIndex == 3
+                                  ? Colors.white
+                                  : Colors.grey.shade500,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Daftar Mobil',
+                                style: TextStyle(fontFamily: 'Nunito'),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      SideMenuItem(
-                        priority: 2,
-                        title: 'Daftar Supir', icon: const Icon(Icons.people),
-                        onTap: (s, w) {
-                          page.jumpToPage(s);
-                          sideMenu.changePage(s);
-                        },
-                        // icon: const Icon(Icons.people_rounded),
+                    ),
+                    NavigationRailDestination(
+                      padding: EdgeInsets.zero,
+                      icon: Container(
+                        height: 10,
                       ),
-                      SideMenuItem(
-                        priority: 3,
-                        title: 'Daftar Mobil', icon: const Icon(Icons.fire_truck),
-                        onTap: (s, w) {
-                          page.jumpToPage(s);
-                          sideMenu.changePage(s);
-                        },
-                        // icon: const Icon(Icons.car_rental_rounded),
+                      label: Container(
+                        width: MediaQuery.of(context).size.width * 0.14,
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.inventory,
+                              color: _selectedIndex == 4
+                                  ? Colors.white
+                                  : Colors.grey.shade500,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Inventory',
+                                style: TextStyle(fontFamily: 'Nunito'),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      SideMenuItem(
-                        priority: 4,
-                        title: 'Inventory', icon: const Icon(Icons.inventory),
-                        onTap: (s, w) {
-                          page.jumpToPage(s);
-                          sideMenu.changePage(s);
-                        },
-                        // icon: const Icon(Icons.car_repair),
+                    ),
+                    NavigationRailDestination(
+                      padding: EdgeInsets.zero,
+                      icon: Container(
+                        height: 10,
                       ),
-                      SideMenuItem(
-                        priority: 5,
-                        title: 'Perbaikan',
-                        icon: const Icon(Icons.engineering_rounded),
-                        onTap: (s, w) {
-                          page.jumpToPage(s);
-                          sideMenu.changePage(s);
-                        },
-                        // icon: const Icon(Icons.monetization_on),
+                      label: Container(
+                        width: MediaQuery.of(context).size.width * 0.14,
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.engineering_rounded,
+                              color: _selectedIndex == 5
+                                  ? Colors.white
+                                  : Colors.grey.shade500,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Perbaikan',
+                                style: TextStyle(fontFamily: 'Nunito'),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      SideMenuItem(
-                        priority: 6,
-                        title: 'Keuangan Bulanan',
-                        icon: const Icon(Icons.monitor_heart_rounded),
-                        onTap: (s, w) {
-                          page.jumpToPage(s);
-                          sideMenu.changePage(s);
-                        },
-                        // icon: const Icon(Icons.document_scanner_rounded),
+                    ),
+                    NavigationRailDestination(
+                      padding: EdgeInsets.zero,
+                      icon: Container(
+                        height: 10,
                       ),
-                      SideMenuItem(
-                        priority: 7,
-                        title: 'Keuangan Tahunan',
-                        icon: const Icon(Icons.auto_graph_rounded),
-                        onTap: (s, w) {
-                          page.jumpToPage(s);
-                          sideMenu.changePage(s);
-                        },
-                        // icon: const Icon(Icons.monetization_on),
+                      label: Container(
+                        width: MediaQuery.of(context).size.width * 0.14,
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.monitor_heart_rounded,
+                              color: _selectedIndex == 6
+                                  ? Colors.white
+                                  : Colors.grey.shade500,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Keuangan Bulanan',
+                                style: TextStyle(fontFamily: 'Nunito'),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                       SideMenuItem(
-                        priority: 8,
-                        title: 'Cash Flow',
-                        icon: const Icon(Icons.compare_arrows),
-                        onTap: (s, w) {
-                          page.jumpToPage(s);
-                          sideMenu.changePage(s);
-                        },
-                        // icon: const Icon(Icons.monetization_on),
+                    ),
+                    NavigationRailDestination(
+                      padding: EdgeInsets.zero,
+                      icon: Container(
+                        height: 10,
                       ),
-                      SideMenuItem(
-                        priority: 9,
-                        title: 'Mutasi Saldo',
-                        icon: const Icon(Icons.attach_money_rounded),
-                        onTap: (s, w) {
-                          page.jumpToPage(s);
-                          sideMenu.changePage(s);
-                        },
-                        // icon: const Icon(Icons.monetization_on),
+                      label: Container(
+                        width: MediaQuery.of(context).size.width * 0.14,
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.auto_graph_rounded,
+                              color: _selectedIndex == 7
+                                  ? Colors.white
+                                  : Colors.grey.shade500,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Keuangan Tahunan',
+                                style: TextStyle(fontFamily: 'Nunito'),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                    NavigationRailDestination(
+                      padding: EdgeInsets.zero,
+                      icon: Container(
+                        height: 10,
+                      ),
+                      label: Container(
+                        width: MediaQuery.of(context).size.width * 0.14,
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.compare_arrows,
+                              color: _selectedIndex == 8
+                                  ? Colors.white
+                                  : Colors.grey.shade500,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Uang Masuk Keluar',
+                                style: TextStyle(fontFamily: 'Nunito'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    NavigationRailDestination(
+                      padding: EdgeInsets.zero,
+                      icon: Container(
+                        height: 10,
+                      ),
+                      label: Container(
+                        width: MediaQuery.of(context).size.width * 0.14,
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.attach_money_rounded,
+                              color: _selectedIndex == 9
+                                  ? Colors.white
+                                  : Colors.grey.shade500,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                'Mutasi Saldo',
+                                style: TextStyle(fontFamily: 'Nunito'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                  selectedIconTheme: IconThemeData(color: Colors.white,size: 17),
+                  unselectedIconTheme: IconThemeData(color: Colors.grey.shade700),
+                  
+                  selectedLabelTextStyle: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold,letterSpacing: 1.2),
+                  unselectedLabelTextStyle: TextStyle(
+                      color: Colors.grey.shade500, letterSpacing: 1.2),
                 ),
-                Expanded(
-                  child: PageView(
-                    controller: page,
-                    children: const [
-                     
-                      DashBoardPage(),
-                      TransaksiPage(),
-                      DaftarSupir(),
-                      DaftarMobil(),
-                      JualBeli(),
-                      PerbaikanPage(),
-                      LaporanBulanan(),
-                      KasTahun(), CashFlow(),
-                        MutasiSaldoPage(),
-                      
-                    ],
-                  ),
-                ),
+              
+                Expanded(child: wid[_selectedIndex]),
               ],
             ));
   }

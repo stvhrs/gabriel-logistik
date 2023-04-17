@@ -490,6 +490,7 @@ Future<Uint8List> generateResume(
 }
 
 Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
+ 
   format = format.applyMargin(
       left: 2.0 * PdfPageFormat.cm,
       top: 4.0 * PdfPageFormat.cm,

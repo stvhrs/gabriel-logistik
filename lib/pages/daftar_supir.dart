@@ -46,7 +46,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         flex: 1,

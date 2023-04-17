@@ -523,7 +523,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                       color: Colors.green,
                                       successColor: Colors.green,
                                       errorColor: Colors.red,
-                                      child: Text('Tambah',
+                                      child: Text('Edit',
                                           style:
                                               TextStyle(color: Colors.white)),
                                       controller: _btnController,
@@ -540,6 +540,8 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                         }
                                         if (empty) {
                                           _btnController.error();
+                                   await   Future.delayed(
+                                            Duration(seconds: 1), () {});
                                           _btnController.reset();
                                           return;
                                         } else {}

@@ -48,7 +48,9 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
       ],
       'totalMutasi': 0
     },
-  );
+  [ MutasiChild.fromMap(
+          {'keterangan': 'Sewa Ruko', 'harga': 0, 'qty': 1, 'total': 0},
+        )]);
   @override
   void initState() {
     super.initState();
@@ -554,7 +556,9 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                     'tanggal': DateTime.now().toIso8601String(),
                     'mutasi': [].map((e) => MutasiChild.fromMap(e)).toList(),
                     'totalMutasi': 0
-                  },
+                  },[ MutasiChild.fromMap(
+          {'keterangan': 'Sewa Ruko', 'harga': 0, 'qty': 1, 'total': 0},
+        )]
                   
                 );
                 setState(() {

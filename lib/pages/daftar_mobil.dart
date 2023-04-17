@@ -52,7 +52,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      margin: const EdgeInsets.only(bottom: 5),
+               
                       height: MediaQuery.of(context).size.height / 20,
                       child: TextFormField(
                               style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
@@ -68,7 +68,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
                   TambahMobil()
                 ],
               ),
-              Container(
+              Container(margin: const EdgeInsets.only(top: 15),
                 color:Theme.of(context).primaryColor,
                 padding: const EdgeInsets.only(
                     top: 8, bottom: 8, left: 15, right: 15),

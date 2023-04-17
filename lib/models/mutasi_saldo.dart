@@ -12,9 +12,9 @@ String id;
 
 
   MutasiSaldo(this.id,this.totalMutasi, this.listMutasi,this.tanggal,this.pendapatan,this.keterangan);
- factory MutasiSaldo.fromMap(Map<String, dynamic> data,) {
+ factory MutasiSaldo.fromMap(Map<String, dynamic> data,List<MutasiChild> wkwk) {
     return MutasiSaldo(data['id'],
-        data['totalMutasi'],data['mutasi'], data['tanggal'], data['pendapatan'],data['keterangan'] );
+        data['totalMutasi'],wkwk, data['tanggal'], data['pendapatan'],data['keterangan'] );
         
   }
 }

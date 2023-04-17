@@ -36,8 +36,7 @@ class _TransaksiTileState extends State<TransaksiTile> {
             : widget.index.isEven
                 ? Colors.grey.shade200
                 : const Color.fromARGB(255, 189, 193, 221),
-        padding:
-            const EdgeInsets.only(top: 5, bottom: 5, left: 15, right: 15),
+        padding: const EdgeInsets.only(top: 0, bottom: 0, left: 15, right: 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -88,7 +87,14 @@ class _TransaksiTileState extends State<TransaksiTile> {
                       : DateTime.parse(widget._transaksi.tanggalBerangkat)
                                   .month !=
                               DateTime.now().month
-                          ? const Expanded(child: IconButton(onPressed: null,icon: Icon(Icons.dangerous,color: Colors.transparent,),))
+                          ? const Expanded(
+                              child: IconButton(
+                              onPressed: null,
+                              icon: Icon(
+                                Icons.dangerous,
+                                color: Colors.transparent,
+                              ),
+                            ))
                           : Expanded(child: TransaksiEdit(widget._transaksi)),
                   Provider.of<ProviderData>(context, listen: false).isOwner
                       ? Expanded(child: TransaksiDelete(widget._transaksi))

@@ -16,7 +16,7 @@ import '../models/perbaikan.dart';
 
 // Future<Uint8List> printPdf(List<Uint8List> listUint8list) async {
 //   final document = pw.Document();
-//   for (var element in listUint8list) {
+//   for (Map<String,dynamic> element in listUint8list) {
 //     final pw.MemoryImage memoryImage = pw.MemoryImage(element);
 
 //     document.addPage(pw.Page(
@@ -44,7 +44,6 @@ List<Map<String, dynamic>> perbaikan2 = [
     'tanggal': DateTime.now().toIso8601String(),
     'keterangan': 'keterangan'
   },
- 
 ];
 List<Map<String, dynamic>> jualBeli = [
   {
@@ -55,7 +54,7 @@ List<Map<String, dynamic>> jualBeli = [
     'keterangan': 'Ini adalah test ketenarangan asdasdas',
     'tanggal': DateTime.now().toIso8601String()
   },
-   {
+  {
     'nama_mobil': 'AD 2345 HWE',
     'harga': 200000,
     'ket_mobil': 'Head Tronton',
@@ -63,7 +62,6 @@ List<Map<String, dynamic>> jualBeli = [
     'keterangan': 'Ini adalah test ketenarangan asdasdas',
     'tanggal': DateTime.now().toIso8601String()
   },
- 
 ];
 
 List<Map<String, dynamic>> transaksi = [
@@ -76,17 +74,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -95,17 +84,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -114,17 +94,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -133,17 +104,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -152,17 +114,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -171,17 +124,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -190,17 +134,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -209,17 +144,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -228,17 +154,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -247,17 +164,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -266,17 +174,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -285,17 +184,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -304,17 +194,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -323,17 +204,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -342,17 +214,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -361,17 +224,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -380,17 +234,8 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
-    'tgl_berangkat': '2023-02-02T20:06:32.561',
-    'keterangan': 'test',
-    'supir': 'Kolil',
-    'tujuan': 'Palangka Harapan',
-    'mobil': 'AD 2345 HWE',
-   'keluar': 100,
-    'ongkos': 50,
-    'sisa': 1000
   },
-   {
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
@@ -399,19 +244,187 @@ List<Map<String, dynamic>> transaksi = [
     'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
-  },{
+  },
+  {
     'tgl_berangkat': '2023-02-02T20:06:32.561',
     'keterangan': 'test',
     'supir': 'Kolil',
     'tujuan': 'Palangka Harapan',
     'mobil': 'AD 2345 HWE',
-   'keluar': 100,
+    'keluar': 100,
     'ongkos': 50,
     'sisa': 1000
   },
-   
-  
-  
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
+  {
+    'tgl_berangkat': '2023-02-02T20:06:32.561',
+    'keterangan': 'test',
+    'supir': 'Kolil',
+    'tujuan': 'Palangka Harapan',
+    'mobil': 'AD 2345 HWE2',
+    'keluar': 100,
+    'ongkos': 50,
+    'sisa': 1000
+  },
 ];
 
 List<Map<String, dynamic>> supir = [
@@ -423,32 +436,36 @@ List<Map<String, dynamic>> supir = [
 
 List<Map<String, dynamic>> mobil = [
   {
+    'plat_mobil': 'AD 2345 HWE2',
+    'ket_mobil': 'HEAD TRONTON',
+    'terjual': false,
+  },{
     'plat_mobil': 'AD 2345 HWE',
     'ket_mobil': 'HEAD TRONTON',
     'terjual': false,
   },
 ];
 
-List<Map<String, dynamic>> mutasiSaldo = [
+List<dynamic> mutasiSaldo = [
   {
     'pendapatan': true,
-    'keterangan':'Keterangan',
+    'keterangan': 'Keterangan',
     'id': '1',
     'tanggal': '2023-02-02T20:06:32.561',
     'mutasi': [
-     {'keterangan': 'Sewa Ruko', 'harga': 10000, 'qty': 1,'total':0},
-      {'keterangan': 'Tanah', 'harga': 10000, 'qty': 1,'total':0}
+      {'keterangan': 'Sewa Ruko', 'harga': 10000, 'qty': 1, 'total': 0},
+      {'keterangan': 'Tanah', 'harga': 10000, 'qty': 1, 'total': 0}
     ],
     'totalMutasi': 1000
   },
   {
     'pendapatan': false,
     'id': '2',
-    'keterangan':'Keterangan',
+    'keterangan': 'Keterangan',
     'tanggal': '2023-02-02T20:06:32.561',
     'mutasi': [
-      {'keterangan': 'Sewa Ruko', 'harga': 10000, 'qty': 1,'total':0},
-      {'keterangan': 'Tanah', 'harga': 10000, 'qty': 1,'total':0}
+      {'keterangan': 'Sewa Ruko', 'harga': 10000, 'qty': 1, 'total': 0},
+      {'keterangan': 'Tanah', 'harga': 10000, 'qty': 1, 'total': 0}
     ],
     'totalMutasi': 2000
   },
@@ -457,43 +474,53 @@ List<Map<String, dynamic>> mutasiSaldo = [
 class Service {
   static Future<List<MutasiSaldo>> getAllMutasiSaldo() async {
     List<MutasiSaldo> data = [];
-    for (var element in mutasiSaldo) {
+
+    for (Map<String,dynamic> element in mutasiSaldo) {
       List<MutasiChild> mutasiChild = [];
-      for (var e in element['mutasi']) {
+      for (Map<String,dynamic> e in element['mutasi']) {
         mutasiChild.add(MutasiChild.fromMap(e));
+  
       }
-      element['mutasi']=mutasiChild;
-      data.add(MutasiSaldo.fromMap(element,));
+    
+      data.add(MutasiSaldo.fromMap(
+        element,mutasiChild
+      ));
     }
+
     return data;
   }
 
   static Future<List<Transaksi>> getAllTransaksi() async {
     List<Transaksi> data = [];
 
-    for (var element in transaksi.reversed) {
-      data.add(Transaksi.fromMap(element));
-    } for (var element in transaksi.reversed) {
-      data.add(Transaksi.fromMap(element));
-    }for (var element in transaksi.reversed) {
-      data.add(Transaksi.fromMap(element));
-    }for (var element in transaksi.reversed) {
-      data.add(Transaksi.fromMap(element));
-    }for (var element in transaksi.reversed) {
-      data.add(Transaksi.fromMap(element));
-    }for (var element in transaksi.reversed) {
-      data.add(Transaksi.fromMap(element));
-    }for (var element in transaksi.reversed) {
+    for (Map<String,dynamic> element in transaksi.reversed) {
       data.add(Transaksi.fromMap(element));
     }
-    
+    for (Map<String,dynamic> element in transaksi.reversed) {
+      data.add(Transaksi.fromMap(element));
+    }
+    for (Map<String,dynamic> element in transaksi.reversed) {
+      data.add(Transaksi.fromMap(element));
+    }
+    for (Map<String,dynamic> element in transaksi.reversed) {
+      data.add(Transaksi.fromMap(element));
+    }
+    for (Map<String,dynamic> element in transaksi.reversed) {
+      data.add(Transaksi.fromMap(element));
+    }
+    for (Map<String,dynamic> element in transaksi.reversed) {
+      data.add(Transaksi.fromMap(element));
+    }
+    for (Map<String,dynamic> element in transaksi.reversed) {
+      data.add(Transaksi.fromMap(element));
+    }
 
     return data;
   }
 
   static Future<List<Supir>> getAllSupir() async {
     List<Supir> data = [];
-    for (var element in supir) {
+    for (Map<String,dynamic> element in supir) {
       data.add(Supir.fromMap(element));
     }
     return data;
@@ -501,7 +528,7 @@ class Service {
 
   static Future<List<Perbaikan>> getAllPerbaikan() async {
     List<Perbaikan> data = [];
-    for (var element in perbaikan2) {
+    for (Map<String,dynamic> element in perbaikan2) {
       data.add(Perbaikan.fromMap(element));
     }
     return data;
@@ -509,7 +536,7 @@ class Service {
 
   static Future<List<JualBeliMobil>> getAlljualBeli() async {
     List<JualBeliMobil> data = [];
-    for (var element in jualBeli) {
+    for (Map<String,dynamic> element in jualBeli) {
       data.add(JualBeliMobil.fromMap(element));
     }
     return data;
@@ -523,7 +550,7 @@ class Service {
     // );
 
     List<Mobil> data = [];
-    for (var te in mobil) {
+    for (Map<String,dynamic> te in mobil) {
       List<Perbaikan> listPerbaikan = list
           .where((element) =>
               (te['plat_mobil'] as String).trim() == element.mobil.trim())

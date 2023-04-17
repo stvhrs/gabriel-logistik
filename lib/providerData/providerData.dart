@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:gabriel_logistik/models/history_saldo.dart';
 import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
+import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/models/supir.dart';
@@ -48,7 +49,7 @@ class ProviderData with ChangeNotifier {
     List<HistorySaldo> backupListHistorySaldo = [];
 
   List<MutasiSaldo> listMutasiSaldo = [];
-
+List<KeuanganBulanan> printed=[];
   double totalSaldo = 0;
   void owner() {
     isOwner == true;
@@ -67,7 +68,7 @@ class ProviderData with ChangeNotifier {
 
   void logout() {
     logined = false;
-    notifyListeners();
+     notifyListeners();
   }
 
   void setData(
@@ -169,10 +170,10 @@ class ProviderData with ChangeNotifier {
     listMutasiSaldo.every((e) {
       if (e.pendapatan) {
         listHistorySaldo.add(HistorySaldo(
-            'Pendapatan', 0, e.keterangan, e.totalMutasi, e.tanggal, true));
+            'Uang Masuk', 0, e.keterangan, e.totalMutasi, e.tanggal, true));
       } else {
         listHistorySaldo.add(HistorySaldo(
-            'Pengeluaran', 0, e.keterangan, -e.totalMutasi, e.tanggal, false));
+            'Uang Keluar', 0, e.keterangan, -e.totalMutasi, e.tanggal, false));
       }
       return true;
     });

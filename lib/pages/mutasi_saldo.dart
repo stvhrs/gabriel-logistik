@@ -22,19 +22,19 @@ class MutasiSaldoPage extends StatefulWidget {
 
 class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
   @override
-  void initState() {     Provider.of<ProviderData>(context, listen: false).startMutasi = null;
+  void initState() {
+    Provider.of<ProviderData>(context, listen: false).startMutasi = null;
     Provider.of<ProviderData>(context, listen: false).endMutasi = null;
-  
-    
-      Provider.of<ProviderData>(context, listen: false).start = null;
+
+    Provider.of<ProviderData>(context, listen: false).start = null;
     Provider.of<ProviderData>(context, listen: false).end = null;
     Provider.of<ProviderData>(context, listen: false).searchsupir = '';
     Provider.of<ProviderData>(context, listen: false).searchtujuan = '';
     Provider.of<ProviderData>(context, listen: false).searchmobile = '';
-     Provider.of<ProviderData>(context, listen: false).searchTransaksi(false);
-       Provider.of<ProviderData>(context, listen: false).calculateSaldo();
+    Provider.of<ProviderData>(context, listen: false).searchTransaksi(false);
+    Provider.of<ProviderData>(context, listen: false).calculateSaldo();
     //  Provider.of<ProviderData>(context, listen: false).searchHistorySaldo();
-     Provider.of<ProviderData>(context, listen: false).calculateMutasi();
+    Provider.of<ProviderData>(context, listen: false).calculateMutasi();
     log('calucalte mutasi page');
     super.initState();
   }
@@ -43,14 +43,19 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ProviderData>(
-        builder: (context, value, child) => Scaffold(floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.print),
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => MutasiPrint(  value.listHistorySaldo),
-            ));
-          }),
-      body: Container(
+      builder: (context, value, child) => Scaffold(
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.green,
+            child: const Icon(
+              Icons.print,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => MutasiPrint(value.listHistorySaldo),
+              ));
+            }),
+        body: Container(
             padding:
                 const EdgeInsets.only(left: 25, right: 25, top: 0, bottom: 25),
             decoration: BoxDecoration(
@@ -84,7 +89,6 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-               
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -103,8 +107,8 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
                     )),
                   ],
                 ),
-    
                 Container(
+                  margin: EdgeInsets.only(top: 15),
                   color: Theme.of(context).primaryColor,
                   padding: const EdgeInsets.only(
                       top: 8, bottom: 8, left: 15, right: 15),
@@ -118,55 +122,56 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
                       )),
                       Expanded(
                           child: Text('Sumber',
-                              style: Theme.of(context).textTheme.displayMedium)),
+                              style:
+                                  Theme.of(context).textTheme.displayMedium)),
                       Expanded(
                           child: Text('Detail',
-                              style: Theme.of(context).textTheme.displayMedium)),
+                              style:
+                                  Theme.of(context).textTheme.displayMedium)),
                       Expanded(
                           child: Text('Harga',
-                              style: Theme.of(context).textTheme.displayMedium)),
+                              style:
+                                  Theme.of(context).textTheme.displayMedium)),
                       Expanded(
-                          child: Text('Saldo',
+                          child: Text('Riwayat Saldo',
                               style: Theme.of(context).textTheme.displayMedium))
                     ],
                   ),
                 ),
-                
-                   SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.7,
-                      child: ListView.builder(
-                          itemCount: value.listHistorySaldo.length,
-                          itemBuilder: (context, index) => (InkWell(
-                                child: Container(
-                                  color: index.isEven
-                                      ? const Color.fromARGB(255, 189, 193, 221)
-                                      : Colors.grey.shade200,
-                                  padding:
-                                      const EdgeInsets.only(left: 15, right: 15),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                          child: Text(FormatTanggal.formatTanggal(
-                                              value.listHistorySaldo[index]
-                                                  .tanggal))),
-                                      Expanded(
-                                          child: Text(
-                                              value.listHistorySaldo[index].sumber)),
-                                      Expanded(
-                                          child: Text(
-                                              value.listHistorySaldo[index].detail)),
-                                      Expanded(
-                                          child: Text(Rupiah.format(
-                                              value.listHistorySaldo[index].harga))),
-                                      Expanded(
-                                          child: Text(Rupiah.format(value
-                                              .listHistorySaldo[index]
-                                              .sisaSaldo))),
-                                    ],
-                                  ),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    child: ListView.builder(
+                        itemCount: value.listHistorySaldo.length,
+                        itemBuilder: (context, index) => (InkWell(
+                              child: Container(
+                                color: index.isEven
+                                    ? const Color.fromARGB(255, 189, 193, 221)
+                                    : Colors.grey.shade200,
+                                padding:
+                                    const EdgeInsets.only(left: 15, right: 15,top: 5,bottom: 5),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                        child: Text(FormatTanggal.formatTanggal(
+                                            value.listHistorySaldo[index]
+                                                .tanggal))),
+                                    Expanded(
+                                        child: Text(value
+                                            .listHistorySaldo[index].sumber)),
+                                    Expanded(
+                                        child: Text(value
+                                            .listHistorySaldo[index].detail)),
+                                    Expanded(
+                                        child: Text(Rupiah.format(value
+                                            .listHistorySaldo[index].harga))),
+                                    Expanded(
+                                        child: Text(Rupiah.format(value
+                                            .listHistorySaldo[index]
+                                            .sisaSaldo))),
+                                  ],
                                 ),
-                              ))))
-                
+                              ),
+                            ))))
               ],
             )),
       ),

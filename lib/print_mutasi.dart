@@ -17,6 +17,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:collection/collection.dart';
+import 'package:flutter/services.dart';
 import 'package:gabriel_logistik/models/history_saldo.dart';
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:gabriel_logistik/models/mutasi_child.dart';
@@ -36,25 +37,28 @@ const sep = 130.0;
 
 Future<Uint8List> generateResume3(
     PdfPageFormat format, List<HistorySaldo> as) async {
-final int panjang=as.length;
+  final int panjang = as.length;
   pw.TextStyle med = const pw.TextStyle(fontSize: 10);
   DateTime dateTime = DateTime.parse(DateTime.now().toIso8601String());
   String yourDateTime = DateFormat('hh:mm dd-MM-yyyy').format(dateTime);
-
 
   final document = pw.Document();
   pw.TextStyle bold = pw.TextStyle(fontWeight: pw.FontWeight.bold);
   pw.TextStyle bold2 =
       pw.TextStyle(fontSize: 15, fontWeight: pw.FontWeight.bold);
   pw.TextStyle small = const pw.TextStyle(fontSize: 10);
-
+  pw.ImageProvider asu = pw.MemoryImage(
+    (await rootBundle.load('images/cahaya.jpeg')).buffer.asUint8List(),
+  );
   var pagetheme = await _myPageTheme(format);
-los( List<HistorySaldo> data){
-   document.addPage(pw.Page(
-          pageFormat: PdfPageFormat.a4,
-          margin: const pw.EdgeInsets.all(16),
-          build: ((pw.Context context) {
-            return pw.Container(
+  los(List<HistorySaldo> data) {
+    document.addPage(pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        margin: const pw.EdgeInsets.all(16),
+        build: ((pw.Context context) {
+          return pw.Stack(alignment: pw.Alignment.center, children: [
+            pw.Image(asu),
+            pw.Container(
                 child: pw.Container(
                     decoration: pw.BoxDecoration(border: pw.Border.all()
                         // color: Colors.red.shade600
@@ -109,75 +113,79 @@ los( List<HistorySaldo> data){
                               ],
                             ),
                           ),
-                          ...data          .mapIndexed((index, element) => pw.Container(
-                width: double.infinity,
-                // decoration: BoxDecoration(
-                //     color: index.isEven
-                //         ? Colors.grey.shade300
-                //         : const Color.fromARGB(255, 189, 193, 221)),
-                padding: const pw.EdgeInsets.only(
-                  top: 7,
-                  bottom: 7,
-                  left: 15,
-                ),
-                child: pw.Row(children: [
-                  pw.Expanded(
-                      flex: 5,
-                      child: pw.Text(
-                        style: med,
-                        FormatTanggal.formatTanggal(element.tanggal.toString())
-                            .toString(),
-                        textAlign: pw.TextAlign.left,
-                      )),
-                  pw.Expanded(
-                      flex: 5,
-                      child: pw.Text(
-                        style: med,
-                        textAlign: pw.TextAlign.left,
-                        element.sumber,
-                      )),
-                  pw.Expanded(
-                      flex: 5,
-                      child: pw.Text(
-                        style: med,
-                        textAlign: pw.TextAlign.left,
-                        element.detail,
-                      )),
-                  pw.Expanded(
-                      flex: 5,
-                      child: pw.Text(
-                        style: med,
-                        textAlign: pw.TextAlign.left,
-                        Rupiah.format(element.harga),
-                      )),
-                  pw.Expanded(
-                      flex: 5,
-                      child: pw.Text(
-                        style: med,
-                        textAlign: pw.TextAlign.left,
-                        Rupiah.format(element.sisaSaldo),
-                      )),
-                ]),
-              ))
-          .toList()
-                        ])));
-          })));
-}
-List<HistorySaldo> temp=[];
-temp.addAll(as);
-  for (var i = 0; i < as.length; i++) {
-    
-    if (i % 28 == 0&&i>0) {
-los(as.getRange(i-28, i).toList());
-for (var element in as.getRange(i-28, i).toList()) {
-  temp.remove(element);
-}
+                          ...data
+                              .mapIndexed((index, element) => pw.Container(
+                                    width: double.infinity,
+                                    // decoration: BoxDecoration(
+                                    //     color: index.isEven
+                                    //         ? Colors.grey.shade300
+                                    //         : const Color.fromARGB(255, 189, 193, 221)),
+                                    padding: const pw.EdgeInsets.only(
+                                      top: 7,
+                                      bottom: 7,
+                                      left: 15,
+                                    ),
+                                    child: pw.Row(children: [
+                                      pw.Expanded(
+                                          flex: 5,
+                                          child: pw.Text(
+                                            style: med,
+                                            FormatTanggal.formatTanggal(
+                                                    element.tanggal.toString())
+                                                .toString(),
+                                            textAlign: pw.TextAlign.left,
+                                          )),
+                                      pw.Expanded(
+                                          flex: 5,
+                                          child: pw.Text(
+                                            style: med,
+                                            textAlign: pw.TextAlign.left,
+                                            element.sumber,
+                                          )),
+                                      pw.Expanded(
+                                          flex: 5,
+                                          child: pw.Text(
+                                            style: med,
+                                            textAlign: pw.TextAlign.left,
+                                            element.detail,
+                                          )),
+                                      pw.Expanded(
+                                          flex: 5,
+                                          child: pw.Text(
+                                            style: med,
+                                            textAlign: pw.TextAlign.left,
+                                            Rupiah.format(element.harga),
+                                          )),
+                                      pw.Expanded(
+                                          flex: 5,
+                                          child: pw.Text(
+                                            style: med,
+                                            textAlign: pw.TextAlign.left,
+                                            Rupiah.format(element.sisaSaldo),
+                                          )),
+                                    ]),
+                                  ))
+                              .toList()
+                        ])))
+          ]);
+        })));
+  }
 
-    } else if(as.length<=28){los(as);
-    }else if(i+1==as.length&&i%28!=0){
-los(temp);
+  List<HistorySaldo> temp = [];
+  temp.addAll(as);
+  if (as.length <= 28) {
+    los(as);
+    return await document.save();
+  }
+  for (var i = 0; i < as.length; i++) {
+    if (i % 28 == 0 && i > 0) {
+      los(as.getRange(i - 28, i).toList());
+      for (var element in as.getRange(i - 28, i).toList()) {
+        temp.remove(element);
+      }
+    } else if (i + 1 == as.length && i % 28 != 0) {
+      los(temp);
     }
-  
   }
   return await document.save();
 }

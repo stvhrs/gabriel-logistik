@@ -35,7 +35,7 @@ class KasTahun extends StatefulWidget {
 
 class _KasTahunState extends State<KasTahun> {
   List<int> tahun = [];
-List<KasModel> listKas=[];
+  List<KasModel> listKas = [];
   final innerController = ScrollController();
 
   int ropdownValue2 = DateTime.now().year;
@@ -55,8 +55,13 @@ List<KasModel> listKas=[];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,  floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.print),
+      resizeToAvoidBottomInset: false,
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.green,
+          child: const Icon(
+            Icons.print,
+            color: Colors.white,
+          ),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => TahunPrint(listKas),
@@ -149,7 +154,6 @@ List<KasModel> listKas=[];
                   }
                   totalBersih -= totalPerbaikan;
 
-
                   KeuanganBulanan data = KeuanganBulanan(
                       e.nama_mobil,
                       transaksiBulanIni,
@@ -162,20 +166,20 @@ List<KasModel> listKas=[];
                       list[list.indexOf(moon)]);
 
                   kasModel.listBulananMobil.add(data);
-               
+
                   tahunTotalSisa += totalSisa;
                   tahunTotalBersih += totalBersih;
                   tahunTotalKeluar += totalKeluar;
                   tahunTotalOngkos += totalOngkos;
                   tahunTotalPerbaikan += totalPerbaikan;
                 }
-                if(tahunTotalOngkos<1){
-                     return 
-                     const SizedBox();
+                if (tahunTotalOngkos < 1) {
+                  return const SizedBox();
                 }
-                   listKas.add(kasModel);
-            
-                     return Kas(kasModel,tahunTotalOngkos,tahunTotalKeluar,tahunTotalSisa,tahunTotalPerbaikan,tahunTotalBersih);
+                listKas.add(kasModel);
+
+                return Kas(kasModel, tahunTotalOngkos, tahunTotalKeluar,
+                    tahunTotalSisa, tahunTotalPerbaikan, tahunTotalBersih);
               }).toList(),
             ),
           ),

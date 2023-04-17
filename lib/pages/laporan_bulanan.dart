@@ -40,6 +40,7 @@ class _LaporanBulananState extends State<LaporanBulanan> {
   String dropdownValue = list[DateTime.now().month - 1];
   int ropdownValue2 = DateTime.now().year;
   List<KeuanganBulanan> listKeuangan = [];
+  List<bool> printed = [];
   @override
   void didChangeDependencies() {
     trankaskis = Provider.of<ProviderData>(context).backupTransaksi;
@@ -59,11 +60,12 @@ class _LaporanBulananState extends State<LaporanBulanan> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.print),
+      floatingActionButton: FloatingActionButton(backgroundColor: Colors.green,
+          child: const Icon(Icons.print,color: Colors.white,),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => LaporanPrint(listKeuangan),
+              builder: (context) => LaporanPrint(
+                  Provider.of<ProviderData>(context, listen: false).printed),
             ));
           }),
       body: Padding(
@@ -181,11 +183,14 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                     totalSisa,
                     totalPerbaikan,
                     list[list.indexOf(dropdownValue)]);
-                    if(transaksiBulanIni.isEmpty && e.perbaikan.isEmpty){
-                      return const SizedBox();
-                    }
-  listKeuangan.add(data);
-              
+                if (transaksiBulanIni.isEmpty && e.perbaikan.isEmpty) {
+                  return const SizedBox();
+                }
+                listKeuangan.add(data);
+                Provider.of<ProviderData>(context, listen: false)
+                    .printed
+                    .add(data);
+
                 return Bulanan(data);
               }).toList(),
             ),

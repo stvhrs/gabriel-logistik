@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:collection/collection.dart';
+import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import '../helper/rupiah_format.dart';
 
 class Bulanan extends StatefulWidget {
@@ -160,394 +162,414 @@ class _BulananState extends State<Bulanan> {
     });
   }
 
+  bool _print = true;
   final children = <int, Widget>{
-    0: const Text('Transaksi',style: TextStyle(fontFamily: 'Nunito')),
-    1: const Text('Perbaikan',style: TextStyle(fontFamily: 'Nunito')),
+    0: const Text('Transaksi', style: TextStyle(fontFamily: 'Nunito')),
+    1: const Text('Perbaikan', style: TextStyle(fontFamily: 'Nunito')),
   };
   @override
   Widget build(BuildContext context) {
-    return 
-      Container(
-        margin: const EdgeInsets.only(bottom: 20),
-        child: Card(
-          elevation: 5,
-          color: Colors.white, surfaceTintColor: Colors.white,
-          shadowColor: Theme.of(context).colorScheme.primary,
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: [ Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
+      child: Card(
+        elevation: 5,
+        color: Colors.white, surfaceTintColor: Colors.white,
+        shadowColor: Theme.of(context).colorScheme.primary,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 15.0, top: 7.5, bottom: 7.5),
-              child: Text(
-                textAlign: TextAlign.left,
-                '${widget.laporanBulanan.namaMobil} - ${widget.laporanBulanan.bulan}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-            ),
-            Padding(
-                padding: const EdgeInsets.only(left: 10,right: 10),
-                child: CupertinoSlidingSegmentedControl<int>(
-                  children: children,
-                  onValueChanged: onValueChanged,
-                  groupValue: currentSegment, 
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 15.0, top: 7.5, bottom: 7.5),
+                  child: Text(
+                    textAlign: TextAlign.left,
+                    '${widget.laporanBulanan.namaMobil} - ${widget.laporanBulanan.bulan}',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
                 ),
-              ),
-            
-          ],
-        ),
-     
-                currentSegment == 0
-                    ? Column(
-                        children: [
-                          Container(  
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                            padding: const EdgeInsets.only(
-                                top: 10, bottom: 12.5, left: 15),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                    flex: 3,
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Tanggal',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayMedium,
-                                    )),
-                                Expanded(
-                                    flex: 3,
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Supir',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayMedium,
-                                    )),
-                                Expanded(
-                                    flex: 10,
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Tujuan',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayMedium,
-                                    )),
-                                Expanded(
-                                    flex: 7,
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Ongkos',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayMedium,
-                                    )),
-                                Expanded(
-                                    flex: 7,
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Keluar',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayMedium,
-                                    )),
-                                Expanded(
-                                    flex: 7,
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Sisa',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayMedium,
-                                    )),
-                              ],
-                            ),
-                          ),
-                          ...buildChildren(),
-                        ],
-                      )
-                    : Column(
-                      children: [
-                        Container(
-                        
-                            decoration: BoxDecoration(color: Colors.red.shade600),
-                            padding: const EdgeInsets.only(
-                                top: 10, bottom: 12.5, left: 15),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                    flex: 3,
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Tanggal',
-                                      style:
-                                          Theme.of(context).textTheme.displayMedium,
-                                    )),
-                                Expanded(
-                                    flex: 5,
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Jenis',
-                                      style:
-                                          Theme.of(context).textTheme.displayMedium,
-                                    )),
-                                Expanded(
-                                    flex: 5,
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Perbaikan',
-                                      style:
-                                          Theme.of(context).textTheme.displayMedium,
-                                    )),
-                                Expanded(
-                                    flex: 6,
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Keterangan',
-                                      style:
-                                          Theme.of(context).textTheme.displayMedium,
-                                    )),
-                              ],
-                            ),
-                          ),  ...buildChildren2(),
-              
-                      ],
-                    ),  widget.laporanBulanan.transaksiBulanIni.isEmpty
-                    ? const SizedBox()
-                    : Padding(
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: CupertinoSlidingSegmentedControl<int>(
+                    children: children,
+                    onValueChanged: onValueChanged,
+                    groupValue: currentSegment,
+                  ),
+                ),
+                Spacer(),
+                Row(
+                  children: [
+                    Icon(Icons.print,
+                        color: Provider.of<ProviderData>(context, listen: true)
+                                .printed
+                                .contains(widget.laporanBulanan)
+                            ? Colors.green
+                            : Colors.grey),
+                    Checkbox(
+                        activeColor: Colors.green,
+                        value: Provider.of<ProviderData>(context, listen: true)
+                            .printed
+                            .contains(widget.laporanBulanan),
+                        onChanged: (va) {
+                          if (va == false) {
+                            Provider.of<ProviderData>(context, listen: false)
+                                .printed
+                                .remove(widget.laporanBulanan);
+                          } else {
+                            Provider.of<ProviderData>(context, listen: false)
+                                .printed
+                                .add(widget.laporanBulanan);
+                          }
+                          setState(() {});
+                        }),
+                  ],
+                )
+              ],
+            ),
+            currentSegment == 0
+                ? Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                         padding: const EdgeInsets.only(
-                            top: 40, bottom: 8, left: 15, right: 20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                            top: 10, bottom: 12.5, left: 15),
+                        child: Row(
                           children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    margin: const EdgeInsets.only(
-                                        top: 10, bottom: 0),
-                                    child: Text(
-                                        textAlign: TextAlign.left,
-                                        'Total Ongkos ',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displaySmall),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    margin: const EdgeInsets.only(
-                                        top: 10, bottom: 0),
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      Rupiah.format(
-                                          widget.laporanBulanan.totalOngkos),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displaySmall,
-                                    ),
-                                  ),
-                                ),
-                                const Expanded(flex: 7, child: SizedBox()),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 4,
-                                  child: Divider(
-                                    height: 7,
-                                    color: Colors.grey.shade900,
-                                  ),
-                                ),
-                                const Expanded(flex: 9, child: SizedBox())
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    margin: const EdgeInsets.only(
-                                        top: 10, bottom: 0),
-                                    child: Text(
-                                        textAlign: TextAlign.left,
-                                        'Total Keluar ',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displaySmall),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    margin: const EdgeInsets.only(
-                                        top: 10, bottom: 0),
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      Rupiah.format(
-                                          widget.laporanBulanan.totalKeluar),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displaySmall,
-                                    ),
-                                  ),
-                                ),
-                                const Expanded(flex: 7, child: SizedBox()),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 4,
-                                  child: Divider(
-                                    height: 7,
-                                    color: Colors.grey.shade900,
-                                  ),
-                                ),
-                                const Expanded(flex: 9, child: SizedBox())
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    margin: const EdgeInsets.only(
-                                        top: 10, bottom: 0),
-                                    child: Text(
-                                        textAlign: TextAlign.left,
-                                        'Total Sisa ',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displaySmall),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    margin: const EdgeInsets.only(
-                                        top: 10, bottom: 0),
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      Rupiah.format(
-                                          widget.laporanBulanan.totalSisa),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displaySmall,
-                                    ),
-                                  ),
-                                ),
-                                const Expanded(flex: 7, child: SizedBox()),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 4,
-                                  child: Divider(
-                                    height: 7,
-                                    color: Colors.grey.shade900,
-                                  ),
-                                ),
-                                const Expanded(flex: 9, child: SizedBox())
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                      margin: const EdgeInsets.only(
-                                          top: 10, bottom: 0),
-                                      child: Text(
-                                        textAlign: TextAlign.left,
-                                        'Total Perbaikan',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displaySmall,
-                                      )),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                      margin: const EdgeInsets.only(
-                                          top: 10, bottom: 0),
-                                      child: Text(
-                                        textAlign: TextAlign.left,
-                                        Rupiah.format(widget
-                                            .laporanBulanan.totalPerbaikan),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displaySmall,
-                                      )),
-                                ),
-                                const Expanded(flex: 7, child: SizedBox()),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 4,
-                                  child: Divider(
-                                    height: 7,
-                                    color: Colors.grey.shade900,
-                                  ),
-                                ),
-                                const Expanded(flex: 9, child: SizedBox())
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                      margin: const EdgeInsets.only(
-                                          top: 10, bottom: 0),
-                                      child: Text(
-                                          textAlign: TextAlign.left,
-                                          'Total Bersih ',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .displaySmall)),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                      margin: const EdgeInsets.only(
-                                          top: 10, bottom: 0),
-                                      child: Text(
-                                        textAlign: TextAlign.left,
-                                        Rupiah.format(
-                                          widget.laporanBulanan.totalBersih,
-                                        ),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displaySmall,
-                                      )),
-                                ),
-                                const Expanded(flex: 7, child: SizedBox()),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 4,
-                                  child: Divider(
-                                    height: 7,
-                                    color: Colors.grey.shade900,
-                                  ),
-                                ),
-                                const Expanded(flex: 9, child: SizedBox())
-                              ],
-                            ),
+                            Expanded(
+                                flex: 3,
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  'Tanggal',
+                                  style:
+                                      Theme.of(context).textTheme.displayMedium,
+                                )),
+                            Expanded(
+                                flex: 3,
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  'Supir',
+                                  style:
+                                      Theme.of(context).textTheme.displayMedium,
+                                )),
+                            Expanded(
+                                flex: 10,
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  'Tujuan',
+                                  style:
+                                      Theme.of(context).textTheme.displayMedium,
+                                )),
+                            Expanded(
+                                flex: 7,
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  'Ongkos',
+                                  style:
+                                      Theme.of(context).textTheme.displayMedium,
+                                )),
+                            Expanded(
+                                flex: 7,
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  'Keluar',
+                                  style:
+                                      Theme.of(context).textTheme.displayMedium,
+                                )),
+                            Expanded(
+                                flex: 7,
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  'Sisa',
+                                  style:
+                                      Theme.of(context).textTheme.displayMedium,
+                                )),
                           ],
                         ),
                       ),
-              
-              ],), // This trailing comma makes auto-formatting nicer for build methods.
-        ),
-      );
+                      ...buildChildren(),
+                    ],
+                  )
+                : Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(color: Colors.red.shade600),
+                        padding: const EdgeInsets.only(
+                            top: 10, bottom: 12.5, left: 15),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                flex: 3,
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  'Tanggal',
+                                  style:
+                                      Theme.of(context).textTheme.displayMedium,
+                                )),
+                            Expanded(
+                                flex: 5,
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  'Jenis',
+                                  style:
+                                      Theme.of(context).textTheme.displayMedium,
+                                )),
+                            Expanded(
+                                flex: 5,
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  'Perbaikan',
+                                  style:
+                                      Theme.of(context).textTheme.displayMedium,
+                                )),
+                            Expanded(
+                                flex: 6,
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  'Keterangan',
+                                  style:
+                                      Theme.of(context).textTheme.displayMedium,
+                                )),
+                          ],
+                        ),
+                      ),
+                      ...buildChildren2(),
+                    ],
+                  ),
+            widget.laporanBulanan.transaksiBulanIni.isEmpty
+                ? const SizedBox()
+                : Padding(
+                    padding: const EdgeInsets.only(
+                        top: 40, bottom: 8, left: 15, right: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, bottom: 0),
+                                child: Text(
+                                    textAlign: TextAlign.left,
+                                    'Total Ongkos ',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, bottom: 0),
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  Rupiah.format(
+                                      widget.laporanBulanan.totalOngkos),
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall,
+                                ),
+                              ),
+                            ),
+                            const Expanded(flex: 7, child: SizedBox()),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Divider(
+                                height: 7,
+                                color: Colors.grey.shade900,
+                              ),
+                            ),
+                            const Expanded(flex: 9, child: SizedBox())
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, bottom: 0),
+                                child: Text(
+                                    textAlign: TextAlign.left,
+                                    'Total Keluar ',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, bottom: 0),
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  Rupiah.format(
+                                      widget.laporanBulanan.totalKeluar),
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall,
+                                ),
+                              ),
+                            ),
+                            const Expanded(flex: 7, child: SizedBox()),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Divider(
+                                height: 7,
+                                color: Colors.grey.shade900,
+                              ),
+                            ),
+                            const Expanded(flex: 9, child: SizedBox())
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, bottom: 0),
+                                child: Text(
+                                    textAlign: TextAlign.left,
+                                    'Total Sisa ',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, bottom: 0),
+                                child: Text(
+                                  textAlign: TextAlign.left,
+                                  Rupiah.format(
+                                      widget.laporanBulanan.totalSisa),
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall,
+                                ),
+                              ),
+                            ),
+                            const Expanded(flex: 7, child: SizedBox()),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Divider(
+                                height: 7,
+                                color: Colors.grey.shade900,
+                              ),
+                            ),
+                            const Expanded(flex: 9, child: SizedBox())
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                  margin:
+                                      const EdgeInsets.only(top: 10, bottom: 0),
+                                  child: Text(
+                                    textAlign: TextAlign.left,
+                                    'Total Perbaikan',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  )),
+                            ),
+                            Expanded(
+                              child: Container(
+                                  margin:
+                                      const EdgeInsets.only(top: 10, bottom: 0),
+                                  child: Text(
+                                    textAlign: TextAlign.left,
+                                    Rupiah.format(
+                                        widget.laporanBulanan.totalPerbaikan),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  )),
+                            ),
+                            const Expanded(flex: 7, child: SizedBox()),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Divider(
+                                height: 7,
+                                color: Colors.grey.shade900,
+                              ),
+                            ),
+                            const Expanded(flex: 9, child: SizedBox())
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                  margin:
+                                      const EdgeInsets.only(top: 10, bottom: 0),
+                                  child: Text(
+                                      textAlign: TextAlign.left,
+                                      'Total Bersih ',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displaySmall)),
+                            ),
+                            Expanded(
+                              child: Container(
+                                  margin:
+                                      const EdgeInsets.only(top: 10, bottom: 0),
+                                  child: Text(
+                                    textAlign: TextAlign.left,
+                                    Rupiah.format(
+                                      widget.laporanBulanan.totalBersih,
+                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  )),
+                            ),
+                            const Expanded(flex: 7, child: SizedBox()),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Divider(
+                                height: 7,
+                                color: Colors.grey.shade900,
+                              ),
+                            ),
+                            const Expanded(flex: 9, child: SizedBox())
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+          ],
+        ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+    );
   }
 }

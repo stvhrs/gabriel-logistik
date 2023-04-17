@@ -4,7 +4,6 @@ import 'package:gabriel_logistik/hpSidemenu.dart';
 
 import 'package:gabriel_logistik/login/login_screen.dart';
 
-
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/sidemenu.dart';
 import 'package:gabriel_logistik/styles/theme.dart';
@@ -94,23 +93,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-        print(MediaQuery.of(context).size.width 
-        );
-    print(MediaQuery.of(context).size.height 
-       );
+    print(MediaQuery.of(context).size.width);
+    print(MediaQuery.of(context).size.height);
     print(MediaQuery.of(context).size.width *
         MediaQuery.of(context).devicePixelRatio);
     print(MediaQuery.of(context).size.height *
         MediaQuery.of(context).devicePixelRatio);
     return loading
-        ? const CircularProgressIndicator()
+        ?  CircularProgressIndicator()
         : Consumer<ProviderData>(builder: (context, data, _) {
             return data.logined
                 ? MediaQuery.of(context).size.width <= 500
                     ? const DashBoardHp()
                     : const DashBoard()
-                
-                    : const LoginScreen();
+                : const LoginScreen();
           });
   }
 }

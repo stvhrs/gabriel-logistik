@@ -35,7 +35,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
           backgroundColor: Colors.grey.shade300,
           floatingActionButton: TransaksiAdd(),
           body: Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25, top: 20),
+              padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -49,7 +49,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
 
                   //           jsonDecode(snapshotx.data!)['data'].toString()),
                   Container(
-                    margin: const EdgeInsets.only(bottom: 15),
+                    margin: const EdgeInsets.only(bottom: 5),
                     child: Card(
                       color: Theme.of(context).colorScheme.secondary,
                       shadowColor: Theme.of(context).colorScheme.primary,
@@ -84,7 +84,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(5),
                             topRight: Radius.circular(5))),
-                    margin: const EdgeInsets.only(top: 10),
+                    margin: const EdgeInsets.only(top: 5),
                     padding: const EdgeInsets.only(
                         top: 10, bottom: 12.5, left: 15, right: 15),
                     child: Row(
@@ -111,7 +111,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                         Expanded(
                             flex: 7,
                             child: Text(
-                              'Mobil',
+                              'No Pol',
                               style: Theme.of(context).textTheme.displayMedium,
                             )),
                         Expanded(

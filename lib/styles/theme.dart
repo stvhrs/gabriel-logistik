@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   AppTheme();
-  static Color primaryColor = const Color.fromARGB(255, 59, 59, 65);
+  static Color primaryColor = Color.fromARGB(255, 49, 49, 54);
   static Color secondaryColor =primaryColor.withBlue(150);
   static ThemeData getAppThemeData() {
     return ThemeData(iconTheme: const IconThemeData(size: 19),
@@ -23,7 +23,7 @@ class AppTheme {
             secondarySelectedColor: primaryColor,
             shadowColor: Colors.yellow,
             selectedShadowColor: Colors.black),
-        scaffoldBackgroundColor: Colors.grey.shade300,
+        scaffoldBackgroundColor: Color.fromRGBO(244, 244, 252,  1),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
                 textStyle: MaterialStateProperty.all(

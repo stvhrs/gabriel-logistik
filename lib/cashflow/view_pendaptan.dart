@@ -22,16 +22,16 @@ import 'package:web_date_picker/web_date_picker.dart';
 import '../helper/dropdown.dart';
 import '../helper/input_currency.dart';
 
-class ViewPendaptan extends StatefulWidget {
+class ViewPendapatan extends StatefulWidget {
   final bool pendapatan;
   final MutasiSaldo mutasi;
-  const ViewPendaptan(this.pendapatan, this.mutasi);
+  const ViewPendapatan(this.pendapatan, this.mutasi);
 
   @override
-  State<ViewPendaptan> createState() => _ViewPendaptanState();
+  State<ViewPendapatan> createState() => _ViewPendapatanState();
 }
 
-class _ViewPendaptanState extends State<ViewPendaptan> {
+class _ViewPendapatanState extends State<ViewPendapatan> {
   int jumlahOpsi = 1;
 
   final RoundedLoadingButtonController _btnController =
@@ -39,18 +39,18 @@ class _ViewPendaptanState extends State<ViewPendaptan> {
 
   @override
   void initState() {
-    jumlahOpsi=widget.mutasi.listMutasi.length;
-    _updatedmutasi=widget.mutasi.listMutasi;
+   
     super.initState();
   }
 
-  List<TextEditingController> total = [TextEditingController()];
+  List<TextEditingController> total = [];
 
-  List<TextEditingController> qty = [TextEditingController()];
+  List<TextEditingController> qty = [];
 
-  List<TextEditingController> harga = [TextEditingController()];
+  List<TextEditingController> harga = [];
   TextEditingController totalMutasi = TextEditingController();
   Widget _buildPartName(int i, BuildContext context) {
+    print(i);
     return Container(
         margin: EdgeInsets.only(top: i == 0 ? 5 : 15),
         child: StatefulBuilder(
@@ -61,13 +61,15 @@ class _ViewPendaptanState extends State<ViewPendaptan> {
                         flex: 4,
                         child: SizedBox(
                             height: 36,
-                            child: TextFormField(
-                              readOnly: true,
+                            child: TextFormField(readOnly: true,
+                              initialValue:
+                                  widget.mutasi.listMutasi[i].keterangan,
                               textInputAction: TextInputAction.next,
                               style: TextStyle(fontSize: 13.5),
                               onChanged: (value) {
-                                if (_updatedmutasi.isNotEmpty) {
-                                  _updatedmutasi[i].keterangan = value;
+                                if (widget.mutasi.listMutasi.isNotEmpty) {
+                                  widget.mutasi.listMutasi[i].keterangan =
+                                      value;
                                 }
                               },
                               decoration:
@@ -78,32 +80,32 @@ class _ViewPendaptanState extends State<ViewPendaptan> {
                         child: Container(
                           height: 36,
                           margin: const EdgeInsets.only(left: 20),
-                          child: TextFormField(
-                            readOnly: true,
+                          child: TextFormField(readOnly: true,
                             textInputAction: TextInputAction.next,
                             style: TextStyle(fontSize: 13.5),
                             controller: harga[i],
                             decoration:
                                 const InputDecoration(hintText: 'Harga'),
                             onChanged: (value) {
-                              if (_updatedmutasi.isNotEmpty) {
-                                _updatedmutasi[i].harga =
+                              if (widget.mutasi.listMutasi.isNotEmpty) {
+                                widget.mutasi.listMutasi[i].harga =
                                     Rupiah.parse(value).toDouble();
-                                // harga[i].text =
-                                //     Rupiah.format(_updatedmutasi[i].harga);
+                              total[i].text = Rupiah.format(
+                                  widget.mutasi.listMutasi[i].qty *
+                                      widget.mutasi.listMutasi[i].harga);
                               }
-                              if (_updatedmutasi.isNotEmpty) {
-                                _updatedmutasi[i].total =
-                                    _updatedmutasi[i].qty *
-                                        _updatedmutasi[i].harga;
+                              if (widget.mutasi.listMutasi.isNotEmpty) {
+                                widget.mutasi.listMutasi[i].total =
+                                    widget.mutasi.listMutasi[i].qty *
+                                        widget.mutasi.listMutasi[i].harga;
                                 double calculateTotalAll = 0;
 
-                                for (var element in _updatedmutasi) {
+                                for (var element in widget.mutasi.listMutasi) {
                                   calculateTotalAll += element.total;
                                 }
                                 totalMutasi.text =
                                     Rupiah.format(calculateTotalAll);
-                               widget. mutasi.totalMutasi = calculateTotalAll;
+                                widget.mutasi.totalMutasi = calculateTotalAll;
                                 print(calculateTotalAll);
                               }
                             },
@@ -118,29 +120,29 @@ class _ViewPendaptanState extends State<ViewPendaptan> {
                         child: Container(
                           height: 36,
                           margin: const EdgeInsets.only(left: 20),
-                          child: TextFormField(
-                            readOnly: true,
+                          child: TextFormField(readOnly: true,
                             textInputAction: TextInputAction.next,
                             style: TextStyle(fontSize: 13.5),
                             controller: qty[i],
                             decoration: const InputDecoration(hintText: 'Qty'),
                             onChanged: (value) {
-                              _updatedmutasi[i].qty = double.parse(value);
+                              widget.mutasi.listMutasi[i].qty =
+                                  double.parse(value);
                               // qty[i].text = double.parse(value).toString();
                               total[i].text = Rupiah.format(
-                                  _updatedmutasi[i].qty *
-                                      _updatedmutasi[i].harga);
+                                  widget.mutasi.listMutasi[i].qty *
+                                      widget.mutasi.listMutasi[i].harga);
                               log('total mas');
-                              if (_updatedmutasi.isNotEmpty) {
-                                _updatedmutasi[i].total =
-                                    _updatedmutasi[i].qty *
-                                        _updatedmutasi[i].harga;
+                              if (widget.mutasi.listMutasi.isNotEmpty) {
+                                widget.mutasi.listMutasi[i].total =
+                                    widget.mutasi.listMutasi[i].qty *
+                                        widget.mutasi.listMutasi[i].harga;
                                 double calculateTotalAll = 0;
 
-                                for (var element in _updatedmutasi) {
+                                for (var element in widget.mutasi.listMutasi) {
                                   calculateTotalAll += element.total;
                                 }
-                               widget. mutasi.totalMutasi = calculateTotalAll;
+                                widget.mutasi.totalMutasi = calculateTotalAll;
                                 print(calculateTotalAll);
                                 totalMutasi.text =
                                     Rupiah.format(calculateTotalAll);
@@ -156,8 +158,8 @@ class _ViewPendaptanState extends State<ViewPendaptan> {
                         child: Container(
                           height: 36,
                           margin: const EdgeInsets.only(left: 20),
-                          child: TextFormField(
-                            readOnly: true,
+                          child: TextFormField(readOnly: true,
+                          
                             textInputAction: TextInputAction.next,
                             style: TextStyle(fontSize: 13.5),
                             controller: total[i],
@@ -174,19 +176,25 @@ class _ViewPendaptanState extends State<ViewPendaptan> {
                 )));
   }
 
-   List<MutasiChild> _updatedmutasi = [
-    MutasiChild.fromMap(
-      {'keterangan': '', 'harga': 0, 'qty': 0, 'total': 0},
-    )
-  ];
   @override
   Widget build(BuildContext context) {
-    
     return Container(
-        child:  IconButton(
-            
-            icon:Icon(Icons.remove_red_eye_rounded,color: Colors.grey,),
-            onPressed: () {
+        child: IconButton(
+            icon: Icon(
+              Icons.remove_red_eye_sharp,
+              color: Colors.grey,
+            ),
+            onPressed: () { jumlahOpsi = widget.mutasi.listMutasi.length;
+
+    totalMutasi.text = Rupiah.format(widget.mutasi.totalMutasi);
+
+    for (var e in widget.mutasi.listMutasi) {
+      total.add(
+          TextEditingController()..text = Rupiah.format(e.total).toString());
+      harga.add(
+          TextEditingController()..text = Rupiah.format(e.harga).toString());
+      qty.add(TextEditingController()..text = e.qty.toString());
+    }
               showDialog(
                   barrierDismissible: false,
                   context: context,
@@ -254,11 +262,13 @@ class _ViewPendaptanState extends State<ViewPendaptan> {
                                           height: 36,
                                           child: WebDatePicker(
                                             height: 60,
-                                            initialDate: DateTime.now(),
+                                            initialDate: DateTime.parse(
+                                              widget.mutasi.tanggal,
+                                            ),
                                             dateformat: 'dd/MM/yyyy',
                                             onChange: (value) {
                                               if (value != null) {
-                                               widget. mutasi.tanggal =
+                                                widget.mutasi.tanggal =
                                                     value.toIso8601String();
                                               }
                                             },
@@ -266,14 +276,15 @@ class _ViewPendaptanState extends State<ViewPendaptan> {
                                       SizedBox(
                                         width: 150,
                                         height: 36,
-                                        child: TextFormField(
-                                          readOnly: true,
+                                        child: TextFormField(readOnly: true,
+                                          initialValue:
+                                              widget.mutasi.keterangan,
                                           textInputAction: TextInputAction.next,
                                           style: TextStyle(fontSize: 13.5),
                                           decoration: InputDecoration(
                                               hintText: 'Keterangan'),
                                           onChanged: (v) {
-                                           widget. mutasi.keterangan = v;
+                                            widget.mutasi.keterangan = v;
                                           },
                                         ),
                                       )
@@ -364,96 +375,14 @@ class _ViewPendaptanState extends State<ViewPendaptan> {
                                                   flex: 1,
                                                   child: index == 0
                                                       ? SizedBox()
-                                                      : Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  left: 5),
-                                                          child: IconButton(
-                                                              onPressed: () {
-                                                                if (jumlahOpsi >
-                                                                    1) {
-                                                                  _updatedmutasi.remove(
-                                                                      _updatedmutasi[
-                                                                          index]);
-                                                                  jumlahOpsi =
-                                                                      jumlahOpsi -
-                                                                          1;
-                                                                  total.remove(
-                                                                      total[
-                                                                          index]);
-                                                                  harga.remove(
-                                                                      harga[
-                                                                          index]);
-                                                                  qty.remove(qty[
-                                                                      index]);
-                                                                  double
-                                                                      calculateTotalAll =
-                                                                      0;
-
-                                                                  for (var element
-                                                                      in _updatedmutasi) {
-                                                                    calculateTotalAll +=
-                                                                        element
-                                                                            .total;
-                                                                  }
-                                                                  totalMutasi
-                                                                          .text =
-                                                                      Rupiah.format(
-                                                                          calculateTotalAll);
-                                                                 widget. mutasi.totalMutasi =
-                                                                      calculateTotalAll;
-                                                                  print(
-                                                                      calculateTotalAll);
-                                                                  setState(
-                                                                      () {});
-                                                                }
-                                                              },
-                                                              icon: Icon(
-                                                                Icons.delete,
-                                                                color:
-                                                                    Colors.red,
-                                                              )),
-                                                        ),
+                                                      : SizedBox()
                                                 ),
                                               ],
                                             ),
                                           )
                                         ])),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Center(
-                                      child: IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              if (jumlahOpsi ==
-                                                  _updatedmutasi.length) {
-                                                _updatedmutasi.add(
-                                                  MutasiChild.fromMap({
-                                                    'keterangan': '',
-                                                    'harga': 0,
-                                                    'qty': 1,
-                                                    'total': 0
-                                                  }),
-                                                );
-
-                                                jumlahOpsi = jumlahOpsi + 1;
-                                                total.add(
-                                                    TextEditingController());
-                                                harga.add(
-                                                    TextEditingController());
-                                                qty.add(
-                                                    TextEditingController());
-                                              }
-                                            });
-                                          },
-                                          icon: const Icon(
-                                            Icons.add_circle,
-                                            color: Colors.green,
-                                            size: 25,
-                                          )),
-                                    ),
-                                  ),
+                                
                                   const Divider(height: 12),
                                   const Divider(height: 12),
                                   Spacer(),
@@ -471,8 +400,8 @@ class _ViewPendaptanState extends State<ViewPendaptan> {
                                       SizedBox(
                                           height: 36,
                                           width: 150,
-                                          child: TextFormField(
-                                            readOnly: true,
+                                          child: TextFormField(readOnly: true,
+                                         
                                             textInputAction:
                                                 TextInputAction.next,
                                             style: TextStyle(
@@ -499,52 +428,9 @@ class _ViewPendaptanState extends State<ViewPendaptan> {
                                           )),
                                     ],
                                   ),
-                                  Spacer(),
-                                  Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: RoundedLoadingButton(
-                                      color: Colors.green,
-                                      successColor: Colors.green,
-                                      errorColor: Colors.red,
-                                      child: Text('Tambah',
-                                          style:
-                                              TextStyle(color: Colors.white)),
-                                      controller: _btnController,
-                                      onPressed: () async {
-                                        bool empty = false;
-
-                                        for (var element in _updatedmutasi) {
-                                          if (element.keterangan == '' ||
-                                             widget. mutasi.keterangan == '' ||
-                                              element.total <= 0) {
-                                            empty = true;
-                                          }
-                                        }
-                                        if (empty) {
-                                          _btnController.error();
-                                          _btnController.reset();
-                                          return;
-                                        } else {
-                                          for (var element in _updatedmutasi) {
-                                           widget. mutasi.listMutasi.add(element);
-                                          }
-                                        }
-
-                                        await Future.delayed(
-                                            Duration(seconds: 3), () {
-                                          Provider.of<ProviderData>(context,
-                                                  listen: false)
-                                              .addmutasi(widget.mutasi);
-                                          _btnController.success();
-                                        });
-                                        await Future.delayed(
-                                            Duration(seconds: 2), () {
-                                          Navigator.of(context).pop();
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                  Spacer()
+                                 
+                                  
+                               
                                 ],
                               ),
                             ),
@@ -553,8 +439,6 @@ class _ViewPendaptanState extends State<ViewPendaptan> {
                       ),
                     );
                   }).then((value) {
-               
-              
                 setState(() {});
               });
             }));
