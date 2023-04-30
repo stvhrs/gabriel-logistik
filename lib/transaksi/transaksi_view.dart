@@ -176,7 +176,7 @@ controlerKetMobil.text=transaksi.keterangan_mobill;
                                               1),
                                           _buildSize(
                                              TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.transaksi.supir,enabled: false,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.transaksi.supir,enabled: false,
                                                 onChanged: (val) {
                                                   transaksi.supir = val;
                                                 },
@@ -186,7 +186,7 @@ controlerKetMobil.text=transaksi.keterangan_mobill;
                                               1),
                                           _buildSize(
                                              TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.transaksi.mobil,enabled: false,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.transaksi.mobil,enabled: false,
                                                 onChanged: (val) {
                                                   transaksi.mobil = val;
                                                   controlerKetMobil
@@ -206,7 +206,7 @@ controlerKetMobil.text=transaksi.keterangan_mobill;
                                               1),
                                           _buildSize(
                                               TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,
                                               
                                                 controller: controlerKetMobil,
                                                 onChanged: (val) {},
@@ -219,7 +219,7 @@ controlerKetMobil.text=transaksi.keterangan_mobill;
                                         children: [
                                           _buildSize(
                                               TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,initialValue:Rupiah.format(widget.transaksi.ongkos) ,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,initialValue:Rupiah.format(widget.transaksi.ongkos) ,
                                                 onChanged: (va) {
                                                   if (va.isNotEmpty &&
                                                       va.startsWith('Rp')) {
@@ -252,7 +252,7 @@ controlerKetMobil.text=transaksi.keterangan_mobill;
                                               1),
                                           _buildSize(
                                               TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,initialValue: Rupiah.format(widget.transaksi.keluar),
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,initialValue: Rupiah.format(widget.transaksi.keluar),
                                                 onChanged: (va) {
                                                   if (va.isNotEmpty &&
                                                       va.startsWith('Rp')) {
@@ -285,7 +285,7 @@ controlerKetMobil.text=transaksi.keterangan_mobill;
                                               1),
                                           _buildSize(
                                               TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,
                                                initialValue: Rupiah.format(widget.transaksi.sisa),
                                           
                                                 onChanged: (va) {
@@ -306,7 +306,7 @@ controlerKetMobil.text=transaksi.keterangan_mobill;
                                               'Sisa',
                                               1),
                                           _buildSize(TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,initialValue: widget.transaksi.tujuan,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,initialValue: widget.transaksi.tujuan,
                                             onChanged: (va) {
                                               transaksi.tujuan = va;
                                             },
@@ -319,7 +319,7 @@ controlerKetMobil.text=transaksi.keterangan_mobill;
                                         children: [
                                           _buildSize(
                                               TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,initialValue: widget.transaksi.keterangan,onChanged: (val) {
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly:true,initialValue: widget.transaksi.keterangan,onChanged: (val) {
                                             transaksi.keterangan = val;
                                           }), 'Keterangan', 2),
                                           _buildSize(const SizedBox(), '', 4),

@@ -41,9 +41,8 @@ class _SearchTanggalState extends State<SearchTanggal> {
                                     maxWidth: 600, minHeight: 500),
                                 child: Theme(
                                   data: ThemeData(
-                                    colorScheme: const ColorScheme.light(
-                                      primary: Color.fromARGB(
-                                          255, 75, 84, 167),
+                                    colorScheme: ColorScheme.light(
+                                      primary: Theme.of(context).primaryColor,
                                       surface: Color.fromARGB(255, 75, 84, 167),
                                     ),
 

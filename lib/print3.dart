@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/examples.dart';
 import 'package:gabriel_logistik/models/history_saldo.dart';
-import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';

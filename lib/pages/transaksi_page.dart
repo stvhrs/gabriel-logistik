@@ -48,6 +48,8 @@ class _TransaksiPageState extends State<TransaksiPage> {
     //  loading?Center(child: CircularProgressIndicator(),):
     
      Consumer<ProviderData>(builder: (context, prov, _) {
+      prov.listTransaksi.sort((a, b) =>
+        DateTime.parse(b.tanggalBerangkat).compareTo(DateTime.parse(a.tanggalBerangkat)));
       return Scaffold(
           resizeToAvoidBottomInset: false,
         
@@ -113,31 +115,31 @@ class _TransaksiPageState extends State<TransaksiPage> {
                             child: Text(
                               'No',
                               style: Theme.of(context).textTheme.displayMedium,
-                            )),
-                        Expanded(
+                            )),                          Expanded(
                             flex: 7,
                             child: Text(
                               'Berangkat',
                               style: Theme.of(context).textTheme.displayMedium,
-                            )),  Expanded(
+                            )), Expanded(
+                            flex: 7,
+                            child: Text(
+                              'No Pol',
+                              style: Theme.of(context).textTheme.displayMedium,
+                            )),
+  Expanded(
+                            flex: 5,
+                            child: Text(
+                              'Supir',
+                              style: Theme.of(context).textTheme.displayMedium,
+                            )), Expanded(
                             flex: 10,
                             child: Text(
                               'Tujuan',
                               style: Theme.of(context).textTheme.displayMedium,
                             )),
                         
-                        Expanded(
-                            flex: 7,
-                            child: Text(
-                              'No Pol',
-                              style: Theme.of(context).textTheme.displayMedium,
-                            )),
-                      Expanded(
-                            flex: 5,
-                            child: Text(
-                              'Supir',
-                              style: Theme.of(context).textTheme.displayMedium,
-                            )),
+                      
+                    
                         Expanded(
                             flex: 7,
                             child: Text(

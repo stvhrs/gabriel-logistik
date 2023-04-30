@@ -13,7 +13,6 @@ import 'package:web_date_picker/web_date_picker.dart';
 
 import '../helper/dropdown.dart';
 import '../helper/input_currency.dart';
-import '../models/mobil.dart';
 
 class PerbaikanEdit extends StatefulWidget {
   final Perbaikan perbaikan;
@@ -143,7 +142,7 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                                         1),
                                     _buildSize(
                                         TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                           initialValue: perbaikan.jenis,
                                           onChanged: (va) {
                                             perbaikan.jenis = va;
@@ -165,7 +164,7 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                                         1),
                                     _buildSize(
                                         TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                           initialValue:
                                               Rupiah.format(perbaikan.harga),
                                           onChanged: (va) {
@@ -184,7 +183,7 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                               
                                     _buildSize(
                                         TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                           initialValue: perbaikan.keterangan,
                                           onChanged: (va) {
                                             perbaikan.keterangan = va;

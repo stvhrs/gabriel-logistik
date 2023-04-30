@@ -4,7 +4,6 @@ import 'package:gabriel_logistik/models/mutasi_saldo.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-import '../models/transaksi.dart';
 import '../providerData/providerData.dart';
 
 class DeletePendaptan extends StatelessWidget {

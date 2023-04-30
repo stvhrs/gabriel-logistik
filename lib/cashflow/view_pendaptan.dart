@@ -1,25 +1,15 @@
-import 'dart:async';
 import 'dart:developer';
 
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
-import 'package:gabriel_logistik/models/mutasi_child.dart';
 import 'package:gabriel_logistik/models/mutasi_saldo.dart';
-import 'package:gabriel_logistik/models/perbaikan.dart';
 
-import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 
-import 'package:gabriel_logistik/providerData/providerData.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gabriel_logistik/services/service.dart';
-import 'package:intl/intl.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
-import '../helper/dropdown.dart';
 import '../helper/input_currency.dart';
 
 class ViewPendapatan extends StatefulWidget {
@@ -65,7 +55,7 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                               initialValue:
                                   widget.mutasi.listMutasi[i].keterangan,
                               textInputAction: TextInputAction.next,
-                              style: TextStyle(fontSize: 13.5),
+                              style: const TextStyle(fontSize: 13.5),
                               onChanged: (value) {
                                 if (widget.mutasi.listMutasi.isNotEmpty) {
                                   widget.mutasi.listMutasi[i].keterangan =
@@ -82,7 +72,7 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                           margin: const EdgeInsets.only(left: 20),
                           child: TextFormField(readOnly: true,
                             textInputAction: TextInputAction.next,
-                            style: TextStyle(fontSize: 13.5),
+                            style: const TextStyle(fontSize: 13.5),
                             controller: harga[i],
                             decoration:
                                 const InputDecoration(hintText: 'Harga'),
@@ -122,7 +112,7 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                           margin: const EdgeInsets.only(left: 20),
                           child: TextFormField(readOnly: true,
                             textInputAction: TextInputAction.next,
-                            style: TextStyle(fontSize: 13.5),
+                            style: const TextStyle(fontSize: 13.5),
                             controller: qty[i],
                             decoration: const InputDecoration(hintText: 'Qty'),
                             onChanged: (value) {
@@ -161,7 +151,7 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                           child: TextFormField(readOnly: true,
                           
                             textInputAction: TextInputAction.next,
-                            style: TextStyle(fontSize: 13.5),
+                            style: const TextStyle(fontSize: 13.5),
                             controller: total[i],
                             decoration:
                                 const InputDecoration(hintText: 'Total'),
@@ -180,7 +170,7 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
   Widget build(BuildContext context) {
     return Container(
         child: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.remove_red_eye_sharp,
               color: Colors.grey,
             ),
@@ -207,7 +197,7 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                           const SizedBox(),
                           Text(
                             widget.pendapatan ? 'Uang Masuk' : 'Uang Keluar',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
@@ -242,7 +232,7 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                               (BuildContext context, StateSetter setState) =>
                                   IntrinsicHeight(
                             child: Container(
-                              constraints: BoxConstraints(minHeight: 600),
+                              constraints: const BoxConstraints(minHeight: 600),
                               padding: const EdgeInsets.only(
                                   bottom: 20, left: 20, right: 20, top: 15),
                               width: MediaQuery.of(context).size.width * 0.52,
@@ -280,8 +270,8 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                                           initialValue:
                                               widget.mutasi.keterangan,
                                           textInputAction: TextInputAction.next,
-                                          style: TextStyle(fontSize: 13.5),
-                                          decoration: InputDecoration(
+                                          style: const TextStyle(fontSize: 13.5),
+                                          decoration: const InputDecoration(
                                               hintText: 'Keterangan'),
                                           onChanged: (v) {
                                             widget.mutasi.keterangan = v;
@@ -293,7 +283,7 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                                   const Divider(height: 12),
                                   const Divider(height: 12),
                                   Container(
-                                    margin: EdgeInsets.only(bottom: 5),
+                                    margin: const EdgeInsets.only(bottom: 5),
                                     decoration: BoxDecoration(
                                         color: Theme.of(context).primaryColor,
                                         borderRadius: const BorderRadius.only(
@@ -320,7 +310,7 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                                             flex: 4,
                                             child: Container(
                                                 margin:
-                                                    EdgeInsets.only(left: 20),
+                                                    const EdgeInsets.only(left: 20),
                                                 child: Text(
                                                   'Harga',
                                                   style: Theme.of(context)
@@ -331,7 +321,7 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                                             flex: 2,
                                             child: Container(
                                                 margin:
-                                                    EdgeInsets.only(left: 20),
+                                                    const EdgeInsets.only(left: 20),
                                                 child: Text(
                                                   'Qty',
                                                   style: Theme.of(context)
@@ -341,7 +331,7 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                                         Expanded(
                                             flex: 4,
                                             child: Container(
-                                              margin: EdgeInsets.only(left: 20),
+                                              margin: const EdgeInsets.only(left: 20),
                                               child: Text(
                                                 'Total',
                                                 style: Theme.of(context)
@@ -349,11 +339,11 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                                                     .displayMedium,
                                               ),
                                             )),
-                                        Spacer(),
+                                        const Spacer(),
                                       ],
                                     ),
                                   ),
-                                  Container(
+                                  SizedBox(
                                     height: MediaQuery.of(context).size.height *
                                         0.35,
                                     child: SingleChildScrollView(
@@ -374,8 +364,8 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                                                 Expanded(
                                                   flex: 1,
                                                   child: index == 0
-                                                      ? SizedBox()
-                                                      : SizedBox()
+                                                      ? const SizedBox()
+                                                      : const SizedBox()
                                                 ),
                                               ],
                                             ),
@@ -385,15 +375,14 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                                 
                                   const Divider(height: 12),
                                   const Divider(height: 12),
-                                  Spacer(),
+                                  const Spacer(),
                                   Row(
                                     children: [
                                       Text(
-                                        'Total ' +
-                                            (widget.pendapatan
+                                        'Total ${widget.pendapatan
                                                 ? "Masuk :"
-                                                : "Keluar :"),
-                                        style: TextStyle(
+                                                : "Keluar :"}',
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 15),
                                       ),
@@ -404,7 +393,7 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                                          
                                             textInputAction:
                                                 TextInputAction.next,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 15),
                                             controller: totalMutasi,
@@ -413,14 +402,14 @@ class _ViewPendapatanState extends State<ViewPendapatan> {
                                                     OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(3),
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                       color: Colors.white),
                                                 ),
                                                 enabledBorder:
                                                     OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(3),
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                       color: Colors.white),
                                                 ),
                                                 fillColor: Colors.white,

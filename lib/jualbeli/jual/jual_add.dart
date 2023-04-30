@@ -177,7 +177,7 @@ class _JualAddState extends State<JualAdd> {
                                         1),
                                     _buildSize(
                                         TextFormField(
-                                          style: TextStyle(fontSize: 13),
+                                          style: const TextStyle(fontSize: 13),
                                           textInputAction: TextInputAction.next,
                                           readOnly: true,
                                           controller: controlerKetMobil,
@@ -189,7 +189,7 @@ class _JualAddState extends State<JualAdd> {
                                         1),
                                     _buildSize(
                                         TextFormField(
-                                          style: TextStyle(fontSize: 13),
+                                          style: const TextStyle(fontSize: 13),
                                           textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.harga =
@@ -209,7 +209,7 @@ class _JualAddState extends State<JualAdd> {
                                   children: [
                                     _buildSize(
                                         TextFormField(
-                                          style: TextStyle(fontSize: 13),
+                                          style: const TextStyle(fontSize: 13),
                                           textInputAction: TextInputAction.next,
                                           onChanged: (va) {
                                             jualBeliMobil.keterangan = va;

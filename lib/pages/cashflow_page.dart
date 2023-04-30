@@ -41,7 +41,7 @@ class _CashFlowState extends State<CashFlow> {
                 color: Theme.of(context).primaryColor.withOpacity(0.2),
                 width: 10,
                 strokeAlign: StrokeAlign.center),
-            color: Color.fromRGBO(244, 244, 252,  1),
+            color: const Color.fromRGBO(244, 244, 252,  1),
             borderRadius: BorderRadius.circular(10)),
         width: MediaQuery.of(context).size.width * 0.7,
         child: Column(
@@ -59,8 +59,8 @@ class _CashFlowState extends State<CashFlow> {
                       bottomLeft: Radius.circular(5),
                       bottomRight: Radius.circular(5))),
               child: Text(
-                'Uang ' + (currentSegment == 0 ? 'Masuk' : 'Keluar'),
-                style: TextStyle(
+                'Uang ${currentSegment == 0 ? 'Masuk' : 'Keluar'}',
+                style: const TextStyle(
                     color: Colors.white,
                     fontFamily: 'Nunito',
                     fontSize: 24,
@@ -117,7 +117,7 @@ class _CashFlowState extends State<CashFlow> {
                   Expanded(
                       flex: 3,
                       child: Text(
-                          'Total ' + (currentSegment == 0 ? "Masuk" : "Keluar"),
+                          'Total ${currentSegment == 0 ? "Masuk" : "Keluar"}',
                           style: Theme.of(context).textTheme.displayMedium)),
                   Expanded(
                       flex: 1,
@@ -183,7 +183,7 @@ class _CashFlowState extends State<CashFlow> {
                                                     .isOwner
                                                 ? DeletePendaptan(
                                                     listMutasi[index])
-                                                : SizedBox()
+                                                : const SizedBox()
                                           ],
                                         )),
                                     // Expanded(
@@ -236,7 +236,7 @@ class _CashFlowState extends State<CashFlow> {
                                                     .isOwner
                                                 ? DeletePendaptan(
                                                     listMutasi2[index])
-                                                : SizedBox()
+                                                : const SizedBox()
                                           ],
                                         )),
                                     // Expanded(

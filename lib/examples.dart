@@ -9,7 +9,6 @@ import 'package:pdf/pdf.dart';
 
 import 'models/history_saldo.dart';
 import 'models/kas_tahun.dart';
-import 'models/mutasi_saldo.dart';
 
 const examples = [
   Example(generateResume, true),

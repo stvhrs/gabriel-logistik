@@ -59,6 +59,9 @@ dependencies:
   url_launcher: ^6.1.10
   desktop_window: ^0.4.0
   d_chart: ^2.2.11
+  
+  custom_date_range_picker: ^1.0.6
+  calendar_date_picker2: ^0.5.2
 
 
 dev_dependencies:

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/logout.dart';
 import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/pages/administrasi_page.dart';
@@ -97,22 +96,22 @@ class _DashBoardState extends State<DashBoard> {
 
   int _selectedIndex = 0;
   List<Widget> wid = [
-    DashBoardPage(),
-    DaftarMobil(),
-    DaftarSupir(),
-    JualBeli(),
-    TransaksiPage(),
-    PerbaikanPage(),
-    AdministrasiPage(),
-    CashFlow(),
-    LaporanBulanan(),
-    KasTahun(),
-    MutasiSaldoPage(),
+    const DashBoardPage(),
+    const DaftarMobil(),
+    const DaftarSupir(),
+    const JualBeli(),
+    const TransaksiPage(),
+    const PerbaikanPage(),
+    const AdministrasiPage(),
+    const CashFlow(),
+    const LaporanBulanan(),
+    const KasTahun(),
+    const MutasiSaldoPage(),
   ];
-  List<bool> _open = [true, false, false, false];
+  final List<bool> _open = [true, false, false, false];
   @override
   Widget build(BuildContext context) {
-    var item = TextStyle(
+    var item = const TextStyle(
         fontFamily: 'Nunito',
         fontSize: 13,
         fontWeight: FontWeight.bold,
@@ -154,13 +153,13 @@ class _DashBoardState extends State<DashBoard> {
                                 _selectedIndex = 0;
                                 setState(() {});
                               },
-                              leading: Icon(Icons.space_dashboard_rounded),
+                              leading: const Icon(Icons.space_dashboard_rounded),
                               title: Text(style: item, 'Dashboard'),
                             )),
                         ExpansionTile(
                           collapsedIconColor: Colors.white,
                           iconColor: Colors.white,
-                          initiallyExpanded: true,
+            
                           title: Text(
                             style: item,
                             'Daftar Unit',
@@ -179,7 +178,7 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 1;
                                     setState(() {});
                                   },
-                                  leading: Icon(Icons.fire_truck),
+                                  leading: const Icon(Icons.fire_truck),
                                   title: Text(style: item, 'Daftar Mobil'),
                                 )),
                             Container(
@@ -195,7 +194,7 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 2;
                                     setState(() {});
                                   },
-                                  leading: Icon(Icons.people),
+                                  leading: const Icon(Icons.people),
                                   title: Text(style: item, 'Daftar Supir'),
                                 )),
                             Container(
@@ -211,7 +210,7 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 3;
                                     setState(() {});
                                   },
-                                  leading: Icon(Icons.inventory),
+                                  leading: const Icon(Icons.inventory),
                                   title: Text(style: item, 'Inventory'),
                                 ))
                           ],
@@ -238,7 +237,7 @@ class _DashBoardState extends State<DashBoard> {
                                     setState(() {});
                                   },
                                   leading:
-                                      Icon(Icons.currency_exchange_rounded),
+                                      const Icon(Icons.currency_exchange_rounded),
                                   title: Text(style: item, 'Rate'),
                                 )),
                             Container(
@@ -254,7 +253,7 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 5;
                                     setState(() {});
                                   },
-                                  leading: Icon(Icons.engineering_rounded),
+                                  leading: const Icon(Icons.engineering_rounded),
                                   title: Text(style: item, 'Perbaikan'),
                                 )),
                             Container(
@@ -270,7 +269,7 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 6;
                                     setState(() {});
                                   },
-                                  leading: Icon(Icons.document_scanner_sharp),
+                                  leading: const Icon(Icons.document_scanner_sharp),
                                   title: Text(style: item, 'Administrasi'),
                                 )),
                             Container(
@@ -286,7 +285,7 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 7;
                                     setState(() {});
                                   },
-                                  leading: Icon(Icons.compare_arrows),
+                                  leading: const Icon(Icons.compare_arrows),
                                   title:
                                       Text(style: item, 'Transaksi lain-lain'),
                                 ))
@@ -313,7 +312,7 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 8;
                                     setState(() {});
                                   },
-                                  leading: Icon(Icons.monitor_heart_rounded),
+                                  leading: const Icon(Icons.monitor_heart_rounded),
                                   title: Text(style: item, 'Mobil Bulanan'),
                                 )),
                             Container(
@@ -329,7 +328,7 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 9;
                                     setState(() {});
                                   },
-                                  leading: Icon(Icons.auto_graph_rounded),
+                                  leading: const Icon(Icons.auto_graph_rounded),
                                   title: Text(style: item, 'Mobil Tahunan'),
                                 ))
                           ],
@@ -355,7 +354,7 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 10;
                                     setState(() {});
                                   },
-                                  leading: Icon(Icons.attach_money_rounded),
+                                  leading: const Icon(Icons.attach_money_rounded),
                                   title: Text(style: item, 'Mutasi'),
                                 ))
                           ],

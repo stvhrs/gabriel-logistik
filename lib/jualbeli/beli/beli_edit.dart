@@ -130,7 +130,7 @@ class _BeliEditState extends State<BeliEdit> {
                                         1),
                                     _buildSize(
                                         TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.jualBeliMobil.mobil,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.jualBeliMobil.mobil,
                                           onChanged: (va) {
                                            
                                           },
@@ -139,7 +139,7 @@ class _BeliEditState extends State<BeliEdit> {
                                         1),
                                           _buildSize(
                                         TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil
                                         .ketMobil,readOnly: true,
                                          
                                         ),
@@ -148,7 +148,7 @@ class _BeliEditState extends State<BeliEdit> {
                                     
                                     _buildSize(
                                         TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: Rupiah.format(widget.jualBeliMobil.harga),
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: Rupiah.format(widget.jualBeliMobil.harga),
                                           onChanged: (va) {
                                          widget.   jualBeliMobil.harga=Rupiah.parse(va);
                                           },
@@ -166,7 +166,7 @@ class _BeliEditState extends State<BeliEdit> {
                                   children: [
                                     _buildSize(
                                         TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,onChanged: (val){
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,onChanged: (val){
                                        widget.     jualBeliMobil.keterangan=val;
                                         },
                                         

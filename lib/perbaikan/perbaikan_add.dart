@@ -156,7 +156,7 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
                                     1),
                                 _buildSize(
                                     TextFormField(
-                                      style: TextStyle(fontSize: 13),
+                                      style: const TextStyle(fontSize: 13),
                                       textInputAction: TextInputAction.next,
                                       onChanged: (va) {
                                         perbaikan.jenis = va;
@@ -182,7 +182,7 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
                                     1),
                                 _buildSize(
                                     TextFormField(
-                                      style: TextStyle(fontSize: 13),
+                                      style: const TextStyle(fontSize: 13),
                                       textInputAction: TextInputAction.next,
                                       onChanged: (va) {
                                         perbaikan.harga = Rupiah.parse(va);
@@ -196,7 +196,7 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
                                     1),
                                 _buildSize(
                                     TextFormField(
-                                      style: TextStyle(fontSize: 13),
+                                      style: const TextStyle(fontSize: 13),
                                       textInputAction: TextInputAction.next,
                                       onChanged: (va) {
                                         perbaikan.keterangan = va;

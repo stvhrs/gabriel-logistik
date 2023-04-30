@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart'; 
-import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/services/service.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -55,7 +54,7 @@ class TambahMobil extends StatelessWidget {
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'No Pol',
                               ),
@@ -68,7 +67,7 @@ class TambahMobil extends StatelessWidget {
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'Keterangan',
                               ),

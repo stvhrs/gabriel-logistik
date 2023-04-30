@@ -8,9 +8,6 @@ import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 
-import '../perbaikan/perbaikan_add.dart';
-import '../perbaikan/perbaikan_delete.dart';
-import '../perbaikan/perbaikan_edit.dart';
 
 class AdministrasiPage extends StatefulWidget {
   const AdministrasiPage({super.key});
@@ -51,13 +48,13 @@ class _AdministrasiPageState extends State<AdministrasiPage> {
                 color: Theme.of(context).primaryColor.withOpacity(0.2),
                 width: 10,
                 strokeAlign: StrokeAlign.center),
-            color: Color.fromRGBO(244, 244, 252,  1),
+            color: const Color.fromRGBO(244, 244, 252,  1),
             borderRadius: BorderRadius.circular(10)),
         width: MediaQuery.of(context).size.width * 0.7,
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(bottom: 30),
+              margin: const EdgeInsets.only(bottom: 15),
               padding: const EdgeInsets.only(
                   right: 30, left: 30, bottom: 10, top: 5),
               decoration: BoxDecoration(
@@ -84,7 +81,7 @@ class _AdministrasiPageState extends State<AdministrasiPage> {
                     margin: const EdgeInsets.only(bottom: 5),
                     height: MediaQuery.of(context).size.height / 20,
                     child: TextFormField(
-                              style: TextStyle(fontSize:13),
+                              style: const TextStyle(fontSize:13),
                       textInputAction: TextInputAction.next,
                       decoration: const InputDecoration(hintText: 'Cari'),
                       onChanged: (val) {

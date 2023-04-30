@@ -53,7 +53,7 @@ class EditMobil extends StatelessWidget {
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: mobil.nama_mobil,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: mobil.nama_mobil,
                               decoration: const InputDecoration(
                                 hintText: 'No Pol',
                               ),
@@ -66,7 +66,7 @@ class EditMobil extends StatelessWidget {
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: mobil.keterangan_mobill,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: mobil.keterangan_mobill,
                               decoration: const InputDecoration(
                                 hintText: 'Keterangan',
                               ),

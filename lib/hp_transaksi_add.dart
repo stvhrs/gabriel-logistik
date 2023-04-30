@@ -214,7 +214,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                             1),
                                                _buildSize(
                                             TextFormField(
-                                              style: TextStyle(fontSize: 13),
+                                              style: const TextStyle(fontSize: 13),
                                               textInputAction:
                                                   TextInputAction.next,
                                               controller: controlerTujuan,
@@ -388,7 +388,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                        
                                         _buildSize(
                                             TextFormField(
-                                              style: TextStyle(fontSize: 13),
+                                              style: const TextStyle(fontSize: 13),
                                               textInputAction:
                                                   TextInputAction.next,
                                               readOnly: true,
@@ -401,7 +401,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                             1),
                                         _buildSize(
                                             TextFormField(
-                                              style: TextStyle(fontSize: 13),
+                                              style: const TextStyle(fontSize: 13),
                                               textInputAction:
                                                   TextInputAction.next,
                                               controller: controlerOngkos,
@@ -441,7 +441,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                             1),
                                         _buildSize(
                                             TextFormField(
-                                              style: TextStyle(fontSize: 13),
+                                              style: const TextStyle(fontSize: 13),
                                               textInputAction:
                                                   TextInputAction.next,
                                               controller: controlerKeluar,
@@ -483,7 +483,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                             1),
                                         _buildSize(
                                             TextFormField(
-                                              style: TextStyle(fontSize: 13),
+                                              style: const TextStyle(fontSize: 13),
                                               textInputAction:
                                                   TextInputAction.next,
                                               keyboardType:
@@ -511,7 +511,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                      
                                         _buildSize(
                                             TextFormField(
-                                                style: TextStyle(fontSize: 13),
+                                                style: const TextStyle(fontSize: 13),
                                                 textInputAction:
                                                     TextInputAction.done,
                                                 controller: controlerKeterangan,

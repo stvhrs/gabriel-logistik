@@ -4,22 +4,16 @@ import 'dart:developer';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/models/mutasi_child.dart';
 import 'package:gabriel_logistik/models/mutasi_saldo.dart';
-import 'package:gabriel_logistik/models/perbaikan.dart';
 
-import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gabriel_logistik/services/service.dart';
-import 'package:intl/intl.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
-import '../helper/dropdown.dart';
 import '../helper/input_currency.dart';
 
 class TambahPendapatan extends StatefulWidget {
@@ -76,7 +70,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                         child: SizedBox(
                             height: 36,
                             child: TextFormField(textInputAction: TextInputAction.next,
-                              style: TextStyle(fontSize: 13.5),
+                              style: const TextStyle(fontSize: 13.5),
                               onChanged: (value) {
                                 if (_updatedmutasi.isNotEmpty) {
                                   _updatedmutasi[i].keterangan = value;
@@ -91,7 +85,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                           height: 36,
                           margin: const EdgeInsets.only(left: 20),
                           child: TextFormField(textInputAction: TextInputAction.next,
-                            style: TextStyle(fontSize: 13.5),
+                            style: const TextStyle(fontSize: 13.5),
                             controller: harga[i],
                             decoration:
                                 const InputDecoration(hintText: 'Harga'),
@@ -130,7 +124,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                           height: 36,
                           margin: const EdgeInsets.only(left: 20),
                           child: TextFormField(textInputAction: TextInputAction.next,
-                            style: TextStyle(fontSize: 13.5),
+                            style: const TextStyle(fontSize: 13.5),
                             controller: qty[i],
                             decoration: const InputDecoration(hintText: 'Qty'),
                             onChanged: (value) {
@@ -166,7 +160,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                           height: 36,
                           margin: const EdgeInsets.only(left: 20),
                           child: TextFormField(textInputAction: TextInputAction.next,
-                            style: TextStyle(fontSize: 13.5),
+                            style: const TextStyle(fontSize: 13.5),
                             readOnly: true,
                             controller: total[i],
                             decoration:
@@ -199,7 +193,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
             child: Text(
               widget.pendapatan ? 'Uang Masuk' : 'Uang Keluar',
               style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             onPressed: () {
               showDialog(
@@ -214,7 +208,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                           const SizedBox(),
                           Text(
                             widget.pendapatan ? 'Uang Masuk' : 'Uang Keluar',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
@@ -249,7 +243,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                               (BuildContext context, StateSetter setState) =>
                                   IntrinsicHeight(
                             child: Container(
-                              constraints: BoxConstraints(minHeight: 600),
+                              constraints: const BoxConstraints(minHeight: 600),
                               padding: const EdgeInsets.only(
                                   bottom: 20, left: 20, right: 20, top: 15),
                               width: MediaQuery.of(context).size.width * 0.52,
@@ -282,8 +276,8 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                           width: 150,
                                           height: 36,
                                           child: TextFormField(textInputAction: TextInputAction.next,
-                                            style: TextStyle(fontSize: 13.5),
-                                            decoration: InputDecoration(
+                                            style: const TextStyle(fontSize: 13.5),
+                                            decoration: const InputDecoration(
                                                 hintText: 'Keterangan'),
                                             onChanged: (v) {
                                               mutasi.keterangan = v;
@@ -295,7 +289,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                     const Divider(height: 12),
                                     const Divider(height: 12),
                                     Container(
-                                      margin: EdgeInsets.only(bottom: 5),
+                                      margin: const EdgeInsets.only(bottom: 5),
                                       decoration: BoxDecoration(
                                           color: Theme.of(context).primaryColor,
                                           borderRadius: const BorderRadius.only(
@@ -322,7 +316,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                               flex: 4,
                                               child: Container(
                                                   margin:
-                                                      EdgeInsets.only(left: 20),
+                                                      const EdgeInsets.only(left: 20),
                                                   child: Text(
                                                     'Harga',
                                                     style: Theme.of(context)
@@ -333,7 +327,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                               flex: 2,
                                               child: Container(
                                                   margin:
-                                                      EdgeInsets.only(left: 20),
+                                                      const EdgeInsets.only(left: 20),
                                                   child: Text(
                                                     'Qty',
                                                     style: Theme.of(context)
@@ -344,7 +338,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                               flex: 4,
                                               child: Container(
                                                 margin:
-                                                    EdgeInsets.only(left: 20),
+                                                    const EdgeInsets.only(left: 20),
                                                 child: Text(
                                                   'Total',
                                                   style: Theme.of(context)
@@ -352,10 +346,10 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                                       .displayMedium,
                                                 ),
                                               )),
-                                          Spacer(),
+                                          const Spacer(),
                                         ],
                                       ),
-                                    ),Container(height: MediaQuery.of(context).size.height*0.35,
+                                    ),SizedBox(height: MediaQuery.of(context).size.height*0.35,
                                       child: SingleChildScrollView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -373,9 +367,9 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                             Expanded(
                                               flex: 1,
                                               child: index == 0
-                                                  ? SizedBox()
+                                                  ? const SizedBox()
                                                   : Container(
-                                                      margin: EdgeInsets.only(
+                                                      margin: const EdgeInsets.only(
                                                           left: 5),
                                                       child: IconButton(
                                                           onPressed: () {
@@ -410,7 +404,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                                               setState(() {});
                                                             }
                                                           },
-                                                          icon: Icon(
+                                                          icon: const Icon(
                                                             Icons.delete,
                                                             color: Colors.red,
                                                           )),
@@ -456,41 +450,38 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                     ),
                                        const Divider(height: 12),
                                     const Divider(height: 12),
-                                    Spacer(),
+                                    const Spacer(),
                                     Row(
                                       children: [
-                                        Text('Total '+(widget.pendapatan?"Masuk :":"Keluar :"),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+                                        Text('Total ${widget.pendapatan?"Masuk :":"Keluar :"}',style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
                                         SizedBox(
                                             height: 36,
                                             width: 150,
                                             child: TextFormField(textInputAction: TextInputAction.next,
-                                             style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),
+                                             style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 15),
                                               readOnly: true,
                                               controller: totalMutasi,
                                               decoration: InputDecoration(
                                                   focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(3),
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: const BorderSide(color: Colors.white),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(3),
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: const BorderSide(color: Colors.white),
           ),
                                                   
                                                   fillColor: Colors.white,
                                                   hintText: ''),
                                             )),
                                       ],
-                                    ),Spacer(),
+                                    ),const Spacer(),
                                     Align(
                                       alignment: Alignment.bottomCenter,
                                       child: RoundedLoadingButton(
                                         color: Colors.green,
                                         successColor: Colors.green,
                                         errorColor: Colors.red,
-                                        child: Text('Tambah',
-                                            style:
-                                                TextStyle(color: Colors.white)),
                                         controller: _btnController,
                                         onPressed: () async {
                                           bool empty = false;
@@ -514,19 +505,22 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                           }
 
                                           await Future.delayed(
-                                              Duration(seconds: 3), () {
+                                              const Duration(seconds: 3), () {
                                             Provider.of<ProviderData>(context,
                                                     listen: false)
                                                 .addmutasi(mutasi);
                                             _btnController.success();
                                           });
                                           await Future.delayed(
-                                              Duration(seconds: 2), () {
+                                              const Duration(seconds: 2), () {
                                             Navigator.of(context).pop();
                                           });
                                         },
+                                        child: const Text('Tambah',
+                                            style:
+                                                TextStyle(color: Colors.white)),
                                       ),
-                                    ),Spacer()
+                                    ),const Spacer()
                                   ],
                                 ),
                               ),

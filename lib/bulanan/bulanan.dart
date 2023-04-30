@@ -41,12 +41,12 @@ class _BulananState extends State<Bulanan> {
                 ),
                 child: Row(children: [
                   Expanded(
-                      flex: 3,
+                      flex: 4,
                       child: Text(
                           textAlign: TextAlign.left,
                           '${DateTime.parse(element.tanggalBerangkat).day}, ${DateFormat('EEEE', "id_ID").format(DateTime.parse(element.tanggalBerangkat))}')),
                   Expanded(
-                      flex: 3,
+                      flex: 4,
                       child: Text(
                         textAlign: TextAlign.left,
                         element.supir,
@@ -114,7 +114,7 @@ class _BulananState extends State<Bulanan> {
           child: Row(
             children: [
               Expanded(
-                  flex: 3,
+                  flex: 4,
                   child: Text(
                       textAlign: TextAlign.left,
                       '${DateTime.parse(element.tanggal).day}, ${DateFormat('EEEE', "id_ID").format(DateTime.parse(element.tanggal))}')),
@@ -199,7 +199,7 @@ class _BulananState extends State<Bulanan> {
                     groupValue: currentSegment,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Row(
                   children: [
                     Icon(Icons.print,
@@ -241,7 +241,7 @@ class _BulananState extends State<Bulanan> {
                         child: Row(
                           children: [
                             Expanded(
-                                flex: 3,
+                                flex: 4,
                                 child: Text(
                                   textAlign: TextAlign.left,
                                   'Tanggal',
@@ -249,7 +249,7 @@ class _BulananState extends State<Bulanan> {
                                       Theme.of(context).textTheme.displayMedium,
                                 )),
                             Expanded(
-                                flex: 3,
+                                flex: 4,
                                 child: Text(
                                   textAlign: TextAlign.left,
                                   'Supir',
@@ -303,7 +303,7 @@ class _BulananState extends State<Bulanan> {
                         child: Row(
                           children: [
                             Expanded(
-                                flex: 3,
+                                flex: 4,
                                 child: Text(
                                   textAlign: TextAlign.left,
                                   'Tanggal',

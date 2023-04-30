@@ -1,13 +1,8 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/helper/format_tanggal.dart';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
-import 'package:gabriel_logistik/jualbeli/beli/beli_add.dart';
-import 'package:gabriel_logistik/jualbeli/beli/beli_edit.dart';
-import 'package:gabriel_logistik/jualbeli/jual/jual_add.dart';
-import 'package:gabriel_logistik/jualbeli/jual/jual_edit.dart';
 import 'package:gabriel_logistik/mutasiSaldo/mutasi_search.dart';
 import 'package:gabriel_logistik/print3.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
@@ -65,19 +60,19 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
             }),
         body: Container(
             padding:
-                const EdgeInsets.only(left: 25, right: 25, top: 0, bottom: 25),
+                const EdgeInsets.only(left: 25, right: 25, top: 0, bottom: 15),
             decoration: BoxDecoration(
                 border: Border.all(
                     color: Theme.of(context).primaryColor.withOpacity(0.2),
                     width: 10,
                     strokeAlign: StrokeAlign.center),
-                color: Color.fromRGBO(244, 244, 252,  1),
+                color: const Color.fromRGBO(244, 244, 252,  1),
                 borderRadius: BorderRadius.circular(10)),
             // width: MediaQuery.of(context).size.width * 0.7,
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(bottom: 30),
+                  margin: const EdgeInsets.only(bottom: 30),
                   padding: const EdgeInsets.only(
                     right: 30,
                     left: 30,
@@ -88,7 +83,7 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(5),
                           bottomRight: Radius.circular(5))),
-                  child: Text(
+                  child: const Text(
                     'Mutasi Saldo',
                     style: TextStyle(
                         color: Colors.white,
@@ -107,16 +102,16 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        SearchMutasi(),
-                        Text('Saldo : ' + Rupiah.format(value.totalSaldo),
-                            style: TextStyle(
+                        const SearchMutasi(),
+                        Text('Saldo : ${Rupiah.format(value.totalSaldo)}',
+                            style: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold)),
                       ],
                     )),
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 15),
+                  margin: const EdgeInsets.only(top: 15),
                   color: Theme.of(context).primaryColor,
                   padding: const EdgeInsets.only(
                       top: 8, bottom: 8, left: 15, right: 15),

@@ -15,21 +15,15 @@
  */
 
 import 'dart:async';
-import 'dart:typed_data';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:gabriel_logistik/models/history_saldo.dart';
-import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
-import 'package:gabriel_logistik/models/mutasi_child.dart';
-import 'package:gabriel_logistik/models/mutasi_saldo.dart';
-import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import './helper/format_tanggal.dart';
 import 'helper/rupiah_format.dart';
-import 'models/transaksi.dart';
 
  PdfColor green = PdfColor.fromHex("00FF00");
 const PdfColor lightGreen = PdfColor.fromInt(0xffcdf1e7);
@@ -85,7 +79,7 @@ Future<Uint8List> generateResume3(
                                       fontSize: 15,
                                       fontWeight: pw.FontWeight.bold)),
                             pw.Spacer(),
-                            pw.Text(yourDateTime+'    ', style: small),
+                            pw.Text('$yourDateTime    ', style: small),
                          
                             // pw.Text('  ' ${as.indexOf(element) + 1}/${as.length} '   ')
                           ]),

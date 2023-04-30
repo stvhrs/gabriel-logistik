@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/main.dart';
 
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/mobil.dart';
 import '../providerData/providerData.dart';
 
 class Logout extends StatelessWidget {
@@ -92,7 +90,7 @@ class Logout extends StatelessWidget {
                 Icons.power_settings_new_rounded,
                 color: Colors.red,
               ),
-            ), Text(
+            ), const Text(
               'Logout',
               style: TextStyle(
                   color: Colors.red,

@@ -49,7 +49,7 @@ class EditSupir extends StatelessWidget {
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
                           child: TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                             initialValue: supir.nama_supir,
                             decoration: const InputDecoration(
                               hintText: 'Nama Supir',
@@ -63,7 +63,7 @@ class EditSupir extends StatelessWidget {
                         Container(
                           margin: const EdgeInsets.only(bottom: 20),
                           child: TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                             initialValue: supir.nohp_supir,
                             decoration: const InputDecoration(
                               hintText: 'No Hp',

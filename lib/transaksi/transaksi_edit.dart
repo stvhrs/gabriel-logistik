@@ -13,7 +13,6 @@ import 'package:web_date_picker/web_date_picker.dart';
 
 import '../helper/dropdown.dart';
 import '../helper/input_currency.dart';
-import '../models/mobil.dart';
 import '../services/service.dart';
 
 class TransaksiEdit extends StatefulWidget {
@@ -212,7 +211,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                           1),
                                       _buildSize(
                                           TextFormField(
-                                            style: TextStyle(fontSize: 13),
+                                            style: const TextStyle(fontSize: 13),
                                             textInputAction:
                                                 TextInputAction.next,
                                             readOnly: true,
@@ -227,7 +226,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                     children: [
                                       _buildSize(
                                           TextFormField(
-                                            style: TextStyle(fontSize: 13),
+                                            style: const TextStyle(fontSize: 13),
                                             textInputAction:
                                                 TextInputAction.next,
                                             initialValue: Rupiah.format(
@@ -265,7 +264,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                           1),
                                       _buildSize(
                                           TextFormField(
-                                            style: TextStyle(fontSize: 13),
+                                            style: const TextStyle(fontSize: 13),
                                             textInputAction:
                                                 TextInputAction.next,
                                             initialValue: Rupiah.format(
@@ -303,7 +302,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                           1),
                                       _buildSize(
                                           TextFormField(
-                                            style: TextStyle(fontSize: 13),
+                                            style: const TextStyle(fontSize: 13),
                                             textInputAction:
                                                 TextInputAction.next,
                                             controller: controlerSisa,
@@ -327,7 +326,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                           1),
                                       _buildSize(
                                           TextFormField(
-                                            style: TextStyle(fontSize: 13),
+                                            style: const TextStyle(fontSize: 13),
                                             textInputAction:
                                                 TextInputAction.next,
                                             initialValue:
@@ -346,7 +345,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                                     children: [
                                       _buildSize(
                                           TextFormField(
-                                              style: TextStyle(fontSize: 13),
+                                              style: const TextStyle(fontSize: 13),
                                               textInputAction:
                                                   TextInputAction.next,
                                               initialValue:

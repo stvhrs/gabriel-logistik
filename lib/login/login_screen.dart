@@ -5,7 +5,6 @@ import 'package:gabriel_logistik/login/app_colors.dart';
 import 'package:gabriel_logistik/login/app_icons.dart';
 import 'package:gabriel_logistik/login/app_styles.dart';
 import 'package:gabriel_logistik/login/responsive_widget.dart';
-import 'package:gabriel_logistik/main.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';

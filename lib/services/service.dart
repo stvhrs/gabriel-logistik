@@ -7,8 +7,6 @@ import 'package:gabriel_logistik/models/mutasi_child.dart';
 
 import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
-import 'package:gabriel_logistik/pages/mutasi_saldo.dart';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import '../models/mutasi_saldo.dart';
@@ -24,7 +22,7 @@ class Service {
         '$base/mutasiSaldo',
       ),
     );
-print( json.decode(response.body).toString() +'wkwekwe');
+print( '${json.decode(response.body)}wkwekwe');
     for (Map<String,dynamic> element in json.decode(response.body)[0]) {
       List<MutasiChild> mutasiChild = [];
       for (Map<String,dynamic> e in element['detail_mutasi'] ) {

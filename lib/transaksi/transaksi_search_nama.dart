@@ -16,7 +16,7 @@ class _SearchNamaState extends State<SearchNama> {
         margin: const EdgeInsets.only(left: 35),
         width: MediaQuery.of(context).size.width * 0.15,
         child: TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
           onChanged: (val) {
             Provider.of<ProviderData>(context, listen: false).searchsupir = val;
             Provider.of<ProviderData>(context, listen: false).searchTransaksi(true);

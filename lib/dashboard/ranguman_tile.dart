@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class Rangkuman extends StatelessWidget {
   final MaterialColor colors;
@@ -13,7 +11,7 @@ class Rangkuman extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width * 0.18,
-        height: MediaQuery.of(context).size.height * 0.1,
+        height: MediaQuery.of(context).size.height * 0.11,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(2),
@@ -22,7 +20,7 @@ class Rangkuman extends StatelessWidget {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 0,
               blurRadius: 10,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
@@ -32,10 +30,10 @@ class Rangkuman extends StatelessWidget {
           children: [
             Container(
                 width: MediaQuery.of(context).size.width * 0.15 * 0.02,
-                height: MediaQuery.of(context).size.height * 0.1,
+                height: MediaQuery.of(context).size.height * 0.11,
                 decoration: BoxDecoration(
                   color: colors,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(2),
                       bottomLeft: Radius.circular(2)),
                 )),
@@ -55,7 +53,7 @@ class Rangkuman extends StatelessWidget {
                   ),
                   Text(
                     data,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 17,
                         fontWeight: FontWeight.bold),
@@ -63,7 +61,7 @@ class Rangkuman extends StatelessWidget {
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(

@@ -38,7 +38,7 @@ class _JualBeliState extends State<JualBeli> {
                 color: Theme.of(context).primaryColor.withOpacity(0.2),
                 width: 10,
                 strokeAlign: StrokeAlign.center),
-            color: Color.fromRGBO(244, 244, 252,  1),
+            color: const Color.fromRGBO(244, 244, 252,  1),
             borderRadius: BorderRadius.circular(10)),
         width: MediaQuery.of(context).size.width * 0.7,
         child: Column(

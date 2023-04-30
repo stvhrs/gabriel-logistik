@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   AppTheme();
-  static Color primaryColor = Color.fromARGB(255, 49, 49, 54);
+  static Color primaryColor = const Color.fromARGB(255, 49, 49, 54);
   static Color secondaryColor =primaryColor.withBlue(150);
   static ThemeData getAppThemeData() {
     return ThemeData(iconTheme: const IconThemeData(size: 19),
@@ -14,7 +14,7 @@ class AppTheme {
         ),
         chipTheme: ChipThemeData(
             backgroundColor: Colors.grey.shade500,
-           labelStyle: TextStyle(fontFamily: 'Nunito',color: Colors.white),
+           labelStyle: const TextStyle(fontFamily: 'Nunito',color: Colors.white),
           
             selectedColor:secondaryColor.withOpacity(0.9),
             checkmarkColor: Colors.green,
@@ -23,7 +23,7 @@ class AppTheme {
             secondarySelectedColor: primaryColor,
             shadowColor: Colors.yellow,
             selectedShadowColor: Colors.black),
-        scaffoldBackgroundColor: Color.fromRGBO(244, 244, 252,  1),
+        scaffoldBackgroundColor: const Color.fromRGBO(244, 244, 252,  1),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
                 textStyle: MaterialStateProperty.all(
@@ -34,7 +34,7 @@ class AppTheme {
         scrollbarTheme:  ScrollbarThemeData(
           thumbVisibility: MaterialStateProperty.all<bool>(true),thickness: MaterialStateProperty.all(5))
             .copyWith(thumbColor: MaterialStateProperty.all(secondaryColor.withOpacity(0.5))),
-        textTheme:  TextTheme(
+        textTheme:  const TextTheme(
             displaySmall: TextStyle(
               fontSize: 13,
               color: Colors.black,fontFamily: 'FreeSans'
@@ -48,13 +48,17 @@ class AppTheme {
               fontWeight: FontWeight.w700,
               color: Colors.black,
             ),
+          bodyMedium: TextStyle(
+              fontSize: 12,
+            
+            ),
             displayMedium: TextStyle(
-              fontSize: 14,
+              fontSize: 13,
               letterSpacing: 1,fontFamily: 'Nunito',
               fontWeight: FontWeight.bold,
               color: Colors.white,
             )),
-        inputDecorationTheme: InputDecorationTheme(hintStyle: TextStyle(fontSize: 13,fontFamily: 'Nunito'),
+        inputDecorationTheme: InputDecorationTheme(hintStyle: const TextStyle(fontSize: 13,fontFamily: 'Nunito'),
           labelStyle: TextStyle(
               fontSize: 18, color: Colors.grey.shade600, letterSpacing: 0.7),
           contentPadding: const EdgeInsets.only(left: 5,right: 5, top: 0, bottom: 0),

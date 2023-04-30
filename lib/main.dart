@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print(MediaQuery.of(context).size.height *
         MediaQuery.of(context).devicePixelRatio);
     return loading
-        ?  CircularProgressIndicator()
+        ?  const CircularProgressIndicator()
         : Consumer<ProviderData>(builder: (context, data, _) {
             return data.logined
                 ? MediaQuery.of(context).size.width <= 500

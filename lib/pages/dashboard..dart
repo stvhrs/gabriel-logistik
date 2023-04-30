@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/basic.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:gabriel_logistik/dashboard/ranguman_tile.dart';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/logout.dart';
-import 'package:gabriel_logistik/models/history_saldo.dart';
 import 'package:provider/provider.dart';
 
-import '../dashboard/grafik.dart';
 import '../providerData/providerData.dart';
 import 'package:d_chart/d_chart.dart';
 
@@ -117,7 +112,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 0,
                 blurRadius: 3,
-                offset: Offset(0, 3), // changes position of shadow
+                offset: const Offset(0, 3), // changes position of shadow
               ),
             ],
           ),
@@ -125,7 +120,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
           child: Row(
             children: [
             
-              Spacer(),
+              const Spacer(),
               Row(
                 children: [
                   Padding(
@@ -142,11 +137,11 @@ class _DashBoardPageState extends State<DashBoardPage> {
                     Provider.of<ProviderData>(context, listen: false).isOwner
                         ? ' Hi Owner !   '
                         : ' Hi Admin !   ',
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontFamily: 'Nunito', fontWeight: FontWeight.bold),
                   ),
                   // Spacer(),
-                  VerticalDivider(), VerticalDivider()
+                  const VerticalDivider(), const VerticalDivider()
                 ],
               ),
               Logout()
@@ -174,7 +169,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(25.0),
+          padding: const EdgeInsets.all(20.0),
           child: Card(
             color: Colors.white,
             surfaceTintColor: Colors.white,
@@ -182,9 +177,9 @@ class _DashBoardPageState extends State<DashBoardPage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Text('Grafik Saldo ' + list[DateTime.now().month - 1],style: TextStyle(fontFamily: 'Nunito',fontWeight: FontWeight.bold,fontSize: 20),),
+                    child: Text('Grafik Saldo ${list[DateTime.now().month - 1]}',style: const TextStyle(fontFamily: 'Nunito',fontWeight: FontWeight.bold,fontSize: 20),),
                   ),
-                  Divider(height: 1,color: Colors.black,),
+                  const Divider(height: 1,color: Colors.black,),
                   Container(
                     padding: const EdgeInsets.all(25.0),
                     height: MediaQuery.of(context).size.height * 0.6,

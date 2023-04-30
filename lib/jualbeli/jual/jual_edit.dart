@@ -11,7 +11,6 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
-import '../../helper/dropdown.dart';
 import '../../helper/input_currency.dart';
 
 class JualEdit extends StatefulWidget {
@@ -159,7 +158,7 @@ class _JualEditState extends State<JualEdit> {
                                         'Pilih Mobil',
                                         1),  _buildSize(
                                         TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.jualBeliMobil.ketMobil,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.jualBeliMobil.ketMobil,
                                           onChanged: (va) {
                                             widget.jualBeliMobil.ketMobil=va;
                                           },
@@ -168,7 +167,7 @@ class _JualEditState extends State<JualEdit> {
                                         1),
                                     _buildSize(
                                         TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue:Rupiah.format( widget.jualBeliMobil.harga),
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue:Rupiah.format( widget.jualBeliMobil.harga),
                                           onChanged: (va) {
                                             widget.jualBeliMobil.harga=Rupiah.parse(va);
                                           },
@@ -186,7 +185,7 @@ class _JualEditState extends State<JualEdit> {
                                   children: [
                                     _buildSize(
                                         TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,
+                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,
                                           onChanged: (va) {
                                             widget.jualBeliMobil.keterangan=va;
                                           },

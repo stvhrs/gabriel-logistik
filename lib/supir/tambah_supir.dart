@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/services/service.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -55,7 +54,7 @@ class TambahSupir extends StatelessWidget {
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(
-                              style: TextStyle(fontSize: 13.5),
+                              style: const TextStyle(fontSize: 13.5),
                               textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'Nama Supir',
@@ -69,7 +68,7 @@ class TambahSupir extends StatelessWidget {
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
                             child: TextFormField(
-                              style: TextStyle(fontSize: 13.5),
+                              style: const TextStyle(fontSize: 13.5),
                               textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'No Hp',

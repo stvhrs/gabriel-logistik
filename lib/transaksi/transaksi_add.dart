@@ -116,7 +116,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
       padding: const EdgeInsets.all(15.0),
       child: FloatingActionButton(
           backgroundColor: Colors.green,
-          child: Icon(
+          child: const Icon(
             Icons.library_add_rounded,
             color: Colors.white,
           ),
@@ -209,19 +209,6 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                           "Tanggal",
                                           1),
                                       _buildSize(
-                                          TextFormField(
-                                            style: TextStyle(fontSize: 13),
-                                            textInputAction:
-                                                TextInputAction.next,
-                                            controller: controlerTujuan,
-                                            onChanged: (va) {
-                                              transaksi.tujuan = va;
-                                              setState(() {});
-                                            },
-                                          ),
-                                          "Ketik Tujuan",
-                                          1),
-                                      _buildSize(
                                           PopupMenuButton<String>(
                                             color: Colors.grey.shade300,
                                             elevation: 2,
@@ -304,6 +291,17 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             }).toList(),
                                           ),
                                           "Pilih Mobil",
+                                          1),  _buildSize(
+                                          TextFormField(
+                                            style:
+                                                const TextStyle(fontSize: 13),
+                                            textInputAction:
+                                                TextInputAction.next,
+                                            readOnly: true,
+                                            controller: controlerKetMobil,
+                                            onChanged: (val) {},
+                                          ),
+                                          "Keterangan Mobil",
                                           1),
                                       _buildSize(
                                           PopupMenuButton<String>(
@@ -375,18 +373,23 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                           1),
                                       _buildSize(
                                           TextFormField(
-                                            style: TextStyle(fontSize: 13),
+                                            style:
+                                                const TextStyle(fontSize: 13),
                                             textInputAction:
                                                 TextInputAction.next,
-                                            readOnly: true,
-                                            controller: controlerKetMobil,
-                                            onChanged: (val) {},
+                                            controller: controlerTujuan,
+                                            onChanged: (va) {
+                                              transaksi.tujuan = va;
+                                              setState(() {});
+                                            },
                                           ),
-                                          "Keterangan Mobil",
+                                          "Ketik Tujuan",
                                           1),
+                                    
                                       _buildSize(
                                           TextFormField(
-                                            style: TextStyle(fontSize: 13),
+                                            style:
+                                                const TextStyle(fontSize: 13),
                                             textInputAction:
                                                 TextInputAction.next,
                                             controller: controlerOngkos,
@@ -425,7 +428,8 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                           1),
                                       _buildSize(
                                           TextFormField(
-                                            style: TextStyle(fontSize: 13),
+                                            style:
+                                                const TextStyle(fontSize: 13),
                                             textInputAction:
                                                 TextInputAction.next,
                                             controller: controlerKeluar,
@@ -465,7 +469,8 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                           1),
                                       _buildSize(
                                           TextFormField(
-                                            style: TextStyle(fontSize: 13),
+                                            style:
+                                                const TextStyle(fontSize: 13),
                                             textInputAction:
                                                 TextInputAction.next,
                                             controller: controlerSisa,
@@ -489,7 +494,8 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                           1),
                                       _buildSize(
                                           TextFormField(
-                                              style: TextStyle(fontSize: 13),
+                                              style:
+                                                  const TextStyle(fontSize: 13),
                                               textInputAction:
                                                   TextInputAction.next,
                                               controller: controlerKeterangan,
@@ -605,14 +611,6 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                       .displayMedium,
                                                 )),
                                             Expanded(
-                                                flex: 10,
-                                                child: Text(
-                                                  "Tujuan",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .displayMedium,
-                                                )),
-                                            Expanded(
                                                 flex: 8,
                                                 child: Text(
                                                   "No Pol",
@@ -624,6 +622,14 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                 flex: 5,
                                                 child: Text(
                                                   "Supir",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .displayMedium,
+                                                )),
+                                            Expanded(
+                                                flex: 10,
+                                                child: Text(
+                                                  "Tujuan",
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .displayMedium,
@@ -714,13 +720,6 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                                                 1,
                                                                             FormatTanggal.formatTanggal(element.tanggalBerangkat).toString())),
                                                                     Expanded(
-                                                                        flex:
-                                                                            10,
-                                                                        child: Text(
-                                                                            style:
-                                                                                small,
-                                                                            element.tujuan)),
-                                                                    Expanded(
                                                                         flex: 8,
                                                                         child: Text(
                                                                             style:
@@ -735,6 +734,13 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                                           element
                                                                               .supir,
                                                                         )),
+                                                                    Expanded(
+                                                                        flex:
+                                                                            10,
+                                                                        child: Text(
+                                                                            style:
+                                                                                small,
+                                                                            element.tujuan)),
 
                                                                     Expanded(
                                                                         flex: 7,
@@ -822,7 +828,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                   });
 
                                                   if (data != null) {
-                                                    data.supir =element.supir;
+                                                    data.supir = element.supir;
                                                     data.mobil = element.mobil;
                                                     Provider.of<ProviderData>(
                                                             context,

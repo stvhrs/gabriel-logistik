@@ -30,7 +30,7 @@ class _SearchMutasiState extends State<SearchMutasi> {
                   picked = await showDateRangePicker(
                       context: context,
                       firstDate: DateTime(DateTime.now().year - 4),
-                      lastDate: DateTime.now().add(Duration(days: 1)),
+                      lastDate: DateTime.now().add(const Duration(days: 1)),
                       builder: (context, child) {
                         return Column(
                           children: [
@@ -39,9 +39,8 @@ class _SearchMutasiState extends State<SearchMutasi> {
                                     maxWidth: 600, minHeight: 500),
                                 child: Theme(
                                   data: ThemeData(
-                                    colorScheme: const ColorScheme.light(
-                                      primary: Color.fromARGB(
-                                          255, 75, 84, 167),
+                                    colorScheme:  ColorScheme.light(
+                                    primary: Theme.of(context).primaryColor,
                                       surface: Color.fromARGB(255, 75, 84, 167),
                                     ),
 

@@ -4,22 +4,16 @@ import 'dart:developer';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/models/mutasi_child.dart';
 import 'package:gabriel_logistik/models/mutasi_saldo.dart';
-import 'package:gabriel_logistik/models/perbaikan.dart';
 
-import 'package:gabriel_logistik/models/mobil.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gabriel_logistik/services/service.dart';
-import 'package:intl/intl.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
-import '../helper/dropdown.dart';
 import '../helper/input_currency.dart';
 
 class EditPendaptan extends StatefulWidget {
@@ -65,7 +59,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
                               initialValue:
                                   widget.mutasi.listMutasi[i].keterangan,
                               textInputAction: TextInputAction.next,
-                              style: TextStyle(fontSize: 13.5),
+                              style: const TextStyle(fontSize: 13.5),
                               onChanged: (value) {
                                 if (widget.mutasi.listMutasi.isNotEmpty) {
                                   widget.mutasi.listMutasi[i].keterangan =
@@ -82,7 +76,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
                           margin: const EdgeInsets.only(left: 20),
                           child: TextFormField(
                             textInputAction: TextInputAction.next,
-                            style: TextStyle(fontSize: 13.5),
+                            style: const TextStyle(fontSize: 13.5),
                             controller: harga[i],
                             decoration:
                                 const InputDecoration(hintText: 'Harga'),
@@ -122,7 +116,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
                           margin: const EdgeInsets.only(left: 20),
                           child: TextFormField(
                             textInputAction: TextInputAction.next,
-                            style: TextStyle(fontSize: 13.5),
+                            style: const TextStyle(fontSize: 13.5),
                             controller: qty[i],
                             decoration: const InputDecoration(hintText: 'Qty'),
                             onChanged: (value) {
@@ -161,7 +155,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
                           child: TextFormField(
                             readOnly: true,
                             textInputAction: TextInputAction.next,
-                            style: TextStyle(fontSize: 13.5),
+                            style: const TextStyle(fontSize: 13.5),
                             controller: total[i],
                             decoration:
                                 const InputDecoration(hintText: 'Total'),
@@ -180,7 +174,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
   Widget build(BuildContext context) {
     return Container(
         child: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.edit,
               color: Colors.green,
             ),
@@ -207,7 +201,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
                           const SizedBox(),
                           Text(
                             widget.pendapatan ? 'Uang Masuk' : 'Uang Keluar',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
@@ -242,7 +236,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
                               (BuildContext context, StateSetter setState) =>
                                   IntrinsicHeight(
                             child: Container(
-                              constraints: BoxConstraints(minHeight: 600),
+                              constraints: const BoxConstraints(minHeight: 600),
                               padding: const EdgeInsets.only(
                                   bottom: 20, left: 20, right: 20, top: 15),
                               width: MediaQuery.of(context).size.width * 0.52,
@@ -280,8 +274,8 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                           initialValue:
                                               widget.mutasi.keterangan,
                                           textInputAction: TextInputAction.next,
-                                          style: TextStyle(fontSize: 13.5),
-                                          decoration: InputDecoration(
+                                          style: const TextStyle(fontSize: 13.5),
+                                          decoration: const InputDecoration(
                                               hintText: 'Keterangan'),
                                           onChanged: (v) {
                                             widget.mutasi.keterangan = v;
@@ -293,7 +287,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                   const Divider(height: 12),
                                   const Divider(height: 12),
                                   Container(
-                                    margin: EdgeInsets.only(bottom: 5),
+                                    margin: const EdgeInsets.only(bottom: 5),
                                     decoration: BoxDecoration(
                                         color: Theme.of(context).primaryColor,
                                         borderRadius: const BorderRadius.only(
@@ -320,7 +314,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                             flex: 4,
                                             child: Container(
                                                 margin:
-                                                    EdgeInsets.only(left: 20),
+                                                    const EdgeInsets.only(left: 20),
                                                 child: Text(
                                                   'Harga',
                                                   style: Theme.of(context)
@@ -331,7 +325,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                             flex: 2,
                                             child: Container(
                                                 margin:
-                                                    EdgeInsets.only(left: 20),
+                                                    const EdgeInsets.only(left: 20),
                                                 child: Text(
                                                   'Qty',
                                                   style: Theme.of(context)
@@ -341,7 +335,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                         Expanded(
                                             flex: 4,
                                             child: Container(
-                                              margin: EdgeInsets.only(left: 20),
+                                              margin: const EdgeInsets.only(left: 20),
                                               child: Text(
                                                 'Total',
                                                 style: Theme.of(context)
@@ -349,11 +343,11 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                                     .displayMedium,
                                               ),
                                             )),
-                                        Spacer(),
+                                        const Spacer(),
                                       ],
                                     ),
                                   ),
-                                  Container(
+                                  SizedBox(
                                     height: MediaQuery.of(context).size.height *
                                         0.35,
                                     child: SingleChildScrollView(
@@ -374,10 +368,10 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                                 Expanded(
                                                   flex: 1,
                                                   child: index == 0
-                                                      ? SizedBox()
+                                                      ? const SizedBox()
                                                       : Container(
                                                           margin:
-                                                              EdgeInsets.only(
+                                                              const EdgeInsets.only(
                                                                   left: 5),
                                                           child: IconButton(
                                                               onPressed: () {
@@ -424,7 +418,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                                                       () {});
                                                                 }
                                                               },
-                                                              icon: Icon(
+                                                              icon: const Icon(
                                                                 Icons.delete,
                                                                 color:
                                                                     Colors.red,
@@ -473,15 +467,14 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                   ),
                                   const Divider(height: 12),
                                   const Divider(height: 12),
-                                  Spacer(),
+                                  const Spacer(),
                                   Row(
                                     children: [
                                       Text(
-                                        'Total ' +
-                                            (widget.pendapatan
+                                        'Total ${widget.pendapatan
                                                 ? "Masuk :"
-                                                : "Keluar :"),
-                                        style: TextStyle(
+                                                : "Keluar :"}',
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 15),
                                       ),
@@ -492,7 +485,7 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                             readOnly: true,
                                             textInputAction:
                                                 TextInputAction.next,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 15),
                                             controller: totalMutasi,
@@ -501,14 +494,14 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                                     OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(3),
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                       color: Colors.white),
                                                 ),
                                                 enabledBorder:
                                                     OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(3),
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                       color: Colors.white),
                                                 ),
                                                 fillColor: Colors.white,
@@ -516,16 +509,13 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                           )),
                                     ],
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Align(
                                     alignment: Alignment.bottomCenter,
                                     child: RoundedLoadingButton(
                                       color: Colors.green,
                                       successColor: Colors.green,
                                       errorColor: Colors.red,
-                                      child: Text('Edit',
-                                          style:
-                                              TextStyle(color: Colors.white)),
                                       controller: _btnController,
                                       onPressed: () async {
                                         bool empty = false;
@@ -541,26 +531,29 @@ class _EditPendaptanState extends State<EditPendaptan> {
                                         if (empty) {
                                           _btnController.error();
                                    await   Future.delayed(
-                                            Duration(seconds: 1), () {});
+                                            const Duration(seconds: 1), () {});
                                           _btnController.reset();
                                           return;
                                         } else {}
 
                                         await Future.delayed(
-                                            Duration(seconds: 3), () {
+                                            const Duration(seconds: 3), () {
                                           Provider.of<ProviderData>(context,
                                                   listen: false)
                                               .updateMutasi(widget.mutasi);
                                           _btnController.success();
                                         });
                                         await Future.delayed(
-                                            Duration(seconds: 2), () {
+                                            const Duration(seconds: 2), () {
                                           Navigator.of(context).pop();
                                         });
                                       },
+                                      child: const Text('Edit',
+                                          style:
+                                              TextStyle(color: Colors.white)),
                                     ),
                                   ),
-                                  Spacer()
+                                  const Spacer()
                                 ],
                               ),
                             ),
