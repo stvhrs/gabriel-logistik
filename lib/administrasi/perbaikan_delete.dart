@@ -8,9 +8,9 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../providerData/providerData.dart';
 import '../services/service.dart';
 
-class PerbaikanDelete extends StatelessWidget {
+class AdministrasiDelete extends StatelessWidget {
   final Perbaikan perbaikan;
-  PerbaikanDelete(this.perbaikan);
+  AdministrasiDelete(this.perbaikan);
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
 

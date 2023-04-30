@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/models/supir.dart';
+import 'package:gabriel_logistik/services/service.dart';
 
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -66,12 +67,23 @@ class SupirDelete extends StatelessWidget {
                         return;
                       }
 
+  var data = await Service.deleteSupir(
+                            supir.id);
 
-                      await Future.delayed(const Duration(seconds: 3), () {
-                        Provider.of<ProviderData>(context, listen: false)
-                            .deleteSupir(supir);
-                        _btnController.success();
+                        if (data != null) {
+                          Provider.of<ProviderData>(context, listen: false)
+                              .deleteSupir(data);
+                        }else{
+                             _btnController.error();
+                           await Future.delayed(const Duration(seconds: 1), () {
+                      _btnController.reset();
                       });
+                          return;
+                        }
+                     
+                       
+                        _btnController.success();
+                  
                       await Future.delayed(const Duration(seconds: 1), () {
                         Navigator.of(context).pop();
                       });

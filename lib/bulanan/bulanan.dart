@@ -33,7 +33,7 @@ class _BulananState extends State<Bulanan> {
                 decoration: BoxDecoration(
                     color: index.isEven
                         ? Colors.grey.shade200
-                        : const Color.fromARGB(255, 189, 193, 221)),
+                        :  Colors.white),
                 padding: const EdgeInsets.only(
                   top: 14,
                   bottom: 14,
@@ -105,7 +105,7 @@ class _BulananState extends State<Bulanan> {
           decoration: BoxDecoration(
               color: index.isEven
                   ? Colors.grey.shade200
-                  : const Color.fromARGB(255, 189, 193, 221)),
+                  :  Colors.white),
           padding: const EdgeInsets.only(
             top: 14,
             bottom: 14,
@@ -162,10 +162,10 @@ class _BulananState extends State<Bulanan> {
     });
   }
 
-  bool _print = true;
+  
   final children = <int, Widget>{
     0: const Text('Transaksi', style: TextStyle(fontFamily: 'Nunito')),
-    1: const Text('Perbaikan', style: TextStyle(fontFamily: 'Nunito')),
+    1: const Text('Maintain', style: TextStyle(fontFamily: 'Nunito')),
   };
   @override
   Widget build(BuildContext context) {
@@ -214,14 +214,14 @@ class _BulananState extends State<Bulanan> {
                             .printed
                             .contains(widget.laporanBulanan),
                         onChanged: (va) {
-                          if (va == false) {
-                            Provider.of<ProviderData>(context, listen: false)
-                                .printed
-                                .remove(widget.laporanBulanan);
-                          } else {
+                          if (va == true) {
                             Provider.of<ProviderData>(context, listen: false)
                                 .printed
                                 .add(widget.laporanBulanan);
+                          } else {
+                            Provider.of<ProviderData>(context, listen: false)
+                                .printed
+                                .remove(widget.laporanBulanan);
                           }
                           setState(() {});
                         }),
@@ -322,7 +322,7 @@ class _BulananState extends State<Bulanan> {
                                 flex: 5,
                                 child: Text(
                                   textAlign: TextAlign.left,
-                                  'Perbaikan',
+                                  'Maintain',
                                   style:
                                       Theme.of(context).textTheme.displayMedium,
                                 )),
@@ -487,7 +487,7 @@ class _BulananState extends State<Bulanan> {
                                       const EdgeInsets.only(top: 10, bottom: 0),
                                   child: Text(
                                     textAlign: TextAlign.left,
-                                    'Total Perbaikan',
+                                    'Total Maintain',
                                     style: Theme.of(context)
                                         .textTheme
                                         .displaySmall,

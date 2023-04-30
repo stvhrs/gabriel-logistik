@@ -15,14 +15,14 @@ import '../helper/dropdown.dart';
 import '../helper/input_currency.dart';
 import '../models/mobil.dart';
 
-class PerbaikanEdit extends StatefulWidget {
+class AdministrasiEdit extends StatefulWidget {
   final Perbaikan perbaikan;
-  const PerbaikanEdit(this.perbaikan);
+  const AdministrasiEdit(this.perbaikan);
   @override
-  State<PerbaikanEdit> createState() => _PerbaikanEditState();
+  State<AdministrasiEdit> createState() => _AdministrasiEditState();
 }
 
-class _PerbaikanEditState extends State<PerbaikanEdit> {
+class _AdministrasiEditState extends State<AdministrasiEdit> {
   List<String> listMobil = [];
 
   @override
@@ -87,7 +87,7 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                       children: [
                         const SizedBox(),
                         const Text(
-                          'Edit Perbaikan',
+                          'Edit AdministrasiEdit',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
@@ -149,7 +149,7 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                                             perbaikan.jenis = va;
                                           },
                                         ),
-                                        'Jenis Perbaikan',
+                                        'Jenis AdministrasiEdit',
                                         1),
                                     _buildSize(
                                         DropDownField(
@@ -178,7 +178,7 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                                             CurrencyInputFormatter()
                                           ],
                                         ),
-                                        'Nominal Perbaikan',
+                                        'AdministrasiEdit',
                                         1),
                                 
                               

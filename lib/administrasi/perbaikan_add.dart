@@ -15,12 +15,12 @@ import '../helper/dropdown.dart';
 import '../helper/input_currency.dart';
 import '../models/mobil.dart';
 
-class PerbaikanAdd extends StatefulWidget {
+class AdministrasiAdd extends StatefulWidget {
   @override
-  State<PerbaikanAdd> createState() => _PerbaikanAddState();
+  State<AdministrasiAdd> createState() => _AdministrasiAddState();
 }
 
-class _PerbaikanAddState extends State<PerbaikanAdd> {
+class _AdministrasiAddState extends State<AdministrasiAdd> {
   List<String> listMobil = [];
 
   @override
@@ -74,7 +74,7 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
           color: Colors.white,
         ),
         label: const Text(
-          'Tambah Perbaikan',
+          'Tambah Administrasi',
           style: TextStyle(color: Colors.white),
         ),
         style: ButtonStyle(
@@ -101,7 +101,7 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
                       children: [
                         const SizedBox(),
                         const Text(
-                          'Tambah Perbaikan',
+                          'Tambah Administrasi',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
@@ -162,7 +162,7 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
                                         perbaikan.jenis = va;
                                       },
                                     ),
-                                    'Jenis Perbaikan',
+                                    'Jenis Administrasi',
                                     1),
                                 _buildSize(
                                     DropDownField(
@@ -192,7 +192,7 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
                                         CurrencyInputFormatter()
                                       ],
                                     ),
-                                    'Nomnial Perbaikan',
+                                    'Nomnial Administrasi',
                                     1),
                                 _buildSize(
                                     TextFormField(

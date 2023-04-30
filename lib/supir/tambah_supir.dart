@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/models/supir.dart';
+import 'package:gabriel_logistik/services/service.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
@@ -97,12 +98,18 @@ class TambahSupir extends StatelessWidget {
                           _btnController.reset();
                           return;
                         }
+                        var data = await Service.postSupir(
+                            {'nama_supir': namaMobil, "no_hp": noHp});
 
-                        await Future.delayed(const Duration(seconds: 3), () {
+                        if (data != null) {
                           Provider.of<ProviderData>(context, listen: false)
-                              .addSupir(Supir(namaMobil, noHp));
-                          _btnController.success();
-                        });
+                              .addSupir(data);
+                        }else{
+                          return;
+                        }
+
+                        _btnController.success();
+
                         await Future.delayed(const Duration(seconds: 1), () {
                           Navigator.of(context).pop();
                         });

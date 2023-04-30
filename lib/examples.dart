@@ -31,7 +31,7 @@ class Example3 {
   final bool needsData;
 }
 typedef LayoutCallbackWithData3 = Future<Uint8List> Function(
-    PdfPageFormat pageFormat, List<HistorySaldo> asu);
+    PdfPageFormat pageFormat, List<HistorySaldo> asu,double asx);
 
 
 typedef LayoutCallbackWithData = Future<Uint8List> Function(

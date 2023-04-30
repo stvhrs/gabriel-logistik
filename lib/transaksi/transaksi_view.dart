@@ -56,7 +56,7 @@ class _TransaksiViewState extends State<TransaksiView> {
         listMobil.add(element);
       }
     });
-
+controlerKetMobil.text=transaksi.keterangan_mobill;
     super.initState();
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart'; 
 import 'package:gabriel_logistik/models/mobil.dart';
+import 'package:gabriel_logistik/services/service.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
@@ -96,15 +97,23 @@ class EditMobil extends StatelessWidget {
                           _btnController.reset();
                           return;
                         }
+             var data = await Service.updateMobil(
+                           {
+       "id_mobil":mobil.id,
+        "plat_mobil": mobil.nama_mobil,
+        "ket_mobil":mobil.keterangan_mobill,
+        "terjual": "false"
+    });
 
-                        await Future.delayed(const Duration(seconds: 3), () {
+                        if (data != null) {
                           Provider.of<ProviderData>(context, listen: false)
-                              .updateMobil(Mobil(false,
-                                
-                                    mobil.nama_mobil,
-                                    mobil.keterangan_mobill,mobil.perbaikan));
+                              .updateMobil(data);
+                        }else{
+                          _btnController.error();
+                        }
+
+                       
                           _btnController.success();
-                        });
                         await Future.delayed(const Duration(seconds: 1), () {
                           Navigator.of(context).pop();
                         });

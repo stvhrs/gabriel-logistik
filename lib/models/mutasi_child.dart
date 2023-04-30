@@ -9,11 +9,12 @@ double total;
     this.harga,
     this.keterangan,this.total
   );
+  
   factory MutasiChild.fromMap(Map<String, dynamic> data) {
     return MutasiChild(
-      data['qty'],
-      data['harga'],
-      data['keterangan'],data['total']
+    double.parse( data['qty'].toString()) ,
+    double.parse( data['harga'].toString()) ,
+      data['keterangan'],double.parse( data['total'].toString())
     );
   }
 }

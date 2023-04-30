@@ -31,11 +31,19 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
     Provider.of<ProviderData>(context, listen: false).searchsupir = '';
     Provider.of<ProviderData>(context, listen: false).searchtujuan = '';
     Provider.of<ProviderData>(context, listen: false).searchmobile = '';
+    
+    Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
     Provider.of<ProviderData>(context, listen: false).searchTransaksi(false);
+
+    Provider.of<ProviderData>(context, listen: false).searchperbaikan('',false);
     Provider.of<ProviderData>(context, listen: false).calculateSaldo();
     //  Provider.of<ProviderData>(context, listen: false).searchHistorySaldo();
     Provider.of<ProviderData>(context, listen: false).calculateMutasi();
     log('calucalte mutasi page');
+ 
+
+  
+
     super.initState();
   }
 
@@ -63,7 +71,7 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
                     color: Theme.of(context).primaryColor.withOpacity(0.2),
                     width: 10,
                     strokeAlign: StrokeAlign.center),
-                color: Colors.white,
+                color: Color.fromRGBO(244, 244, 252,  1),
                 borderRadius: BorderRadius.circular(10)),
             // width: MediaQuery.of(context).size.width * 0.7,
             child: Column(
@@ -129,7 +137,7 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
                               style:
                                   Theme.of(context).textTheme.displayMedium)),
                       Expanded(
-                          child: Text('Harga',
+                          child: Text('Nominal',
                               style:
                                   Theme.of(context).textTheme.displayMedium)),
                       Expanded(
@@ -145,7 +153,7 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
                         itemBuilder: (context, index) => (InkWell(
                               child: Container(
                                 color: index.isEven
-                                    ? const Color.fromARGB(255, 189, 193, 221)
+                                    ?  Colors.white
                                     : Colors.grey.shade200,
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 15,top: 5,bottom: 5),

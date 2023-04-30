@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 import '../providerData/providerData.dart';
+import '../services/service.dart';
 
 class EditSupir extends StatelessWidget {
   final Supir supir;
@@ -94,12 +95,19 @@ class EditSupir extends StatelessWidget {
                         return;
                       }
 
-                      await Future.delayed(const Duration(seconds: 3), () {
-                        Provider.of<ProviderData>(context, listen: false)
-                            .updateSupir(Supir( supir.nama_supir,
-                                supir.nohp_supir));
+                         var data = await Service.updateSupir(
+                            {'id_supir':supir.id,'nama_supir': supir.nama_supir, "no_hp": supir.nohp_supir});
+
+                        if (data != null) {
+                          Provider.of<ProviderData>(context, listen: false)
+                              .updateSupir(data);
+                        }else{
+                          return;
+                        }
+
+                        
                         _btnController.success();
-                      });
+                    
                       await Future.delayed(const Duration(seconds: 1), () {
                         Navigator.of(context).pop();
                       });

@@ -5,6 +5,7 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 import '../models/transaksi.dart';
 import '../providerData/providerData.dart';
+import '../services/service.dart';
 
 class TransaksiDelete extends StatelessWidget {
   final Transaksi transaksi;
@@ -60,18 +61,20 @@ class TransaksiDelete extends StatelessWidget {
                     errorColor: Colors.red,
                     controller: _btnController,
                     onPressed: () async {
-                      if (false) {
-                        _btnController.error();
-                        await Future.delayed(const Duration(seconds: 1));
-                        _btnController.reset();
-                        return;
-                      }
+                   var data = await Service.deleteTransaksi(
+                            transaksi.id);
 
-                      await Future.delayed(const Duration(seconds: 3), () {
-                        Provider.of<ProviderData>(context, listen: false)
-                            .deleteTransaksi(transaksi);
-                        _btnController.success();
+                        if (data != null) {
+                          Provider.of<ProviderData>(context, listen: false)
+                              .deleteTransaksi(data);
+                        }else{
+                             _btnController.error();
+                           await Future.delayed(const Duration(seconds: 1), () {
+                      _btnController.reset();
                       });
+                          return;
+                        }
+                     _btnController.success();
                       await Future.delayed(const Duration(seconds: 1), () {
                         Navigator.of(context).pop();
                       });

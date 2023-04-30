@@ -35,24 +35,26 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
 
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
-  MutasiSaldo mutasi = MutasiSaldo.fromMap(
-    {
-      'pendapatan': true,
-      'keterangan': '',
-      'id': '1',
-      'tanggal': DateTime.now().toIso8601String(),
-      'mutasi': [
-        MutasiChild.fromMap(
-          {'keterangan': 'Sewa Ruko', 'harga': 0, 'qty': 1, 'total': 0},
-        )
-      ],
-      'totalMutasi': 0
-    },
-  [ MutasiChild.fromMap(
-          {'keterangan': 'Sewa Ruko', 'harga': 0, 'qty': 1, 'total': 0},
-        )]);
+  late MutasiSaldo mutasi;
   @override
   void initState() {
+    mutasi= MutasiSaldo.fromMap(
+    {
+       "id_mutasi": "0",
+        "pendapatan_mutasi":widget.pendapatan? "true":"false",
+        "tanggal_mutasi": DateTime.now().toIso8601String(),
+        "keterangan_mutasi": "ket",
+        
+        "total_mutasi": "0"
+    },
+  [ MutasiChild.fromMap(
+          {
+                "keterangan": "Keterangan",
+                "harga": "0",
+                "qty": "0",
+                "total": "0"
+            },
+        )]);
     super.initState();
   }
 
@@ -182,7 +184,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
 
   final List<MutasiChild> _updatedmutasi = [
     MutasiChild.fromMap(
-      {'keterangan': '', 'harga': 0, 'qty': 0, 'total': 0},
+      {'keterangan': '', 'harga': "0", 'qty': "0", 'total': "0"},
     )
   ];
   @override

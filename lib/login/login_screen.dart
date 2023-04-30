@@ -55,7 +55,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(height: height * 0.2),
+                   
+                      SizedBox(height: height * 0.1),   Image.asset('images/title.png'),
+                             SizedBox(height: height * 0.1), 
                       RichText(
                         text: TextSpan(
                           children: [
@@ -191,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: height * 0.03),
                       SizedBox(height: height * 0.05),
                       RoundedLoadingButton(
-                        color: Theme.of(context).colorScheme.primary,
+                        color: Colors.green,
                         controller: _btnController,
                         successColor: Colors.green,
                         errorColor: Colors.red,
@@ -243,16 +245,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 : Expanded(
                     child: Container(
                       height: height,
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.primary,
                       child: Center(
-                        child: Text(
-                          'Logistik',
-                          style: ralewayStyle.copyWith(
-                            fontSize: 48.0,
-                            color: AppColors.whiteColor,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
+                        child:Container( child: Image.asset('images/cahaya.png',height: height*0.5,)),
                       ),
                     ),
                   ),

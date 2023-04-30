@@ -38,7 +38,7 @@ class _JualBeliState extends State<JualBeli> {
                 color: Theme.of(context).primaryColor.withOpacity(0.2),
                 width: 10,
                 strokeAlign: StrokeAlign.center),
-            color: Colors.white,
+            color: Color.fromRGBO(244, 244, 252,  1),
             borderRadius: BorderRadius.circular(10)),
         width: MediaQuery.of(context).size.width * 0.7,
         child: Column(
@@ -146,7 +146,7 @@ class _JualBeliState extends State<JualBeli> {
                     itemBuilder: (context, index) => InkWell(
                             child: Container(
                               color: index.isEven
-                                  ? const Color.fromARGB(255, 189, 193, 221)
+                                  ?  Colors.white
                                   : Colors.grey.shade200,
                               padding:
                                   const EdgeInsets.only(left: 15, right: 15),
@@ -166,7 +166,7 @@ class _JualBeliState extends State<JualBeli> {
                                          listMutasi[index].harga))),
                                   Expanded(
                                       flex: 6,
-                                      child: Text(c.listJualBeliMobil[index]
+                                      child: Text(listMutasi[index]
                                           .keterangan)),
                                   Expanded(
                                       flex: 1,
@@ -182,7 +182,7 @@ class _JualBeliState extends State<JualBeli> {
                     itemBuilder: (context, index) => InkWell(
                             child: Container(
                               color: index.isEven
-                                  ? const Color.fromARGB(255, 189, 193, 221)
+                                  ?  Colors.white
                                   : Colors.grey.shade200,
                               padding:
                                   const EdgeInsets.only(left: 15, right: 15),

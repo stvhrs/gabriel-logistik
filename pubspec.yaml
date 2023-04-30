@@ -54,6 +54,11 @@ dependencies:
   path_provider: ^2.0.13
   dio: ^5.0.3
   syncfusion_flutter_charts: ^21.1.39
+  fl_chart: ^0.62.0
+  syncfusion_localizations: ^21.1.39
+  url_launcher: ^6.1.10
+  desktop_window: ^0.4.0
+  d_chart: ^2.2.11
 
 
 dev_dependencies:

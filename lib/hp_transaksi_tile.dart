@@ -26,7 +26,7 @@ class _HpTransaksiTileState extends State<HpTransaksiTile> {
             ? Colors.amber.shade100
             : widget.index.isEven
                 ? Colors.grey.shade200
-                :  const Color.fromARGB(255, 189, 193, 221),
+                :   Colors.white,
         padding:
              const EdgeInsets.only(top: 14, bottom: 14,left: 10),
         child: Row(

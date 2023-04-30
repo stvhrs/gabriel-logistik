@@ -46,10 +46,10 @@ class ProviderData with ChangeNotifier {
   List<Supir> backupListSupir = [];
 
   List<HistorySaldo> listHistorySaldo = [];
-    List<HistorySaldo> backupListHistorySaldo = [];
+  List<HistorySaldo> backupListHistorySaldo = [];
 
   List<MutasiSaldo> listMutasiSaldo = [];
-List<KeuanganBulanan> printed=[];
+  List<KeuanganBulanan> printed = [];
   double totalSaldo = 0;
   void owner() {
     isOwner == true;
@@ -68,7 +68,7 @@ List<KeuanganBulanan> printed=[];
 
   void logout() {
     logined = false;
-     notifyListeners();
+    notifyListeners();
   }
 
   void setData(
@@ -143,6 +143,7 @@ List<KeuanganBulanan> printed=[];
 
   void calculateMutasi() {
     listHistorySaldo.clear();
+    backupListHistorySaldo.clear();
     listTransaksi.every((e) {
       listHistorySaldo.add(HistorySaldo(
           'Transaksi', 0, e.mobil, e.sisa, e.tanggalBerangkat, true));
@@ -151,7 +152,7 @@ List<KeuanganBulanan> printed=[];
 
     listPerbaikan.every((e) {
       listHistorySaldo.add(
-          HistorySaldo('Perbaikan', 0, e.mobil, -e.harga, e.tanggal, false));
+          HistorySaldo('Maintain', 0, e.mobil, -e.harga, e.tanggal, false));
       return true;
     });
 
@@ -179,7 +180,7 @@ List<KeuanganBulanan> printed=[];
     });
     listHistorySaldo.sort((a, b) =>
         DateTime.parse(b.tanggal).compareTo(DateTime.parse(a.tanggal)));
-        backupListHistorySaldo.addAll(listHistorySaldo);
+    backupListHistorySaldo.addAll(listHistorySaldo);
     double incrementMutasi = 0;
     incrementMutasi += totalSaldo;
     for (var i = 0; i < listHistorySaldo.length; i++) {
@@ -188,59 +189,63 @@ List<KeuanganBulanan> printed=[];
       //   listHistorySaldo[0].sisaSaldo = totalSaldo;
       //   return;
       // }
-     
-        listHistorySaldo[i].sisaSaldo = incrementMutasi -= listHistorySaldo[i].harga;
-        log('pendatapan');
-     
-      
+
+      listHistorySaldo[i].sisaSaldo =
+          incrementMutasi -= listHistorySaldo[i].harga;
+      log('pendatapan');
+
       // if (i == 0) {
       //   listHistorySaldo[0].sisaSaldo = totalSaldo;
       // }
     }
     //  notifyListeners();
   }
- void addmutasi(MutasiSaldo mutasi) {
+
+  void addmutasi(MutasiSaldo mutasi) {
     listMutasiSaldo.add(mutasi);
-   
+
     notifyListeners();
   }
-   void deleteMutasi(MutasiSaldo mobil) {
+
+  void deleteMutasi(MutasiSaldo mobil) {
     listMutasiSaldo.removeWhere(
       (element) => mobil.id == element.id,
     );
-  
+
     notifyListeners();
   }
-    void updateMutasi(MutasiSaldo mobil) {
-    int data = listMutasiSaldo
-        .indexWhere((element) => element.id == mobil.id);
+
+  void updateMutasi(MutasiSaldo mobil) {
+    int data = listMutasiSaldo.indexWhere((element) => element.id == mobil.id);
 
     listMutasiSaldo[data] = mobil;
-  
+
     notifyListeners();
   }
+
   void addMobil(Mobil mobil) {
     listMobil.add(mobil);
     backupListMobil.add(mobil);
     notifyListeners();
   }
 
-  void deleteMobil(Mobil mobil) {
+  void deleteMobil(String id) {
     listMobil.removeWhere(
-      (element) => mobil.nama_mobil == element.nama_mobil,
+      (element) => id == element.id,
     );
     backupListMobil.removeWhere(
-      (element) => mobil.nama_mobil == element.nama_mobil,
+      (element) => id == element.id,
     );
 
     notifyListeners();
   }
 
   void updateMobil(Mobil mobil) {
-    int data = listMobil
-        .indexWhere((element) => element.nama_mobil == mobil.nama_mobil);
-
+    int data = listMobil.indexWhere((element) => element.id == mobil.id);
+    
     listMobil[data] = mobil;
+    
+    
     notifyListeners();
   }
 
@@ -251,16 +256,20 @@ List<KeuanganBulanan> printed=[];
     notifyListeners();
   }
 
-  void deleteSupir(Supir supir) {
-    listSupir.remove(supir);
-    backupListSupir.remove(supir);
+  void deleteSupir(String id) {
+    listSupir.removeWhere(
+      (element) => element.id == id,
+    );
+    backupListSupir.removeWhere(
+      (element) => element.id == id,
+    );
     notifyListeners();
   }
 
   void updateSupir(Supir supir) {
-    int data = listSupir
-        .indexWhere((element) => element.nama_supir == supir.nama_supir);
+    int data = listSupir.indexWhere((element) => element.id == supir.id);
     listSupir[data] = supir;
+   
     notifyListeners();
   }
 
@@ -287,46 +296,54 @@ List<KeuanganBulanan> printed=[];
   void addPerbaikan(Perbaikan Perbaikan) {
     listPerbaikan.insert(0, Perbaikan);
     backupListPerbaikan.insert(0, Perbaikan);
+    searchperbaikan('', false);
     notifyListeners();
   }
 
-  void deletePerbaikan(Perbaikan Perbaikan) {
-    listPerbaikan.remove(Perbaikan);
-    backupListPerbaikan.remove(Perbaikan);
+  void deletePerbaikan(String id) {
+    listPerbaikan.removeWhere(
+      (element) => element.id == id,
+    );
+    backupListPerbaikan.removeWhere(
+      (element) => element.id == id,
+    );
     notifyListeners();
   }
 
   void updatePerbaikan(Perbaikan Perbaikan) {
     int data = listPerbaikan
-        .indexWhere((element) => (element.mobil) == (Perbaikan.mobil));
+        .indexWhere((element) => (element.id) == (Perbaikan.id));
     listPerbaikan[data] = Perbaikan;
+    searchperbaikan('', false);
     notifyListeners();
   }
 
   void addTransaksi(Transaksi transaksi) {
-    listTransaksi.insert(0, transaksi);
+     listTransaksi.insert(0, transaksi);
     backupTransaksi.insert(0, transaksi);
+    // searchTransaksi(false);
 
-    List<Map<String, dynamic>> test = [];
-    for (var element in backupTransaksi) {
-      test.add(Transaksi.toMap(element));
-    }
     // calculateSaldo();
     notifyListeners();
   }
 
-  void deleteTransaksi(Transaksi transaksi) {
-    listTransaksi.remove(transaksi);
-    backupTransaksi.remove(transaksi);
+  void deleteTransaksi(String id) {
+    listTransaksi.removeWhere(
+      (element) => element.id == id,
+    );
+    backupTransaksi.removeWhere(
+      (element) => element.id == id,
+    );
     notifyListeners();
   }
 
   void updateTransaksi(Transaksi transaksi) {
-    int data = listTransaksi.indexWhere(
-        (element) => element.tanggalBerangkat == transaksi.tanggalBerangkat);
+    int data =
+        listTransaksi.indexWhere((element) => element.id == transaksi.id);
 
     listTransaksi[data] = transaksi;
-    backupTransaksi[data] = transaksi;
+    
+    searchTransaksi(false);
     notifyListeners();
   }
 
@@ -337,36 +354,40 @@ List<KeuanganBulanan> printed=[];
 
   DateTime? start;
   DateTime? end;
-   DateTime? startMutasi;
+  DateTime? startMutasi;
   DateTime? endMutasi;
-   void searchHistorySaldo() {
-
+  void searchHistorySaldo() {
     listHistorySaldo.clear();
     for (var element in backupListHistorySaldo) {
-      
-    
       bool skipped = false;
 
-     
       if (startMutasi != null) {
-        if (DateTime.parse( element.tanggal).isBefore(startMutasi!) ||
-            DateTime.parse( element.tanggal).isAfter(endMutasi!)) {
+        if (DateTime.parse(element.tanggal).isBefore(startMutasi!) ||
+            DateTime.parse(element.tanggal).isAfter(endMutasi!)) {
           skipped = true;
         }
       }
-     
 
       if (!skipped) {
-        listHistorySaldo.add( element);
+        listHistorySaldo.add(element);
       }
     }
-     notifyListeners();
+    notifyListeners();
   }
+
   void searchTransaksi(bool listen) {
-    listTransaksi.clear();
+      listTransaksi.clear();
     for (Transaksi data in backupTransaksi) {
       bool skipped = false;
-
+      data.supir = listSupir
+          .firstWhere((element) => element.id == data.id_supir)
+          .nama_supir;
+      data.mobil = listMobil
+          .firstWhere((element) => element.id == data.id_mobil)
+          .nama_mobil;
+      data.keterangan_mobill = listMobil
+          .firstWhere((element) => element.id == data.id_mobil)
+          .keterangan_mobill;
       if (searchmobile.isNotEmpty &&
           !data.mobil.toLowerCase().startsWith(searchmobile.toLowerCase())) {
         skipped = true;
@@ -393,11 +414,24 @@ List<KeuanganBulanan> printed=[];
         listTransaksi.add(data);
       }
     }
-    listen? notifyListeners():'';
-    
+    listen ? notifyListeners() : '';
   }
-
-  void searchSupir(String val,bool listen) {
+refres(){
+   for (Transaksi data in backupTransaksi) {
+    
+      data.supir = listSupir
+          .firstWhere((element) => element.id == data.id_supir)
+          .nama_supir;
+      data.mobil = listMobil
+          .firstWhere((element) => element.nama_mobil == data.mobil)
+          .nama_mobil;
+      data.keterangan_mobill = listMobil
+          .firstWhere((element) => element.nama_mobil == data.mobil)
+          .keterangan_mobill;
+     
+    }
+}
+  void searchSupir(String val, bool listen) {
     if (val.isEmpty) {
       listSupir.clear();
       listSupir.addAll(backupListSupir);
@@ -407,10 +441,15 @@ List<KeuanganBulanan> printed=[];
               element.nama_supir.toLowerCase().startsWith(val.toLowerCase()))
           .toList();
     }
-    listen? notifyListeners():'';
+    listen ? notifyListeners() : '';
   }
 
-  void searchperbaikan(String val,bool listen) {
+  void searchperbaikan(String val, bool listen) {
+    for (var data in listPerbaikan) {
+      data.mobil = backupListMobil
+          .firstWhere((element) => element.id == data.id_mobil)
+          .nama_mobil ;
+    }
     if (val.isEmpty) {
       listPerbaikan.clear();
       listPerbaikan.addAll(backupListPerbaikan);
@@ -420,10 +459,10 @@ List<KeuanganBulanan> printed=[];
               element.mobil.toLowerCase().startsWith(val.toLowerCase()))
           .toList();
     }
-   listen? notifyListeners():'';
+    listen ? notifyListeners() : '';
   }
 
-  void searchJual(String val,bool listen) {
+  void searchJual(String val, bool listen) {
     if (val.isEmpty) {
       listJualBeliMobil.clear();
       listJualBeliMobil.addAll(backuplistJualBeliMobil);
@@ -433,10 +472,10 @@ List<KeuanganBulanan> printed=[];
               element.mobil.toLowerCase().startsWith(val.toLowerCase()))
           .toList();
     }
-    listen? notifyListeners():'';
+    listen ? notifyListeners() : '';
   }
 
-  void searchMobil(String val,bool listen) {
+  void searchMobil(String val, bool listen) {
     if (val.isEmpty) {
       listMobil.clear();
       listMobil.addAll(backupListMobil);
@@ -446,6 +485,6 @@ List<KeuanganBulanan> printed=[];
               element.nama_mobil.toLowerCase().startsWith(val.toLowerCase()))
           .toList();
     }
-    listen? notifyListeners():'';
+    listen ? notifyListeners() : '';
   }
 }

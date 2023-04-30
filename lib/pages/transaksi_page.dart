@@ -8,6 +8,8 @@ import 'package:gabriel_logistik/transaksi/transaksi_search_tujuan.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_tile.dart';
 import 'package:provider/provider.dart';
 
+import '../services/service.dart';
+
 class TransaksiPage extends StatefulWidget {
   const TransaksiPage({super.key});
 
@@ -16,23 +18,39 @@ class TransaksiPage extends StatefulWidget {
 }
 
 class _TransaksiPageState extends State<TransaksiPage> {
+  // bool loading=true;
+  @override
+  initData()async{
+        Provider.of<ProviderData>(context, listen: false).  listTransaksi = await Service.getAllTransaksi();
+        // loading=false;
+        
+        setState(() {
+          
+        });
+  }
   @override
   void initState() {
+//  initData();
+
     Provider.of<ProviderData>(context, listen: false).start = null;
     Provider.of<ProviderData>(context, listen: false).end = null;
     Provider.of<ProviderData>(context, listen: false).searchsupir = '';
     Provider.of<ProviderData>(context, listen: false).searchtujuan = '';
     Provider.of<ProviderData>(context, listen: false).searchmobile = '';
+      Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
      Provider.of<ProviderData>(context, listen: false).searchTransaksi(false);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProviderData>(builder: (context, prov, _) {
+    return
+    //  loading?Center(child: CircularProgressIndicator(),):
+    
+     Consumer<ProviderData>(builder: (context, prov, _) {
       return Scaffold(
           resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.grey.shade300,
+        
           floatingActionButton: TransaksiAdd(),
           body: Padding(
               padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
@@ -101,23 +119,23 @@ class _TransaksiPageState extends State<TransaksiPage> {
                             child: Text(
                               'Berangkat',
                               style: Theme.of(context).textTheme.displayMedium,
-                            )),
-                        Expanded(
-                            flex: 5,
+                            )),  Expanded(
+                            flex: 10,
                             child: Text(
-                              'Supir',
+                              'Tujuan',
                               style: Theme.of(context).textTheme.displayMedium,
                             )),
+                        
                         Expanded(
                             flex: 7,
                             child: Text(
                               'No Pol',
                               style: Theme.of(context).textTheme.displayMedium,
                             )),
-                        Expanded(
-                            flex: 10,
+                      Expanded(
+                            flex: 5,
                             child: Text(
-                              'Tujuan',
+                              'Supir',
                               style: Theme.of(context).textTheme.displayMedium,
                             )),
                         Expanded(

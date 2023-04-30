@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/logout.dart';
 import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
+import 'package:gabriel_logistik/pages/administrasi_page.dart';
 
 import 'package:gabriel_logistik/pages/daftar_supir.dart';
 import 'package:gabriel_logistik/pages/dashboard..dart';
@@ -83,6 +84,7 @@ class _DashBoardState extends State<DashBoard> {
       page.jumpToPage(p0);
     });
     loading = false;
+
     setState(() {});
   }
 
@@ -96,18 +98,25 @@ class _DashBoardState extends State<DashBoard> {
   int _selectedIndex = 0;
   List<Widget> wid = [
     DashBoardPage(),
-    TransaksiPage(),
-    DaftarSupir(),
     DaftarMobil(),
+    DaftarSupir(),
     JualBeli(),
+    TransaksiPage(),
     PerbaikanPage(),
+    AdministrasiPage(),
+    CashFlow(),
     LaporanBulanan(),
     KasTahun(),
-    CashFlow(),
     MutasiSaldoPage(),
   ];
+  List<bool> _open = [true, false, false, false];
   @override
   Widget build(BuildContext context) {
+    var item = TextStyle(
+        fontFamily: 'Nunito',
+        fontSize: 13,
+        fontWeight: FontWeight.bold,
+        color: Colors.white);
     return loading
         ? const Center(
             child: CircularProgressIndicator(),
@@ -117,313 +126,244 @@ class _DashBoardState extends State<DashBoard> {
             body: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                NavigationRail(
-                  minWidth: MediaQuery.of(context).size.width * 0.14,
-                  indicatorColor: Theme.of(context).primaryColor,
-                  useIndicator: false,
-                  selectedIndex: _selectedIndex,
-                  onDestinationSelected: (int index) {
-                    setState(() {
-                      _selectedIndex = index;
-                    });
-                  },
-                  labelType: NavigationRailLabelType.all,
-                  leading: Column(
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.075,
-                        decoration: BoxDecoration(shape: BoxShape.circle),
-                        child: Image.asset('images/cahaya.png'),
-                      ),
-                      Divider(
-                        color: Colors.white,thickness: 2,height: 2,
-                      )
-                    ],
+                Container(
+                  color: Theme.of(context).primaryColor.withOpacity(0.90),
+                  width: MediaQuery.of(context).size.width * 0.17,
+                  height: MediaQuery.of(context).size.height,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(4),
+                          child: Card(color: Colors.white,child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset('images/title.png'),
+                          )),
+                        ),
+                        
+                        Container(
+                            color: _selectedIndex == 0 ? Theme.of(context).colorScheme.secondary
+                                : Theme.of(context).primaryColor,
+                               
+                            child: ListTile(iconColor: Colors.white,
+                              minLeadingWidth: 20,
+                              textColor: _selectedIndex == 0
+                                  ? Theme.of(context).colorScheme.secondary
+                                  : Colors.white,
+                              onTap: () {
+                                _selectedIndex = 0;
+                                setState(() {});
+                              },
+                              leading: Icon(Icons.space_dashboard_rounded),
+                              title: Text(style: item, 'Dashboard'),
+                            )),
+                        ExpansionTile(
+                          collapsedIconColor: Colors.white,
+                          iconColor: Colors.white,
+                          initiallyExpanded: true,
+                          title: Text(
+                            style: item,
+                            'Daftar Unit',
+                          ),
+                          children: <Widget>[
+                            Container(
+                                color: _selectedIndex == 1
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).colorScheme.primary,
+                                child: ListTile(iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 1
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 1;
+                                    setState(() {});
+                                  },
+                                  leading: Icon(Icons.fire_truck),
+                                  title: Text(style: item, 'Daftar Mobil'),
+                                )),
+                            Container(
+                                color: _selectedIndex == 2
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).colorScheme.primary,
+                                child: ListTile(iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 2
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 2;
+                                    setState(() {});
+                                  },
+                                  leading: Icon(Icons.people),
+                                  title: Text(style: item, 'Daftar Supir'),
+                                )),
+                            Container(
+                                color: _selectedIndex == 3
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).colorScheme.primary,
+                                child: ListTile(iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 3
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 3;
+                                    setState(() {});
+                                  },
+                                  leading: Icon(Icons.inventory),
+                                  title: Text(style: item, 'Inventory'),
+                                ))
+                          ],
+                        ),
+                        ExpansionTile(
+                          collapsedIconColor: Colors.white,
+                          iconColor: Colors.white,
+                          title: Text(
+                            style: item,
+                            'Transaksi',
+                          ),
+                          children: <Widget>[
+                            Container(
+                                color: _selectedIndex == 4
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).colorScheme.primary,
+                                child: ListTile(iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 4
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 4;
+                                    setState(() {});
+                                  },
+                                  leading:
+                                      Icon(Icons.currency_exchange_rounded),
+                                  title: Text(style: item, 'Rate'),
+                                )),
+                            Container(
+                                color: _selectedIndex == 5
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).colorScheme.primary,
+                                child: ListTile(iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 5
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 5;
+                                    setState(() {});
+                                  },
+                                  leading: Icon(Icons.engineering_rounded),
+                                  title: Text(style: item, 'Perbaikan'),
+                                )),
+                            Container(
+                                color: _selectedIndex == 6
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).colorScheme.primary,
+                                child: ListTile(iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 6
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 6;
+                                    setState(() {});
+                                  },
+                                  leading: Icon(Icons.document_scanner_sharp),
+                                  title: Text(style: item, 'Administrasi'),
+                                )),
+                            Container(
+                                color: _selectedIndex == 7
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).colorScheme.primary,
+                                child: ListTile(iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 7
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 7;
+                                    setState(() {});
+                                  },
+                                  leading: Icon(Icons.compare_arrows),
+                                  title:
+                                      Text(style: item, 'Transaksi lain-lain'),
+                                ))
+                          ],
+                        ),
+                        ExpansionTile(
+                          collapsedIconColor: Colors.white,
+                          iconColor: Colors.white,
+                          title: Text(
+                            style: item,
+                            'Laporan Unit',
+                          ),
+                          children: <Widget>[
+                            Container(
+                                color: _selectedIndex == 8
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).colorScheme.primary,
+                                child: ListTile(iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 8
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 8;
+                                    setState(() {});
+                                  },
+                                  leading: Icon(Icons.monitor_heart_rounded),
+                                  title: Text(style: item, 'Mobil Bulanan'),
+                                )),
+                            Container(
+                                color: _selectedIndex == 9
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).colorScheme.primary,
+                                child: ListTile(iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 9
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 9;
+                                    setState(() {});
+                                  },
+                                  leading: Icon(Icons.auto_graph_rounded),
+                                  title: Text(style: item, 'Mobil Tahunan'),
+                                ))
+                          ],
+                        ),
+                        ExpansionTile(
+                          collapsedIconColor: Colors.white,
+                          iconColor: Colors.white,
+                          title: Text(
+                            style: item,
+                            'Kas',
+                          ),
+                          children: <Widget>[
+                            Container(
+                                color: _selectedIndex == 10
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).primaryColor,
+                                child: ListTile(iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 10
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 10;
+                                    setState(() {});
+                                  },
+                                  leading: Icon(Icons.attach_money_rounded),
+                                  title: Text(style: item, 'Mutasi'),
+                                ))
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  backgroundColor: Theme.of(context).primaryColor,
-                  destinations: <NavigationRailDestination>[
-                    // navigation destinations
-
-                    NavigationRailDestination(
-                      padding: EdgeInsets.zero,
-                      icon: Container(
-                        height: 10,
-                      ),
-                      label: Container(
-                        width: MediaQuery.of(context).size.width * 0.14,
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.dashboard_rounded,
-                              color: _selectedIndex == 0
-                                  ? Colors.white
-                                  : Colors.grey.shade500,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                'Dashboard',
-                                style: TextStyle(fontFamily: 'Nunito'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    NavigationRailDestination(
-                      padding: EdgeInsets.zero,
-                      icon: Container(
-                        height: 10,
-                      ),
-                      label: Container(
-                        width: MediaQuery.of(context).size.width * 0.14,
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.currency_exchange_rounded,
-                              color: _selectedIndex == 1
-                                  ? Colors.white
-                                  : Colors.grey.shade500,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                'Transaksi',
-                                style: TextStyle(fontFamily: 'Nunito'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    NavigationRailDestination(
-                      padding: EdgeInsets.zero,
-                      icon: Container(
-                        height: 10,
-                      ),
-                      label: Container(
-                        width: MediaQuery.of(context).size.width * 0.14,
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.people,
-                              color: _selectedIndex == 2
-                                  ? Colors.white
-                                  : Colors.grey.shade500,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                'Daftar Supir',
-                                style: TextStyle(fontFamily: 'Nunito'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    NavigationRailDestination(
-                      padding: EdgeInsets.zero,
-                      icon: Container(
-                        height: 10,
-                      ),
-                      label: Container(
-                        width: MediaQuery.of(context).size.width * 0.14,
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.fire_truck,
-                              color: _selectedIndex == 3
-                                  ? Colors.white
-                                  : Colors.grey.shade500,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                'Daftar Mobil',
-                                style: TextStyle(fontFamily: 'Nunito'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    NavigationRailDestination(
-                      padding: EdgeInsets.zero,
-                      icon: Container(
-                        height: 10,
-                      ),
-                      label: Container(
-                        width: MediaQuery.of(context).size.width * 0.14,
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.inventory,
-                              color: _selectedIndex == 4
-                                  ? Colors.white
-                                  : Colors.grey.shade500,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                'Inventory',
-                                style: TextStyle(fontFamily: 'Nunito'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    NavigationRailDestination(
-                      padding: EdgeInsets.zero,
-                      icon: Container(
-                        height: 10,
-                      ),
-                      label: Container(
-                        width: MediaQuery.of(context).size.width * 0.14,
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.engineering_rounded,
-                              color: _selectedIndex == 5
-                                  ? Colors.white
-                                  : Colors.grey.shade500,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                'Perbaikan',
-                                style: TextStyle(fontFamily: 'Nunito'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    NavigationRailDestination(
-                      padding: EdgeInsets.zero,
-                      icon: Container(
-                        height: 10,
-                      ),
-                      label: Container(
-                        width: MediaQuery.of(context).size.width * 0.14,
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.monitor_heart_rounded,
-                              color: _selectedIndex == 6
-                                  ? Colors.white
-                                  : Colors.grey.shade500,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                'Keuangan Bulanan',
-                                style: TextStyle(fontFamily: 'Nunito'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    NavigationRailDestination(
-                      padding: EdgeInsets.zero,
-                      icon: Container(
-                        height: 10,
-                      ),
-                      label: Container(
-                        width: MediaQuery.of(context).size.width * 0.14,
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.auto_graph_rounded,
-                              color: _selectedIndex == 7
-                                  ? Colors.white
-                                  : Colors.grey.shade500,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                'Keuangan Tahunan',
-                                style: TextStyle(fontFamily: 'Nunito'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    NavigationRailDestination(
-                      padding: EdgeInsets.zero,
-                      icon: Container(
-                        height: 10,
-                      ),
-                      label: Container(
-                        width: MediaQuery.of(context).size.width * 0.14,
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.compare_arrows,
-                              color: _selectedIndex == 8
-                                  ? Colors.white
-                                  : Colors.grey.shade500,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                'Uang Masuk Keluar',
-                                style: TextStyle(fontFamily: 'Nunito'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    NavigationRailDestination(
-                      padding: EdgeInsets.zero,
-                      icon: Container(
-                        height: 10,
-                      ),
-                      label: Container(
-                        width: MediaQuery.of(context).size.width * 0.14,
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.attach_money_rounded,
-                              color: _selectedIndex == 9
-                                  ? Colors.white
-                                  : Colors.grey.shade500,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                'Mutasi Saldo',
-                                style: TextStyle(fontFamily: 'Nunito'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                  selectedIconTheme: IconThemeData(color: Colors.white,size: 17),
-                  unselectedIconTheme: IconThemeData(color: Colors.grey.shade700),
-                  
-                  selectedLabelTextStyle: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold,letterSpacing: 1.2),
-                  unselectedLabelTextStyle: TextStyle(
-                      color: Colors.grey.shade500, letterSpacing: 1.2),
                 ),
-              
                 Expanded(child: wid[_selectedIndex]),
               ],
             ));

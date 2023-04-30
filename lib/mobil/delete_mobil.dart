@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/services/service.dart';
 
 
 import 'package:provider/provider.dart';
@@ -62,20 +63,25 @@ class DeleteMobil extends StatelessWidget {
                     errorColor: Colors.red,
                     controller: _btnController,
                     onPressed: () async {
-                      if (false)
-                       {
-                        _btnController.error();
-                        await Future.delayed(const Duration(seconds: 1));
-                        _btnController.reset();
-                        return;
-                      }
+                      if (false){}
+                         String? data = await Service.deleteMobil(
+                          mobil.id);
 
-
-                      await Future.delayed(const Duration(seconds: 3), () {
-                        Provider.of<ProviderData>(context, listen: false)
-                            .deleteMobil(mobil);
-                        _btnController.success();
+                        if (data != null) {
+                          Provider.of<ProviderData>(context, listen: false)
+                              .deleteMobil(mobil.id);
+                                                }else{
+                             _btnController.error();
+                           await Future.delayed(const Duration(seconds: 1), () {
+                      _btnController.reset();
                       });
+                          return;
+                        }
+                     
+
+                    
+                        _btnController.success();
+                  
                       await Future.delayed(const Duration(seconds: 1), () {
                         Navigator.of(context).pop();
                       });

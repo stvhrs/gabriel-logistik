@@ -7,10 +7,7 @@ import 'package:gabriel_logistik/cashflow/view_pendaptan.dart';
 
 import 'package:gabriel_logistik/helper/format_tanggal.dart';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
-import 'package:gabriel_logistik/jualbeli/beli/beli_add.dart';
-import 'package:gabriel_logistik/jualbeli/beli/beli_edit.dart';
-import 'package:gabriel_logistik/jualbeli/jual/jual_add.dart';
-import 'package:gabriel_logistik/jualbeli/jual/jual_edit.dart';
+
 import 'package:gabriel_logistik/models/mutasi_saldo.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +41,7 @@ class _CashFlowState extends State<CashFlow> {
                 color: Theme.of(context).primaryColor.withOpacity(0.2),
                 width: 10,
                 strokeAlign: StrokeAlign.center),
-            color: Colors.white,
+            color: Color.fromRGBO(244, 244, 252,  1),
             borderRadius: BorderRadius.circular(10)),
         width: MediaQuery.of(context).size.width * 0.7,
         child: Column(
@@ -155,7 +152,7 @@ class _CashFlowState extends State<CashFlow> {
                             return InkWell(
                               child: Container(
                                 color: index.isEven
-                                    ? const Color.fromARGB(255, 189, 193, 221)
+                                    ?  Colors.white
                                     : Colors.grey.shade200,
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 15),
@@ -208,7 +205,7 @@ class _CashFlowState extends State<CashFlow> {
                             return InkWell(
                               child: Container(
                                 color: index.isEven
-                                    ? const Color.fromARGB(255, 189, 193, 221)
+                                    ?  Colors.white
                                     : Colors.grey.shade200,
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 15),

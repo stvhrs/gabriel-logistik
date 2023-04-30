@@ -17,6 +17,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:collection/collection.dart';
+import 'package:flutter/services.dart';
 import 'package:gabriel_logistik/models/kas_tahun.dart';
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:intl/intl.dart';
@@ -33,11 +34,13 @@ const sep = 120.0;
 Future<Uint8List> generateResume2(
     PdfPageFormat format, List<KasModel> as) async {
          DateTime dateTime = DateTime.parse(DateTime.now().toIso8601String());
-String yourDateTime = DateFormat('hh:mm dd-MM-yyyy').format(dateTime);
+String yourDateTime = DateFormat('HH:mm dd-MM-yyyy').format(dateTime);
   final document = pw.Document();
   pw.TextStyle bold = pw.TextStyle(fontWeight: pw.FontWeight.bold);
   pw.TextStyle small = const pw.TextStyle(fontSize: 10);
-
+pw.ImageProvider asu = pw.MemoryImage(
+    (await rootBundle.load('images/bg.png')).buffer.asUint8List(),
+  );
   buildChildren(List<KeuanganBulanan> bulanans) {
     return bulanans.mapIndexed(
       (index, element) => pw.Container(
@@ -95,7 +98,8 @@ for (var listBulananMobil in element.listBulananMobil) {
         pageFormat: PdfPageFormat.a4,
         margin: const pw.EdgeInsets.all(16),
         build: ((pw.Context context) {
-          return pw.Container(
+          return pw.Stack(alignment: pw.Alignment.center, children: [
+            pw.Image(asu), pw.Container(
             child: pw.Container(
               decoration: pw.BoxDecoration(border: pw.Border.all()
                   // color: Colors.red.shade600
@@ -137,7 +141,7 @@ for (var listBulananMobil in element.listBulananMobil) {
                           pw.Expanded(
                               flex: 7, child: pw.Text('Sisa', style: bold)),
                           pw.Expanded(
-                              flex: 7, child: pw.Text('Perbaikan', style: bold)),
+                              flex: 7, child: pw.Text('Maintain', style: bold)),
                           pw.Expanded(
                               flex: 7, child: pw.Text('Bersih', style: bold)),
                         ],
@@ -270,7 +274,7 @@ for (var listBulananMobil in element.listBulananMobil) {
                                       child: pw.Container(
                                           margin: const pw.EdgeInsets.only(
                                               top: 4, bottom: 0),
-                                          child: pw.Text('Total Perbaikan',
+                                          child: pw.Text('Total Maintain',
                                               style: small)),
                                     ),
                                     pw.Expanded(
@@ -339,7 +343,7 @@ for (var listBulananMobil in element.listBulananMobil) {
                           ),
                   ]), // This trailing comma makes auto-formatting nicer for build methods.
             ),
-          );
+           )] );
         })));
   }
   // await Printing.layoutPdf(

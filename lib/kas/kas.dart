@@ -25,12 +25,10 @@ class _KasState extends State<Kas> {
     return widget.kasModel.listBulananMobil.mapIndexed(
       (index, element) => Container(
         decoration: BoxDecoration(
-            color: index.isEven
-                ? Colors.grey.shade200
-                : const Color.fromARGB(255, 189, 193, 221)),
+            color: index.isEven ? Colors.grey.shade200 : Colors.white),
         padding: const EdgeInsets.only(
-          top: 14,
-          bottom: 14,
+          top: 7,
+          bottom: 7,
           left: 15,
         ),
         child: Row(
@@ -67,7 +65,8 @@ class _KasState extends State<Kas> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(margin: const EdgeInsets.only(bottom: 50),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 50),
       width: MediaQuery.of(context).size.width * 0.43,
       child: Card(
         elevation: 5,
@@ -126,7 +125,7 @@ class _KasState extends State<Kas> {
                     Expanded(
                         flex: 7,
                         child: Text(
-                          'Perbaikan',
+                          'Maintain',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(
@@ -150,11 +149,14 @@ class _KasState extends State<Kas> {
                         children: [
                           Row(
                             children: [
-                              Expanded(flex:2,
+                              Expanded(
+                                flex: 2,
                                 child: Container(
                                   margin:
                                       const EdgeInsets.only(top: 10, bottom: 0),
-                                  child: Text(textAlign: TextAlign.left,'Total Ongkos ',
+                                  child: Text(
+                                      textAlign: TextAlign.left,
+                                      'Total Ongkos ',
                                       style: Theme.of(context)
                                           .textTheme
                                           .displaySmall),
@@ -164,9 +166,9 @@ class _KasState extends State<Kas> {
                                 child: Container(
                                   margin:
                                       const EdgeInsets.only(top: 10, bottom: 0),
-                                  child: Text(textAlign: TextAlign.left,
-                                    Rupiah.format(
-                                        widget.tahunTotalOngkos),
+                                  child: Text(
+                                    textAlign: TextAlign.left,
+                                    Rupiah.format(widget.tahunTotalOngkos),
                                     style: Theme.of(context)
                                         .textTheme
                                         .displaySmall,
@@ -176,24 +178,28 @@ class _KasState extends State<Kas> {
                               const Expanded(flex: 7, child: SizedBox()),
                             ],
                           ),
-                            Row(
+                          Row(
                             children: [
-                              Expanded(flex:4,
+                              Expanded(
+                                flex: 4,
                                 child: Divider(
                                   height: 7,
-                                                       
                                   color: Colors.grey.shade900,
                                 ),
-                              ),const Expanded(flex: 9,child: SizedBox())
+                              ),
+                              const Expanded(flex: 9, child: SizedBox())
                             ],
                           ),
                           Row(
                             children: [
-                              Expanded(flex:2,
+                              Expanded(
+                                flex: 2,
                                 child: Container(
                                   margin:
                                       const EdgeInsets.only(top: 10, bottom: 0),
-                                  child: Text(textAlign: TextAlign.left,'Total Keluar ',
+                                  child: Text(
+                                      textAlign: TextAlign.left,
+                                      'Total Keluar ',
                                       style: Theme.of(context)
                                           .textTheme
                                           .displaySmall),
@@ -203,9 +209,9 @@ class _KasState extends State<Kas> {
                                 child: Container(
                                   margin:
                                       const EdgeInsets.only(top: 10, bottom: 0),
-                                  child: Text(textAlign: TextAlign.left,
-                                    Rupiah.format(
-                                        widget.tahunTotalKeluar),
+                                  child: Text(
+                                    textAlign: TextAlign.left,
+                                    Rupiah.format(widget.tahunTotalKeluar),
                                     style: Theme.of(context)
                                         .textTheme
                                         .displaySmall,
@@ -215,24 +221,28 @@ class _KasState extends State<Kas> {
                               const Expanded(flex: 7, child: SizedBox()),
                             ],
                           ),
-                            Row(
+                          Row(
                             children: [
-                              Expanded(flex:4,
+                              Expanded(
+                                flex: 4,
                                 child: Divider(
                                   height: 7,
-                                                       
                                   color: Colors.grey.shade900,
                                 ),
-                              ),const Expanded(flex: 9,child: SizedBox())
+                              ),
+                              const Expanded(flex: 9, child: SizedBox())
                             ],
                           ),
                           Row(
                             children: [
-                              Expanded(flex:2,
+                              Expanded(
+                                flex: 2,
                                 child: Container(
                                   margin:
                                       const EdgeInsets.only(top: 10, bottom: 0),
-                                  child: Text(textAlign: TextAlign.left,'Total Sisa ',
+                                  child: Text(
+                                      textAlign: TextAlign.left,
+                                      'Total Sisa ',
                                       style: Theme.of(context)
                                           .textTheme
                                           .displaySmall),
@@ -242,35 +252,40 @@ class _KasState extends State<Kas> {
                                 child: Container(
                                   margin:
                                       const EdgeInsets.only(top: 10, bottom: 0),
-                                  child: Text(textAlign: TextAlign.left,
-                                    Rupiah.format(
-                                        widget.tahunTotalSisa),
-                                    style:
-                                        Theme.of(context).textTheme.displaySmall,
+                                  child: Text(
+                                    textAlign: TextAlign.left,
+                                    Rupiah.format(widget.tahunTotalSisa),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
                                   ),
                                 ),
-                              ),  const Expanded(flex: 7, child: SizedBox()),
-                            ],
-                          ),
-                            Row(
-                            children: [
-                              Expanded(flex:4,
-                                child: Divider(
-                                  height: 7,
-                                                       
-                                  color: Colors.grey.shade900,
-                                ),
-                              ),const Expanded(flex: 9,child: SizedBox())
+                              ),
+                              const Expanded(flex: 7, child: SizedBox()),
                             ],
                           ),
                           Row(
                             children: [
-                              Expanded(flex:2,
+                              Expanded(
+                                flex: 4,
+                                child: Divider(
+                                  height: 7,
+                                  color: Colors.grey.shade900,
+                                ),
+                              ),
+                              const Expanded(flex: 9, child: SizedBox())
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
                                 child: Container(
-                                    margin:
-                                        const EdgeInsets.only(top: 10, bottom: 0),
-                                    child: Text(textAlign: TextAlign.left,
-                                      'Total Perbaikan',
+                                    margin: const EdgeInsets.only(
+                                        top: 10, bottom: 0),
+                                    child: Text(
+                                      textAlign: TextAlign.left,
+                                      'Total Maintain',
                                       style: Theme.of(context)
                                           .textTheme
                                           .displaySmall,
@@ -278,46 +293,51 @@ class _KasState extends State<Kas> {
                               ),
                               Expanded(
                                 child: Container(
-                                    margin:
-                                        const EdgeInsets.only(top: 10, bottom: 0),
-                                    child: Text(textAlign: TextAlign.left,
-                                      
-                                      Rupiah.format(
-                                          widget.tahunTotalPerbaikan),
+                                    margin: const EdgeInsets.only(
+                                        top: 10, bottom: 0),
+                                    child: Text(
+                                      textAlign: TextAlign.left,
+                                      Rupiah.format(widget.tahunTotalPerbaikan),
                                       style: Theme.of(context)
                                           .textTheme
                                           .displaySmall,
                                     )),
-                              ),  const Expanded(flex: 7, child: SizedBox()),
-                            ],
-                          ),
-                            Row(
-                            children: [
-                              Expanded(flex:4,
-                                child: Divider(
-                                  height: 7,
-                                                       
-                                  color: Colors.grey.shade900,
-                                ),
-                              ),const Expanded(flex: 9,child: SizedBox())
+                              ),
+                              const Expanded(flex: 7, child: SizedBox()),
                             ],
                           ),
                           Row(
                             children: [
-                              Expanded(flex:2,
+                              Expanded(
+                                flex: 4,
+                                child: Divider(
+                                  height: 7,
+                                  color: Colors.grey.shade900,
+                                ),
+                              ),
+                              const Expanded(flex: 9, child: SizedBox())
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
                                 child: Container(
-                                    margin:
-                                        const EdgeInsets.only(top: 10, bottom: 0),
-                                    child: Text(textAlign: TextAlign.left,'Total Bersih ',
+                                    margin: const EdgeInsets.only(
+                                        top: 10, bottom: 0),
+                                    child: Text(
+                                        textAlign: TextAlign.left,
+                                        'Total Bersih ',
                                         style: Theme.of(context)
                                             .textTheme
                                             .displaySmall)),
                               ),
                               Expanded(
                                 child: Container(
-                                    margin:
-                                        const EdgeInsets.only(top: 10, bottom: 0),
-                                    child: Text(textAlign: TextAlign.left,
+                                    margin: const EdgeInsets.only(
+                                        top: 10, bottom: 0),
+                                    child: Text(
+                                      textAlign: TextAlign.left,
                                       Rupiah.format(
                                         widget.tahunTotalBersih,
                                       ),
@@ -325,18 +345,20 @@ class _KasState extends State<Kas> {
                                           .textTheme
                                           .displaySmall,
                                     )),
-                              ),  const Expanded(flex: 7, child: SizedBox()),
+                              ),
+                              const Expanded(flex: 7, child: SizedBox()),
                             ],
                           ),
-                            Row(
+                          Row(
                             children: [
-                              Expanded(flex:4,
+                              Expanded(
+                                flex: 4,
                                 child: Divider(
                                   height: 7,
-                                                       
                                   color: Colors.grey.shade900,
                                 ),
-                              ),const Expanded(flex: 9,child: SizedBox())
+                              ),
+                              const Expanded(flex: 9, child: SizedBox())
                             ],
                           ),
                         ],

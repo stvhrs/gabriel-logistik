@@ -39,10 +39,11 @@ class _LaporanBulananState extends State<LaporanBulanan> {
   List<Transaksi> trankaskis = [];
   String dropdownValue = list[DateTime.now().month - 1];
   int ropdownValue2 = DateTime.now().year;
-  List<KeuanganBulanan> listKeuangan = [];
+
   List<bool> printed = [];
   @override
   void didChangeDependencies() {
+    Provider.of<ProviderData>(context).printed.clear();
     trankaskis = Provider.of<ProviderData>(context).backupTransaksi;
     mobil = Provider.of<ProviderData>(context).backupListMobil;
     for (var element in Provider.of<ProviderData>(context).backupTransaksi) {
@@ -63,10 +64,13 @@ class _LaporanBulananState extends State<LaporanBulanan> {
       floatingActionButton: FloatingActionButton(backgroundColor: Colors.green,
           child: const Icon(Icons.print,color: Colors.white,),
           onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
+            if( Provider.of<ProviderData>(context, listen: false).printed.isNotEmpty){
+                 Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => LaporanPrint(
                   Provider.of<ProviderData>(context, listen: false).printed),
             ));
+            }
+         
           }),
       body: Padding(
         padding: const EdgeInsets.only(left: 50, right: 50, top: 10),
@@ -183,10 +187,10 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                     totalSisa,
                     totalPerbaikan,
                     list[list.indexOf(dropdownValue)]);
-                if (transaksiBulanIni.isEmpty && e.perbaikan.isEmpty) {
+                if (transaksiBulanIni.isEmpty && totalPerbaikan<1) {
                   return const SizedBox();
                 }
-                listKeuangan.add(data);
+               
                 Provider.of<ProviderData>(context, listen: false)
                     .printed
                     .add(data);

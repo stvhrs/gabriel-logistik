@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/administrasi/perbaikan_add.dart';
+import 'package:gabriel_logistik/administrasi/perbaikan_delete.dart';
+import 'package:gabriel_logistik/administrasi/perbaikan_edit.dart';
 import 'package:gabriel_logistik/helper/format_tanggal.dart';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 
@@ -9,14 +12,14 @@ import '../perbaikan/perbaikan_add.dart';
 import '../perbaikan/perbaikan_delete.dart';
 import '../perbaikan/perbaikan_edit.dart';
 
-class PerbaikanPage extends StatefulWidget {
-  const PerbaikanPage({super.key});
+class AdministrasiPage extends StatefulWidget {
+  const AdministrasiPage({super.key});
 
   @override
-  State<PerbaikanPage> createState() => _PerbaikanPageState();
+  State<AdministrasiPage> createState() => _AdministrasiPageState();
 }
 
-class _PerbaikanPageState extends State<PerbaikanPage> {
+class _AdministrasiPageState extends State<AdministrasiPage> {
   @override
   void initState() {
                           Provider.of<ProviderData>(context, listen: false)
@@ -63,7 +66,7 @@ class _PerbaikanPageState extends State<PerbaikanPage> {
                       bottomLeft: Radius.circular(5),
                       bottomRight: Radius.circular(5))),
               child: const Text(
-                'Perbaikan',
+                'Administrasi',
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Nunito',
@@ -92,7 +95,7 @@ class _PerbaikanPageState extends State<PerbaikanPage> {
                   ),
                 ),
                 const Expanded(flex: 4, child: SizedBox()),
-                PerbaikanAdd()
+                AdministrasiAdd()
               ],
             ),
             Container(
@@ -165,11 +168,11 @@ class _PerbaikanPageState extends State<PerbaikanPage> {
                                 flex: 2,
                                 child: Provider.of<ProviderData>(context)
                                         .isOwner
-                                    ? PerbaikanDelete(c.listPerbaikan[index])
+                                    ? AdministrasiDelete(c.listPerbaikan[index])
                                     : const SizedBox()),
                             Expanded(
                                 flex: 2,
-                                child: PerbaikanEdit(c.listPerbaikan[index]))
+                                child: AdministrasiEdit(c.listPerbaikan[index]))
                           ],
                         ),
                       ),

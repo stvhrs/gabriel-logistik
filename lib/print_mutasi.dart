@@ -31,16 +31,16 @@ import './helper/format_tanggal.dart';
 import 'helper/rupiah_format.dart';
 import 'models/transaksi.dart';
 
-const PdfColor green = PdfColor.fromInt(0xff9ce5d0);
+ PdfColor green = PdfColor.fromHex("00FF00");
 const PdfColor lightGreen = PdfColor.fromInt(0xffcdf1e7);
 const sep = 130.0;
 
 Future<Uint8List> generateResume3(
-    PdfPageFormat format, List<HistorySaldo> as) async {
+    PdfPageFormat format, List<HistorySaldo> as,double totalSaldo) async {
   final int panjang = as.length;
   pw.TextStyle med = const pw.TextStyle(fontSize: 10);
   DateTime dateTime = DateTime.parse(DateTime.now().toIso8601String());
-  String yourDateTime = DateFormat('hh:mm dd-MM-yyyy').format(dateTime);
+  String yourDateTime = DateFormat('HH:mm dd-MM-yyyy').format(dateTime);
 
   final document = pw.Document();
   pw.TextStyle bold = pw.TextStyle(fontWeight: pw.FontWeight.bold);
@@ -48,7 +48,7 @@ Future<Uint8List> generateResume3(
       pw.TextStyle(fontSize: 15, fontWeight: pw.FontWeight.bold);
   pw.TextStyle small = const pw.TextStyle(fontSize: 10);
   pw.ImageProvider asu = pw.MemoryImage(
-    (await rootBundle.load('images/cahaya.jpeg')).buffer.asUint8List(),
+    (await rootBundle.load('images/bg.png')).buffer.asUint8List(),
   );
   var pagetheme = await _myPageTheme(format);
   los(List<HistorySaldo> data) {
@@ -74,15 +74,19 @@ Future<Uint8List> generateResume3(
                             pw.Padding(
                               padding: const pw.EdgeInsets.only(
                                   left: 15.0, top: 7.5, bottom: 7.5),
-                              child: pw.Text('Mutasi Saldo',
+                              child: pw.Text('Mutasi Saldo   ',
                                   style: pw.TextStyle(
                                       fontSize: 16,
                                       fontWeight: pw.FontWeight.bold)
                                   // style: Theme.of(context).textTheme.bodyLarge,
                                   ),
                             ),
+                            pw.Text(Rupiah.format(totalSaldo,),style: pw.TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: pw.FontWeight.bold)),
                             pw.Spacer(),
-                            pw.Text(yourDateTime, style: small),
+                            pw.Text(yourDateTime+'    ', style: small),
+                         
                             // pw.Text('  ' ${as.indexOf(element) + 1}/${as.length} '   ')
                           ]),
                           pw.Container(
@@ -119,7 +123,7 @@ Future<Uint8List> generateResume3(
                                     // decoration: BoxDecoration(
                                     //     color: index.isEven
                                     //         ? Colors.grey.shade300
-                                    //         : const Color.fromARGB(255, 189, 193, 221)),
+                                    //         : const Colors.white),
                                     padding: const pw.EdgeInsets.only(
                                       top: 7,
                                       bottom: 7,

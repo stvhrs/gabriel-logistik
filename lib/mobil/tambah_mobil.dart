@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart'; 
 import 'package:gabriel_logistik/models/mobil.dart';
+import 'package:gabriel_logistik/services/service.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
@@ -99,14 +100,24 @@ class TambahMobil extends StatelessWidget {
                           return;
                         }
 
-                        await Future.delayed(const Duration(seconds: 3), () {
+                         var data = await Service.postMobil(
+                           {
+       
+        "plat_mobil": namaMobil,
+        "ket_mobil":noHp,
+        "terjual": "false"
+    });
+
+                        if (data != null) {
                           Provider.of<ProviderData>(context, listen: false)
-                              .addMobil(Mobil(false,
-                                 
-                                  namaMobil,
-                                  noHp,[]));
+                              .addMobil(data);
+                        }else{
+                          _btnController.error();
+                        }
+
+                       
                           _btnController.success();
-                        });
+                        
                         await Future.delayed(const Duration(seconds: 1), () {
                           Navigator.of(context).pop();
                         });

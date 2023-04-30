@@ -24,18 +24,11 @@ class _TransaksiTileState extends State<TransaksiTile> {
   bool hover = false;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      onHover: (v) {
-        hover = v;
-        setState(() {});
-      },
-      child: Container(
-        color: hover
-            ? Colors.amber.shade100
-            : widget.index.isEven
+    return Container(
+        color:
+             widget.index.isEven
                 ? Colors.grey.shade200
-                : const Color.fromARGB(255, 189, 193, 221),
+                :  Colors.white,
         padding: const EdgeInsets.only(top: 0, bottom: 0, left: 15, right: 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,14 +44,14 @@ class _TransaksiTileState extends State<TransaksiTile> {
                     maxLines: 1,
                     FormatTanggal.formatTanggal(
                             widget._transaksi.tanggalBerangkat)
-                        .toString())),
+                        .toString())),   Expanded(flex: 10, child: Text(widget._transaksi.tujuan)),  Expanded(flex: 7, child: Text(widget._transaksi.mobil)),
+         
             Expanded(
                 flex: 5,
                 child: Text(
                   widget._transaksi.supir,
                 )),
-            Expanded(flex: 7, child: Text(widget._transaksi.mobil)),
-            Expanded(flex: 10, child: Text(widget._transaksi.tujuan)),
+          
             Expanded(
                 flex: 7, child: Text(Rupiah.format(widget._transaksi.ongkos))),
             Expanded(
@@ -104,7 +97,7 @@ class _TransaksiTileState extends State<TransaksiTile> {
             ),
           ],
         ),
-      ),
+      
     );
   }
 }

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/examples.dart';
 import 'package:gabriel_logistik/models/history_saldo.dart';
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
+import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:printing/printing.dart';
+import 'package:provider/provider.dart';
 
 class MutasiPrint extends StatefulWidget {
   final List<HistorySaldo> list;
@@ -49,7 +51,7 @@ class _MutasiPrintState extends State<MutasiPrint> {
           canDebug: false,
           build: (format) => examples3[0].builder(
             format,
-            widget.list,
+            widget.list,Provider.of<ProviderData>(context,listen: false).totalSaldo
           ),
           onPrinted: _showPrintedToast,
           canChangeOrientation: false,

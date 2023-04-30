@@ -173,7 +173,7 @@ class _KasTahunState extends State<KasTahun> {
                   tahunTotalOngkos += totalOngkos;
                   tahunTotalPerbaikan += totalPerbaikan;
                 }
-                if (tahunTotalOngkos < 1) {
+                if (tahunTotalSisa <1&& tahunTotalPerbaikan<1) {
                   return const SizedBox();
                 }
                 listKas.add(kasModel);

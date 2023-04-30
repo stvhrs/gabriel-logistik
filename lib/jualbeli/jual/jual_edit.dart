@@ -27,7 +27,7 @@ class _JualEditState extends State<JualEdit> {
   @override
   void initState() {
     Provider.of<ProviderData>(context, listen: false)
-        .listMobil
+       .listMobil.where((element) => element.terjual==false)
         .map((e) => e.nama_mobil)
         .toList()
         .forEach((element) {

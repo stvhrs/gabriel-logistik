@@ -14,6 +14,7 @@ import 'package:web_date_picker/web_date_picker.dart';
 
 import '../../helper/dropdown.dart';
 import '../../helper/input_currency.dart';
+import '../../services/service.dart';
 
 class JualAdd extends StatefulWidget {
   @override
@@ -27,10 +28,10 @@ class _JualAddState extends State<JualAdd> {
   void initState() {
     Provider.of<ProviderData>(context, listen: false)
         .listMobil
+        .where((element) => element.terjual == false)
         .map((e) => e.nama_mobil)
         .toList()
         .forEach((element) {
-
       if (listMobil.contains(element)) {
       } else {
         listMobil.add(element);
@@ -39,18 +40,19 @@ class _JualAddState extends State<JualAdd> {
 
     super.initState();
   }
- TextEditingController controlerKetMobil=TextEditingController();
+
+  TextEditingController controlerKetMobil = TextEditingController();
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
   late JualBeliMobil jualBeliMobil;
   TextStyle small = const TextStyle(fontSize: 13.5);
   Widget _buildSize(widget, String ket, int flex) {
-
     return Expanded(
       flex: flex,
       child: Container(
         width: MediaQuery.of(context).size.width * 0.14 * flex,
-        margin: EdgeInsets.only(left: ket=='Tanggal'||ket=='Keterangan'?0: 50, bottom: 30),
+        margin: EdgeInsets.only(
+            left: ket == 'Tanggal' || ket == 'Keterangan' ? 0 : 50, bottom: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -74,17 +76,19 @@ class _JualAddState extends State<JualAdd> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-    
-        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red) ,
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.red),
             padding: MaterialStateProperty.all(const EdgeInsets.all(10))),
         onPressed: () {
           jualBeliMobil = JualBeliMobil.fromMap({
-           'nama_mobil': '', 'ket_mobil':'',
-    'harga': 0,
-   
-    'beli': false,
-    'keterangan': '',
-    'tanggal': DateTime.now().toIso8601String()
+            'id_jb': '0',
+            'id_mobil': '0',
+            'plat_mobil': '0',
+            'ket_mobil': '0',
+            'harga_jb': "0",
+            'tgl_jb': DateTime.now().toIso8601String(),
+            'beli_jb': "false",
+            'ket_jb': 'keterangan'
           });
 
           showDialog(
@@ -140,7 +144,8 @@ class _JualAddState extends State<JualAdd> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     _buildSize(
-                                             WebDatePicker(lastDate: DateTime.now(),
+                                        WebDatePicker(
+                                          lastDate: DateTime.now(),
                                           height: 60,
                                           initialDate: DateTime.now(),
                                           dateformat: 'dd/MM/yyyy',
@@ -153,36 +158,42 @@ class _JualAddState extends State<JualAdd> {
                                         ),
                                         'Tanggal',
                                         1),
-                                  
                                     _buildSize(
                                         DropDownField(
                                           onValueChanged: (val) {
                                             jualBeliMobil.mobil = val;
-                                             controlerKetMobil.text = Provider
-                                                      .of<ProviderData>(context,
-                                                          listen: false)
-                                                  .listMobil
-                                                  .firstWhere((element) =>
-                                                      element.nama_mobil == val)
-                                                  .keterangan_mobill;
+                                            controlerKetMobil.text = Provider
+                                                    .of<ProviderData>(context,
+                                                        listen: false)
+                                                .listMobil
+                                                .firstWhere((element) =>
+                                                    element.nama_mobil == val)
+                                                .keterangan_mobill;
+                                                jualBeliMobil.id_mobil=Provider.of<ProviderData>(context,listen: false).listMobil.where((element) => element.terjual==false) .firstWhere((element) => element.nama_mobil==val).id;
                                           },
                                           items: listMobil,
                                         ),
                                         'Pilih Mobil',
-                                        1),  _buildSize(
+                                        1),
+                                    _buildSize(
                                         TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,controller: controlerKetMobil,
+                                          style: TextStyle(fontSize: 13),
+                                          textInputAction: TextInputAction.next,
+                                          readOnly: true,
+                                          controller: controlerKetMobil,
                                           onChanged: (va) {
-                                            jualBeliMobil.ketMobil=va;
+                                            jualBeliMobil.ketMobil = va;
                                           },
                                         ),
                                         'Keterangan Mobil',
                                         1),
                                     _buildSize(
                                         TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                                          style: TextStyle(fontSize: 13),
+                                          textInputAction: TextInputAction.next,
                                           onChanged: (va) {
-                                            jualBeliMobil.harga=Rupiah.parse(va);
+                                            jualBeliMobil.harga =
+                                                Rupiah.parse(va);
                                           },
                                           inputFormatters: [
                                             FilteringTextInputFormatter
@@ -198,52 +209,75 @@ class _JualAddState extends State<JualAdd> {
                                   children: [
                                     _buildSize(
                                         TextFormField(
-                              style: TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                                          style: TextStyle(fontSize: 13),
+                                          textInputAction: TextInputAction.next,
                                           onChanged: (va) {
-                                            jualBeliMobil.keterangan=va;
+                                            jualBeliMobil.keterangan = va;
                                           },
                                         ),
                                         'Keterangan',
                                         2),
                                   ],
-                                ),RoundedLoadingButton(
-                                          color: Colors.red,
-                                          elevation: 10,
-                                          successColor: Colors.green,
-                                          errorColor: Colors.red,
-                                          controller: _btnController,
-                                          onPressed: () async {
-                                            if (jualBeliMobil.harga==0||jualBeliMobil.tanggal.isEmpty||jualBeliMobil.mobil.isEmpty) {
-                                              _btnController.error();
-                                              await Future.delayed(
-                                                  const Duration(seconds: 1));
-                                              _btnController.reset();
-                                              return;
-                                            }
+                                ),
+                                RoundedLoadingButton(
+                                  color: Colors.red,
+                                  elevation: 10,
+                                  successColor: Colors.green,
+                                  errorColor: Colors.red,
+                                  controller: _btnController,
+                                  onPressed: () async {
+                                    if (jualBeliMobil.harga == 0 ||
+                                        jualBeliMobil.tanggal.isEmpty ||
+                                        jualBeliMobil.mobil.isEmpty) {
+                                      _btnController.error();
+                                      await Future.delayed(
+                                          const Duration(seconds: 1));
+                                      _btnController.reset();
+                                      return;
+                                    }
+                                    var data = await Service.postJB({
+                                      "id_jb":jualBeliMobil.id,
+                                      "id_mobil":jualBeliMobil.id_mobil,
+                                      'plat_mobil': jualBeliMobil.mobil,
+                                      'ket_mobil': jualBeliMobil.ketMobil,
+                                      'harga_jb':
+                                          jualBeliMobil.harga.toString(),
+                                      'tgl_jb': jualBeliMobil.tanggal,
+                                      'beli_jb': "false",
+                                      'ket_jb': jualBeliMobil.ketMobil
+                                    });
 
-                                            await Future.delayed(
-                                                const Duration(seconds: 3), () {
-                                            
-                                                Provider.of<ProviderData>(
-                                                        context,
-                                                        listen: false)
-                                                    .addJualBeliMobil(jualBeliMobil);
-                                              
-   Provider.of<ProviderData>(
-                                                        context,
-                                                        listen: false)
-                                                    .updateMobil(Mobil(true,jualBeliMobil.mobil, jualBeliMobil.ketMobil, []));
-                                              _btnController.success();
-                                            });
-                                            await Future.delayed(
-                                                const Duration(seconds: 1), () {
-                                              Navigator.of(context).pop();
-                                            });
-                                          },
-                                          child: const Text('Jual',
-                                              style: TextStyle(
-                                                  color: Colors.white)),
-                                        )
+                                    if (data != null) {
+                                      Provider.of<ProviderData>(context,
+                                              listen: false)
+                                          .updateMobil(Mobil.fromMap({
+                                        'id_mobil': data.id_mobil,
+                                        'plat_mobil': data.mobil,
+                                        "ket_mobil": data.ketMobil,
+                                        "terjual": "true"
+                                      }, []));
+
+                                      Provider.of<ProviderData>(context,
+                                              listen: false)
+                                          .addJualBeliMobil(data);
+                                    } else {
+                                      _btnController.error();
+                                      await Future.delayed(
+                                          const Duration(seconds: 1), () {});
+                                      _btnController.reset();
+                                      return;
+                                    }
+
+                                    _btnController.success();
+
+                                    await Future.delayed(
+                                        const Duration(seconds: 1), () {
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                  child: const Text('Jual',
+                                      style: TextStyle(color: Colors.white)),
+                                )
                               ],
                             ),
                           ),
@@ -252,7 +286,6 @@ class _JualAddState extends State<JualAdd> {
                     ));
               });
         },
-    
         child: const Text(
           'Jual',
           style: TextStyle(color: Colors.white),

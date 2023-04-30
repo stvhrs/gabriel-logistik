@@ -17,6 +17,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:collection/collection.dart';
+import 'package:flutter/services.dart';
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:intl/intl.dart';
@@ -36,8 +37,10 @@ Future<Uint8List> generateResume(
       print(as.length);
   pw.TextStyle med = const pw.TextStyle(fontSize: 10);
   DateTime dateTime = DateTime.parse(DateTime.now().toIso8601String());
-  String yourDateTime = DateFormat('hh:mm dd-MM-yyyy').format(dateTime);
-
+  String yourDateTime = DateFormat('HH:mm dd-MM-yyyy').format(dateTime);
+pw.ImageProvider asu = pw.MemoryImage(
+    (await rootBundle.load('images/bg.png')).buffer.asUint8List(),
+  );
   
   buildChildren(List<Transaksi> list) {
     if (as.isEmpty) {
@@ -49,7 +52,7 @@ Future<Uint8List> generateResume(
                 // decoration: BoxDecoration(
                 //     color: index.isEven
                 //         ? Colors.grey.shade200
-                //         : const Color.fromARGB(255, 189, 193, 221)),
+                //         : const Colors.white),
                 padding: const pw.EdgeInsets.only(
                   top: 7,
                   bottom: 7,
@@ -125,7 +128,7 @@ Future<Uint8List> generateResume(
               // decoration: BoxDecoration(
               //     color: index.isEven
               //         ? Colors.grey.shade200
-              //         :  const Color.fromARGB(255, 189, 193, 221)),
+              //         :  const Colors.white),
               padding: const pw.EdgeInsets.only(
                 top: 7,
                 bottom: 7,
@@ -192,7 +195,8 @@ Future<Uint8List> generateResume(
         pageFormat: PdfPageFormat.a4,
         margin: const pw.EdgeInsets.all(16),
         build: ((pw.Context context) {
-          return pw.Container(
+          return pw.Stack(alignment: pw.Alignment.center, children: [
+            pw.Image(asu),pw.Container(
             child: pw.Container(
               decoration: pw.BoxDecoration(border: pw.Border.all()
                   // color: Colors.red.shade600
@@ -260,7 +264,7 @@ Future<Uint8List> generateResume(
                         child: pw.Center(
                           child: pw.Text(
                               textAlign: pw.TextAlign.center,
-                              'Perbaikan',
+                             'Maintain',
                               style: bold2),
                         )),
                     pw.Container(
@@ -277,7 +281,7 @@ Future<Uint8List> generateResume(
                               flex: 3, child: pw.Text('Jenis', style: bold)),
                           pw.Expanded(
                               flex: 5,
-                              child: pw.Text('Perbaikan', style: bold)),
+                              child: pw.Text('Maintain', style: bold)),
                           pw.Expanded(
                               flex: 7,
                               child: pw.Text('Keterangan', style: bold)),
@@ -411,7 +415,7 @@ Future<Uint8List> generateResume(
                                       child: pw.Container(
                                           margin: const pw.EdgeInsets.only(
                                               top: 4, bottom: 0),
-                                          child: pw.Text('Total Perbaikan',
+                                          child: pw.Text('Total Maintain',
                                               style: small)),
                                     ),
                                     pw.Expanded(
@@ -480,7 +484,7 @@ Future<Uint8List> generateResume(
                           ),
                   ]), // This trailing comma makes auto-formatting nicer for build methods.
             ),
-          );
+          )]);
         })));
   }
   // await Printing.layoutPdf(
