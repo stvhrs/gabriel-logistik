@@ -104,7 +104,11 @@ class TambahSupir extends StatelessWidget {
                           Provider.of<ProviderData>(context, listen: false)
                               .addSupir(data);
                         }else{
+                          _btnController.error();
+                         await Future.delayed(Duration(milliseconds: 500));
+                          _btnController.reset();
                           return;
+
                         }
 
                         _btnController.success();

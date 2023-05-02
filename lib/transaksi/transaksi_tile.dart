@@ -77,7 +77,9 @@ class _TransaksiTileState extends State<TransaksiTile> {
                     ? Expanded(child: TransaksiEdit(widget._transaksi))
                     : DateTime.parse(widget._transaksi.tanggalBerangkat)
                                 .month !=
-                            DateTime.now().month
+                            DateTime.now().month||DateTime.parse(widget._transaksi.tanggalBerangkat)
+                                .year !=
+                            DateTime.now().year
                         ? const Expanded(
                             child: IconButton(
                             onPressed: null,

@@ -102,6 +102,9 @@ class EditSupir extends StatelessWidget {
                           Provider.of<ProviderData>(context, listen: false)
                               .updateSupir(data);
                         }else{
+                           _btnController.error();
+                         await Future.delayed(Duration(milliseconds: 500));
+                          _btnController.reset();
                           return;
                         }
 

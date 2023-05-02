@@ -43,7 +43,7 @@ class _SearchTanggalState extends State<SearchTanggal> {
                                   data: ThemeData(
                                     colorScheme: ColorScheme.light(
                                       primary: Theme.of(context).primaryColor,
-                                      surface: Color.fromARGB(255, 75, 84, 167),
+                                      surface: const Color.fromARGB(255, 75, 84, 167),
                                     ),
 
                                     // Here I Chaged the overline to my Custom TextStyle.

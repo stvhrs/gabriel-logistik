@@ -109,7 +109,10 @@ class EditMobil extends StatelessWidget {
                           Provider.of<ProviderData>(context, listen: false)
                               .updateMobil(data);
                         }else{
-                          _btnController.error();
+                           _btnController.error();
+                         await Future.delayed(Duration(milliseconds: 500));
+                          _btnController.reset();
+                          return;
                         }
 
                        

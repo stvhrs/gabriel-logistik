@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_add.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_search_mobil.dart';
@@ -20,14 +21,14 @@ class TransaksiPage extends StatefulWidget {
 class _TransaksiPageState extends State<TransaksiPage> {
   // bool loading=true;
   @override
-  initData()async{
-        Provider.of<ProviderData>(context, listen: false).  listTransaksi = await Service.getAllTransaksi();
-        // loading=false;
-        
-        setState(() {
-          
-        });
+  initData() async {
+    Provider.of<ProviderData>(context, listen: false).listTransaksi =
+        await Service.getAllTransaksi();
+    // loading=false;
+
+    setState(() {});
   }
+
   @override
   void initState() {
 //  initData();
@@ -37,22 +38,22 @@ class _TransaksiPageState extends State<TransaksiPage> {
     Provider.of<ProviderData>(context, listen: false).searchsupir = '';
     Provider.of<ProviderData>(context, listen: false).searchtujuan = '';
     Provider.of<ProviderData>(context, listen: false).searchmobile = '';
-      Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
-     Provider.of<ProviderData>(context, listen: false).searchTransaksi(false);
+    Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
+    Provider.of<ProviderData>(context, listen: false).searchTransaksi(false);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return
-    //  loading?Center(child: CircularProgressIndicator(),):
-    
-     Consumer<ProviderData>(builder: (context, prov, _) {
-      prov.listTransaksi.sort((a, b) =>
-        DateTime.parse(b.tanggalBerangkat).compareTo(DateTime.parse(a.tanggalBerangkat)));
+        //  loading?Center(child: CircularProgressIndicator(),):
+
+        Consumer<ProviderData>(builder: (context, prov, _) {
+      List<Transaksi> data = prov.listTransaksi;
+      data.sort((a, b) => DateTime.parse(b.tanggalBerangkat)
+          .compareTo(DateTime.parse(a.tanggalBerangkat)));
       return Scaffold(
           resizeToAvoidBottomInset: false,
-        
           floatingActionButton: TransaksiAdd(),
           body: Padding(
               padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
@@ -115,31 +116,31 @@ class _TransaksiPageState extends State<TransaksiPage> {
                             child: Text(
                               'No',
                               style: Theme.of(context).textTheme.displayMedium,
-                            )),                          Expanded(
+                            )),
+                        Expanded(
                             flex: 7,
                             child: Text(
                               'Berangkat',
                               style: Theme.of(context).textTheme.displayMedium,
-                            )), Expanded(
+                            )),
+                        Expanded(
                             flex: 7,
                             child: Text(
                               'No Pol',
                               style: Theme.of(context).textTheme.displayMedium,
                             )),
-  Expanded(
+                        Expanded(
                             flex: 5,
                             child: Text(
                               'Supir',
                               style: Theme.of(context).textTheme.displayMedium,
-                            )), Expanded(
+                            )),
+                        Expanded(
                             flex: 10,
                             child: Text(
                               'Tujuan',
                               style: Theme.of(context).textTheme.displayMedium,
                             )),
-                        
-                      
-                    
                         Expanded(
                             flex: 7,
                             child: Text(
@@ -171,9 +172,9 @@ class _TransaksiPageState extends State<TransaksiPage> {
                   Expanded(
                     // height: MediaQuery.of(context).size.height * 0.7,
                     child: ListView.builder(
-                        itemCount: prov.listTransaksi.length,
-                        itemBuilder: (context, index) => TransaksiTile(
-                            prov.listTransaksi[index], index + 1)),
+                        itemCount: data.length,
+                        itemBuilder: (context, index) =>
+                            TransaksiTile(data[index], index + 1)),
                   ),
                 ],
               )));

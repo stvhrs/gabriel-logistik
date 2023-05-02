@@ -6,8 +6,9 @@ class Perbaikan {
   double harga;
   String tanggal;
   String keterangan;
+  bool adminitrasi;
   Perbaikan(this.id, this.id_mobil, this.mobil, this.jenis, this.harga,
-      this.tanggal, this.keterangan);
+      this.tanggal, this.keterangan,this.adminitrasi);
   factory Perbaikan.fromMap(Map<String, dynamic> data) {
     //  "id_perbaikan": "23",
     //             "id_mobil": "4",
@@ -22,6 +23,6 @@ class Perbaikan {
         data['jenis_p'],
         double.parse(data['harga_p']),
         data['tgl_p'],
-        data['ket_p']);
+        data['ket_p'],data['administrasi']=="true");
   }
 }

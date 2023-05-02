@@ -14,4 +14,13 @@ class Mobil {
     return Mobil(data['id_mobil'],data['terjual']=='false'?false:true,
         data['plat_mobil'], data['ket_mobil'], list);
   }
+  static Map<String, dynamic> toMap(Mobil data) {
+    return {
+      'id_mobil': data.id,
+      'terjual': data.terjual.toString(),
+      'plat_mobil': data.nama_mobil,
+      'ket_mobil': data.keterangan_mobill,
+
+    };
+  }
 }

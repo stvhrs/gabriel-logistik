@@ -242,16 +242,15 @@ class ProviderData with ChangeNotifier {
 
   void updateMobil(Mobil mobil) {
     int data = listMobil.indexWhere((element) => element.id == mobil.id);
-    
+
     listMobil[data] = mobil;
-    
-    
+
     notifyListeners();
   }
 
   void addSupir(Supir supir) {
-    listSupir.insert(0, supir);
-    backupListSupir.insert(0, supir);
+    listSupir.add(supir);
+    backupListSupir.add(supir);
 
     notifyListeners();
   }
@@ -269,13 +268,13 @@ class ProviderData with ChangeNotifier {
   void updateSupir(Supir supir) {
     int data = listSupir.indexWhere((element) => element.id == supir.id);
     listSupir[data] = supir;
-   
+
     notifyListeners();
   }
 
   void addJualBeliMobil(JualBeliMobil jualBeliMobil) {
-    listJualBeliMobil.insert(0, jualBeliMobil);
-    backuplistJualBeliMobil.insert(0, jualBeliMobil);
+    listJualBeliMobil.add(jualBeliMobil);
+    backuplistJualBeliMobil.add(jualBeliMobil);
     notifyListeners();
   }
 
@@ -294,8 +293,8 @@ class ProviderData with ChangeNotifier {
   }
 
   void addPerbaikan(Perbaikan Perbaikan) {
-    listPerbaikan.insert(0, Perbaikan);
-    backupListPerbaikan.insert(0, Perbaikan);
+    listPerbaikan.add( Perbaikan);
+    backupListPerbaikan.add(Perbaikan);
     searchperbaikan('', false);
     notifyListeners();
   }
@@ -311,16 +310,16 @@ class ProviderData with ChangeNotifier {
   }
 
   void updatePerbaikan(Perbaikan Perbaikan) {
-    int data = listPerbaikan
-        .indexWhere((element) => (element.id) == (Perbaikan.id));
+    int data =
+        listPerbaikan.indexWhere((element) => (element.id) == (Perbaikan.id));
     listPerbaikan[data] = Perbaikan;
     searchperbaikan('', false);
     notifyListeners();
   }
 
   void addTransaksi(Transaksi transaksi) {
-     listTransaksi.insert(0, transaksi);
-    backupTransaksi.insert(0, transaksi);
+    listTransaksi.add(transaksi);
+    backupTransaksi.add(transaksi);
     // searchTransaksi(false);
 
     // calculateSaldo();
@@ -342,7 +341,7 @@ class ProviderData with ChangeNotifier {
         listTransaksi.indexWhere((element) => element.id == transaksi.id);
 
     listTransaksi[data] = transaksi;
-    
+
     searchTransaksi(false);
     notifyListeners();
   }
@@ -376,18 +375,21 @@ class ProviderData with ChangeNotifier {
   }
 
   void searchTransaksi(bool listen) {
-      listTransaksi.clear();
+    listTransaksi.clear();
     for (Transaksi data in backupTransaksi) {
       bool skipped = false;
-      data.supir = listSupir
-          .firstWhere((element) => element.id == data.id_supir)
-          .nama_supir;
-      data.mobil = listMobil
-          .firstWhere((element) => element.id == data.id_mobil)
-          .nama_mobil;
-      data.keterangan_mobill = listMobil
-          .firstWhere((element) => element.id == data.id_mobil)
-          .keterangan_mobill;
+      try {
+        data.supir = listSupir
+            .firstWhere((element) => element.id == data.id_supir)
+            .nama_supir;
+        data.mobil = listMobil
+            .firstWhere((element) => element.id == data.id_mobil)
+            .nama_mobil;
+        data.keterangan_mobill = listMobil
+            .firstWhere((element) => element.id == data.id_mobil)
+            .keterangan_mobill;
+      } catch (e) {}
+
       if (searchmobile.isNotEmpty &&
           !data.mobil.toLowerCase().startsWith(searchmobile.toLowerCase())) {
         skipped = true;
@@ -416,9 +418,9 @@ class ProviderData with ChangeNotifier {
     }
     listen ? notifyListeners() : '';
   }
-refres(){
-   for (Transaksi data in backupTransaksi) {
-    
+
+  refres() {
+    for (Transaksi data in backupTransaksi) {
       data.supir = listSupir
           .firstWhere((element) => element.id == data.id_supir)
           .nama_supir;
@@ -428,9 +430,9 @@ refres(){
       data.keterangan_mobill = listMobil
           .firstWhere((element) => element.nama_mobil == data.mobil)
           .keterangan_mobill;
-     
     }
-}
+  }
+
   void searchSupir(String val, bool listen) {
     if (val.isEmpty) {
       listSupir.clear();
@@ -448,7 +450,7 @@ refres(){
     for (var data in listPerbaikan) {
       data.mobil = backupListMobil
           .firstWhere((element) => element.id == data.id_mobil)
-          .nama_mobil ;
+          .nama_mobil;
     }
     if (val.isEmpty) {
       listPerbaikan.clear();

@@ -64,12 +64,12 @@ class DeleteMobil extends StatelessWidget {
                     controller: _btnController,
                     onPressed: () async {
                       if (false){}
-                         String? data = await Service.deleteMobil(
-                          mobil.id);
+                         Mobil? data = await Service.deleteMobil(
+                          Mobil.toMap(mobil));
 
                         if (data != null) {
                           Provider.of<ProviderData>(context, listen: false)
-                              .deleteMobil(mobil.id);
+                              .updateMobil(data);
                                                 }else{
                              _btnController.error();
                            await Future.delayed(const Duration(seconds: 1), () {

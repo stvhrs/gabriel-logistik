@@ -1,4 +1,4 @@
-class JualBeliMobil {
+class   JualBeliMobil {
   String id;
   String id_mobil;
   String mobil;
@@ -17,7 +17,7 @@ class JualBeliMobil {
         'ketarangan[]',
         double.parse(data['harga_jb']),
         data['tgl_jb'],
-        data['beli_jb'] == "true",
+        data['jualOrBeli'] == "true",
         data['ket_jb']);
   }
 }

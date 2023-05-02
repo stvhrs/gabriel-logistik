@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/helper/format_tanggal.dart';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
+import 'package:gabriel_logistik/models/perbaikan.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
@@ -24,23 +25,13 @@ class _PerbaikanPageState extends State<PerbaikanPage> {
                                 Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
     super.initState();
   }
-//
+   List<Perbaikan> data=[];
   @override
   Widget build(BuildContext context) {
     return Consumer<ProviderData>(builder: (context, c, h) {
-              // if (_search != '') {
-              //   // c.listSupir.clear();
-              //   for (var element in c.listSupir) {
-              //     if (element.nama_supir
-              //         .toLowerCase()
-              //         .startsWith(_search.toLowerCase())) {
-              //       c.listSupir.add(element);
-              //     }
-              //   }
-              // } else {
-              //   c.listSupir = c.listSupir;
-              // }
-
+          data=c. listPerbaikan.where((element) => element.adminitrasi==false). toList();
+  data.sort((a, b) => DateTime.parse(b.tanggal)
+          .compareTo(DateTime.parse(a.tanggal)));
               return Container(
         padding: const EdgeInsets.only(left: 25, right: 25, top: 0, bottom: 25),
         decoration: BoxDecoration(
@@ -135,7 +126,7 @@ class _PerbaikanPageState extends State<PerbaikanPage> {
              SizedBox(
                   height: MediaQuery.of(context).size.height * 0.7,
                   child: ListView.builder(
-                    itemCount: c.listPerbaikan.reversed.toList().length,
+                    itemCount: data.  toList().length,
                     itemBuilder: (context, index) => InkWell(
                       child: Container(
                         color: index.isEven
@@ -147,29 +138,29 @@ class _PerbaikanPageState extends State<PerbaikanPage> {
                             Expanded(
                                 flex: 11,
                                 child: Text(FormatTanggal.formatTanggal(
-                                    c.listPerbaikan[index].tanggal))),
+                                    data.  toList()[index].tanggal))),
                             Expanded(
                                 flex: 11,
-                                child: Text(c.listPerbaikan[index].mobil)),
+                                child: Text(data[index].mobil)),
                             Expanded(
                                 flex: 11,
-                                child: Text(c.listPerbaikan[index].jenis)),
+                                child: Text(data[index].jenis)),
                             Expanded(
                                 flex: 11,
                                 child: Text(Rupiah.format(
-                                    c.listPerbaikan[index].harga))),
+                                    data.  toList()[index].harga))),
                             Expanded(
                                 flex: 20,
-                                child: Text(c.listPerbaikan[index].keterangan)),
+                                child: Text(data[index].keterangan)),
                             Expanded(
                                 flex: 2,
-                                child: Provider.of<ProviderData>(context)
+                                child: Provider.of<ProviderData>(context,listen: false)
                                         .isOwner
-                                    ? PerbaikanDelete(c.listPerbaikan[index])
+                                    ? PerbaikanDelete(data[index])
                                     : const SizedBox()),
                             Expanded(
                                 flex: 2,
-                                child: PerbaikanEdit(c.listPerbaikan[index]))
+                                child: PerbaikanEdit(data[index]))
                           ],
                         ),
                       ),

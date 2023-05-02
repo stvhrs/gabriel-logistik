@@ -43,7 +43,7 @@ class _LaporanBulananState extends State<LaporanBulanan> {
   List<bool> printed = [];
   @override
   void didChangeDependencies() {
-    Provider.of<ProviderData>(context).printed.clear();
+  
     trankaskis = Provider.of<ProviderData>(context).backupTransaksi;
     mobil = Provider.of<ProviderData>(context).backupListMobil;
     for (var element in Provider.of<ProviderData>(context).backupTransaksi) {
@@ -55,10 +55,12 @@ class _LaporanBulananState extends State<LaporanBulanan> {
       tahun.add(ropdownValue2);
     }
     super.didChangeDependencies();
+     Provider.of<ProviderData>(context,listen: false).printed.clear();
   }
 
   @override
   Widget build(BuildContext context) {
+     
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(backgroundColor: Colors.green,

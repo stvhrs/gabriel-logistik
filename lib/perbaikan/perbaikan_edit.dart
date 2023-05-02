@@ -24,17 +24,7 @@ class PerbaikanEdit extends StatefulWidget {
 class _PerbaikanEditState extends State<PerbaikanEdit> {
   List<String> listMobil = [];
 
-  @override
-  void initState() {
-    perbaikan=widget.perbaikan;
-    mobilCont.text = widget.perbaikan.mobil;
-    listMobil=Provider.of<ProviderData>(context, listen: false)
-        .listMobil.where((element) => element.terjual==false).map((e) => e.nama_mobil).toList();
-
-    
-
-    super.initState();
-  }
+ 
 
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
@@ -65,6 +55,11 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
 
   @override
   Widget build(BuildContext context) {
+        perbaikan=widget.perbaikan;
+    mobilCont.text = widget.perbaikan.mobil;
+    listMobil=Provider.of<ProviderData>(context, listen: false)
+        .listMobil.where((element) => element.terjual==false).map((e) => e.nama_mobil).toList();
+
     return IconButton(
         icon: const Icon(
           Icons.edit,
@@ -122,130 +117,132 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                             padding: const EdgeInsets.only(
                                 bottom: 20, left: 20, right: 20, top: 15),
                             width: MediaQuery.of(context).size.width * 0.4,
-                            child: Column(
-                              children: [
-                               
-                                    _buildSize(
-                                             WebDatePicker(lastDate: DateTime.now(),
-                                          height: 60,
-                                          initialDate: DateTime.parse(
-                                              widget.perbaikan.tanggal),
-                                          dateformat: 'dd/MM/yyyy',
-                                          onChange: (value) {
-                                            if (value != null) {
-                                              perbaikan.tanggal =
-                                                  value.toIso8601String();
-                                            }
-                                          },
-                                        ),
-                                        'Tanggal',
-                                        1),
-                                    _buildSize(
-                                        TextFormField(
-                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
-                                          initialValue: perbaikan.jenis,
-                                          onChanged: (va) {
-                                            perbaikan.jenis = va;
-                                          },
-                                        ),
-                                        'Jenis Perbaikan',
-                                        1),
-                                    _buildSize(
-                                        DropDownField(
-                                          controller: mobilCont,
-                                          onValueChanged: (val) {
-                                            perbaikan.mobil = val;
-                                            perbaikan.id_mobil=Provider.of<ProviderData>(context,listen: false).listMobil.firstWhere((element) => element.nama_mobil==val).id;
-
-                                          },
-                                          items: listMobil,
-                                        ),
-                                        'Pilih Mobil',
-                                        1),
-                                    _buildSize(
-                                        TextFormField(
-                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
-                                          initialValue:
-                                              Rupiah.format(perbaikan.harga),
-                                          onChanged: (va) {
-                                            perbaikan.harga =
-                                                Rupiah.parse(va);
-                                          },
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly,
-                                            CurrencyInputFormatter()
-                                          ],
-                                        ),
-                                        'Nominal Perbaikan',
-                                        1),
-                                
-                              
-                                    _buildSize(
-                                        TextFormField(
-                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
-                                          initialValue: perbaikan.keterangan,
-                                          onChanged: (va) {
-                                            perbaikan.keterangan = va;
-                                          },
-                                        ),
-                                        'Keterangan',
-                                        2),
+                            child:  SingleChildScrollView(
+                              child: Column(
+                                children: [
                                  
-                              
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: RoundedLoadingButton(
-                                    color: Colors.green,
-                                    elevation: 10,
-                                    successColor: Colors.green,
-                                    errorColor: Colors.red,
-                                    controller: _btnController,
-                                    onPressed: () async {
-                                      if (perbaikan.harga == 0 ||
-                                          perbaikan.jenis.isEmpty ||
-                                          perbaikan.mobil.isEmpty) {
-                                        _btnController.error();
+                                      _buildSize(
+                                               WebDatePicker(lastDate: DateTime.now(),
+                                            height: 60,
+                                            initialDate: DateTime.parse(
+                                                widget.perbaikan.tanggal),
+                                            dateformat: 'dd/MM/yyyy',
+                                            onChange: (value) {
+                                              if (value != null) {
+                                                perbaikan.tanggal =
+                                                    value.toIso8601String();
+                                              }
+                                            },
+                                          ),
+                                          'Tanggal',
+                                          1),
+                                      _buildSize(
+                                          TextFormField(
+                                style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                                            initialValue: perbaikan.jenis,
+                                            onChanged: (va) {
+                                              perbaikan.jenis = va;
+                                            },
+                                          ),
+                                          'Jenis Perbaikan',
+                                          1),
+                                      _buildSize(
+                                          DropDownField(
+                                            controller: mobilCont,
+                                            onValueChanged: (val) {
+                                              perbaikan.mobil = val;
+                                              perbaikan.id_mobil=Provider.of<ProviderData>(context,listen: false).listMobil.firstWhere((element) => element.nama_mobil==val).id;
+                            
+                                            },
+                                            items: listMobil,
+                                          ),
+                                          'Pilih Mobil',
+                                          1),
+                                      _buildSize(
+                                          TextFormField(
+                                style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                                            initialValue:
+                                                Rupiah.format(perbaikan.harga),
+                                            onChanged: (va) {
+                                              perbaikan.harga =
+                                                  Rupiah.parse(va);
+                                            },
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly,
+                                              CurrencyInputFormatter()
+                                            ],
+                                          ),
+                                          'Nominal Perbaikan',
+                                          1),
+                                  
+                                
+                                      _buildSize(
+                                          TextFormField(
+                                style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                                            initialValue: perbaikan.keterangan,
+                                            onChanged: (va) {
+                                              perbaikan.keterangan = va;
+                                            },
+                                          ),
+                                          'Keterangan',
+                                          2),
+                                   
+                                
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: RoundedLoadingButton(
+                                      color: Colors.green,
+                                      elevation: 10,
+                                      successColor: Colors.green,
+                                      errorColor: Colors.red,
+                                      controller: _btnController,
+                                      onPressed: () async {
+                                        if (perbaikan.harga == 0 ||
+                                            perbaikan.jenis.isEmpty ||
+                                            perbaikan.mobil.isEmpty) {
+                                          _btnController.error();
+                                          await Future.delayed(
+                                              const Duration(seconds: 1));
+                                          _btnController.reset();
+                                          return;
+                                        }
+                            
+                                 
+                                
+                                                 var data = await Service.updatePerbaikan(
+                                                       {
+                                   
+                                  "id_perbaikan":perbaikan.id,
+                                    "id_mobil": perbaikan.id_mobil,
+                                    "plat_mobil": perbaikan.mobil,
+                                    "ket_mobil":perbaikan.keterangan,
+                                    "jenis_p": perbaikan.jenis,
+                                    "harga_p": perbaikan.harga.toString(),
+                                    "ket_p": perbaikan.keterangan,
+                                    "tgl_p": perbaikan.tanggal
+                                });
+                                
+                            
+                                                    if (data != null) {
+                                                      Provider.of<ProviderData>(context, listen: false)
+                                .updatePerbaikan(data);
+                                                    }else{
+                                                      _btnController.error();
+                                                    }
+                                          _btnController.success();
+                                        
                                         await Future.delayed(
-                                            const Duration(seconds: 1));
-                                        _btnController.reset();
-                                        return;
-                                      }
-
-                               
-    
-                                               var data = await Service.updatePerbaikan(
-                           {
-       
-      "id_perbaikan":perbaikan.id,
-        "id_mobil": perbaikan.id_mobil,
-        "plat_mobil": perbaikan.mobil,
-        "ket_mobil":perbaikan.keterangan,
-        "jenis_p": perbaikan.jenis,
-        "harga_p": perbaikan.harga.toString(),
-        "ket_p": perbaikan.keterangan,
-        "tgl_p": perbaikan.tanggal
-    });
-    
-
-                        if (data != null) {
-                          Provider.of<ProviderData>(context, listen: false)
-                              .updatePerbaikan(data);
-                        }else{
-                          _btnController.error();
-                        }
-                                        _btnController.success();
-                                      
-                                      await Future.delayed(
-                                          const Duration(seconds: 1), () {
-                                        Navigator.of(context).pop();
-                                      });
-                                    },
-                                    child: const Text('Edit',
-                                        style: TextStyle(color: Colors.white)),
-                                  ),
-                                )
-                              ],
+                                            const Duration(seconds: 1), () {
+                                          Navigator.of(context).pop();
+                                        });
+                                      },
+                                      child: const Text('Edit',
+                                          style: TextStyle(color: Colors.white)),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),

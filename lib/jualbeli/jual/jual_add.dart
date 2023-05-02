@@ -87,7 +87,7 @@ class _JualAddState extends State<JualAdd> {
             'ket_mobil': '0',
             'harga_jb': "0",
             'tgl_jb': DateTime.now().toIso8601String(),
-            'beli_jb': "false",
+            'jualOrBeli': "false",
             'ket_jb': 'keterangan'
           });
 
@@ -243,7 +243,7 @@ class _JualAddState extends State<JualAdd> {
                                       'harga_jb':
                                           jualBeliMobil.harga.toString(),
                                       'tgl_jb': jualBeliMobil.tanggal,
-                                      'beli_jb': "false",
+                                      'jualOrBeli': "false",
                                       'ket_jb': jualBeliMobil.ketMobil
                                     });
 

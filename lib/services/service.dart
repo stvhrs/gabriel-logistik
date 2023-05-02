@@ -17,24 +17,20 @@ String base = 'https://cahayaover.site/api';
 class Service {
   static Future<List<MutasiSaldo>> getAllMutasiSaldo() async {
     List<MutasiSaldo> data = [];
- final response = await http.get(
+    final response = await http.get(
       Uri.parse(
         '$base/mutasiSaldo',
       ),
     );
-print( '${json.decode(response.body)}wkwekwe');
-    for (Map<String,dynamic> element in json.decode(response.body)[0]) {
+    print('${json.decode(response.body)}wkwekwe');
+    for (Map<String, dynamic> element in json.decode(response.body)[0]) {
       List<MutasiChild> mutasiChild = [];
-      for (Map<String,dynamic> e in element['detail_mutasi'] ) {
+      for (Map<String, dynamic> e in element['detail_mutasi']) {
         mutasiChild.add(MutasiChild.fromMap(e));
-
       }
 
-      data.add(MutasiSaldo.fromMap(
-        element,mutasiChild
-      ));
-
-  }
+      data.add(MutasiSaldo.fromMap(element, mutasiChild));
+    }
     return data;
   }
 
@@ -83,7 +79,7 @@ print( '${json.decode(response.body)}wkwekwe');
   static Future<List<JualBeliMobil>> getAlljualBeli() async {
     final response = await http.get(
       Uri.parse(
-        '$base/jual',
+        '$base/jualBeli',
       ),
     );
     List<JualBeliMobil> data = [];
@@ -112,121 +108,156 @@ print( '${json.decode(response.body)}wkwekwe');
   }
 
   static Future<Supir?> postSupir(Map<String, dynamic> data) async {
-    final response = await http.post(
-      body: data,
-      Uri.parse(
-        '$base/supir',
-      ),
-    );
+    try {
+      final response = await http.post(
+        body: data,
+        Uri.parse(
+          '$base/supir',
+        ),
+      );
 
-    if (response.body.isNotEmpty) {
-      return Supir.fromMap(json.decode(response.body)["0"]["supir"][0]);
-    } else {
+      if (response.body.isNotEmpty) {
+        return Supir.fromMap(json.decode(response.body)["0"]["supir"][0]);
+      } else {
+        return null;
+      }
+    } catch (e) {
       return null;
     }
   }
 
   static Future<Supir?> updateSupir(Map<String, dynamic> data) async {
-    final response = await http.put(
-      body: data,
-      Uri.parse(
-        '$base/supir',
-      ),
-    );
+    try {
+      final response = await http.put(
+        body: data,
+        Uri.parse(
+          '$base/supir',
+        ),
+      );
 
-    if (response.body.isNotEmpty) {
-      return Supir.fromMap(json.decode(response.body)["0"]);
-    } else {
+      if (response.body.isNotEmpty) {
+        return Supir.fromMap(json.decode(response.body)["0"]);
+      } else {
+        return null;
+      }
+    } catch (e) {
       return null;
     }
   }
 
   static Future<String> deleteSupir(String data) async {
-    final response = await http.delete(
-      Uri.parse('$base/supir?id_supir=$data'),
-    );
+    try {
+      final response = await http.delete(
+        Uri.parse('$base/supir?id_supir=$data'),
+      );
 
-    if (response.body.contains('fail')) {
+      if (response.body.contains('fail')) {
+        return '';
+      } else {
+        return data;
+      }
+    } catch (e) {
       return '';
-    } else {
-      return data;
     }
   }
 
   static Future<Mobil?> postMobil(Map<String, dynamic> data) async {
-    log('post Mobil');
-    final response = await http.post(
-      body: data,
-      Uri.parse(
-        '$base/mobil',
-      ),
-    );
+    try {
+      final response = await http.post(
+        body: data,
+        Uri.parse(
+          '$base/mobil',
+        ),
+      );
 
-    if (response.body.isNotEmpty) {
-      return Mobil.fromMap(json.decode(response.body)["mobil"][0], []);
-    } else {
+      if (response.body.isNotEmpty) {
+        return Mobil.fromMap(json.decode(response.body)["mobil"][0], []);
+      } else {
+        return null;
+      }
+    } catch (e) {
       return null;
     }
   }
 
   static Future<Mobil?> updateMobil(Map<String, dynamic> data) async {
-    final response = await http.put(
-      body: data,
-      Uri.parse(
-        '$base/mobil',
-      ),
-    );
+    try {
+      final response = await http.put(
+        body: data,
+        Uri.parse(
+          '$base/mobil',
+        ),
+      );
 
-    if (response.body.isNotEmpty) {
-      return Mobil.fromMap(json.decode(response.body)["0"], []);
-    } else {
+      if (response.body.isNotEmpty) {
+        return Mobil.fromMap(json.decode(response.body)["0"], []);
+      } else {
+        return null;
+      }
+    } catch (e) {
       return null;
     }
   }
 
-  static Future<String?> deleteMobil(String data) async {
-    final response = await http.delete(
-      Uri.parse('$base/mobil?id_mobil=$data'),
-    );
+  static Future<Mobil?> deleteMobil(Map<String, dynamic> data) async {
+    data["terjual"] = "true";
+    try {
+      final response = await http.put(
+        body: data,
+        Uri.parse(
+          '$base/mobil',
+        ),
+      );
 
-    if (response.body.contains('fail')) {
+      if (response.body.isNotEmpty) {
+        return Mobil.fromMap(json.decode(response.body)["0"], []);
+      } else {
+        return null;
+      }
+    } catch (e) {
       return null;
-    } else {
-      return data;
     }
   }
 
   static Future<Perbaikan?> postPerbaikan(Map<String, dynamic> data) async {
-    final response = await http.post(
-      body: data,
-      Uri.parse(
-        '$base/perbaikan',
-      ),
-    );
-
-    if (response.body.isNotEmpty) {
-      print(json.decode(response.body)["perbaikan"][0].toString());
-      return Perbaikan.fromMap(
-        json.decode(response.body)["perbaikan"][0],
+    try {
+      final response = await http.post(
+        body: data,
+        Uri.parse(
+          '$base/perbaikan',
+        ),
       );
-    } else {
+
+      if (response.body.isNotEmpty) {
+        print(json.decode(response.body)["perbaikan"][0].toString());
+        return Perbaikan.fromMap(
+          json.decode(response.body)["perbaikan"][0],
+        );
+      } else {
+        return null;
+      }
+    } catch (e) {
       return null;
     }
   }
 
   static Future<Perbaikan?> updatePerbaikan(Map<String, dynamic> data) async {
-    final response = await http.put(
-      body: data,
-      Uri.parse(
-        '$base/perbaikan',
-      ),
-    );
-
-    if (response.body.isNotEmpty) {
-      return Perbaikan.fromMap(
-        json.decode(response.body)["0"],
+    try {
+      final response = await http.put(
+        body: data,
+        Uri.parse(
+          '$base/perbaikan',
+        ),
       );
-    } else {
+
+      if (response.body.isNotEmpty) {
+        return Perbaikan.fromMap(
+          json.decode(response.body)["0"],
+        );
+      } else {
+        return null;
+      }
+    } catch (e) {
       return null;
     }
   }
@@ -273,8 +304,8 @@ print( '${json.decode(response.body)}wkwekwe');
           '$base/transaksi',
         ),
       );
-print(data);
-print(response.body);
+      print(data);
+      print(response.body);
       if (response.body.isNotEmpty) {
         return Transaksi.fromMap(json.decode(response.body)["0"]);
       }

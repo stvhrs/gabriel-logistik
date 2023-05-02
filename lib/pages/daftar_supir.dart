@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
-import 'package:gabriel_logistik/supir/delete_supir.dart';
-import 'package:gabriel_logistik/supir/edit_supir.dart';
+import 'package:gabriel_logistik/supir/supir_tile.dart';
 import 'package:gabriel_logistik/supir/tambah_supir.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +19,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
     Provider.of<ProviderData>(context, listen: false).searchSupir('', false);
     super.initState();
   }
-
+ 
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -101,60 +101,16 @@ class _DaftarSupirState extends State<DaftarSupir> {
               ),
             ),
             Consumer<ProviderData>(builder: (context, c, h) {
-              // if (_search != '') {
-              //   // c.listSupir.clear();
-              //   for (var element in c.listSupir) {
-              //     if (element.nama_supir
-              //         .toLowerCase()
-              //         .startsWith(_search.toLowerCase())) {
-              //       c.listSupir.add(element);
-              //     }
-              //   }
-              // } else {
-              //   c.listSupir = c.listSupir;
-              // }
-
+             List<Supir> data=c.listSupir.reversed.toList() .where((element) => element.nama_supir!='') .toList();
               return SizedBox(
                   height: MediaQuery.of(context).size.height * 0.7,
                   child: ListView.builder(
-                    itemCount: c.listSupir.reversed.toList().length,
-                    itemBuilder: (context, index) => InkWell(
-                      child: Container(
-                        color:
-                            index.isEven ? Colors.white : Colors.grey.shade200,
-                        padding: const EdgeInsets.only(left: 15, right: 15),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                flex: 11,
-                                child: Text(c.listSupir.reversed
-                                    .toList()[index]
-                                    .nama_supir)),
-                            Expanded(
-                                flex: 11,
-                                child: Text(c.listSupir.reversed
-                                    .toList()[index]
-                                    .nohp_supir)),
-                            Expanded(
-                              flex: 3,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  EditSupir(
-                                      c.listSupir.reversed.toList()[index]),
-                                  Provider.of<ProviderData>(context,
-                                              listen: false)
-                                          .isOwner
-                                      ? SupirDelete(
-                                          c.listSupir.reversed.toList()[index])
-                                      : const SizedBox()
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                     
+                      
+                      return SupirTile(data
+                                    .toList()[index],index);},
                   ));
             })
           ],

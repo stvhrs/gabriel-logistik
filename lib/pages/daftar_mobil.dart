@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/mobil/delete_mobil.dart';
-import 'package:gabriel_logistik/mobil/edit_mobil.dart';
+import 'package:gabriel_logistik/mobil/mobil_tile.dart';
 import 'package:gabriel_logistik/mobil/tambah_mobil.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
+
+import '../models/mobil.dart';
 
 class DaftarMobil extends StatefulWidget {
   const DaftarMobil({super.key});
@@ -101,50 +102,17 @@ class _DaftarMobilState extends State<DaftarMobil> {
               ),
             ),
             Consumer<ProviderData>(builder: (context, c, h) {
+              List<Mobil> data=c.listMobil.reversed.toList().where((element) => element.terjual==false).toList();
           
 
               return SizedBox(
                   height: MediaQuery.of(context).size.height * 0.7,
                   child: ListView.builder(
-                    itemCount: c.listMobil.reversed.toList() .length,
+                    itemCount: data.length,
                     itemBuilder: (context, index) {
-              
-                      return c.listMobil.reversed.toList()[index].terjual
-                        ? const SizedBox()
-                        : InkWell(
-                            child: Container(
-                              color: index.isEven
-                                  ? Colors.white
-                                  : Colors.grey.shade200,
-                              padding:
-                                  const EdgeInsets.only(left: 15, right: 15),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      flex: 11,
-                                      child:
-                                          Text(c.listMobil.reversed.toList()[index].nama_mobil)),
-                                  Expanded(
-                                      flex: 11,
-                                      child: Text(c
-                                          .listMobil.reversed.toList()[index].keterangan_mobill)),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Row(
-                                      children: [
-                                        EditMobil(c.listMobil.reversed.toList()[index]),
-                                        Provider.of<ProviderData>(context,
-                                                    listen: false)
-                                                .isOwner
-                                            ? DeleteMobil(c.listMobil.reversed.toList()[index])
-                                            : const SizedBox()
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
+                       
+              return
+                      MobilTile(data[index], index);
             }));
             })
           ],

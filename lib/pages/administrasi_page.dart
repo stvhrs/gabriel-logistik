@@ -8,6 +8,8 @@ import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 
+import '../models/perbaikan.dart';
+
 
 class AdministrasiPage extends StatefulWidget {
   const AdministrasiPage({super.key});
@@ -24,10 +26,13 @@ class _AdministrasiPageState extends State<AdministrasiPage> {
                                 Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
     super.initState();
   }
-//
+List<Perbaikan> data=[];
   @override
   Widget build(BuildContext context) {
     return Consumer<ProviderData>(builder: (context, c, h) {
+         data=c. listPerbaikan.where((element) => element.adminitrasi==true).toList();
+  data.sort((a, b) => DateTime.parse(b.tanggal)
+          .compareTo(DateTime.parse(a.tanggal)));
               // if (_search != '') {
               //   // c.listSupir.clear();
               //   for (var element in c.listSupir) {
@@ -135,7 +140,7 @@ class _AdministrasiPageState extends State<AdministrasiPage> {
              SizedBox(
                   height: MediaQuery.of(context).size.height * 0.7,
                   child: ListView.builder(
-                    itemCount: c.listPerbaikan.reversed.toList().length,
+                    itemCount:data.length,
                     itemBuilder: (context, index) => InkWell(
                       child: Container(
                         color: index.isEven
@@ -147,29 +152,29 @@ class _AdministrasiPageState extends State<AdministrasiPage> {
                             Expanded(
                                 flex: 11,
                                 child: Text(FormatTanggal.formatTanggal(
-                                    c.listPerbaikan[index].tanggal))),
+                                    data. toList()[index].tanggal))),
                             Expanded(
                                 flex: 11,
-                                child: Text(c.listPerbaikan[index].mobil)),
+                                child: Text(data. toList()[index].mobil)),
                             Expanded(
                                 flex: 11,
-                                child: Text(c.listPerbaikan[index].jenis)),
+                                child: Text(data. toList()[index].jenis)),
                             Expanded(
                                 flex: 11,
                                 child: Text(Rupiah.format(
-                                    c.listPerbaikan[index].harga))),
+                                    data. toList()[index].harga))),
                             Expanded(
                                 flex: 20,
-                                child: Text(c.listPerbaikan[index].keterangan)),
+                                child: Text(data. toList()[index].keterangan)),
                             Expanded(
                                 flex: 2,
                                 child: Provider.of<ProviderData>(context)
                                         .isOwner
-                                    ? AdministrasiDelete(c.listPerbaikan[index])
+                                    ? AdministrasiDelete(data. toList()[index])
                                     : const SizedBox()),
                             Expanded(
                                 flex: 2,
-                                child: AdministrasiEdit(c.listPerbaikan[index]))
+                                child: AdministrasiEdit(data. toList()[index]))
                           ],
                         ),
                       ),

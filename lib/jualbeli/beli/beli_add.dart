@@ -60,11 +60,12 @@ class _BeliAddState extends State<BeliAdd> {
           jualBeliMobil = JualBeliMobil.fromMap({
             'id_jb': '0',
             'id_mobil': '0',
-            'plat_mobil': '0',
+            'plat_mobil': '0',  
             'ket_mobil': '0',
             'harga_jb': "0",
             'tgl_jb': DateTime.now().toIso8601String(),
-            'beli_jb': "true",
+            'jualOrBeli': "true",
+            
             'ket_jb': 'keterangan'
           });
 
@@ -212,7 +213,7 @@ class _BeliAddState extends State<BeliAdd> {
                                       'harga_jb':
                                           jualBeliMobil.harga.toString(),
                                       'tgl_jb': jualBeliMobil.tanggal,
-                                      'beli_jb': "true",
+                                      'jualOrBeli': "true",
                                       'ket_jb': jualBeliMobil.ketMobil
                                     });
 

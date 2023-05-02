@@ -15,6 +15,7 @@ import 'package:gabriel_logistik/pages/mutasi_saldo.dart';
 import 'package:gabriel_logistik/pages/cashflow_page.dart';
 
 import 'package:gabriel_logistik/pages/perbaikan_page.dart';
+import 'package:gabriel_logistik/pages/rekap_unit.dart';
 
 import 'package:gabriel_logistik/pages/transaksi_page.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
@@ -46,8 +47,9 @@ class _DashBoardState extends State<DashBoard> {
   late List<Perbaikan> listPerbaikan;
   late List<JualBeliMobil> listJualBeliMobil;
   late List<MutasiSaldo> listMutasiSaldo;
-  bool loading = true;
+
   String test = '';
+    bool loading = true;
   initData() async {
 //    test=      await Service.test2();
 // await Service.test();
@@ -106,6 +108,7 @@ class _DashBoardState extends State<DashBoard> {
     const CashFlow(),
     const LaporanBulanan(),
     const KasTahun(),
+    const RekapUnit(),
     const MutasiSaldoPage(),
   ];
   final List<bool> _open = [true, false, false, false];
@@ -328,11 +331,28 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 9;
                                     setState(() {});
                                   },
-                                  leading: const Icon(Icons.auto_graph_rounded),
+                                  leading: const Icon(Icons.calendar_month_rounded),
                                   title: Text(style: item, 'Mobil Tahunan'),
+                                )), Container(
+                                color: _selectedIndex == 10
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).colorScheme.primary,
+                                child: ListTile(iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 10
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 10;
+                                    setState(() {});
+                                  },
+                                  leading: const Icon(Icons.auto_graph_rounded),
+                                  title: Text(style: item, 'Rekap Tahunan'),
                                 ))
+                        ,
                           ],
                         ),
+                        
                         ExpansionTile(
                           collapsedIconColor: Colors.white,
                           iconColor: Colors.white,
@@ -342,16 +362,16 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                           children: <Widget>[
                             Container(
-                                color: _selectedIndex == 10
+                                color: _selectedIndex == 11
                                     ? Theme.of(context).colorScheme.secondary
                                     : Theme.of(context).primaryColor,
                                 child: ListTile(iconColor: Colors.white,
                                   minLeadingWidth: 20,
-                                  textColor: _selectedIndex == 10
+                                  textColor: _selectedIndex == 11
                                       ? Theme.of(context).colorScheme.secondary
                                       : Colors.white,
                                   onTap: () {
-                                    _selectedIndex = 10;
+                                    _selectedIndex = 11;
                                     setState(() {});
                                   },
                                   leading: const Icon(Icons.attach_money_rounded),
