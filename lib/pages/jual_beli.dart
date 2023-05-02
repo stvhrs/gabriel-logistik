@@ -10,6 +10,8 @@ import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 
+import '../services/service.dart';
+import 'package:gabriel_logistik/helper/custompaint.dart';
 class JualBeli extends StatefulWidget {
   const JualBeli({super.key});
 
@@ -18,6 +20,30 @@ class JualBeli extends StatefulWidget {
 }
 
 class _JualBeliState extends State<JualBeli> {
+    late List<JualBeliMobil> listTransaksi;
+
+ 
+  bool loading = true;
+  initData() async {
+//    test=      await Service.test2();
+// await Service.test();
+// await Service.postSupir();
+// await Service.deleteSupir();
+// await Service.test3();
+    listTransaksi = await Service.getAlljualBeli();
+
+    Provider.of<ProviderData>(context, listen: false)
+        .setData([], false, [], [], [], listTransaksi, []);
+
+    loading = false;
+
+    setState(() {});
+  }
+  @override
+  void initState() {
+initData();
+    super.initState();
+  }
   int currentSegment = 0;
   void onValueChanged(int? newValue) {
     setState(() {
@@ -31,7 +57,11 @@ class _JualBeliState extends State<JualBeli> {
   };
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return  loading==true
+        ? Center(
+            child: CustomPaints(),
+          )
+        : Container(
         padding: const EdgeInsets.only(left: 25, right: 25, top: 0, bottom: 25),
         decoration: BoxDecoration(
             border: Border.all(

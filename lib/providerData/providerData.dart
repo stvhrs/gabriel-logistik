@@ -80,29 +80,39 @@ class ProviderData with ChangeNotifier {
       List<JualBeliMobil> jualbeli,
       List<MutasiSaldo> listMutasi) {
     print('set');
-    listJualBeliMobil.clear();
-    backuplistJualBeliMobil.clear();
-    listJualBeliMobil.addAll(jualbeli);
-    backuplistJualBeliMobil.addAll(jualbeli);
+    if (jualbeli.isNotEmpty) {
+      listJualBeliMobil.clear();
+      backuplistJualBeliMobil.clear();
+      listJualBeliMobil.addAll(jualbeli);
+      backuplistJualBeliMobil.addAll(jualbeli);
+    }
 
-    listPerbaikan.clear();
-    backupListPerbaikan.clear();
-    listPerbaikan.addAll(perbaikan);
-    backupListPerbaikan.addAll(perbaikan);
+    if (data.isNotEmpty) {
+      listPerbaikan.clear();
+      backupListPerbaikan.clear();
+      listPerbaikan.addAll(perbaikan);
+      backupListPerbaikan.addAll(perbaikan);
+    }
+    if (data.isNotEmpty) {
+      listTransaksi.clear();
+      backupTransaksi.clear();
+      listTransaksi.addAll(data);
+      backupTransaksi.addAll(data);
+    }
+    if (mobilData.isNotEmpty) {
+      backupListMobil.addAll(mobilData);
 
-    listTransaksi.clear();
-    backupTransaksi.clear();
-    listTransaksi.addAll(data);
-    backupTransaksi.addAll(data);
+      listMobil.addAll(mobilData);
+    }
+    if (supirData.isNotEmpty) {
+      listSupir.addAll(supirData);
+      backupListSupir.addAll(supirData);
+    }
+    if (listMutasi.isNotEmpty) {
+      listMutasiSaldo.clear();
+      listMutasiSaldo.addAll(listMutasi);
+    }
 
-    backupListMobil.addAll(mobilData);
-    backupListSupir.addAll(supirData);
-
-    listMobil.addAll(mobilData);
-    listSupir.addAll(supirData);
-
-    listMutasiSaldo.clear();
-    listMutasiSaldo.addAll(listMutasi);
     calculateSaldo();
 
     (listen) ? notifyListeners() : () {};
@@ -293,7 +303,7 @@ class ProviderData with ChangeNotifier {
   }
 
   void addPerbaikan(Perbaikan Perbaikan) {
-    listPerbaikan.add( Perbaikan);
+    listPerbaikan.add(Perbaikan);
     backupListPerbaikan.add(Perbaikan);
     searchperbaikan('', false);
     notifyListeners();

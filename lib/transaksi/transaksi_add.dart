@@ -526,7 +526,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                             left: 15))),
                                             onPressed: (transaksi.sisa <= 0 ||
                                                     transaksi.supir ==
-                                                        "Pilih Supir" ||
+                                                        "Pilih Supir" ||transaksi.mobil=="Pilih Mobil"||
                                                     transaksi.tujuan.isEmpty ||
                                                     transaksi.ongkos == 0 ||
                                                     transaksi.keluar == 0)
@@ -551,9 +551,9 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                         Transaksi.fromMap({
                                                       "id_transaksi": "0",
                                                       "id_mobil": "0",
-                                                      "plat_mobil": "0",
+                                                      "plat_mobil": "Pilih Mobil",
                                                       "id_supir": "0",
-                                                      "nama_supir": "0",
+                                                      "nama_supir": "Pilih Supir",
                                                       "tanggal": DateTime.now()
                                                           .toIso8601String(),
                                                       "ket_transaksi": "k",

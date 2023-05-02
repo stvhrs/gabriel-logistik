@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
+import 'package:gabriel_logistik/services/service.dart';
 import 'package:gabriel_logistik/supir/supir_tile.dart';
 import 'package:gabriel_logistik/supir/tambah_supir.dart';
 import 'package:provider/provider.dart';
-
+import 'package:gabriel_logistik/helper/custompaint.dart';
 class DaftarSupir extends StatefulWidget {
   const DaftarSupir({super.key});
 
@@ -13,8 +14,28 @@ class DaftarSupir extends StatefulWidget {
 }
 
 class _DaftarSupirState extends State<DaftarSupir> {
+    late List<Supir> listTransaksi;
+
+ 
+  bool loading = true;
+  initData() async {
+//    test=      await Service.test2();
+// await Service.test();
+// await Service.postSupir();
+// await Service.deleteSupir();
+// await Service.test3();
+    listTransaksi = await Service.getAllSupir();
+
+    Provider.of<ProviderData>(context, listen: false)
+        .setData([], false, [], listTransaksi, [], [], []);
+
+    loading = false;
+
+    setState(() {});
+  }
   @override
   void initState() {
+    initData();
      Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
     Provider.of<ProviderData>(context, listen: false).searchSupir('', false);
     super.initState();
@@ -22,7 +43,11 @@ class _DaftarSupirState extends State<DaftarSupir> {
  
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return  loading==true
+        ? Center(
+            child: CustomPaints(),
+          )
+        : Container(
         padding: const EdgeInsets.only(left: 25, right: 25, top: 0, bottom: 25),
         decoration: BoxDecoration(
             border: Border.all(

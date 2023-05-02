@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/helper/custompaint.dart';
 import 'package:gabriel_logistik/hp_transaksi_add.dart';
 import 'package:gabriel_logistik/hp_transaksi_tile.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
@@ -80,8 +81,8 @@ class _DashBoardHpState extends State<DashBoardHp> {
   Widget build(BuildContext context) {
 
     return loading
-        ? const Center(
-            child: CircularProgressIndicator(),
+        ?  Center(
+            child: CustomPaints(),
           )
         : Consumer<ProviderData>(builder: (context, prov, _) {
             return Scaffold(resizeToAvoidBottomInset: false,

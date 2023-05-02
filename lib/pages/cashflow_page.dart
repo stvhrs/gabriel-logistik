@@ -4,13 +4,15 @@ import 'package:gabriel_logistik/cashflow/delete_pendaptan.dart';
 import 'package:gabriel_logistik/cashflow/edit_pendapta.dart';
 import 'package:gabriel_logistik/cashflow/tambah_pendaptan.dart';
 import 'package:gabriel_logistik/cashflow/view_pendaptan.dart';
-
+import 'package:gabriel_logistik/helper/custompaint.dart';
 import 'package:gabriel_logistik/helper/format_tanggal.dart';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 
 import 'package:gabriel_logistik/models/mutasi_saldo.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
+
+import '../services/service.dart';
 
 class CashFlow extends StatefulWidget {
   const CashFlow({super.key});
@@ -20,6 +22,36 @@ class CashFlow extends StatefulWidget {
 }
 
 class _CashFlowState extends State<CashFlow> {
+      late List<MutasiSaldo> listTransaksi;
+
+ 
+  bool loading = true;
+  initData() async {
+//    test=      await Service.test2();
+// await Service.test();
+// await Service.postSupir();
+// await Service.deleteSupir();
+// await Service.test3();
+    listTransaksi = await Service.getAllMutasiSaldo();
+
+    Provider.of<ProviderData>(context, listen: false)
+        .setData([], false, [], [], [], [], listTransaksi);
+
+    loading = false;
+
+    setState(() {});
+  }
+  @override
+  void initState() {
+    initData();
+   
+ 
+
+  
+
+    super.initState();
+  }
+
   int currentSegment = 0;
   void onValueChanged(int? newValue) {
     setState(() {
@@ -34,7 +66,11 @@ class _CashFlowState extends State<CashFlow> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return  loading==true
+        ? Center(
+            child: CustomPaints(),
+          )
+        :  Container(
         padding: const EdgeInsets.only(left: 25, right: 25, top: 0, bottom: 25),
         decoration: BoxDecoration(
             border: Border.all(

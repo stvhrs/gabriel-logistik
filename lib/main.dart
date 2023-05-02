@@ -8,7 +8,7 @@ import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/sidemenu.dart';
 import 'package:gabriel_logistik/styles/theme.dart';
 import 'package:provider/provider.dart';
-
+import 'package:gabriel_logistik/helper/custompaint.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print(MediaQuery.of(context).size.height *
         MediaQuery.of(context).devicePixelRatio);
     return loading
-        ?  const CircularProgressIndicator()
+        ?   CustomPaints()
         : Consumer<ProviderData>(builder: (context, data, _) {
             return data.logined
                 ? MediaQuery.of(context).size.width <= 500

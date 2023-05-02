@@ -29,7 +29,7 @@ import 'pages/daftar_mobil.dart';
 import 'models/mobil.dart';
 import 'models/supir.dart';
 import 'models/transaksi.dart';
-
+import 'package:gabriel_logistik/helper/custompaint.dart';
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
 
@@ -120,8 +120,8 @@ class _DashBoardState extends State<DashBoard> {
         fontWeight: FontWeight.bold,
         color: Colors.white);
     return loading
-        ? const Center(
-            child: CircularProgressIndicator(),
+        ?  Center(
+            child: CustomPaints(),
           )
         : Scaffold(
             resizeToAvoidBottomInset: false,

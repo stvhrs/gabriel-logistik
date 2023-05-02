@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/mobil/mobil_tile.dart';
 import 'package:gabriel_logistik/mobil/tambah_mobil.dart';
+import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
+import 'package:gabriel_logistik/services/service.dart';
 import 'package:provider/provider.dart';
-
+import 'package:gabriel_logistik/helper/custompaint.dart';
 import '../models/mobil.dart';
-
+import 'package:gabriel_logistik/helper/custompaint.dart';
 class DaftarMobil extends StatefulWidget {
   const DaftarMobil({super.key});
 
@@ -14,8 +16,29 @@ class DaftarMobil extends StatefulWidget {
 }
 
 class _DaftarMobilState extends State<DaftarMobil> {
+    late List<Mobil> listTransaksi;
+
+ 
+  bool loading = true;
+  initData() async {
+//    test=      await Service.test2();
+// await Service.test();
+// await Service.postSupir();
+// await Service.deleteSupir();
+// await Service.test3();
+  List<Perbaikan> per = await Service.getAllPerbaikan();
+    listTransaksi = await Service.getAllMobil(per);
+
+    Provider.of<ProviderData>(context, listen: false)
+        .setData([], false, listTransaksi, [], per, [], []);
+
+    loading = false;
+
+    setState(() {});
+  }
   @override
   void initState() {
+    initData();
     Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
     super.initState();
   }
@@ -23,7 +46,11 @@ class _DaftarMobilState extends State<DaftarMobil> {
 //
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return  loading==true
+        ? Center(
+            child: CustomPaints(),
+          )
+        :  Container(
         padding: const EdgeInsets.only(left: 25, right: 25, top: 0, bottom: 25),
         decoration: BoxDecoration(
             border: Border.all(

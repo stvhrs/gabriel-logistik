@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/helper/custompaint.dart';
 import 'package:gabriel_logistik/helper/format_tanggal.dart';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
@@ -9,7 +10,8 @@ import 'package:provider/provider.dart';
 import '../perbaikan/perbaikan_add.dart';
 import '../perbaikan/perbaikan_delete.dart';
 import '../perbaikan/perbaikan_edit.dart';
-
+import '../services/service.dart';
+import 'package:gabriel_logistik/helper/custompaint.dart';
 class PerbaikanPage extends StatefulWidget {
   const PerbaikanPage({super.key});
 
@@ -18,8 +20,29 @@ class PerbaikanPage extends StatefulWidget {
 }
 
 class _PerbaikanPageState extends State<PerbaikanPage> {
-  @override
+   late List<Perbaikan> listTransaksi;
+
+ 
+  bool loading = true;
+  initData() async {
+//    test=      await Service.test2();
+// await Service.test();
+// await Service.postSupir();
+// await Service.deleteSupir();
+// await Service.test3();
+    listTransaksi = await Service.getAllPerbaikan();
+
+    Provider.of<ProviderData>(context, listen: false)
+        .setData([], false, [], [], listTransaksi, [], []);
+
+    loading = false;
+
+    setState(() {});
+  }
+
+ 
   void initState() {
+    initData();
                           Provider.of<ProviderData>(context, listen: false)
                             .searchperbaikan('',false);
                                 Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
@@ -28,7 +51,11 @@ class _PerbaikanPageState extends State<PerbaikanPage> {
    List<Perbaikan> data=[];
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProviderData>(builder: (context, c, h) {
+    return  loading==true
+        ? Center(
+            child: CustomPaints(),
+          )
+        : Consumer<ProviderData>(builder: (context, c, h) {
           data=c. listPerbaikan.where((element) => element.adminitrasi==false). toList();
   data.sort((a, b) => DateTime.parse(b.tanggal)
           .compareTo(DateTime.parse(a.tanggal)));
