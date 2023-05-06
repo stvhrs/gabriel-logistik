@@ -221,7 +221,8 @@ class _BeliAddState extends State<BeliAdd> {
                                       Provider.of<ProviderData>(context,
                                               listen: false)
                                           .addMobil(Mobil.fromMap({'id_mobil':data.id_mobil,'plat_mobil':data.mobil,"ket_mobil":data.ketMobil}, []));
-
+data.mobil=jualBeliMobil.mobil;
+data.ketMobil=jualBeliMobil.ketMobil;
                                       Provider.of<ProviderData>(context,
                                               listen: false)
                                           .addJualBeliMobil(data);

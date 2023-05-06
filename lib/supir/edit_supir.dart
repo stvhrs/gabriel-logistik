@@ -96,14 +96,14 @@ class EditSupir extends StatelessWidget {
                       }
 
                          var data = await Service.updateSupir(
-                            {'id_supir':supir.id,'nama_supir': supir.nama_supir, "no_hp": supir.nohp_supir});
+                            {'id_supir':supir.id,'nama_supir': supir.nama_supir, "no_hp": supir.nohp_supir,});
 
                         if (data != null) {
                           Provider.of<ProviderData>(context, listen: false)
                               .updateSupir(data);
                         }else{
                            _btnController.error();
-                         await Future.delayed(Duration(milliseconds: 500));
+                         await Future.delayed(const Duration(milliseconds: 500));
                           _btnController.reset();
                           return;
                         }

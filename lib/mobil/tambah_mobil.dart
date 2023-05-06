@@ -112,7 +112,7 @@ class TambahMobil extends StatelessWidget {
                               .addMobil(data);
                         }else{
                          _btnController.error();
-                         await Future.delayed(Duration(milliseconds: 500));
+                         await Future.delayed(const Duration(milliseconds: 500));
                           _btnController.reset();
                           return;
                         }

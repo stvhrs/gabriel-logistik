@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/administrasi/perbaikan_add.dart';
-import 'package:gabriel_logistik/administrasi/perbaikan_delete.dart';
-import 'package:gabriel_logistik/administrasi/perbaikan_edit.dart';
+import 'package:gabriel_logistik/administrasi/admin_add.dart';
+import 'package:gabriel_logistik/administrasi/admin_delete.dart';
+import 'package:gabriel_logistik/administrasi/admin_edit.dart';
 import 'package:gabriel_logistik/helper/format_tanggal.dart';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 
@@ -45,7 +45,7 @@ class _AdministrasiPageState extends State<AdministrasiPage> {
  
   @override
   void initState() {
-    initData();
+        if (mounted){ initData();}
                           Provider.of<ProviderData>(context, listen: false)
                             .searchperbaikan('',false);
                                 Provider.of<ProviderData>(context, listen: false).searchMobil('', false);

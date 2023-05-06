@@ -18,6 +18,7 @@ class MobilTile extends StatefulWidget {
 
 class _MobilTileState extends State<MobilTile> {
   bool deleteable = true;
+  @override
   initState(){
       for (var element
         in Provider.of<ProviderData>(context, listen: false).listTransaksi) {

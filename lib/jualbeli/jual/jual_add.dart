@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 
 import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
-import 'package:gabriel_logistik/models/mobil.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:flutter/material.dart';
@@ -248,14 +247,8 @@ class _JualAddState extends State<JualAdd> {
                                     });
 
                                     if (data != null) {
-                                      Provider.of<ProviderData>(context,
-                                              listen: false)
-                                          .updateMobil(Mobil.fromMap({
-                                        'id_mobil': data.id_mobil,
-                                        'plat_mobil': data.mobil,
-                                        "ket_mobil": data.ketMobil,
-                                        "terjual": "true"
-                                      }, []));
+                                     data.mobil=jualBeliMobil.mobil;
+data.ketMobil=jualBeliMobil.ketMobil;
 
                                       Provider.of<ProviderData>(context,
                                               listen: false)

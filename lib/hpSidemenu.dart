@@ -73,7 +73,7 @@ class _DashBoardHpState extends State<DashBoardHp> {
 
   @override
   void initState() {
-    initData();
+        if (mounted){ initData();}
 
     super.initState();
   }

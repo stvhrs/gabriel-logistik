@@ -11,13 +11,13 @@ class   JualBeliMobil {
       this.tanggal, this.beli, this.keterangan);
   factory JualBeliMobil.fromMap(Map<String, dynamic> data) {
     return JualBeliMobil(
-        data['id_jb'],
-        data['id_mobil'],
-        data['plat_mobil'],
-        'ketarangan[]',
-        double.parse(data['harga_jb']),
-        data['tgl_jb'],
-        data['jualOrBeli'] == "true",
-        data['ket_jb']);
+        data['id_jb']??"",
+        data['id_mobil']??"",
+        data['plat_mobil']??"",
+       data[ 'ket_mobil']??"",
+        double.parse(data['harga_jb'].toString()),
+        data['tgl_jb']??"",
+        data['jualOrBeli']== "true",
+        data['ket_jb']??"");
   }
 }

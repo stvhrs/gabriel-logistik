@@ -32,7 +32,7 @@ class _MutasiSaldoPageState extends State<MutasiSaldoPage> {
 
     Provider.of<ProviderData>(context, listen: false).searchperbaikan('',false);
     Provider.of<ProviderData>(context, listen: false).calculateSaldo();
-    //  Provider.of<ProviderData>(context, listen: false).searchHistorySaldo();
+
     Provider.of<ProviderData>(context, listen: false).calculateMutasi();
     log('calucalte mutasi page');
  

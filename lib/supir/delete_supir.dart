@@ -17,29 +17,31 @@ class SupirDelete extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        showDialog(barrierDismissible: false,
+        showDialog(
+            barrierDismissible: false,
             context: context,
             builder: (context) {
               return AlertDialog(
                 actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
-                title:  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text("Delete"), Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CircleAvatar(
-                                radius: 12,
-                                backgroundColor: Colors.white,
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Icon(
-                                    Icons.close,
-                                    
-                                    color: Colors.red,
-                                  ),
-                                )),
-                          ),
+                    const Text("Delete"),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                          radius: 12,
+                          backgroundColor: Colors.white,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Icon(
+                              Icons.close,
+                              color: Colors.red,
+                            ),
+                          )),
+                    ),
                   ],
                 ),
                 content: IntrinsicHeight(
@@ -49,7 +51,7 @@ class SupirDelete extends StatelessWidget {
                       margin: const EdgeInsets.only(bottom: 20),
                       child: const Text('Apakah Anda Yakin ?'),
                     ),
-                  ),                
+                  ),
                 ),
                 actions: <Widget>[
                   RoundedLoadingButton(
@@ -59,31 +61,26 @@ class SupirDelete extends StatelessWidget {
                     errorColor: Colors.red,
                     controller: _btnController,
                     onPressed: () async {
-                      if (false)
-                       {
+                      var data = await Service.updateSupir({
+                        'id_supir': supir.id,
+                        'nama_supir': supir.nama_supir,
+                        "no_hp": supir.nohp_supir,
+                        "terhapus": "true"
+                      });
+
+                      if (data != null) {
+                        Provider.of<ProviderData>(context, listen: false)
+                            .updateSupir(data);
+                      } else {
                         _btnController.error();
-                        await Future.delayed(const Duration(seconds: 1));
-                        _btnController.reset();
+                        await Future.delayed(const Duration(seconds: 1), () {
+                          _btnController.reset();
+                        });
                         return;
                       }
 
-  var data = await Service.deleteSupir(
-                            supir.id);
+                      _btnController.success();
 
-                        if (data != null) {
-                          Provider.of<ProviderData>(context, listen: false)
-                              .deleteSupir(data);
-                        }else{
-                             _btnController.error();
-                           await Future.delayed(const Duration(seconds: 1), () {
-                      _btnController.reset();
-                      });
-                          return;
-                        }
-                     
-                       
-                        _btnController.success();
-                  
                       await Future.delayed(const Duration(seconds: 1), () {
                         Navigator.of(context).pop();
                       });

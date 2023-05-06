@@ -15,6 +15,9 @@ import '../models/perbaikan.dart';
 String base = 'https://cahayaover.site/api';
 
 class Service {
+
+
+  
   static Future<List<MutasiSaldo>> getAllMutasiSaldo() async {
     List<MutasiSaldo> data = [];
     final response = await http.get(
@@ -22,11 +25,12 @@ class Service {
         '$base/mutasiSaldo',
       ),
     );
-    print('${json.decode(response.body)}wkwekwe');
-    for (Map<String, dynamic> element in json.decode(response.body)[0]) {
+
+    for (Map<String, dynamic> element in json.decode(response.body)) {
       List<MutasiChild> mutasiChild = [];
-      for (Map<String, dynamic> e in element['detail_mutasi']) {
-        mutasiChild.add(MutasiChild.fromMap(e));
+      print(element['detail_mutasi']);
+      for (var e in json.decode(element['detail_mutasi'])) {
+        print(jsonDecode(e));
       }
 
       data.add(MutasiSaldo.fromMap(element, mutasiChild));
@@ -331,7 +335,7 @@ class Service {
   static Future<JualBeliMobil?> postJB(Map<String, dynamic> data) async {
     try {
       Mobil? mobil;
-      if (data["beli_jb"] == "false") {
+      if (data["jualOrBeli"] == "false") {
         mobil = await updateMobil({
           "id_mobil": data["id_mobil"],
           'plat_mobil': data["plat_mobil"],
@@ -365,8 +369,7 @@ class Service {
       //   log("tidak boleh sama");
       // }
       if (response.body.isNotEmpty) {
-        return JualBeliMobil.fromMap(
-            json.decode(response.body)["0"]["jualbeli"][0]);
+        return JualBeliMobil.fromMap(json.decode(response.body)["jualbeli"][0]);
       } else {
         return null;
       }
@@ -383,15 +386,36 @@ class Service {
         Uri.parse(
           '$base/jualBeli',
         ),
-      );
-
-      if (response.body.isNotEmpty) {
+      );print(json.decode(response.body));
+      
         return JualBeliMobil.fromMap(json.decode(response.body)["0"]);
-      }
+      
     } catch (e) {
       log(e.toString());
       return null;
     }
     return null;
+  }
+
+  static Future<List<MutasiSaldo>> postMutasi(
+      Map<String, dynamic> mutasi) async {
+    List<MutasiSaldo> data = [];
+    final response = await http.post(
+      body: mutasi,
+      Uri.parse(
+        '$base/mutasiSaldo',
+      ),
+    );
+
+    for (Map<String, dynamic> element in json.decode(response.body)) {
+      List<MutasiChild> mutasiChild = [];
+      print(element['detail_mutasi']);
+      for (Map<String, dynamic> e in json.decode(element['detail_mutasi'])) {
+        print(e);
+      }
+
+      data.add(MutasiSaldo.fromMap(element, mutasiChild));
+    }
+    return data;
   }
 }

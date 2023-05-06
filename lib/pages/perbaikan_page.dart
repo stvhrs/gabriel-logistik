@@ -11,7 +11,6 @@ import '../perbaikan/perbaikan_add.dart';
 import '../perbaikan/perbaikan_delete.dart';
 import '../perbaikan/perbaikan_edit.dart';
 import '../services/service.dart';
-import 'package:gabriel_logistik/helper/custompaint.dart';
 class PerbaikanPage extends StatefulWidget {
   const PerbaikanPage({super.key});
 
@@ -41,8 +40,9 @@ class _PerbaikanPageState extends State<PerbaikanPage> {
   }
 
  
+  @override
   void initState() {
-    initData();
+        if (mounted){ initData();}
                           Provider.of<ProviderData>(context, listen: false)
                             .searchperbaikan('',false);
                                 Provider.of<ProviderData>(context, listen: false).searchMobil('', false);

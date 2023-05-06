@@ -1,4 +1,3 @@
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
@@ -15,17 +14,17 @@ class RPSCustomPainter extends CustomPainter {
     @override
     void paint(Canvas canvas, Size size) {
             
-Paint paint_0_fill = Paint()..style=PaintingStyle.fill;
-paint_0_fill.color = Color(0xffffffff).withOpacity(1);
-canvas.drawRect(Rect.fromLTWH(size.width*-0.1000000,size.height*-0.1000000,size.width*1.200000,size.height*1.200000),paint_0_fill);
+Paint paint0Fill = Paint()..style=PaintingStyle.fill;
+paint0Fill.color = const Color(0xffffffff).withOpacity(1);
+canvas.drawRect(Rect.fromLTWH(size.width*-0.1000000,size.height*-0.1000000,size.width*1.200000,size.height*1.200000),paint0Fill);
 
-Paint paint_1_fill = Paint()..style=PaintingStyle.fill;
-paint_1_fill.color = Color(0xffffffff).withOpacity(1);
-canvas.drawRect(Rect.fromLTWH(size.width*-0.1000000,size.height*-0.1000000,size.width*1.200000,size.height*1.200000),paint_1_fill);
+Paint paint1Fill = Paint()..style=PaintingStyle.fill;
+paint1Fill.color = const Color(0xffffffff).withOpacity(1);
+canvas.drawRect(Rect.fromLTWH(size.width*-0.1000000,size.height*-0.1000000,size.width*1.200000,size.height*1.200000),paint1Fill);
 
-Paint paint_2_fill = Paint()..style=PaintingStyle.fill;
-paint_2_fill.color = Color(0xffffffff).withOpacity(1);
-canvas.drawRect(Rect.fromLTWH(size.width*-0.1000000,size.height*-0.1000000,size.width*1.200000,size.height*1.200000),paint_2_fill);
+Paint paint2Fill = Paint()..style=PaintingStyle.fill;
+paint2Fill.color = const Color(0xffffffff).withOpacity(1);
+canvas.drawRect(Rect.fromLTWH(size.width*-0.1000000,size.height*-0.1000000,size.width*1.200000,size.height*1.200000),paint2Fill);
 
 }
 

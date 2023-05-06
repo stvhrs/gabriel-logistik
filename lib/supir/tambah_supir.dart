@@ -98,14 +98,14 @@ class TambahSupir extends StatelessWidget {
                           return;
                         }
                         var data = await Service.postSupir(
-                            {'nama_supir': namaMobil, "no_hp": noHp});
+                            {'nama_supir': namaMobil, "no_hp": noHp,"terhapus":"false"});
 
                         if (data != null) {
                           Provider.of<ProviderData>(context, listen: false)
                               .addSupir(data);
                         }else{
                           _btnController.error();
-                         await Future.delayed(Duration(milliseconds: 500));
+                         await Future.delayed(const Duration(milliseconds: 500));
                           _btnController.reset();
                           return;
 

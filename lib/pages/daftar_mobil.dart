@@ -7,7 +7,6 @@ import 'package:gabriel_logistik/services/service.dart';
 import 'package:provider/provider.dart';
 import 'package:gabriel_logistik/helper/custompaint.dart';
 import '../models/mobil.dart';
-import 'package:gabriel_logistik/helper/custompaint.dart';
 class DaftarMobil extends StatefulWidget {
   const DaftarMobil({super.key});
 
@@ -38,7 +37,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
   }
   @override
   void initState() {
-    initData();
+        if (mounted){ initData();}
     Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
     super.initState();
   }

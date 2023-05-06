@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_add.dart';
@@ -10,10 +9,6 @@ import 'package:gabriel_logistik/transaksi/transaksi_search_tujuan.dart';
 import 'package:gabriel_logistik/transaksi/transaksi_tile.dart';
 import 'package:provider/provider.dart';
 
-import '../models/jual_beli_mobil.dart';
-import '../models/mobil.dart';
-import '../models/mutasi_saldo.dart';
-import '../models/perbaikan.dart';
 import '../services/service.dart';
 import 'package:gabriel_logistik/helper/custompaint.dart';
 class TransaksiPage extends StatefulWidget {
@@ -46,7 +41,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
 
   @override
   void initState() {
-    initData();
+        if (mounted){ initData();}
 
     Provider.of<ProviderData>(context, listen: false).start = null;
     Provider.of<ProviderData>(context, listen: false).end = null;

@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    initData();
+        if (mounted){ initData();}
 
     super.initState();
   }

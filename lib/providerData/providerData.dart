@@ -100,11 +100,15 @@ class ProviderData with ChangeNotifier {
       backupTransaksi.addAll(data);
     }
     if (mobilData.isNotEmpty) {
+        listMobil.clear();
+        backupListMobil.clear();
       backupListMobil.addAll(mobilData);
 
       listMobil.addAll(mobilData);
     }
     if (supirData.isNotEmpty) {
+       listSupir.clear();
+        backupListSupir.clear();
       listSupir.addAll(supirData);
       backupListSupir.addAll(supirData);
     }
@@ -116,7 +120,9 @@ class ProviderData with ChangeNotifier {
     calculateSaldo();
 
     (listen) ? notifyListeners() : () {};
+    
   }
+  
 
   void calculateSaldo() {
     totalSaldo = 0;
@@ -296,8 +302,8 @@ class ProviderData with ChangeNotifier {
 
   void updateJualBeliMobil(JualBeliMobil jualBeliMobil) {
     int data = listJualBeliMobil.indexWhere((element) =>
-        (element.mobil + element.tanggal) ==
-        (jualBeliMobil.mobil + jualBeliMobil.tanggal));
+        element.id  ==
+        jualBeliMobil.id );
     listJualBeliMobil[data] = jualBeliMobil;
     notifyListeners();
   }

@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
 import '../../helper/input_currency.dart';
+import '../../services/service.dart';
 
 class JualEdit extends StatefulWidget {
   final JualBeliMobil jualBeliMobil;
@@ -26,11 +27,11 @@ class _JualEditState extends State<JualEdit> {
   @override
   void initState() {
     Provider.of<ProviderData>(context, listen: false)
-       .listMobil.where((element) => element.terjual==false)
+        .listMobil
+        .where((element) => element.terjual == false)
         .map((e) => e.nama_mobil)
         .toList()
         .forEach((element) {
-
       if (listMobil.contains(element)) {
       } else {
         listMobil.add(element);
@@ -39,18 +40,18 @@ class _JualEditState extends State<JualEdit> {
 
     super.initState();
   }
- 
+
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
- 
+
   TextStyle small = const TextStyle(fontSize: 13.5);
   Widget _buildSize(widget, String ket, int flex) {
-
     return Expanded(
       flex: flex,
       child: Container(
         width: MediaQuery.of(context).size.width * 0.14 * flex,
-        margin: EdgeInsets.only(left: ket=='Tanggal'||ket=='Keterangan'?0: 50, bottom: 30),
+        margin: EdgeInsets.only(
+            left: ket == 'Tanggal' || ket == 'Keterangan' ? 0 : 50, bottom: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -74,12 +75,11 @@ class _JualEditState extends State<JualEdit> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-    
-        icon:const Icon(Icons.edit,color: Colors.green,),
-        
+        icon: const Icon(
+          Icons.edit,
+          color: Colors.green,
+        ),
         onPressed: () {
-
-
           showDialog(
               barrierDismissible: false,
               context: context,
@@ -133,9 +133,11 @@ class _JualEditState extends State<JualEdit> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     _buildSize(
-                                             WebDatePicker(lastDate: DateTime.now(),
+                                        WebDatePicker(
+                                          lastDate: DateTime.now(),
                                           height: 60,
-                                          initialDate:DateTime.parse(widget.jualBeliMobil.tanggal) ,
+                                          initialDate: DateTime.parse(
+                                              widget.jualBeliMobil.tanggal),
                                           dateformat: 'dd/MM/yyyy',
                                           onChange: (value) {
                                             if (value != null) {
@@ -146,30 +148,39 @@ class _JualEditState extends State<JualEdit> {
                                         ),
                                         'Tanggal',
                                         1),
-                                  
                                     _buildSize(
-                                        TextFormField(initialValue: widget.jualBeliMobil.mobil,enabled: false,
+                                        TextFormField(
+                                          initialValue:
+                                              widget.jualBeliMobil.mobil,
+                                          enabled: false,
                                           onChanged: (val) {
                                             widget.jualBeliMobil.mobil = val;
-                                            
                                           },
-                                       
                                         ),
                                         'Pilih Mobil',
-                                        1),  _buildSize(
+                                        1),
+                                    _buildSize(
                                         TextFormField(
-                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.jualBeliMobil.ketMobil,
+                                          style: const TextStyle(fontSize: 13),
+                                          textInputAction: TextInputAction.next,
+                                          readOnly: true,
+                                          initialValue:
+                                              widget.jualBeliMobil.ketMobil,
                                           onChanged: (va) {
-                                            widget.jualBeliMobil.ketMobil=va;
+                                            widget.jualBeliMobil.ketMobil = va;
                                           },
                                         ),
                                         'Keterangan Mobil',
                                         1),
                                     _buildSize(
                                         TextFormField(
-                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue:Rupiah.format( widget.jualBeliMobil.harga),
+                                          style: const TextStyle(fontSize: 13),
+                                          textInputAction: TextInputAction.next,
+                                          initialValue: Rupiah.format(
+                                              widget.jualBeliMobil.harga),
                                           onChanged: (va) {
-                                            widget.jualBeliMobil.harga=Rupiah.parse(va);
+                                            widget.jualBeliMobil.harga =
+                                                Rupiah.parse(va);
                                           },
                                           inputFormatters: [
                                             FilteringTextInputFormatter
@@ -185,49 +196,80 @@ class _JualEditState extends State<JualEdit> {
                                   children: [
                                     _buildSize(
                                         TextFormField(
-                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,
+                                          style: const TextStyle(fontSize: 13),
+                                          textInputAction: TextInputAction.next,
+                                          initialValue:
+                                              widget.jualBeliMobil.keterangan,
                                           onChanged: (va) {
-                                            widget.jualBeliMobil.keterangan=va;
+                                            widget.jualBeliMobil.keterangan =
+                                                va;
                                           },
                                         ),
                                         'Keterangan',
                                         2),
                                   ],
-                                ),RoundedLoadingButton(
-                                          color:Colors.green,
-                                          elevation: 10,
-                                          successColor: Colors.green,
-                                          errorColor: Colors.red,
-                                          controller: _btnController,
-                                          onPressed: () async {
-                                            if (widget.jualBeliMobil.harga==0||widget.jualBeliMobil.tanggal.isEmpty||widget.jualBeliMobil.mobil.isEmpty) {
-                                              _btnController.error();
-                                              await Future.delayed(
-                                                  const Duration(seconds: 1));
-                                              _btnController.reset();
-                                              return;
-                                            }
+                                ),
+                                RoundedLoadingButton(
+                                  color: Colors.green,
+                                  elevation: 10,
+                                  successColor: Colors.green,
+                                  errorColor: Colors.red,
+                                  controller: _btnController,
+                                  onPressed: () async {
+                                    if (widget.jualBeliMobil.harga == 0 ||
+                                        widget.jualBeliMobil.tanggal.isEmpty ||
+                                        widget.jualBeliMobil.mobil.isEmpty) {
+                                      _btnController.error();
+                                      await Future.delayed(
+                                          const Duration(seconds: 1));
+                                      _btnController.reset();
+                                      return;
+                                    }
+                                    var data = await Service.updateJb({
+                                      'id_jb': widget.jualBeliMobil.id,"id_mobil":widget.jualBeliMobil.id_mobil,
+                                      'plat_mobil': widget.jualBeliMobil.mobil,
+                                      'ket_mobil':
+                                          widget.jualBeliMobil.ketMobil,
+                                      'harga_jb':
+                                          widget.jualBeliMobil.harga.toString(),
+                                      'tgl_jb': widget.jualBeliMobil.tanggal,
+                                      'jualOrBeli': "false",
+                                      'ket_jb':  widget.jualBeliMobil.keterangan
+                                    });
 
-                                            await Future.delayed(
-                                                const Duration(seconds: 3), () {
-                                            
-                                                Provider.of<ProviderData>(
-                                                        context,
-                                                        listen: false)
-                                                  .updateJualBeliMobil(widget.jualBeliMobil);
-                                              
- 
-                                              _btnController.success();
-                                            });
-                                            await Future.delayed(
-                                                const Duration(seconds: 1), () {
-                                              Navigator.of(context).pop();
-                                            });
-                                          },
-                                          child: const Text('Edit',
-                                              style: TextStyle(
-                                                  color: Colors.white)),
-                                        )
+                                    if (data != null) {
+                                      Provider.of<ProviderData>(context,
+                                              listen: false)
+                                          .updateJualBeliMobil(data);
+                                    } else {
+                                      _btnController.error();
+                                      await Future.delayed(
+                                          const Duration(seconds: 1), () {});
+                                      _btnController.reset();
+                                      return;
+                                    }
+
+                                    Provider.of<ProviderData>(context,
+                                            listen: false)
+                                        .updateJualBeliMobil(
+                                            widget.jualBeliMobil);
+
+                                    _btnController.success();
+
+                                    await Future.delayed(
+                                        const Duration(seconds: 1), () {
+                                      Navigator.of(context).pop();
+                                    });
+                                    _btnController.success();
+
+                                    await Future.delayed(
+                                        const Duration(seconds: 1), () {
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                  child: const Text('Edit',
+                                      style: TextStyle(color: Colors.white)),
+                                )
                               ],
                             ),
                           ),

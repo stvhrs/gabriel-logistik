@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
 
-
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:web_date_picker/web_date_picker.dart';
 
 import '../../helper/input_currency.dart';
-
+import '../../services/service.dart';
 
 class BeliEdit extends StatefulWidget {
   final JualBeliMobil jualBeliMobil;
@@ -22,18 +21,17 @@ class BeliEdit extends StatefulWidget {
 }
 
 class _BeliEditState extends State<BeliEdit> {
- 
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
 
   TextStyle small = const TextStyle(fontSize: 13.5);
   Widget _buildSize(widget, String ket, int flex) {
-
     return Expanded(
       flex: flex,
       child: Container(
         width: MediaQuery.of(context).size.width * 0.14 * flex,
-        margin: EdgeInsets.only(left: ket=='Tanggal'||ket=='Keterangan'?0: 50, bottom: 30),
+        margin: EdgeInsets.only(
+            left: ket == 'Tanggal' || ket == 'Keterangan' ? 0 : 50, bottom: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -56,12 +54,12 @@ class _BeliEditState extends State<BeliEdit> {
 
   @override
   Widget build(BuildContext context) {
-    return  IconButton(
-    
-        icon:const Icon(Icons.edit,color: Colors.green,),
-        
+    return IconButton(
+        icon: const Icon(
+          Icons.edit,
+          color: Colors.green,
+        ),
         onPressed: () {
-
           showDialog(
               barrierDismissible: false,
               context: context,
@@ -115,13 +113,14 @@ class _BeliEditState extends State<BeliEdit> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     _buildSize(
-                                             WebDatePicker(lastDate: DateTime.now(),
+                                        WebDatePicker(
+                                          lastDate: DateTime.now(),
                                           height: 60,
                                           initialDate: DateTime.now(),
                                           dateformat: 'dd/MM/yyyy',
                                           onChange: (value) {
                                             if (value != null) {
-                                        widget.      jualBeliMobil.tanggal =
+                                              widget.jualBeliMobil.tanggal =
                                                   value.toIso8601String();
                                             }
                                           },
@@ -130,27 +129,34 @@ class _BeliEditState extends State<BeliEdit> {
                                         1),
                                     _buildSize(
                                         TextFormField(
-                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,readOnly: true,initialValue: widget.jualBeliMobil.mobil,
-                                          onChanged: (va) {
-                                           
-                                          },
+                                          style: const TextStyle(fontSize: 13),
+                                          textInputAction: TextInputAction.next,
+                                          readOnly: true,
+                                          initialValue:
+                                              widget.jualBeliMobil.mobil,
+                                          onChanged: (va) {},
                                         ),
                                         'Mobil',
                                         1),
-                                          _buildSize(
+                                    _buildSize(
                                         TextFormField(
-                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil
-                                        .ketMobil,readOnly: true,
-                                         
+                                          style: const TextStyle(fontSize: 13),
+                                          textInputAction: TextInputAction.next,
+                                          initialValue:
+                                              widget.jualBeliMobil.ketMobil,
+                                          readOnly: true,
                                         ),
                                         'Keterangan Mobil',
                                         1),
-                                    
                                     _buildSize(
                                         TextFormField(
-                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: Rupiah.format(widget.jualBeliMobil.harga),
+                                          style: const TextStyle(fontSize: 13),
+                                          textInputAction: TextInputAction.next,
+                                          initialValue: Rupiah.format(
+                                              widget.jualBeliMobil.harga),
                                           onChanged: (va) {
-                                         widget.   jualBeliMobil.harga=Rupiah.parse(va);
+                                            widget.jualBeliMobil.harga =
+                                                Rupiah.parse(va);
                                           },
                                           inputFormatters: [
                                             FilteringTextInputFormatter
@@ -166,50 +172,74 @@ class _BeliEditState extends State<BeliEdit> {
                                   children: [
                                     _buildSize(
                                         TextFormField(
-                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,initialValue: widget.jualBeliMobil.keterangan,onChanged: (val){
-                                       widget.     jualBeliMobil.keterangan=val;
-                                        },
-                                        
+                                          style: const TextStyle(fontSize: 13),
+                                          textInputAction: TextInputAction.next,
+                                          initialValue:
+                                              widget.jualBeliMobil.keterangan,
+                                          onChanged: (val) {
+                                            widget.jualBeliMobil.keterangan =
+                                                val;
+                                          },
                                         ),
                                         'Keterangan',
                                         2),
                                   ],
-                                ),RoundedLoadingButton(
-                                          color: Colors.green,
-                                          elevation: 10,
-                                          successColor: Colors.green,
-                                          errorColor: Colors.red,
-                                          controller: _btnController,
-                                          onPressed: () async {
-                                            if (widget.jualBeliMobil.harga==0||widget.jualBeliMobil.tanggal.isEmpty||widget.jualBeliMobil.mobil.isEmpty) {
-                                              _btnController.error();
-                                              await Future.delayed(
-                                                  const Duration(seconds: 1));
-                                              _btnController.reset();
-                                              return;
-                                            }
+                                ),
+                                RoundedLoadingButton(
+                                  color: Colors.green,
+                                  elevation: 10,
+                                  successColor: Colors.green,
+                                  errorColor: Colors.red,
+                                  controller: _btnController,
+                                  onPressed: () async {
+                                    if (widget.jualBeliMobil.harga == 0 ||
+                                        widget.jualBeliMobil.tanggal.isEmpty ||
+                                        widget.jualBeliMobil.mobil.isEmpty) {
+                                      _btnController.error();
+                                      await Future.delayed(
+                                          const Duration(seconds: 1));
+                                      _btnController.reset();
+                                      return;
+                                    }
+                                    var data = await Service.updateJb({'id_jb':widget.jualBeliMobil.id,"id_mobil":widget.jualBeliMobil.id_mobil,
+                                      'plat_mobil': widget.jualBeliMobil.mobil,
+                                      'ket_mobil':
+                                          widget.jualBeliMobil.ketMobil,
+                                      'harga_jb':
+                                          widget.jualBeliMobil.harga.toString(),
+                                      'tgl_jb': widget.jualBeliMobil.tanggal,
+                                      'jualOrBeli': "true",
+                                      'ket_jb': widget.jualBeliMobil.keterangan
+                                    });
 
-                                            await Future.delayed(
-                                                const Duration(seconds: 3), () {
-                                            
-                                                Provider.of<ProviderData>(
-                                                        context,
-                                                        listen: false)
-                                                    .updateJualBeliMobil(widget.jualBeliMobil);
-                                                
-                                              
+                                    if (data != null) {
+                                     
+                                      Provider.of<ProviderData>(context,
+                                              listen: false)
+                                          .updateJualBeliMobil(data);
+                                    } else {
+                                      _btnController.error();
+                                      await Future.delayed(
+                                          const Duration(seconds: 1), () {});
+                                      _btnController.reset();
+                                      return;
+                                    }
 
-                                              _btnController.success();
-                                            });
-                                            await Future.delayed(
-                                                const Duration(seconds: 1), () {
-                                              Navigator.of(context).pop();
-                                            });
-                                          },
-                                          child: const Text('Edit',
-                                              style: TextStyle(
-                                                  color: Colors.white)),
-                                        )
+                                    Provider.of<ProviderData>(context,
+                                            listen: false)
+                                        .updateJualBeliMobil(
+                                            widget.jualBeliMobil);
+
+                                    _btnController.success();
+
+                                    await Future.delayed(
+                                        const Duration(seconds: 1), () {
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                  child: const Text('Edit',
+                                      style: TextStyle(color: Colors.white)),
+                                )
                               ],
                             ),
                           ),

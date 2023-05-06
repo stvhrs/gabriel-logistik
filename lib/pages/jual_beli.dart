@@ -41,7 +41,7 @@ class _JualBeliState extends State<JualBeli> {
   }
   @override
   void initState() {
-initData();
+    if (mounted){ initData();}
     super.initState();
   }
   int currentSegment = 0;
@@ -156,6 +156,7 @@ initData();
             Consumer<ProviderData>(builder: (context, c, h) {
                  List<JualBeliMobil> listMutasi=[];
                 List<JualBeliMobil> listMutasi2=[];
+                 
                       if(currentSegment==0){
                         for (var element in c.listJualBeliMobil) {
                           if(element.beli){  listMutasi.add(element);}
@@ -167,7 +168,10 @@ initData();
                           if(!element.beli){  listMutasi2.add(element);}
                         
                         }
-                      }
+                      } listMutasi.sort((a, b) => DateTime.parse(b.tanggal)
+                .compareTo(DateTime.parse(a.tanggal)));
+                     listMutasi2.sort((a, b) => DateTime.parse(b.tanggal)
+                .compareTo(DateTime.parse(a.tanggal)));
               return currentSegment==0?
                SizedBox(
                   height: MediaQuery.of(context).size.height * 0.7,

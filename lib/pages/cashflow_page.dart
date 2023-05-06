@@ -43,7 +43,7 @@ class _CashFlowState extends State<CashFlow> {
   }
   @override
   void initState() {
-    initData();
+        if (mounted){ initData();}
    
  
 

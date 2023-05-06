@@ -35,7 +35,8 @@ class _DaftarSupirState extends State<DaftarSupir> {
   }
   @override
   void initState() {
-    initData();
+    if (mounted){   initData();}
+   
      Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
     Provider.of<ProviderData>(context, listen: false).searchSupir('', false);
     super.initState();
@@ -126,7 +127,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
               ),
             ),
             Consumer<ProviderData>(builder: (context, c, h) {
-             List<Supir> data=c.listSupir.reversed.toList() .where((element) => element.nama_supir!='') .toList();
+             List<Supir> data=c.listSupir .where((element) => element.delted==false) .toList().reversed.toList();
               return SizedBox(
                   height: MediaQuery.of(context).size.height * 0.7,
                   child: ListView.builder(
