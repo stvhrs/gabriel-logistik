@@ -19,8 +19,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   List<Map<String, dynamic>> data = [
-    {'user': 'owner', 'pass': '123', 'status': 'owner'},
-    {'user': 'admin', 'pass': '123', 'status': 'admin'},
+    {'user': 'AriefCT5', 'pass': 'CahayaTrans5', 'status': 'owner'},
+    {'user': 'Operator5', 'pass': 'HanyalahAdmin', 'status': 'admin'},
   ];
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();

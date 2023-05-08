@@ -43,7 +43,7 @@ class _TransaksiTileState extends State<TransaksiTile> {
                           widget._transaksi.tanggalBerangkat)
                       .toString())),
          
-          Expanded(flex: 7, child: Text(widget._transaksi.mobil)),
+          Expanded(flex: 5, child: Text(widget._transaksi.mobil)),
 
           Expanded(
               flex: 5,

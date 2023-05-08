@@ -83,7 +83,7 @@ class _JualBeliState extends State<JualBeli> {
                       bottomLeft: Radius.circular(5),
                       bottomRight: Radius.circular(5))),
               child: const Text(
-                'Inventory',
+                'Jual Beli Unit',
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Nunito',

@@ -24,7 +24,8 @@ class TransaksiAdd extends StatefulWidget {
 class _TransaksiAddState extends State<TransaksiAdd> {
   List<String> listSupir = [];
   List<String> listMobil = [];
-  List<Transaksi> bulkTransaksi = [];
+  final List<Transaksi> bulkTransaksi = [];
+
   TextEditingController controlerSisa = TextEditingController();
   TextEditingController controlerOngkos = TextEditingController();
   TextEditingController controlerKeluar = TextEditingController();
@@ -36,7 +37,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
   @override
   void initState() {
     Provider.of<ProviderData>(context, listen: false)
-        .listSupir
+        .listSupir.where((element) => element.delted==false)
         .map((e) => e.nama_supir)
         .toList()
         .forEach((element) {
@@ -85,7 +86,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
         //           )),
         Container(
       margin: const EdgeInsets.only(bottom: 15, left: 10),
-      height: 36,
+      height: 28,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         // clipBehavior: Clip.none,
@@ -209,7 +210,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                           "Tanggal",
                                           1),
                                       _buildSize(
-                                          PopupMenuButton<String>(
+                                          PopupMenuButton<String>(padding: EdgeInsets.all(10),
                                             color: Colors.grey.shade300,
                                             elevation: 2,
                                             shape: RoundedRectangleBorder(
@@ -384,7 +385,19 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             },
                                           ),
                                           "Ketik Tujuan",
-                                          1),
+                                          1), _buildSize(
+                                          TextFormField(
+                                              style:
+                                                  const TextStyle(fontSize: 13),
+                                              textInputAction:
+                                                  TextInputAction.next,
+                                              controller: controlerKeterangan,
+                                              onChanged: (val) {
+                                                transaksi.keterangan = val;
+                                                setState(() {});
+                                              }),
+                                          "Keterangan",
+                                          2),
                                     
                                       _buildSize(
                                           TextFormField(
@@ -424,7 +437,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                               CurrencyInputFormatter()
                                             ],
                                           ),
-                                          "Biaya Ongkos",
+                                          "Biaya Ongkosan",
                                           1),
                                       _buildSize(
                                           TextFormField(
@@ -492,19 +505,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                           ),
                                           "Sisa",
                                           1),
-                                      _buildSize(
-                                          TextFormField(
-                                              style:
-                                                  const TextStyle(fontSize: 13),
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              controller: controlerKeterangan,
-                                              onChanged: (val) {
-                                                transaksi.keterangan = val;
-                                                setState(() {});
-                                              }),
-                                          "Keterangan",
-                                          2),
+                                     
                                       const Spacer(),
                                       Container(
                                         child: ElevatedButton.icon(
@@ -532,38 +533,31 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                     transaksi.keluar == 0)
                                                 ? null
                                                 : () {
+                                                  Transaksi temp=Transaksi("", transaksi.id_supir, 
+                                                  transaksi.id_mobil,transaksi. tanggalBerangkat,transaksi. keterangan,transaksi.
+                                                   supir, transaksi. mobil, transaksi.  keterangan_mobill, transaksi.  tujuan,  transaksi. 
+                                                   keluar, transaksi.  ongkos,  transaksi. sisa);
+                                               
                                                     bulkTransaksi
-                                                        .add(transaksi);
-                                                    controlerKetMobil.text = "";
-                                                    controlerMobil.text =
-                                                        "Pilih Mobil";
-                                                    controlerKeterangan.text =
-                                                        "";
-                                                    controlerOngkos.text = "";
-                                                    controlerKeluar.text = "";
-                                                    controlerSisa.text = "";
-                                                    controlerSupir.text =
-                                                        "Pilih Supir";
-                                                    controlerKetMobil.text = "";
-                                                    controlerTujuan.text = "";
+                                                        .add(temp);
+                                                    // controlerKetMobil.text = "";
+                                                    // controlerMobil.text =
+                                                    //     "Pilih Mobil";
+                                                    // controlerKeterangan.text =
+                                                    //     "";
+                                                    // controlerOngkos.text = "";
+                                                    // controlerKeluar.text = "";
+                                                    // controlerSisa.text = "";
+                                                    // controlerSupir.text =
+                                                    //     "Pilih Supir";
+                                                    // controlerKetMobil.text = "";
+                                                    // controlerTujuan.text = "";
 
-                                                    transaksi =
-                                                        Transaksi.fromMap({
-                                                      "id_transaksi": "0",
-                                                      "id_mobil": "0",
-                                                      "plat_mobil": "Pilih Mobil",
-                                                      "id_supir": "0",
-                                                      "nama_supir": "Pilih Supir",
-                                                      "tanggal": DateTime.now()
-                                                          .toIso8601String(),
-                                                      "ket_transaksi": "k",
-                                                      "tujuan": "0",
-                                                      "ongkosan": "0",
-                                                      "keluar": "0",
-                                                      "sisa": "0"
-                                                    });
+                                                    
 
-                                                    setState(() {});
+                                                   setState(() {
+                                                     
+                                                   },);
                                                   }),
                                       ),
                                     ],
@@ -671,7 +665,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                         ),
                                       ),
                                       Expanded(
-                                        child: ListView(
+                                        child: ListView(addAutomaticKeepAlives: false,
                                             padding: EdgeInsets.zero,
                                             children: bulkTransaksi.reversed
                                                 .toList()
@@ -691,9 +685,9 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                               padding:
                                                                   const EdgeInsets
                                                                           .only(
-                                                                      top: 10,
+                                                                      top: 2,
                                                                       bottom:
-                                                                          12.5,
+                                                                        2,
                                                                       left: 15,
                                                                       right:
                                                                           15),
@@ -867,7 +861,24 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                       ),
                     ),
                   );
-                }).then((value) => {bulkTransaksi.clear()});
+                }).then((value) => {bulkTransaksi.clear(),
+                
+                transaksi =
+                                                        Transaksi.fromMap({
+                                                      "id_transaksi": "0",
+                                                      "id_mobil": "0",
+                                                      "plat_mobil": "Pilih Mobil",
+                                                      "id_supir": "0",
+                                                      "nama_supir": "Pilih Supir",
+                                                      "tanggal": DateTime.now()
+                                                          .toIso8601String(),
+                                                      "ket_transaksi": "k",
+                                                      "tujuan": "0",
+                                                      "ongkosan": "0",
+                                                      "keluar": "0",
+                                                      "sisa": "0"
+                                                    })
+                });
           }),
     );
   }

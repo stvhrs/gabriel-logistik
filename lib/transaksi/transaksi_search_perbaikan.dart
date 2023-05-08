@@ -14,7 +14,7 @@ class _SearchPerbaikanState extends State<SearchPerbaikan> {
   bool _selected = false;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Container(height: 36,
       margin: const EdgeInsets.all(8.0),
       child: Container(
         child: ChoiceChip(backgroundColor: _selected?Theme.of(context).colorScheme.secondary:Colors.grey.shade200,

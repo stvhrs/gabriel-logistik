@@ -69,13 +69,14 @@ class Logout extends StatelessWidget {
                             onPressed: () async {
                               await Future.delayed(const Duration(seconds: 1),
                                   () async {
-                                Navigator.of(context).pop();
+                             
                                 SharedPreferences prefs =
                                     await SharedPreferences.getInstance();
-                                prefs.clear();
+                          await      prefs.clear();
                                 Provider.of<ProviderData>(context,
                                         listen: false)
                                     .logout();
+                                       Navigator.of(context).pop();
                                 // Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context) => MyHomePage(title: ''),));
                               });
                             },

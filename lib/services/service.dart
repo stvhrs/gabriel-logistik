@@ -1,23 +1,17 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/mutasi_child.dart';
-
 import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:http/http.dart' as http;
-
 import '../models/mutasi_saldo.dart';
 import '../models/perbaikan.dart';
 
 String base = 'https://cahayaover.site/api';
 
 class Service {
-
-
-  
   static Future<List<MutasiSaldo>> getAllMutasiSaldo() async {
     List<MutasiSaldo> data = [];
     final response = await http.get(
@@ -26,15 +20,16 @@ class Service {
       ),
     );
 
-    for (Map<String, dynamic> element in json.decode(response.body)) {
+    for (Map<String, dynamic> element in json.decode(response.body)[0]) {
       List<MutasiChild> mutasiChild = [];
       print(element['detail_mutasi']);
-      for (var e in json.decode(element['detail_mutasi'])) {
-        print(jsonDecode(e));
+      for (var e in element['detail_mutasi']) {
+   mutasiChild.add(MutasiChild.fromMap(e));
       }
 
       data.add(MutasiSaldo.fromMap(element, mutasiChild));
     }
+    
     return data;
   }
 
@@ -386,10 +381,10 @@ class Service {
         Uri.parse(
           '$base/jualBeli',
         ),
-      );print(json.decode(response.body));
-      
-        return JualBeliMobil.fromMap(json.decode(response.body)["0"]);
-      
+      );
+      print(json.decode(response.body));
+
+      return JualBeliMobil.fromMap(json.decode(response.body)["0"]);
     } catch (e) {
       log(e.toString());
       return null;

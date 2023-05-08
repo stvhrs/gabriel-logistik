@@ -25,31 +25,42 @@ class _BeliAddState extends State<BeliAdd> {
   late JualBeliMobil jualBeliMobil;
   TextStyle small = const TextStyle(fontSize: 13.5);
   Widget _buildSize(widget, String ket, int flex) {
-    return Expanded(
-      flex: flex,
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.14 * flex,
-        margin: EdgeInsets.only(
-            left: ket == 'Tanggal' || ket == 'Keterangan' ? 0 : 50, bottom: 30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-                margin: const EdgeInsets.only(bottom: 7, top: 7),
-                child: Row(
-                  children: [
-                    Text(
-                      '$ket :',
-                      style: const TextStyle(fontSize: 13.5),
-                    ),
-                  ],
-                )),
-            widget
-          ],
-        ),
-      ),
-    );
+    return Container(
+          margin: const EdgeInsets.only(bottom: 7, top: 7),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  '$ket :',
+                  style: const TextStyle(fontSize: 13.5),
+                ),
+              ),
+              Expanded(flex: 2, child:Container(height: 36,child: widget)),
+            ],
+          ));
+    
   }
+    Widget _buildSize2(widget, String ket, int flex) {
+    return Container(
+          margin: const EdgeInsets.only(bottom: 7, top: 7),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  '$ket :',
+                  style: const TextStyle(fontSize: 13.5),
+                ),
+              ),
+              Expanded(flex: 2, child: widget),
+            ],
+          ));
+    
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +91,7 @@ class _BeliAddState extends State<BeliAdd> {
                       children: [
                         const SizedBox(),
                         const Text(
-                          'Beli Mobil',
+                          'Beli Unit',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
@@ -115,12 +126,12 @@ class _BeliAddState extends State<BeliAdd> {
                           child: Container(
                             padding: const EdgeInsets.only(
                                 bottom: 20, left: 20, right: 20, top: 15),
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            child: Column(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
+                           width: MediaQuery.of(context).size.width * 0.4,
+                            child:SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                
+                                 
                                     _buildSize(
                                         WebDatePicker(
                                           lastDate: DateTime.now(),
@@ -172,10 +183,9 @@ class _BeliAddState extends State<BeliAdd> {
                                         ),
                                         'Harga',
                                         1),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
+                                 
+                                
+                               
                                     _buildSize(
                                         TextFormField(
                                           style: const TextStyle(fontSize: 13),
@@ -186,8 +196,8 @@ class _BeliAddState extends State<BeliAdd> {
                                         ),
                                         'Keterangan',
                                         2),
-                                  ],
-                                ),
+                                 
+                             
                                 RoundedLoadingButton(
                                   color: Colors.green,
                                   elevation: 10,
@@ -243,12 +253,12 @@ data.ketMobil=jualBeliMobil.ketMobil;
                                   child: const Text('Beli',
                                       style: TextStyle(color: Colors.white)),
                                 )
-                              ],
-                            ),
+                              
+                           ] ),
                           ),
                         ),
                       ),
-                    ));
+                    )));
               });
         },
         child: const Text(

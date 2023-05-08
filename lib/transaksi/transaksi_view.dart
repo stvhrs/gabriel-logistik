@@ -84,7 +84,7 @@ controlerKetMobil.text=transaksi.keterangan_mobill;
                     ),
                   ],
                 )),
-            widget
+           Container(height: 36,child:  widget)
           ],
         ),
       ),

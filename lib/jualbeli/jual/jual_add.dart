@@ -46,30 +46,40 @@ class _JualAddState extends State<JualAdd> {
   late JualBeliMobil jualBeliMobil;
   TextStyle small = const TextStyle(fontSize: 13.5);
   Widget _buildSize(widget, String ket, int flex) {
-    return Expanded(
-      flex: flex,
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.14 * flex,
-        margin: EdgeInsets.only(
-            left: ket == 'Tanggal' || ket == 'Keterangan' ? 0 : 50, bottom: 30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-                margin: const EdgeInsets.only(bottom: 7, top: 7),
-                child: Row(
-                  children: [
-                    Text(
-                      '$ket :',
-                      style: const TextStyle(fontSize: 13.5),
-                    ),
-                  ],
-                )),
-            widget
-          ],
-        ),
-      ),
-    );
+    return Container(
+          margin: const EdgeInsets.only(bottom: 7, top: 7),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  '$ket :',
+                  style: const TextStyle(fontSize: 13.5),
+                ),
+              ),
+              Expanded(flex: 2, child:Container(height: 36,child: widget)),
+            ],
+          ));
+    
+  }
+    Widget _buildSize2(widget, String ket, int flex) {
+    return Container(
+          margin: const EdgeInsets.only(bottom: 7, top: 7),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  '$ket :',
+                  style: const TextStyle(fontSize: 13.5),
+                ),
+              ),
+              Expanded(flex: 2, child: widget),
+            ],
+          ));
+    
   }
 
   @override
@@ -101,7 +111,7 @@ class _JualAddState extends State<JualAdd> {
                       children: [
                         const SizedBox(),
                         const Text(
-                          'Jual Mobil',
+                          'Jual Unit',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
@@ -136,142 +146,139 @@ class _JualAddState extends State<JualAdd> {
                           child: Container(
                             padding: const EdgeInsets.only(
                                 bottom: 20, left: 20, right: 20, top: 15),
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            child: Column(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    _buildSize(
-                                        WebDatePicker(
-                                          lastDate: DateTime.now(),
-                                          height: 60,
-                                          initialDate: DateTime.now(),
-                                          dateformat: 'dd/MM/yyyy',
-                                          onChange: (value) {
-                                            if (value != null) {
-                                              jualBeliMobil.tanggal =
-                                                  value.toIso8601String();
-                                            }
-                                          },
-                                        ),
-                                        'Tanggal',
-                                        1),
-                                    _buildSize(
-                                        DropDownField(
-                                          onValueChanged: (val) {
-                                            jualBeliMobil.mobil = val;
-                                            controlerKetMobil.text = Provider
-                                                    .of<ProviderData>(context,
-                                                        listen: false)
-                                                .listMobil
-                                                .firstWhere((element) =>
-                                                    element.nama_mobil == val)
-                                                .keterangan_mobill;
-                                                jualBeliMobil.id_mobil=Provider.of<ProviderData>(context,listen: false).listMobil.where((element) => element.terjual==false) .firstWhere((element) => element.nama_mobil==val).id;
-                                          },
-                                          items: listMobil,
-                                        ),
-                                        'Pilih Mobil',
-                                        1),
-                                    _buildSize(
-                                        TextFormField(
-                                          style: const TextStyle(fontSize: 13),
-                                          textInputAction: TextInputAction.next,
-                                          readOnly: true,
-                                          controller: controlerKetMobil,
-                                          onChanged: (va) {
-                                            jualBeliMobil.ketMobil = va;
-                                          },
-                                        ),
-                                        'Keterangan Mobil',
-                                        1),
-                                    _buildSize(
-                                        TextFormField(
-                                          style: const TextStyle(fontSize: 13),
-                                          textInputAction: TextInputAction.next,
-                                          onChanged: (va) {
-                                            jualBeliMobil.harga =
-                                                Rupiah.parse(va);
-                                          },
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly,
-                                            CurrencyInputFormatter()
-                                          ],
-                                        ),
-                                        'Harga',
-                                        1),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    _buildSize(
-                                        TextFormField(
-                                          style: const TextStyle(fontSize: 13),
-                                          textInputAction: TextInputAction.next,
-                                          onChanged: (va) {
-                                            jualBeliMobil.keterangan = va;
-                                          },
-                                        ),
-                                        'Keterangan',
-                                        2),
-                                  ],
-                                ),
-                                RoundedLoadingButton(
-                                  color: Colors.red,
-                                  elevation: 10,
-                                  successColor: Colors.green,
-                                  errorColor: Colors.red,
-                                  controller: _btnController,
-                                  onPressed: () async {
-                                    if (jualBeliMobil.harga == 0 ||
-                                        jualBeliMobil.tanggal.isEmpty ||
-                                        jualBeliMobil.mobil.isEmpty) {
-                                      _btnController.error();
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children:[
+                                      _buildSize(
+                                          WebDatePicker(
+                                            lastDate: DateTime.now(),
+                                            height: 60,
+                                            initialDate: DateTime.now(),
+                                            dateformat: 'dd/MM/yyyy',
+                                            onChange: (value) {
+                                              if (value != null) {
+                                                jualBeliMobil.tanggal =
+                                                    value.toIso8601String();
+                                              }
+                                            },
+                                          ),
+                                          'Tanggal',
+                                          1),
+                                      _buildSize2(
+                                          DropDownField(
+                                            onValueChanged: (val) {
+                                              jualBeliMobil.mobil = val;
+                                              controlerKetMobil.text = Provider
+                                                      .of<ProviderData>(context,
+                                                          listen: false)
+                                                  .listMobil
+                                                  .firstWhere((element) =>
+                                                      element.nama_mobil == val)
+                                                  .keterangan_mobill;
+                                                  jualBeliMobil.id_mobil=Provider.of<ProviderData>(context,listen: false).listMobil.where((element) => element.terjual==false) .firstWhere((element) => element.nama_mobil==val).id;
+                                            },
+                                            items: listMobil,
+                                          ),
+                                          'Pilih Mobil',
+                                          1),
+                                      _buildSize(
+                                          TextFormField(
+                                            style: const TextStyle(fontSize: 13),
+                                            textInputAction: TextInputAction.next,
+                                            readOnly: true,
+                                            controller: controlerKetMobil,
+                                            onChanged: (va) {
+                                              jualBeliMobil.ketMobil = va;
+                                            },
+                                          ),
+                                          'Keterangan Mobil',
+                                          1),
+                                      _buildSize(
+                                          TextFormField(
+                                            style: const TextStyle(fontSize: 13),
+                                            textInputAction: TextInputAction.next,
+                                            onChanged: (va) {
+                                              jualBeliMobil.harga =
+                                                  Rupiah.parse(va);
+                                            },
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly,
+                                              CurrencyInputFormatter()
+                                            ],
+                                          ),
+                                          'Harga',
+                                          1),
+                                  
+                                  
+                                      _buildSize(
+                                          TextFormField(
+                                            style: const TextStyle(fontSize: 13),
+                                            textInputAction: TextInputAction.next,
+                                            onChanged: (va) {
+                                              jualBeliMobil.keterangan = va;
+                                            },
+                                          ),
+                                          'Keterangan',
+                                          2),
+                                    
+                                
+                                  RoundedLoadingButton(
+                                    color: Colors.red,
+                                    elevation: 10,
+                                    successColor: Colors.green,
+                                    errorColor: Colors.red,
+                                    controller: _btnController,
+                                    onPressed: () async {
+                                      if (jualBeliMobil.harga == 0 ||
+                                          jualBeliMobil.tanggal.isEmpty ||
+                                          jualBeliMobil.mobil.isEmpty) {
+                                        _btnController.error();
+                                        await Future.delayed(
+                                            const Duration(seconds: 1));
+                                        _btnController.reset();
+                                        return;
+                                      }
+                                      var data = await Service.postJB({
+                                        "id_jb":jualBeliMobil.id,
+                                        "id_mobil":jualBeliMobil.id_mobil,
+                                        'plat_mobil': jualBeliMobil.mobil,
+                                        'ket_mobil': jualBeliMobil.ketMobil,
+                                        'harga_jb':
+                                            jualBeliMobil.harga.toString(),
+                                        'tgl_jb': jualBeliMobil.tanggal,
+                                        'jualOrBeli': "false",
+                                        'ket_jb': jualBeliMobil.ketMobil
+                                      });
+                            
+                                      if (data != null) {
+                                       data.mobil=jualBeliMobil.mobil;
+                            data.ketMobil=jualBeliMobil.ketMobil;
+                            
+                                        Provider.of<ProviderData>(context,
+                                                listen: false)
+                                            .addJualBeliMobil(data);
+                                      } else {
+                                        _btnController.error();
+                                        await Future.delayed(
+                                            const Duration(seconds: 1), () {});
+                                        _btnController.reset();
+                                        return;
+                                      }
+                            
+                                      _btnController.success();
+                            
                                       await Future.delayed(
-                                          const Duration(seconds: 1));
-                                      _btnController.reset();
-                                      return;
-                                    }
-                                    var data = await Service.postJB({
-                                      "id_jb":jualBeliMobil.id,
-                                      "id_mobil":jualBeliMobil.id_mobil,
-                                      'plat_mobil': jualBeliMobil.mobil,
-                                      'ket_mobil': jualBeliMobil.ketMobil,
-                                      'harga_jb':
-                                          jualBeliMobil.harga.toString(),
-                                      'tgl_jb': jualBeliMobil.tanggal,
-                                      'jualOrBeli': "false",
-                                      'ket_jb': jualBeliMobil.ketMobil
-                                    });
-
-                                    if (data != null) {
-                                     data.mobil=jualBeliMobil.mobil;
-data.ketMobil=jualBeliMobil.ketMobil;
-
-                                      Provider.of<ProviderData>(context,
-                                              listen: false)
-                                          .addJualBeliMobil(data);
-                                    } else {
-                                      _btnController.error();
-                                      await Future.delayed(
-                                          const Duration(seconds: 1), () {});
-                                      _btnController.reset();
-                                      return;
-                                    }
-
-                                    _btnController.success();
-
-                                    await Future.delayed(
-                                        const Duration(seconds: 1), () {
-                                      Navigator.of(context).pop();
-                                    });
-                                  },
-                                  child: const Text('Jual',
-                                      style: TextStyle(color: Colors.white)),
-                                )
-                              ],
+                                          const Duration(seconds: 1), () {
+                                        Navigator.of(context).pop();
+                                      });
+                                    },
+                                    child: const Text('Jual',
+                                        style: TextStyle(color: Colors.white)),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),

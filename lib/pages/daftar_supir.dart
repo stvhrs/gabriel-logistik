@@ -127,7 +127,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
               ),
             ),
             Consumer<ProviderData>(builder: (context, c, h) {
-             List<Supir> data=c.listSupir .where((element) => element.delted==false) .toList().reversed.toList();
+             List<Supir> data=c.listSupir.reversed.toList() .where((element) => element.delted==false) .toList().reversed.toList();
               return SizedBox(
                   height: MediaQuery.of(context).size.height * 0.7,
                   child: ListView.builder(
@@ -136,7 +136,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
                      
                       
                       return SupirTile(data
-                                    .toList()[index],index);},
+                                   [index],index);},
                   ));
             })
           ],

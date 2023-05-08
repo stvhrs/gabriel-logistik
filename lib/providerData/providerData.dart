@@ -27,7 +27,7 @@ List<String> list = <String>[
 ];
 
 class ProviderData with ChangeNotifier {
-  bool isOwner = true;
+  late  bool isOwner ;
   bool logined = false;
 
   List<Transaksi> backupTransaksi = [];
@@ -47,12 +47,12 @@ class ProviderData with ChangeNotifier {
 
   List<HistorySaldo> listHistorySaldo = [];
   List<HistorySaldo> backupListHistorySaldo = [];
-
+List<Transaksi> bulk=[];
   List<MutasiSaldo> listMutasiSaldo = [];
   List<KeuanganBulanan> printed = [];
   double totalSaldo = 0;
   void owner() {
-    isOwner == true;
+    isOwner = true;
     notifyListeners();
   }
 
@@ -72,7 +72,7 @@ class ProviderData with ChangeNotifier {
   }
 
   void setData(
-      List<Transaksi> data,
+      List<Transaksi> tras,
       bool listen,
       List<Mobil> mobilData,
       List<Supir> supirData,
@@ -87,28 +87,28 @@ class ProviderData with ChangeNotifier {
       backuplistJualBeliMobil.addAll(jualbeli);
     }
 
-    if (data.isNotEmpty) {
+    if (perbaikan.isNotEmpty) {
       listPerbaikan.clear();
       backupListPerbaikan.clear();
       listPerbaikan.addAll(perbaikan);
       backupListPerbaikan.addAll(perbaikan);
     }
-    if (data.isNotEmpty) {
+    if (tras.isNotEmpty) {
       listTransaksi.clear();
       backupTransaksi.clear();
-      listTransaksi.addAll(data);
-      backupTransaksi.addAll(data);
+      listTransaksi.addAll(tras);
+      backupTransaksi.addAll(tras);
     }
     if (mobilData.isNotEmpty) {
-        listMobil.clear();
-        backupListMobil.clear();
+      listMobil.clear();
+         listMobil.addAll(mobilData);
+      backupListMobil.clear();
       backupListMobil.addAll(mobilData);
-
-      listMobil.addAll(mobilData);
+   
     }
     if (supirData.isNotEmpty) {
-       listSupir.clear();
-        backupListSupir.clear();
+      listSupir.clear();
+      backupListSupir.clear();
       listSupir.addAll(supirData);
       backupListSupir.addAll(supirData);
     }
@@ -120,9 +120,7 @@ class ProviderData with ChangeNotifier {
     calculateSaldo();
 
     (listen) ? notifyListeners() : () {};
-    
   }
-  
 
   void calculateSaldo() {
     totalSaldo = 0;
@@ -187,10 +185,10 @@ class ProviderData with ChangeNotifier {
     listMutasiSaldo.every((e) {
       if (e.pendapatan) {
         listHistorySaldo.add(HistorySaldo(
-            'Uang Masuk', 0, e.keterangan, e.totalMutasi, e.tanggal, true));
+            'Nota Jual', 0, e.keterangan, e.totalMutasi, e.tanggal, true));
       } else {
         listHistorySaldo.add(HistorySaldo(
-            'Uang Keluar', 0, e.keterangan, -e.totalMutasi, e.tanggal, false));
+            'Nota Beli', 0, e.keterangan, -e.totalMutasi, e.tanggal, false));
       }
       return true;
     });
@@ -219,7 +217,6 @@ class ProviderData with ChangeNotifier {
 
   void addmutasi(MutasiSaldo mutasi) {
     listMutasiSaldo.add(mutasi);
-
     notifyListeners();
   }
 
@@ -301,9 +298,8 @@ class ProviderData with ChangeNotifier {
   }
 
   void updateJualBeliMobil(JualBeliMobil jualBeliMobil) {
-    int data = listJualBeliMobil.indexWhere((element) =>
-        element.id  ==
-        jualBeliMobil.id );
+    int data = listJualBeliMobil
+        .indexWhere((element) => element.id == jualBeliMobil.id);
     listJualBeliMobil[data] = jualBeliMobil;
     notifyListeners();
   }
@@ -394,17 +390,7 @@ class ProviderData with ChangeNotifier {
     listTransaksi.clear();
     for (Transaksi data in backupTransaksi) {
       bool skipped = false;
-      try {
-        data.supir = listSupir
-            .firstWhere((element) => element.id == data.id_supir)
-            .nama_supir;
-        data.mobil = listMobil
-            .firstWhere((element) => element.id == data.id_mobil)
-            .nama_mobil;
-        data.keterangan_mobill = listMobil
-            .firstWhere((element) => element.id == data.id_mobil)
-            .keterangan_mobill;
-      } catch (e) {}
+     refres();
 
       if (searchmobile.isNotEmpty &&
           !data.mobil.toLowerCase().startsWith(searchmobile.toLowerCase())) {

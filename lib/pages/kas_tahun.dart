@@ -49,11 +49,15 @@ class _KasTahunState extends State<KasTahun> {
     if (!tahun.contains(ropdownValue2)) {
       tahun.add(ropdownValue2);
     }
+    
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    
+    listKas.clear;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
@@ -176,7 +180,10 @@ class _KasTahunState extends State<KasTahun> {
                 if (tahunTotalSisa <1&& tahunTotalPerbaikan<1) {
                   return const SizedBox();
                 }
-                listKas.add(kasModel);
+                if(!listKas.map((e) => e.namaMobil).toList().contains(kasModel.namaMobil)){
+  listKas.add(kasModel);
+                }
+              
 
                 return Kas(kasModel, tahunTotalOngkos, tahunTotalKeluar,
                     tahunTotalSisa, tahunTotalPerbaikan, tahunTotalBersih);

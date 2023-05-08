@@ -77,7 +77,7 @@ class DropDownField extends FormField<String> {
                 Row(
                   children: <Widget>[
                     Expanded(
-                      child: SizedBox(
+                      child: SizedBox(height: 36,
                         child: TextFormField(
                              textInputAction: TextInputAction.next,
                           // autovalidate: true,

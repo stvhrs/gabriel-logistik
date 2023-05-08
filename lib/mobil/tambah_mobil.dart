@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/helper/uppercase.dart'; 
 import 'package:gabriel_logistik/services/service.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -14,7 +15,8 @@ class TambahMobil extends StatelessWidget {
   Widget build(BuildContext context) {
     String namaMobil = '';
     String noHp = '';
-
+TextEditingController satu=TextEditingController();
+TextEditingController satu2=TextEditingController();
 
     return ElevatedButton.icon(
         style: ButtonStyle(
@@ -53,11 +55,11 @@ class TambahMobil extends StatelessWidget {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(
+                            child: TextFormField(controller: satu,
                               style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'No Pol',
-                              ),
+                              ),inputFormatters: [UpperCaseTextFormatter()],
                               onChanged: (val) {
                                 namaMobil = val.toString();
                               },
@@ -66,11 +68,11 @@ class TambahMobil extends StatelessWidget {
                           ),
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(
+                            child: TextFormField(controller: satu2,
                               style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
                                 hintText: 'Keterangan',
-                              ),
+                              ),inputFormatters: [UpperCaseTextFormatter()],
                               onChanged: (val) {
                                 noHp = val.toString();
                               },
@@ -120,8 +122,13 @@ class TambahMobil extends StatelessWidget {
                        
                           _btnController.success();
                         
-                        await Future.delayed(const Duration(seconds: 1), () {
-                          Navigator.of(context).pop();
+                           await Future.delayed(const Duration(seconds: 1), () {
+                          namaMobil="";
+                          noHp="";
+                          satu.clear();
+                          satu2.clear();
+                          
+                        _btnController.reset();
                         });
                       },
                       child:

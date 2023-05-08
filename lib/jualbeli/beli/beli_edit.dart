@@ -25,31 +25,41 @@ class _BeliEditState extends State<BeliEdit> {
       RoundedLoadingButtonController();
 
   TextStyle small = const TextStyle(fontSize: 13.5);
-  Widget _buildSize(widget, String ket, int flex) {
-    return Expanded(
-      flex: flex,
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.14 * flex,
-        margin: EdgeInsets.only(
-            left: ket == 'Tanggal' || ket == 'Keterangan' ? 0 : 50, bottom: 30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-                margin: const EdgeInsets.only(bottom: 7, top: 7),
-                child: Row(
-                  children: [
-                    Text(
-                      '$ket :',
-                      style: const TextStyle(fontSize: 13.5),
-                    ),
-                  ],
-                )),
-            widget
-          ],
-        ),
-      ),
-    );
+Widget _buildSize(widget, String ket, int flex) {
+    return Container(
+          margin: const EdgeInsets.only(bottom: 7, top: 7),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  '$ket :',
+                  style: const TextStyle(fontSize: 13.5),
+                ),
+              ),
+              Expanded(flex: 2, child:Container(height: 36,child: widget)),
+            ],
+          ));
+    
+  }
+    Widget _buildSize2(widget, String ket, int flex) {
+    return Container(
+          margin: const EdgeInsets.only(bottom: 7, top: 7),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  '$ket :',
+                  style: const TextStyle(fontSize: 13.5),
+                ),
+              ),
+              Expanded(flex: 2, child: widget),
+            ],
+          ));
+    
   }
 
   @override
@@ -71,7 +81,7 @@ class _BeliEditState extends State<BeliEdit> {
                       children: [
                         const SizedBox(),
                         const Text(
-                          'Beli Mobil',
+                          'Edit Beli Unit',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
@@ -106,141 +116,137 @@ class _BeliEditState extends State<BeliEdit> {
                           child: Container(
                             padding: const EdgeInsets.only(
                                 bottom: 20, left: 20, right: 20, top: 15),
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            child: Column(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    _buildSize(
-                                        WebDatePicker(
-                                          lastDate: DateTime.now(),
-                                          height: 60,
-                                          initialDate: DateTime.now(),
-                                          dateformat: 'dd/MM/yyyy',
-                                          onChange: (value) {
-                                            if (value != null) {
-                                              widget.jualBeliMobil.tanggal =
-                                                  value.toIso8601String();
-                                            }
-                                          },
-                                        ),
-                                        'Tanggal',
-                                        1),
-                                    _buildSize(
-                                        TextFormField(
-                                          style: const TextStyle(fontSize: 13),
-                                          textInputAction: TextInputAction.next,
-                                          readOnly: true,
-                                          initialValue:
-                                              widget.jualBeliMobil.mobil,
-                                          onChanged: (va) {},
-                                        ),
-                                        'Mobil',
-                                        1),
-                                    _buildSize(
-                                        TextFormField(
-                                          style: const TextStyle(fontSize: 13),
-                                          textInputAction: TextInputAction.next,
-                                          initialValue:
-                                              widget.jualBeliMobil.ketMobil,
-                                          readOnly: true,
-                                        ),
-                                        'Keterangan Mobil',
-                                        1),
-                                    _buildSize(
-                                        TextFormField(
-                                          style: const TextStyle(fontSize: 13),
-                                          textInputAction: TextInputAction.next,
-                                          initialValue: Rupiah.format(
-                                              widget.jualBeliMobil.harga),
-                                          onChanged: (va) {
-                                            widget.jualBeliMobil.harga =
-                                                Rupiah.parse(va);
-                                          },
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly,
-                                            CurrencyInputFormatter()
-                                          ],
-                                        ),
-                                        'Harga',
-                                        1),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    _buildSize(
-                                        TextFormField(
-                                          style: const TextStyle(fontSize: 13),
-                                          textInputAction: TextInputAction.next,
-                                          initialValue:
-                                              widget.jualBeliMobil.keterangan,
-                                          onChanged: (val) {
-                                            widget.jualBeliMobil.keterangan =
-                                                val;
-                                          },
-                                        ),
-                                        'Keterangan',
-                                        2),
-                                  ],
-                                ),
-                                RoundedLoadingButton(
-                                  color: Colors.green,
-                                  elevation: 10,
-                                  successColor: Colors.green,
-                                  errorColor: Colors.red,
-                                  controller: _btnController,
-                                  onPressed: () async {
-                                    if (widget.jualBeliMobil.harga == 0 ||
-                                        widget.jualBeliMobil.tanggal.isEmpty ||
-                                        widget.jualBeliMobil.mobil.isEmpty) {
-                                      _btnController.error();
-                                      await Future.delayed(
-                                          const Duration(seconds: 1));
-                                      _btnController.reset();
-                                      return;
-                                    }
-                                    var data = await Service.updateJb({'id_jb':widget.jualBeliMobil.id,"id_mobil":widget.jualBeliMobil.id_mobil,
-                                      'plat_mobil': widget.jualBeliMobil.mobil,
-                                      'ket_mobil':
-                                          widget.jualBeliMobil.ketMobil,
-                                      'harga_jb':
-                                          widget.jualBeliMobil.harga.toString(),
-                                      'tgl_jb': widget.jualBeliMobil.tanggal,
-                                      'jualOrBeli': "true",
-                                      'ket_jb': widget.jualBeliMobil.keterangan
-                                    });
-
-                                    if (data != null) {
-                                     
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                 
+                                      _buildSize(
+                                          WebDatePicker(
+                                            lastDate: DateTime.now(),
+                                            height: 60,
+                                            initialDate: DateTime.now(),
+                                            dateformat: 'dd/MM/yyyy',
+                                            onChange: (value) {
+                                              if (value != null) {
+                                                widget.jualBeliMobil.tanggal =
+                                                    value.toIso8601String();
+                                              }
+                                            },
+                                          ),
+                                          'Tanggal',
+                                          1),
+                                      _buildSize(
+                                          TextFormField(
+                                            style: const TextStyle(fontSize: 13),
+                                            textInputAction: TextInputAction.next,
+                                            readOnly: true,
+                                            initialValue:
+                                                widget.jualBeliMobil.mobil,
+                                            onChanged: (va) {},
+                                          ),
+                                          'Mobil',
+                                          1),
+                                      _buildSize(
+                                          TextFormField(
+                                            style: const TextStyle(fontSize: 13),
+                                            textInputAction: TextInputAction.next,
+                                            initialValue:
+                                                widget.jualBeliMobil.ketMobil,
+                                            readOnly: true,
+                                          ),
+                                          'Keterangan Mobil',
+                                          1),
+                                      _buildSize(
+                                          TextFormField(
+                                            style: const TextStyle(fontSize: 13),
+                                            textInputAction: TextInputAction.next,
+                                            initialValue: Rupiah.format(
+                                                widget.jualBeliMobil.harga),
+                                            onChanged: (va) {
+                                              widget.jualBeliMobil.harga =
+                                                  Rupiah.parse(va);
+                                            },
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly,
+                                              CurrencyInputFormatter()
+                                            ],
+                                          ),
+                                          'Harga',
+                                          1),
+                                  
+                                      _buildSize(
+                                          TextFormField(
+                                            style: const TextStyle(fontSize: 13),
+                                            textInputAction: TextInputAction.next,
+                                            initialValue:
+                                                widget.jualBeliMobil.keterangan,
+                                            onChanged: (val) {
+                                              widget.jualBeliMobil.keterangan =
+                                                  val;
+                                            },
+                                          ),
+                                          'Keterangan',
+                                          2),
+                                   
+                                  RoundedLoadingButton(
+                                    color: Colors.green,
+                                    elevation: 10,
+                                    successColor: Colors.green,
+                                    errorColor: Colors.red,
+                                    controller: _btnController,
+                                    onPressed: () async {
+                                      if (widget.jualBeliMobil.harga == 0 ||
+                                          widget.jualBeliMobil.tanggal.isEmpty ||
+                                          widget.jualBeliMobil.mobil.isEmpty) {
+                                        _btnController.error();
+                                        await Future.delayed(
+                                            const Duration(seconds: 1));
+                                        _btnController.reset();
+                                        return;
+                                      }
+                                      var data = await Service.updateJb({'id_jb':widget.jualBeliMobil.id,"id_mobil":widget.jualBeliMobil.id_mobil,
+                                        'plat_mobil': widget.jualBeliMobil.mobil,
+                                        'ket_mobil':
+                                            widget.jualBeliMobil.ketMobil,
+                                        'harga_jb':
+                                            widget.jualBeliMobil.harga.toString(),
+                                        'tgl_jb': widget.jualBeliMobil.tanggal,
+                                        'jualOrBeli': "true",
+                                        'ket_jb': widget.jualBeliMobil.keterangan
+                                      });
+                            
+                                      if (data != null) {
+                                       
+                                        Provider.of<ProviderData>(context,
+                                                listen: false)
+                                            .updateJualBeliMobil(data);
+                                      } else {
+                                        _btnController.error();
+                                        await Future.delayed(
+                                            const Duration(seconds: 1), () {});
+                                        _btnController.reset();
+                                        return;
+                                      }
+                            
                                       Provider.of<ProviderData>(context,
                                               listen: false)
-                                          .updateJualBeliMobil(data);
-                                    } else {
-                                      _btnController.error();
+                                          .updateJualBeliMobil(
+                                              widget.jualBeliMobil);
+                            
+                                      _btnController.success();
+                            
                                       await Future.delayed(
-                                          const Duration(seconds: 1), () {});
-                                      _btnController.reset();
-                                      return;
-                                    }
-
-                                    Provider.of<ProviderData>(context,
-                                            listen: false)
-                                        .updateJualBeliMobil(
-                                            widget.jualBeliMobil);
-
-                                    _btnController.success();
-
-                                    await Future.delayed(
-                                        const Duration(seconds: 1), () {
-                                      Navigator.of(context).pop();
-                                    });
-                                  },
-                                  child: const Text('Edit',
-                                      style: TextStyle(color: Colors.white)),
-                                )
-                              ],
+                                          const Duration(seconds: 1), () {
+                                        Navigator.of(context).pop();
+                                      });
+                                    },
+                                    child: const Text('Edit',
+                                        style: TextStyle(color: Colors.white)),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),

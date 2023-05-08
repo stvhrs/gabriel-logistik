@@ -46,9 +46,24 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
   TextStyle small = const TextStyle(fontSize: 13.5);
   Widget _buildSize(widget, String ket, int flex) {
     return Container(
-      // width: MediaQuery.of(context).size.width * 0.14,
-      // margin: EdgeInsets.only(left: ket=='Tanggal'||ket=='Keterangan'?0: 50, bottom: 30),
-      child: Container(
+          margin: const EdgeInsets.only(bottom: 7, top: 7),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  '$ket :',
+                  style: const TextStyle(fontSize: 13.5),
+                ),
+              ),
+              Expanded(flex: 2, child:Container(height: 36,child: widget)),
+            ],
+          ));
+    
+  }
+    Widget _buildSize2(widget, String ket, int flex) {
+    return Container(
           margin: const EdgeInsets.only(bottom: 7, top: 7),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -62,8 +77,8 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
               ),
               Expanded(flex: 2, child: widget),
             ],
-          )),
-    );
+          ));
+    
   }
 
   @override
@@ -144,7 +159,7 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
                                   _buildSize(
                                       WebDatePicker(
                                         lastDate: DateTime.now(),
-                                        height: 60,
+                                        height: 36,
                                         initialDate: DateTime.now(),
                                         dateformat: 'dd/MM/yyyy',
                                         onChange: (value) {
@@ -166,7 +181,7 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
                                       ),
                                       'Jenis Perbaikan',
                                       1),
-                                  _buildSize(
+                                  _buildSize2(
                                       DropDownField(
                                         onValueChanged: (val) {
                                           perbaikan.mobil = val;

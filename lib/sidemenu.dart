@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,11 @@ import 'package:gabriel_logistik/pages/dashboard..dart';
 import 'package:gabriel_logistik/pages/jual_beli.dart';
 import 'package:gabriel_logistik/pages/kas_tahun.dart';
 import 'package:gabriel_logistik/pages/laporan_bulanan.dart';
+import 'package:gabriel_logistik/pages/laporan_kas.dart';
 import 'package:gabriel_logistik/pages/mutasi_saldo.dart';
-import 'package:gabriel_logistik/pages/cashflow_page.dart';
+import 'package:gabriel_logistik/pages/nota_beli.dart';
+import 'package:gabriel_logistik/pages/nota_jual.dart';
+
 
 import 'package:gabriel_logistik/pages/perbaikan_page.dart';
 import 'package:gabriel_logistik/pages/rekap_unit.dart';
@@ -30,6 +34,7 @@ import 'models/mobil.dart';
 import 'models/supir.dart';
 import 'models/transaksi.dart';
 import 'package:gabriel_logistik/helper/custompaint.dart';
+
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
 
@@ -49,7 +54,7 @@ class _DashBoardState extends State<DashBoard> {
   late List<MutasiSaldo> listMutasiSaldo;
 
   String test = '';
-    bool loading = true;
+  bool loading = true;
   initData() async {
 //    test=      await Service.test2();
 // await Service.test();
@@ -91,8 +96,9 @@ class _DashBoardState extends State<DashBoard> {
 
   @override
   void initState() {
-        if (mounted){ initData();}
-
+    if (mounted) {
+      initData();
+    }
     super.initState();
   }
 
@@ -104,23 +110,30 @@ class _DashBoardState extends State<DashBoard> {
     const JualBeli(),
     const TransaksiPage(),
     const PerbaikanPage(),
-    const AdministrasiPage(),
-    const CashFlow(),
+    const AdministrasiPage(), CashFlow(),
+    const CashFlow1(),
+   
     const LaporanBulanan(),
     const KasTahun(),
-    const RekapUnit(),
+    const RekapUnit(),   LaporanKas(),
     const MutasiSaldoPage(),
+
+    Container(
+      child: Center(child: Text("USER")),
+    )
   ];
   final List<bool> _open = [true, false, false, false];
   @override
   Widget build(BuildContext context) {
+    log("build");
+
     var item = const TextStyle(
         fontFamily: 'Nunito',
         fontSize: 13,
         fontWeight: FontWeight.bold,
         color: Colors.white);
     return loading
-        ?  Center(
+        ? Center(
             child: CustomPaints(),
           )
         : Scaffold(
@@ -137,17 +150,19 @@ class _DashBoardState extends State<DashBoard> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(4),
-                          child: Card(color: Colors.white,child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset('images/title.png'),
-                          )),
+                          child: Card(
+                              color: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.asset('images/title.png'),
+                              )),
                         ),
-                        
                         Container(
-                            color: _selectedIndex == 0 ? Theme.of(context).colorScheme.secondary
+                            color: _selectedIndex == 0
+                                ? Theme.of(context).colorScheme.secondary
                                 : Theme.of(context).primaryColor,
-                               
-                            child: ListTile(iconColor: Colors.white,
+                            child: ListTile(
+                              iconColor: Colors.white,
                               minLeadingWidth: 20,
                               textColor: _selectedIndex == 0
                                   ? Theme.of(context).colorScheme.secondary
@@ -156,13 +171,13 @@ class _DashBoardState extends State<DashBoard> {
                                 _selectedIndex = 0;
                                 setState(() {});
                               },
-                              leading: const Icon(Icons.space_dashboard_rounded),
+                              leading:
+                                  const Icon(Icons.space_dashboard_rounded),
                               title: Text(style: item, 'Dashboard'),
                             )),
                         ExpansionTile(
                           collapsedIconColor: Colors.white,
                           iconColor: Colors.white,
-            
                           title: Text(
                             style: item,
                             'Daftar Unit',
@@ -172,7 +187,8 @@ class _DashBoardState extends State<DashBoard> {
                                 color: _selectedIndex == 1
                                     ? Theme.of(context).colorScheme.secondary
                                     : Theme.of(context).colorScheme.primary,
-                                child: ListTile(iconColor: Colors.white,
+                                child: ListTile(
+                                  iconColor: Colors.white,
                                   minLeadingWidth: 20,
                                   textColor: _selectedIndex == 1
                                       ? Theme.of(context).colorScheme.secondary
@@ -188,7 +204,8 @@ class _DashBoardState extends State<DashBoard> {
                                 color: _selectedIndex == 2
                                     ? Theme.of(context).colorScheme.secondary
                                     : Theme.of(context).colorScheme.primary,
-                                child: ListTile(iconColor: Colors.white,
+                                child: ListTile(
+                                  iconColor: Colors.white,
                                   minLeadingWidth: 20,
                                   textColor: _selectedIndex == 2
                                       ? Theme.of(context).colorScheme.secondary
@@ -204,7 +221,8 @@ class _DashBoardState extends State<DashBoard> {
                                 color: _selectedIndex == 3
                                     ? Theme.of(context).colorScheme.secondary
                                     : Theme.of(context).colorScheme.primary,
-                                child: ListTile(iconColor: Colors.white,
+                                child: ListTile(
+                                  iconColor: Colors.white,
                                   minLeadingWidth: 20,
                                   textColor: _selectedIndex == 3
                                       ? Theme.of(context).colorScheme.secondary
@@ -214,7 +232,7 @@ class _DashBoardState extends State<DashBoard> {
                                     setState(() {});
                                   },
                                   leading: const Icon(Icons.inventory),
-                                  title: Text(style: item, 'Inventory'),
+                                  title: Text(style: item, 'Jual Beli Unit'),
                                 ))
                           ],
                         ),
@@ -230,7 +248,8 @@ class _DashBoardState extends State<DashBoard> {
                                 color: _selectedIndex == 4
                                     ? Theme.of(context).colorScheme.secondary
                                     : Theme.of(context).colorScheme.primary,
-                                child: ListTile(iconColor: Colors.white,
+                                child: ListTile(
+                                  iconColor: Colors.white,
                                   minLeadingWidth: 20,
                                   textColor: _selectedIndex == 4
                                       ? Theme.of(context).colorScheme.secondary
@@ -239,15 +258,16 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 4;
                                     setState(() {});
                                   },
-                                  leading:
-                                      const Icon(Icons.currency_exchange_rounded),
-                                  title: Text(style: item, 'Rate'),
+                                  leading: const Icon(
+                                      Icons.currency_exchange_rounded),
+                                  title: Text(style: item, 'Ritase'),
                                 )),
                             Container(
                                 color: _selectedIndex == 5
                                     ? Theme.of(context).colorScheme.secondary
                                     : Theme.of(context).colorScheme.primary,
-                                child: ListTile(iconColor: Colors.white,
+                                child: ListTile(
+                                  iconColor: Colors.white,
                                   minLeadingWidth: 20,
                                   textColor: _selectedIndex == 5
                                       ? Theme.of(context).colorScheme.secondary
@@ -256,14 +276,16 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 5;
                                     setState(() {});
                                   },
-                                  leading: const Icon(Icons.engineering_rounded),
+                                  leading:
+                                      const Icon(Icons.engineering_rounded),
                                   title: Text(style: item, 'Perbaikan'),
                                 )),
                             Container(
                                 color: _selectedIndex == 6
                                     ? Theme.of(context).colorScheme.secondary
                                     : Theme.of(context).colorScheme.primary,
-                                child: ListTile(iconColor: Colors.white,
+                                child: ListTile(
+                                  iconColor: Colors.white,
                                   minLeadingWidth: 20,
                                   textColor: _selectedIndex == 6
                                       ? Theme.of(context).colorScheme.secondary
@@ -272,28 +294,59 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 6;
                                     setState(() {});
                                   },
-                                  leading: const Icon(Icons.document_scanner_sharp),
+                                  leading:
+                                      const Icon(Icons.document_scanner_sharp),
                                   title: Text(style: item, 'Administrasi'),
                                 )),
-                            Container(
-                                color: _selectedIndex == 7
-                                    ? Theme.of(context).colorScheme.secondary
-                                    : Theme.of(context).colorScheme.primary,
-                                child: ListTile(iconColor: Colors.white,
-                                  minLeadingWidth: 20,
-                                  textColor: _selectedIndex == 7
-                                      ? Theme.of(context).colorScheme.secondary
-                                      : Colors.white,
-                                  onTap: () {
-                                    _selectedIndex = 7;
-                                    setState(() {});
-                                  },
-                                  leading: const Icon(Icons.compare_arrows),
-                                  title:
-                                      Text(style: item, 'Transaksi lain-lain'),
-                                ))
                           ],
                         ),
+                        ExpansionTile(
+                            collapsedIconColor: Colors.white,
+                            iconColor: Colors.white,
+                            title: Text(
+                              style: item,
+                              'Transaksi Lain',
+                            ),
+                            children: <Widget>[
+                              Container(
+                                  color: _selectedIndex == 7
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Theme.of(context).colorScheme.primary,
+                                  child: ListTile(
+                                    iconColor: Colors.white,
+                                    minLeadingWidth: 20,
+                                    textColor: _selectedIndex == 7
+                                        ? Theme.of(context)
+                                            .colorScheme
+                                            .secondary
+                                        : Colors.white,
+                                    onTap: () {
+                                      _selectedIndex = 7;
+                                      setState(() {});
+                                    },
+                                    leading: const Icon(Icons.compare_arrows),
+                                    title: Text(style: item, 'Nota Pembelian'),
+                                  )),
+                              Container(
+                                  color: _selectedIndex == 8
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Theme.of(context).colorScheme.primary,
+                                  child: ListTile(
+                                    iconColor: Colors.white,
+                                    minLeadingWidth: 20,
+                                    textColor: _selectedIndex == 8
+                                        ? Theme.of(context)
+                                            .colorScheme
+                                            .secondary
+                                        : Colors.white,
+                                    onTap: () {
+                                      _selectedIndex = 8;
+                                      setState(() {});
+                                    },
+                                    leading: const Icon(Icons.compare_arrows),
+                                    title: Text(style: item, 'Nota Penjualan'),
+                                  ))
+                            ]),
                         ExpansionTile(
                           collapsedIconColor: Colors.white,
                           iconColor: Colors.white,
@@ -303,41 +356,29 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                           children: <Widget>[
                             Container(
-                                color: _selectedIndex == 8
-                                    ? Theme.of(context).colorScheme.secondary
-                                    : Theme.of(context).colorScheme.primary,
-                                child: ListTile(iconColor: Colors.white,
-                                  minLeadingWidth: 20,
-                                  textColor: _selectedIndex == 8
-                                      ? Theme.of(context).colorScheme.secondary
-                                      : Colors.white,
-                                  onTap: () {
-                                    _selectedIndex = 8;
-                                    setState(() {});
-                                  },
-                                  leading: const Icon(Icons.monitor_heart_rounded),
-                                  title: Text(style: item, 'Mobil Bulanan'),
-                                )),
-                            Container(
                                 color: _selectedIndex == 9
                                     ? Theme.of(context).colorScheme.secondary
                                     : Theme.of(context).colorScheme.primary,
-                                child: ListTile(iconColor: Colors.white,
+                                child: ListTile(
+                                  iconColor: Colors.white,
                                   minLeadingWidth: 20,
-                                  textColor: _selectedIndex == 9
+                                  textColor: _selectedIndex == 8
                                       ? Theme.of(context).colorScheme.secondary
                                       : Colors.white,
                                   onTap: () {
                                     _selectedIndex = 9;
                                     setState(() {});
                                   },
-                                  leading: const Icon(Icons.calendar_month_rounded),
-                                  title: Text(style: item, 'Mobil Tahunan'),
-                                )), Container(
+                                  leading:
+                                      const Icon(Icons.monitor_heart_rounded),
+                                  title: Text(style: item, 'Mobil Bulanan'),
+                                )),
+                            Container(
                                 color: _selectedIndex == 10
                                     ? Theme.of(context).colorScheme.secondary
                                     : Theme.of(context).colorScheme.primary,
-                                child: ListTile(iconColor: Colors.white,
+                                child: ListTile(
+                                  iconColor: Colors.white,
                                   minLeadingWidth: 20,
                                   textColor: _selectedIndex == 10
                                       ? Theme.of(context).colorScheme.secondary
@@ -346,26 +387,16 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 10;
                                     setState(() {});
                                   },
-                                  leading: const Icon(Icons.auto_graph_rounded),
-                                  title: Text(style: item, 'Rekap Tahunan'),
-                                ))
-                        ,
-                          ],
-                        ),
-                        
-                        ExpansionTile(
-                          collapsedIconColor: Colors.white,
-                          iconColor: Colors.white,
-                          title: Text(
-                            style: item,
-                            'Kas',
-                          ),
-                          children: <Widget>[
+                                  leading:
+                                      const Icon(Icons.calendar_month_rounded),
+                                  title: Text(style: item, 'Mobil Tahunan'),
+                                )),
                             Container(
                                 color: _selectedIndex == 11
                                     ? Theme.of(context).colorScheme.secondary
-                                    : Theme.of(context).primaryColor,
-                                child: ListTile(iconColor: Colors.white,
+                                    : Theme.of(context).colorScheme.primary,
+                                child: ListTile(
+                                  iconColor: Colors.white,
                                   minLeadingWidth: 20,
                                   textColor: _selectedIndex == 11
                                       ? Theme.of(context).colorScheme.secondary
@@ -374,11 +405,78 @@ class _DashBoardState extends State<DashBoard> {
                                     _selectedIndex = 11;
                                     setState(() {});
                                   },
-                                  leading: const Icon(Icons.attach_money_rounded),
+                                  leading: const Icon(Icons.auto_graph_rounded),
+                                  title: Text(style: item, 'Rekap Tahunan'),
+                                )),
+                          ],
+                        ),
+                        ExpansionTile(
+                          collapsedIconColor: Colors.white,
+                          iconColor: Colors.white,
+                          title: Text(
+                            style: item,
+                            'Kas',
+                          ),
+                          children: <Widget>[
+                             Container(
+                                color: _selectedIndex == 12
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).primaryColor,
+                                child: ListTile(
+                                  iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 12
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 12;
+                                    setState(() {});
+                                  },
+                                  leading:
+                                      const Icon(Icons.shopify_rounded),
+                                  title: Text(style: item, 'Laporan Kas'),
+                                )),
+                            Container(
+                                color: _selectedIndex == 13
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).primaryColor,
+                                child: ListTile(
+                                  iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 13
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 13;
+                                    setState(() {});
+                                  },
+                                  leading:
+                                      const Icon(Icons.attach_money_rounded),
                                   title: Text(style: item, 'Mutasi'),
                                 ))
                           ],
                         ),
+                        Provider.of<ProviderData>(context, listen: false)
+                                .isOwner
+                            ? Container(
+                                color: _selectedIndex == 14
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Theme.of(context).primaryColor,
+                                child: ListTile(
+                                  iconColor: Colors.white,
+                                  minLeadingWidth: 20,
+                                  textColor: _selectedIndex == 14
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.white,
+                                  onTap: () {
+                                    _selectedIndex = 14;
+                                    setState(() {});
+                                  },
+                                  leading:
+                                      const Icon(Icons.emoji_people_rounded),
+                                  title: Text(style: item, 'User Management'),
+                                ))
+                            : SizedBox(),
                       ],
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/helper/uppercase.dart';
 import 'package:gabriel_logistik/services/service.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -14,7 +15,8 @@ class TambahSupir extends StatelessWidget {
   Widget build(BuildContext context) {
     String namaMobil = '';
     String noHp = '';
-
+TextEditingController satu=TextEditingController();
+TextEditingController satu2=TextEditingController();
     return ElevatedButton.icon(
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.green)),
@@ -53,9 +55,9 @@ class TambahSupir extends StatelessWidget {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(
+                            child: TextFormField(controller: satu,
                               style: const TextStyle(fontSize: 13.5),
-                              textInputAction: TextInputAction.next,
+                              textInputAction: TextInputAction.next,inputFormatters: [UpperCaseTextFormatter()],
                               decoration: const InputDecoration(
                                 hintText: 'Nama Supir',
                               ),
@@ -67,7 +69,7 @@ class TambahSupir extends StatelessWidget {
                           ),
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(
+                            child: TextFormField(controller:satu2 ,
                               style: const TextStyle(fontSize: 13.5),
                               textInputAction: TextInputAction.next,
                               decoration: const InputDecoration(
@@ -114,7 +116,12 @@ class TambahSupir extends StatelessWidget {
                         _btnController.success();
 
                         await Future.delayed(const Duration(seconds: 1), () {
-                          Navigator.of(context).pop();
+                          namaMobil="";
+                          noHp="";
+                          satu.clear();
+                          satu2.clear();
+                          
+                        _btnController.reset();
                         });
                       },
                       child: const Text('Tambah',

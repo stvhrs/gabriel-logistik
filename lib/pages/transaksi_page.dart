@@ -34,22 +34,23 @@ class _TransaksiPageState extends State<TransaksiPage> {
     Provider.of<ProviderData>(context, listen: false)
         .setData(listTransaksi, false, [], [], [], [], []);
 
-    loading = false;
-
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-        if (mounted){ initData();}
-
+    
     Provider.of<ProviderData>(context, listen: false).start = null;
     Provider.of<ProviderData>(context, listen: false).end = null;
     Provider.of<ProviderData>(context, listen: false).searchsupir = '';
     Provider.of<ProviderData>(context, listen: false).searchtujuan = '';
     Provider.of<ProviderData>(context, listen: false).searchmobile = '';
-    Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
+     Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
     Provider.of<ProviderData>(context, listen: false).searchTransaksi(false);
+    loading = false;
+
+    setState(() {});
+  }
+
+  @override 
+  void initState() {
+        if (mounted){ initData();}
+
     super.initState();
   }
 
@@ -68,7 +69,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                 floatingActionButton: TransaksiAdd(),
                 body: Padding(
                     padding:
-                        const EdgeInsets.only(left: 25, right: 25, top: 10),
+                        const EdgeInsets.only(left: 25, right: 25, top: 4),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -89,7 +90,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                             surfaceTintColor:
                                 Theme.of(context).colorScheme.secondary,
                             child: Padding(
-                              padding: const EdgeInsets.all(16),
+                              padding: const EdgeInsets.all(8),
                               child: Column(
                                 children: [
                                   Row(
@@ -97,7 +98,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                                     children: [
                                       Expanded(
                                         child: Image.asset('images/search.png',
-                                            height: 50),
+                                            height: 30),
                                       ),
                                       const Expanded(
                                           flex: 4, child: SearchTanggal()),
@@ -145,7 +146,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                                         .displayMedium,
                                   )),
                               Expanded(
-                                  flex: 7,
+                                  flex: 5,
                                   child: Text(
                                     'No Pol',
                                     style: Theme.of(context)

@@ -12,7 +12,7 @@ class SearchMobil extends StatefulWidget {
 class _SearchMobilState extends State<SearchMobil> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Container(height: 36,
         margin: const EdgeInsets.only(left: 35),
         width: MediaQuery.of(context).size.width * 0.15,
         child: TextFormField(

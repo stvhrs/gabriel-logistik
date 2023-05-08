@@ -19,7 +19,7 @@ class Perbaikan {
     return Perbaikan(
         data['id_perbaikan'],
         data['id_mobil'],
-       "data['plat_mobil']",
+       data['plat_mobil'],
         data['jenis_p'],
         double.parse(data['harga_p']),
         data['tgl_p'],

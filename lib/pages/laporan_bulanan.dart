@@ -35,8 +35,8 @@ class _LaporanBulananState extends State<LaporanBulanan> {
   List<int> tahun = [];
 
   final innerController = ScrollController();
-  List<Mobil> mobil = [];
-  List<Transaksi> trankaskis = [];
+
+
   String dropdownValue = list[DateTime.now().month - 1];
   int ropdownValue2 = DateTime.now().year;
 
@@ -44,9 +44,8 @@ class _LaporanBulananState extends State<LaporanBulanan> {
   @override
   void didChangeDependencies() {
   
-    trankaskis = Provider.of<ProviderData>(context).backupTransaksi;
-    mobil = Provider.of<ProviderData>(context).backupListMobil;
-    for (var element in Provider.of<ProviderData>(context).backupTransaksi) {
+
+    for (var element in Provider.of<ProviderData>(context).listTransaksi) {
       if (!tahun.contains(DateTime.parse(element.tanggalBerangkat).year)) {
         tahun.add(DateTime.parse(element.tanggalBerangkat).year);
       }
@@ -139,7 +138,7 @@ class _LaporanBulananState extends State<LaporanBulanan> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.89,
             child: ListView(
-              children: Provider.of<ProviderData>(context).listMobil.map((e) {
+              children: Provider.of<ProviderData>(context).backupListMobil.map((e) {
                 List<Transaksi> transaksiBulanIni = [];
                 double totalPerbaikan = 0;
                 double totalBersih = 0;
@@ -149,7 +148,7 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                 double totalSisa = 0;
 
                 transaksiBulanIni = Provider.of<ProviderData>(context)
-                    .backupTransaksi
+                    .listTransaksi
                     .where((element) =>
                         element.mobil == e.nama_mobil &&
                         DateTime.parse(element.tanggalBerangkat).month ==
@@ -178,7 +177,8 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                   listPerbaikan.add(Perbaikan);
                 }
                 totalBersih -= totalPerbaikan;
-
+transaksiBulanIni.sort((a, b) =>
+        DateTime.parse(b.tanggalBerangkat).compareTo(DateTime.parse(a.tanggalBerangkat)));
                 KeuanganBulanan data = KeuanganBulanan(
                     e.nama_mobil,
                     transaksiBulanIni,

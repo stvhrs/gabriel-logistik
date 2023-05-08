@@ -34,7 +34,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
   @override
   void initState() {
     Provider.of<ProviderData>(context, listen: false)
-        .listSupir
+        .listSupir.where((element) => element.delted==false)
         .map((e) => e.nama_supir)
         .toList()
         .forEach((element) {
@@ -169,7 +169,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              'Tambah Transaksi',
+                                              'Input Transaksi',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w700,
                                                   color: Theme.of(context)
@@ -212,19 +212,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                             ),
                                             'Tanggal',
                                             1),
-                                               _buildSize(
-                                            TextFormField(
-                                              style: const TextStyle(fontSize: 13),
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              controller: controlerTujuan,
-                                              onChanged: (va) {
-                                                transaksi.tujuan = va;
-                                                setState(() {});
-                                              },
-                                            ),
-                                            'Ketik Tujuan',
-                                            1), _buildSize(
+                                           _buildSize(
                                             PopupMenuButton<String>(
                                               color: Colors.grey.shade300,
                                               elevation: 2,
@@ -310,7 +298,19 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                               }).toList(),
                                             ),
                                             'Pilih Mobil',
-                                            1),
+                                            1), _buildSize(
+                                            TextFormField(
+                                              style: const TextStyle(fontSize: 13),
+                                              textInputAction:
+                                                  TextInputAction.next,
+                                              readOnly: true,
+                                              controller: controlerKetMobil,
+                                              onChanged: (val) {
+                                                setState(() {});
+                                              },
+                                            ),
+                                            'Keterangan Mobil',
+                                            1),  
                                         _buildSize(
                                             PopupMenuButton<String>(
                                               color: Colors.grey.shade300,
@@ -386,19 +386,30 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                             'Pilih Supir',
                                             1),
                                        
-                                        _buildSize(
+                                          _buildSize(
                                             TextFormField(
                                               style: const TextStyle(fontSize: 13),
                                               textInputAction:
                                                   TextInputAction.next,
-                                              readOnly: true,
-                                              controller: controlerKetMobil,
-                                              onChanged: (val) {
+                                              controller: controlerTujuan,
+                                              onChanged: (va) {
+                                                transaksi.tujuan = va;
                                                 setState(() {});
                                               },
                                             ),
-                                            'Keterangan Mobil',
-                                            1),
+                                            'Ketik Tujuan',
+                                            1),  _buildSize(
+                                            TextFormField(
+                                                style: const TextStyle(fontSize: 13),
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: controlerKeterangan,
+                                                onChanged: (val) {
+                                                  transaksi.keterangan = val;
+                                                  setState(() {});
+                                                }),
+                                            'Keterangan',
+                                            2),
                                         _buildSize(
                                             TextFormField(
                                               style: const TextStyle(fontSize: 13),
@@ -509,18 +520,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                             'Sisa',
                                             1),
                                      
-                                        _buildSize(
-                                            TextFormField(
-                                                style: const TextStyle(fontSize: 13),
-                                                textInputAction:
-                                                    TextInputAction.done,
-                                                controller: controlerKeterangan,
-                                                onChanged: (val) {
-                                                  transaksi.keterangan = val;
-                                                  setState(() {});
-                                                }),
-                                            'Keterangan',
-                                            2),
+                                      
                                         Padding(
                                           padding: const EdgeInsets.all(32),
                                           child: RoundedLoadingButton(

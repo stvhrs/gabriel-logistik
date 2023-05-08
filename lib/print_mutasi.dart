@@ -119,8 +119,8 @@ Future<Uint8List> generateResume3(
                                     //         ? Colors.grey.shade300
                                     //         : const Colors.white),
                                     padding: const pw.EdgeInsets.only(
-                                      top: 7,
-                                      bottom: 7,
+                                      top: 3.5,
+                                      bottom: 3.5,
                                       left: 15,
                                     ),
                                     child: pw.Row(children: [
@@ -171,17 +171,17 @@ Future<Uint8List> generateResume3(
 
   List<HistorySaldo> temp = [];
   temp.addAll(as);
-  if (as.length <= 28) {
+  if (as.length <= 36) {
     los(as);
     return await document.save();
   }
   for (var i = 0; i < as.length; i++) {
-    if (i % 28 == 0 && i > 0) {
-      los(as.getRange(i - 28, i).toList());
-      for (var element in as.getRange(i - 28, i).toList()) {
+    if (i % 36 == 0 && i > 0) {
+      los(as.getRange(i - 36, i).toList());
+      for (var element in as.getRange(i - 36, i).toList()) {
         temp.remove(element);
       }
-    } else if (i + 1 == as.length && i % 28 != 0) {
+    } else if (i + 1 == as.length && i % 36 != 0) {
       los(temp);
     }
   }

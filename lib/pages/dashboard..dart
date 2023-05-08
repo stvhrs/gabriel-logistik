@@ -73,11 +73,16 @@ class _DashBoardPageState extends State<DashBoardPage> {
 
     super.initState();
   }
-
+double totalSiseaHarini=0;
   @override
   void didChangeDependencies() {
+    for (var element in Provider.of<ProviderData>(context,listen: false).listTransaksi.where((element) =>
+    
+    DateTime.parse( element.tanggalBerangkat).month==DateTime.now().month&&DateTime.parse( element.tanggalBerangkat).year==DateTime.now().year)) {
+      totalSiseaHarini+=element.sisa;
+    }
     for (var element in Provider.of<ProviderData>(context, listen: false)
-        .listHistorySaldo
+        .listHistorySaldo.reversed.toList()
         .where((element) =>
             DateTime.parse(element.tanggal).month == DateTime.now().month &&
             DateTime.parse(element.tanggal).year == DateTime.now().year)
@@ -93,7 +98,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
      
     }
     if(grafik.isNotEmpty){
- grafik.first['measure']=Provider.of<ProviderData>(context,listen: false).totalSaldo;
+ grafik.last['measure']=Provider.of<ProviderData>(context,listen: false).totalSaldo;
      
     }
     
@@ -155,14 +160,14 @@ class _DashBoardPageState extends State<DashBoardPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Rangkuman(Colors.green, saldoSaatIni, 'Saldo',
+                  Rangkuman(Colors.green,Rupiah.format(totalSiseaHarini) , 'Total Sisa Hari ini',
                       Icons.attach_money_rounded),
                   Rangkuman(Colors.blue, jumlahMobil, 'Jumlah Mobil',
                       Icons.fire_truck_rounded),
                   Rangkuman(Colors.orange, jumlahSupir, 'Jumlah Supir',
                       Icons.people_alt_rounded),
                   Rangkuman(Colors.brown, jumlahTransaksiBulanini,
-                      'Rate Bulan ini', Icons.currency_exchange_rounded),
+                      'Ritase Bulan ini', Icons.currency_exchange_rounded),
                 ],
               ),
             ],
@@ -177,7 +182,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Text('Grafik Saldo ${list[DateTime.now().month - 1]}',style: const TextStyle(fontFamily: 'Nunito',fontWeight: FontWeight.bold,fontSize: 20),),
+                    child: Text('Grafik Saldo ',style: const TextStyle(fontFamily: 'Nunito',fontWeight: FontWeight.bold,fontSize: 20),),
                   ),
                   const Divider(height: 1,color: Colors.black,),
                   Container(

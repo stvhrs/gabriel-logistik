@@ -14,14 +14,14 @@ import 'package:provider/provider.dart';
 
 import '../services/service.dart';
 
-class CashFlow extends StatefulWidget {
-  const CashFlow({super.key});
+class CashFlow1 extends StatefulWidget {
+  const CashFlow1({super.key});
 
   @override
-  State<CashFlow> createState() => _CashFlowState();
+  State<CashFlow1> createState() => _CashFlowState();
 }
 
-class _CashFlowState extends State<CashFlow> {
+class _CashFlowState extends State<CashFlow1> {
       late List<MutasiSaldo> listTransaksi;
 
  
@@ -52,12 +52,6 @@ class _CashFlowState extends State<CashFlow> {
     super.initState();
   }
 
-  int currentSegment = 0;
-  void onValueChanged(int? newValue) {
-    setState(() {
-      currentSegment = newValue!;
-    });
-  }
 
   final children = <int, Widget>{
     0: const Text('Masuk', style: TextStyle(fontFamily: 'Nunito')),
@@ -83,7 +77,7 @@ class _CashFlowState extends State<CashFlow> {
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(bottom: 30),
+              margin: const EdgeInsets.only(bottom: 10),
               padding: const EdgeInsets.only(
                 right: 30,
                 left: 30,
@@ -95,7 +89,7 @@ class _CashFlowState extends State<CashFlow> {
                       bottomLeft: Radius.circular(5),
                       bottomRight: Radius.circular(5))),
               child: Text(
-                'Uang ${currentSegment == 0 ? 'Masuk' : 'Keluar'}',
+                'Nota Penjualan',
                 style: const TextStyle(
                     color: Colors.white,
                     fontFamily: 'Nunito',
@@ -103,36 +97,23 @@ class _CashFlowState extends State<CashFlow> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 10, bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: CupertinoSlidingSegmentedControl<int>(
-                      children: children,
-                      onValueChanged: onValueChanged,
-                      groupValue: currentSegment,
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children:
-                            Provider.of<ProviderData>(context, listen: false)
-                                    .isOwner
-                                ? [
-                                    const Spacer(),
-                                    TambahPendapatan(currentSegment == 0)
-                                  ]
-                                : []),
-                  ),
-                ],
-              ),
-            ),
+           
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children:
+                              Provider.of<ProviderData>(context, listen: false)
+                                      .isOwner
+                                  ? [
+                                      const Spacer(),
+                                      TambahPendapatan( true)
+                                    ]
+                                  : []),
+                   ),
+                  
+              
+            
             Container(
               color: Theme.of(context).primaryColor,
               padding:
@@ -153,7 +134,7 @@ class _CashFlowState extends State<CashFlow> {
                   Expanded(
                       flex: 3,
                       child: Text(
-                          'Total ${currentSegment == 0 ? "Masuk" : "Keluar"}',
+                          'Total Nota Penjualan',
                           style: Theme.of(context).textTheme.displayMedium)),
                   Expanded(
                       flex: 1,
@@ -164,23 +145,16 @@ class _CashFlowState extends State<CashFlow> {
             ),
             Consumer<ProviderData>(builder: (context, c, h) {
               List<MutasiSaldo> listMutasi = [];
-              List<MutasiSaldo> listMutasi2 = [];
-              if (currentSegment == 0) {
+             
+             
+            
                 for (var element in c.listMutasiSaldo) {
-                  if (element.pendapatan) {
+                  if (!element.pendapatan) {
                     listMutasi.add(element);
                   }
                 }
-              }
-              if (currentSegment == 1) {
-                for (var element in c.listMutasiSaldo) {
-                  if (!element.pendapatan) {
-                    listMutasi2.add(element);
-                  }
-                }
-              }
-              return currentSegment == 0
-                  ? SizedBox(
+              return
+             SizedBox(
                       height: MediaQuery.of(context).size.height * 0.7,
                       child: ListView.builder(
                           itemCount: listMutasi.length,
@@ -210,9 +184,9 @@ class _CashFlowState extends State<CashFlow> {
                                         flex: 1,
                                         child: Row(
                                           children: [
-                                            EditPendaptan(currentSegment == 0,
+                                            EditPendaptan(true,
                                                 listMutasi[index]),
-                                            ViewPendapatan(currentSegment == 0,
+                                            ViewPendapatan(true,
                                                 listMutasi[index]),
                                             Provider.of<ProviderData>(context,
                                                         listen: false)
@@ -232,61 +206,13 @@ class _CashFlowState extends State<CashFlow> {
                                 ),
                               ),
                             );
-                          }))
-                  : SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.7,
-                      child: ListView.builder(
-                          itemCount: listMutasi2.length,
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              child: Container(
-                                color: index.isEven
-                                    ?  Colors.white
-                                    : Colors.grey.shade200,
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                        flex: 3,
-                                        child: Text(FormatTanggal.formatTanggal(
-                                            listMutasi2[index].tanggal))),
-                                    Expanded(
-                                        flex: 3,
-                                        child: Text(
-                                            listMutasi2[index].keterangan)),
-                                    Expanded(
-                                        flex: 3,
-                                        child: Text(Rupiah.format(
-                                            listMutasi2[index].totalMutasi))),
-                                    Expanded(
-                                        flex: 1,
-                                        child: Row(
-                                          children: [
-                                            EditPendaptan(currentSegment == 0,
-                                                listMutasi2[index]),
-                                            ViewPendapatan(currentSegment == 0,
-                                                listMutasi2[index]),
-                                            Provider.of<ProviderData>(context,
-                                                        listen: false)
-                                                    .isOwner
-                                                ? DeletePendaptan(
-                                                    listMutasi2[index])
-                                                : const SizedBox()
-                                          ],
-                                        )),
-                                    // Expanded(
-                                    //     flex: 1,
-                                    //     child: currentSegment == 1
-                                    //         ? JualEdit(listMutasi[index])
-                                    //         : BeliEdit(
-                                    //             listMutasi[index]))
-                                  ],
-                                ),
-                              ),
-                            );
                           }));
-            })
+                  
+                               
+                              
+                          
+                          })
+          
           ],
         ));
   }
