@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:gabriel_logistik/hpSidemenu.dart';
@@ -5,11 +7,14 @@ import 'package:gabriel_logistik/hpSidemenu.dart';
 import 'package:gabriel_logistik/login/login_screen.dart';
 
 import 'package:gabriel_logistik/providerData/providerData.dart';
+import 'package:gabriel_logistik/services/service.dart';
 import 'package:gabriel_logistik/sidemenu.dart';
 import 'package:gabriel_logistik/styles/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:gabriel_logistik/helper/custompaint.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'models/user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -71,9 +76,29 @@ class _MyHomePageState extends State<MyHomePage> {
   initData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var data = prefs.getString('data');
+
     if (data != null) {
+      print(jsonDecode(data));
+      User? user = await Service.getUserId(jsonDecode(data)["id_user"]);
+      if (user == null ||
+          user.password != jsonDecode(data)["password"] ||
+          user.username != jsonDecode(data)["username"]) {
+        await prefs.clear();
+        Provider.of<ProviderData>(context, listen: false).logout();
+        loading=false;
+        setState(() {});
+        return;
+      }
+
       // ignore: use_build_context_synchronously
       Provider.of<ProviderData>(context, listen: false).login();
+      if (jsonDecode(data)['status'] == 'owner') {
+        print('owner');
+        Provider.of<ProviderData>(context, listen: false).owner();
+      } else {
+        print('admin');
+        Provider.of<ProviderData>(context, listen: false).admin();
+      }
       loading = false;
       setState(() {});
     } else {
@@ -86,21 +111,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-        if (mounted){ initData();}
+    if (mounted) {
+      initData();
+    }
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.width);
-    print(MediaQuery.of(context).size.height);
-    print(MediaQuery.of(context).size.width *
-        MediaQuery.of(context).devicePixelRatio);
-    print(MediaQuery.of(context).size.height *
-        MediaQuery.of(context).devicePixelRatio);
+    // print(MediaQuery.of(context).size.width);
+    // print(MediaQuery.of(context).size.height);
+    // print(MediaQuery.of(context).size.width *
+    //     MediaQuery.of(context).devicePixelRatio);
+    // print(MediaQuery.of(context).size.height *
+    //     MediaQuery.of(context).devicePixelRatio);
     return loading
-        ?   CustomPaints()
+        ? CustomPaints()
         : Consumer<ProviderData>(builder: (context, data, _) {
             return data.logined
                 ? MediaQuery.of(context).size.width <= 500

@@ -30,7 +30,7 @@ TextEditingController satu2=TextEditingController();
                   actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
                   title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text("Tambah Mobil"), Padding(
+                    const Text('Tambah No Pol'), Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CircleAvatar(
                                 radius: 12,
@@ -85,7 +85,16 @@ TextEditingController satu2=TextEditingController();
                     ),
                   ),
                   actions: <Widget>[
-                    RoundedLoadingButton(
+                     Container(margin: EdgeInsets.only(top: 10),
+                                    child: Expanded(
+                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [RoundedLoadingButton(width: 120,color: Colors.red,controller:
+                                         RoundedLoadingButtonController(), onPressed: (){
+                                          Navigator.of(context).pop();
+                                         }, child: const Text('Batal',
+                                                style: TextStyle(color: Colors.white))),
+                                          RoundedLoadingButton(width: 120,
+                                           
                       color: Theme.of(context).primaryColor,
                       elevation: 10,
                       successColor: Colors.green,
@@ -132,10 +141,10 @@ TextEditingController satu2=TextEditingController();
                         });
                       },
                       child:
-                          const Text('Tambah', style: TextStyle(color: Colors.white)),
+                          const Text('Simpan', style: TextStyle(color: Colors.white)),
                     )
                   ],
-                );
+                )))]);
               });
         },
         icon: const Icon(Icons.add,color: Colors.white,),

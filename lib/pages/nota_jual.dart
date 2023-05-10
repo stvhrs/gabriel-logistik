@@ -37,16 +37,16 @@ class _CashFlowState extends State<CashFlow1> {
     Provider.of<ProviderData>(context, listen: false)
         .setData([], false, [], [], [], [], listTransaksi);
 
-    loading = false;
-
-    setState(() {});
+   
   }
   @override
   void initState() {
         if (mounted){ initData();}
    
  
+loading = false;
 
+    setState(() {});
   
 
     super.initState();
@@ -134,7 +134,7 @@ class _CashFlowState extends State<CashFlow1> {
                   Expanded(
                       flex: 3,
                       child: Text(
-                          'Total Nota Penjualan',
+                          'Nominal Nota Penjualan',
                           style: Theme.of(context).textTheme.displayMedium)),
                   Expanded(
                       flex: 1,

@@ -55,7 +55,7 @@ class Transaksi {
   //     'tujuan': data.tujuan,
   //     'mobil': data.mobil,
   //     'keluar': data.keluar,
-  //     'ongkos': data.ongkos,
+  //     'Tarif': data.ongkos,
   //   };
   // }
 }

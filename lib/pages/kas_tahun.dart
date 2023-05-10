@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
 import 'package:gabriel_logistik/kas/kas.dart';
@@ -77,13 +78,13 @@ class _KasTahunState extends State<KasTahun> {
           Container(
             child: Row(
               children: [
-                DropdownButton<int>(
+                DropdownButton2<int>( menuItemStyleData: MenuItemStyleData(height: 36),
                   value: ropdownValue2,
-                  elevation: 16,
+                 
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.secondary),
                   underline: Container(
-                    height: 2.5,
+                    height: 2.5,margin: EdgeInsets.only(top: 5),
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                   onChanged: (int? value) {

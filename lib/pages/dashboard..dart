@@ -51,7 +51,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
     //  Provider.of<ProviderData>(context, listen: false).searchHistorySaldo();
     Provider.of<ProviderData>(context, listen: false).calculateMutasi();
     jumlahSupir = Provider.of<ProviderData>(context, listen: false)
-        .backupListSupir
+        .listSupir.where((element) => element.delted==false)
         .length
         .toString();
     jumlahMobil = Provider.of<ProviderData>(context, listen: false)

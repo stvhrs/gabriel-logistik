@@ -107,7 +107,7 @@ class _KasState extends State<Kas> {
                     Expanded(
                         flex: 7,
                         child: Text(
-                          'Ongkos',
+                          'Tarif',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(

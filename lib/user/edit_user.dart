@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/models/supir.dart';
+import 'package:gabriel_logistik/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
+import '../login/app_icons.dart';
 import '../providerData/providerData.dart';
 import '../services/service.dart';
 
-class EditSupir extends StatelessWidget {
-  final Supir supir;
-  EditSupir(this.supir);
+class EditUser extends StatefulWidget {
+  final User supir;
+  EditUser(this.supir);
+
+  @override
+  State<EditUser> createState() => _EditUserState();
+}
+
+class _EditUserState extends State<EditUser> {
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
-
+bool hidden=true;
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -23,7 +31,7 @@ class EditSupir extends StatelessWidget {
                 actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
                 title:  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Edit Driver'), Padding(
+                    const Text('Edit User'), Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CircleAvatar(
                                 radius: 12,
@@ -42,41 +50,63 @@ class EditSupir extends StatelessWidget {
                   ],
                 ),
                 content: IntrinsicHeight(
-                  child: SizedBox(
-                    width: 500,
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: TextFormField(
-                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
-                            initialValue: supir.nama_supir,
-                            decoration: const InputDecoration(
-                              hintText: 'Nama Driver',
+                  child: StatefulBuilder(
+                    builder: (context,setState,) {
+                      return SizedBox(
+                        width: 500,
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 20),
+                              child: TextFormField(
+                                  style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                                initialValue: widget.supir.username,
+                                decoration: InputDecoration(
+                            border: InputBorder.none,
+                            prefixIcon: SizedBox(
+                             
+                              child: Icon(Icons.email),
                             ),
-                            onChanged: (val) {
-                              supir.nama_supir = val.toString();
-                            },
-                            maxLines: 1,
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: TextFormField(
-                              style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
-                            initialValue: supir.nohp_supir,
-                            decoration: const InputDecoration(
-                              hintText: 'No Hp',
+                                  hintText: 'Username',
+                                ),
+                                onChanged: (val) {
+                                  widget.supir.username = val.toString();
+                                },
+                                maxLines: 1,
+                              ),
                             ),
-                            onChanged: (val) {
-                              supir.nohp_supir = val.toString();
-                            },
-                            maxLines: 1,
-                          ),
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 20),
+                              child: TextFormField(obscureText: hidden,
+                                  style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
+                                initialValue: widget.supir.password,
+                                 decoration: InputDecoration(
+                                border: InputBorder.none,
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    hidden = !hidden;
+                                    setState(() {});
+                                  },
+                                  icon: hidden
+                                      ? Icon(Icons.remove_red_eye_outlined)
+                                      :  Icon(Icons.remove_red_eye_rounded),
+                                ),
+                                prefixIcon: SizedBox(
+                                  child: Icon(Icons.lock),
+                                ),
+                                  hintText: 'Password',
+                                ),
+                                onChanged: (val) {
+                                  widget.supir.password = val.toString();
+                                },
+                                maxLines: 1,
+                              ),
+                            ),
+                          
+                          ],
                         ),
-                      
-                      ],
-                    ),
+                      );
+                    }
                   ),
                 ),
                 actions: <Widget>[
@@ -95,20 +125,20 @@ class EditSupir extends StatelessWidget {
                     errorColor: Colors.red,
                     controller: _btnController,
                     onPressed: () async {
-                      if (supir.nama_supir.isEmpty ||
-                          supir.nohp_supir.isEmpty) {
+                      if (widget.supir.username.isEmpty ||
+                          widget.supir.password.isEmpty) {
                         _btnController.error();
                         await Future.delayed(const Duration(seconds: 1));
                         _btnController.reset();
                         return;
                       }
 
-                         var data = await Service.updateSupir(
-                            {'id_supir':supir.id,'nama_supir': supir.nama_supir, "no_hp": supir.nohp_supir,});
+                         var data = await Service.updatUser(
+                            {'id_user':widget.supir.id,'username': widget.supir.username, "password": widget.supir.password,'status':widget.supir.owner?"owner":"admin"});
 
                         if (data != null) {
                           Provider.of<ProviderData>(context, listen: false)
-                              .updateSupir(data);
+                              .updateUser(data);
                         }else{
                            _btnController.error();
                          await Future.delayed(const Duration(milliseconds: 500));

@@ -130,7 +130,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                  flex: 3,
+                                  flex: 2,
                                   child: Text(
                                     'No',
                                     style: Theme.of(context)
@@ -138,9 +138,9 @@ class _TransaksiPageState extends State<TransaksiPage> {
                                         .displayMedium,
                                   )),
                               Expanded(
-                                  flex: 7,
+                                  flex: 5,
                                   child: Text(
-                                    'Berangkat',
+                                    'Tanggal',
                                     style: Theme.of(context)
                                         .textTheme
                                         .displayMedium,
@@ -156,7 +156,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                               Expanded(
                                   flex: 5,
                                   child: Text(
-                                    'Supir',
+                                    'Driver',
                                     style: Theme.of(context)
                                         .textTheme
                                         .displayMedium,
@@ -168,11 +168,18 @@ class _TransaksiPageState extends State<TransaksiPage> {
                                     style: Theme.of(context)
                                         .textTheme
                                         .displayMedium,
+                                  )),Expanded(
+                                  flex: 10,
+                                  child: Text(
+                                    'Keterangan',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayMedium,
                                   )),
                               Expanded(
                                   flex: 7,
                                   child: Text(
-                                    'Ongkos',
+                                    'Tarif',
                                     style: Theme.of(context)
                                         .textTheme
                                         .displayMedium,

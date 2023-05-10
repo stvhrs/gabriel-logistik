@@ -25,23 +25,20 @@ class _JualBeliState extends State<JualBeli> {
  
   bool loading = true;
   initData() async {
-//    test=      await Service.test2();
-// await Service.test();
-// await Service.postSupir();
-// await Service.deleteSupir();
-// await Service.test3();
+
     listTransaksi = await Service.getAlljualBeli();
 
     Provider.of<ProviderData>(context, listen: false)
         .setData([], false, [], [], [], listTransaksi, []);
 
-    loading = false;
-
-    setState(() {});
+    
   }
   @override
   void initState() {
     if (mounted){ initData();}
+    loading = false;
+
+    setState(() {});
     super.initState();
   }
   int currentSegment = 0;
@@ -57,6 +54,8 @@ class _JualBeliState extends State<JualBeli> {
   };
   @override
   Widget build(BuildContext context) {
+     List<JualBeliMobil> listMutasi=[];
+                List<JualBeliMobil> listMutasi2=[]; 
     return  loading==true
         ? Center(
             child: CustomPaints(),
@@ -154,8 +153,7 @@ class _JualBeliState extends State<JualBeli> {
               ),
             ),
             Consumer<ProviderData>(builder: (context, c, h) {
-                 List<JualBeliMobil> listMutasi=[];
-                List<JualBeliMobil> listMutasi2=[];
+                
                  
                       if(currentSegment==0){
                         for (var element in c.listJualBeliMobil) {

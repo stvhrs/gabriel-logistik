@@ -5,6 +5,7 @@ import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/mutasi_child.dart';
 import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
+import 'package:gabriel_logistik/models/user.dart';
 import 'package:http/http.dart' as http;
 import '../models/mutasi_saldo.dart';
 import '../models/perbaikan.dart';
@@ -24,12 +25,12 @@ class Service {
       List<MutasiChild> mutasiChild = [];
       print(element['detail_mutasi']);
       for (var e in element['detail_mutasi']) {
-   mutasiChild.add(MutasiChild.fromMap(e));
+        mutasiChild.add(MutasiChild.fromMap(e));
       }
 
       data.add(MutasiSaldo.fromMap(element, mutasiChild));
     }
-    
+
     return data;
   }
 
@@ -48,6 +49,34 @@ class Service {
     return data;
   }
 
+  static Future<List<User>> getUser() async {
+    try {
+        List<User> data = [];
+      final response = await http.get(
+        Uri.parse(
+          '$base/user',
+        ),
+      );
+        for (Map<String, dynamic> element in json.decode(response.body)) {
+      data.add(User.fromMap(element));
+    }
+      return data;
+    } catch (e) {
+    return[];
+    }
+  }
+static Future<User?> getUserId(String id) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+          '$base/user?id_user=$id',
+        ),
+      );
+      return User.fromMap(jsonDecode(response.body));
+    } catch (e) {
+      return null;
+    }
+  }
   static Future<List<Supir>> getAllSupir() async {
     List<Supir> data = [];
     final response = await http.get(
@@ -148,6 +177,60 @@ class Service {
     try {
       final response = await http.delete(
         Uri.parse('$base/supir?id_supir=$data'),
+      );
+
+      if (response.body.contains('fail')) {
+        return '';
+      } else {
+        return data;
+      }
+    } catch (e) {
+      return '';
+    }
+  }
+
+  static Future<User?> postUser(Map<String, dynamic> data) async {
+    try {
+      final response = await http.post(
+        body: data,
+        Uri.parse(
+          '$base/user',
+        ),
+      );
+
+      if (response.body.isNotEmpty) {
+        return User.fromMap(json.decode(response.body)["0"]["user"][0]);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static Future<User?> updatUser(Map<String, dynamic> data) async {
+    try {
+      final response = await http.put(
+        body: data,
+        Uri.parse(
+          '$base/user',
+        ),
+      );
+
+      if (response.body.isNotEmpty) {
+        return User.fromMap(json.decode(response.body)["0"]);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static Future<String> deleteUser(String data) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('$base/user?id_user=$data'),
       );
 
       if (response.body.contains('fail')) {

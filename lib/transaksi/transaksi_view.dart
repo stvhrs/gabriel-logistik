@@ -69,7 +69,7 @@ controlerKetMobil.text=transaksi.keterangan_mobill;
       // margin: EdgeInsets.only(right: ket == 'Tanggal' ? 0 : 50, bottom: 30),
       child: Container(
         margin: EdgeInsets.only(
-            right: ket == 'Keterangan Mobil' || ket == 'Ketik Tujuan' ? 0 : 50,
+            right: ket == 'Jenis Mobil' || ket == 'Ketik Tujuan' ? 0 : 50,
             bottom: ket == 'Keterangan' ? 40 : 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,7 +182,7 @@ controlerKetMobil.text=transaksi.keterangan_mobill;
                                                 },
                                               
                                               ),
-                                              'Pilih Supir',
+                                              'Pilih Driver',
                                               1),
                                           _buildSize(
                                              TextFormField(
@@ -202,7 +202,7 @@ controlerKetMobil.text=transaksi.keterangan_mobill;
                                                 },
                                              
                                               ),
-                                              'Pilih Mobil',
+                                              'Pilih No Pol',
                                               1),
                                           _buildSize(
                                               TextFormField(
@@ -211,7 +211,7 @@ controlerKetMobil.text=transaksi.keterangan_mobill;
                                                 controller: controlerKetMobil,
                                                 onChanged: (val) {},
                                               ),
-                                              'Keterangan Mobil',
+                                              'Jenis Mobil',
                                               1),
                                         ],
                                       ),

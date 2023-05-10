@@ -31,12 +31,12 @@ class _TransaksiTileState extends State<TransaksiTile> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-              flex: 3,
+              flex: 2,
               child: Text(
                 widget.index.toString(),
               )),
           Expanded(
-              flex: 7,
+              flex: 5,
               child: Text(
                   maxLines: 1,
                   FormatTanggal.formatTanggal(
@@ -49,7 +49,7 @@ class _TransaksiTileState extends State<TransaksiTile> {
               flex: 5,
               child: Text(
                 widget._transaksi.supir,
-              )), Expanded(flex: 10, child: Text(widget._transaksi.tujuan)),
+              )), Expanded(flex: 10, child: Text(widget._transaksi.tujuan)),Expanded(flex: 10, child: Text(widget._transaksi.keterangan)),
 
           Expanded(
               flex: 7, child: Text(Rupiah.format(widget._transaksi.ongkos))),

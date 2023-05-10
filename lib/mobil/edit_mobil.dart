@@ -27,7 +27,7 @@ class EditMobil extends StatelessWidget {
                   actionsPadding: const EdgeInsets.only(right: 15, bottom: 15),
                   title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text("Edit Mobil"), Padding(
+                    const Text('Edit No Pol'), Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CircleAvatar(
                                 radius: 12,
@@ -82,7 +82,15 @@ class EditMobil extends StatelessWidget {
                     ),
                   ),
                   actions: <Widget>[
-                    RoundedLoadingButton(
+                    Container(margin: EdgeInsets.only(top: 10),
+                                    child: Expanded(
+                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [RoundedLoadingButton(width: 120,color: Colors.red,controller:
+                                         RoundedLoadingButtonController(), onPressed: (){
+                                          Navigator.of(context).pop();
+                                         }, child: const Text('Batal',
+                                                style: TextStyle(color: Colors.white))),
+                                          RoundedLoadingButton(width: 120,
                       color: Theme.of(context).primaryColor,
                       elevation: 10,
                       successColor: Colors.green,
@@ -125,7 +133,7 @@ class EditMobil extends StatelessWidget {
                           const Text('Edit', style: TextStyle(color: Colors.white)),
                     )
                   ],
-                );
+                )))]);
               });
         },
         icon: const Icon(Icons.edit,color:      Colors.green,),

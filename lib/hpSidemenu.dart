@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/helper/custompaint.dart';
 import 'package:gabriel_logistik/hp_transaksi_add.dart';
 import 'package:gabriel_logistik/hp_transaksi_tile.dart';
+import 'package:gabriel_logistik/logout.dart';
+import 'package:gabriel_logistik/logout_hp.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
@@ -94,28 +96,7 @@ class _DashBoardHpState extends State<DashBoardHp> {
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Nunito',
                           letterSpacing: 1.1)),
-                  leading: Padding(
-                    padding: const EdgeInsets.all(13.0),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.white),
-                      child: InkWell(
-                        child: const Icon(
-                          Icons.restart_alt_rounded,
-                          color: Colors.red,
-                        ),
-                        onTap: () async {
-                          SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
-                          prefs.clear();
-
-                          // Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => MyHomePage(title: ''),));
-                          Provider.of<ProviderData>(context, listen: false)
-                              .logout();
-                        },
-                      ),
-                    ),
-                  ),
+                  leading: HpLogout()
                 ),
                 
                 backgroundColor: Colors.grey.shade300,
@@ -171,7 +152,7 @@ class _DashBoardHpState extends State<DashBoardHp> {
                               Expanded(
                                   flex: 7,
                                   child: Text(
-                                    'Ongkos',
+                                    'Tarif',
                                     style: TextStyle(
                                         fontFamily: 'Nunito',
                                         fontSize: 10,

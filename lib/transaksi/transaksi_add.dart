@@ -12,6 +12,7 @@ import "package:rounded_loading_button/rounded_loading_button.dart";
 import "package:provider/provider.dart";
 import "package:web_date_picker/web_date_picker.dart";
 
+import '../helper/dropdown.dart';
 import "../helper/format_tanggal.dart";
 import "../helper/input_currency.dart";
 import '../services/service.dart';
@@ -37,7 +38,8 @@ class _TransaksiAddState extends State<TransaksiAdd> {
   @override
   void initState() {
     Provider.of<ProviderData>(context, listen: false)
-        .listSupir.where((element) => element.delted==false)
+        .listSupir
+        .where((element) => element.delted == false)
         .map((e) => e.nama_supir)
         .toList()
         .forEach((element) {
@@ -56,10 +58,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
         listMobil.add(element);
       }
     });
-    listSupir.insert(0, "Pilih Supir");
-    listMobil.insert(0, "Pilih Mobil");
-    controlerSupir.text = "Pilih Supir";
-    controlerMobil.text = "Pilih Mobil";
+
     super.initState();
   }
 
@@ -67,11 +66,55 @@ class _TransaksiAddState extends State<TransaksiAdd> {
       RoundedLoadingButtonController();
   late Transaksi transaksi;
   TextStyle small = const TextStyle(fontSize: 13.5);
+
+  Widget _buildSize2(widget, String ket, int flex) {
+    return
+        //  Container(height: 50,
+        //   // margin: EdgeInsets.only(
+        //   //     right: ket == 'Jenis Mobil' || ket == "Ketik Tujuan" ? 0 : 50,
+        //   //     bottom: ket == "ket_transaksi" ? 20 : 5),
+        //   child: Row(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       Container(
+        //           margin: const EdgeInsets.only(
+        //             right: 7,
+        //           ),
+        //           child: Text(
+        //             "$ket :",
+        //             style: const TextStyle(fontSize: 13.5),
+        //           )),
+        Container(
+      margin: const EdgeInsets.only(bottom: 15, left: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // clipBehavior: Clip.none,
+        // alignment: Alignment.centerLeft,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Text(
+              "$ket :",
+              style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Nunito"),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: widget,
+          )
+        ],
+      ),
+    );
+  }
+
   Widget _buildSize(widget, String ket, int flex) {
     return
         //  Container(height: 50,
         //   // margin: EdgeInsets.only(
-        //   //     right: ket == "Keterangan Mobil" || ket == "Ketik Tujuan" ? 0 : 50,
+        //   //     right: ket == 'Jenis Mobil' || ket == "Ketik Tujuan" ? 0 : 50,
         //   //     bottom: ket == "ket_transaksi" ? 20 : 5),
         //   child: Row(
         //     crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,11 +168,11 @@ class _TransaksiAddState extends State<TransaksiAdd> {
             transaksi = Transaksi.fromMap({
               "id_transaksi": "0",
               "id_mobil": "0",
-              "plat_mobil": "Pilih Mobil",
+              "plat_mobil": "",
               "id_supir": "0",
-              "nama_supir": "Pilih Supir",
+              "nama_supir": "",
               "tanggal": DateTime.now().toIso8601String(),
-              "ket_transaksi": "k",
+              "ket_transaksi": "",
               "tujuan": "0",
               "ongkosan": "0",
               "keluar": "0",
@@ -147,7 +190,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                       children: [
                         const SizedBox(),
                         const Text(
-                          "Tambah Transaksi",
+                          "Input Transaksi",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
                         ),
@@ -193,372 +236,373 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.26,
                                   child: Column(
-                                    children: [
-                                      _buildSize(
-                                          WebDatePicker(
-                                            lastDate: DateTime.now(),
-                                            height: 36,
-                                            initialDate: DateTime.now(),
-                                            dateformat: "dd/MM/yyyy",
-                                            onChange: (value) {
-                                              if (value != null) {
-                                                transaksi.tanggalBerangkat =
-                                                    value.toIso8601String();
-                                              }
-                                            },
-                                          ),
-                                          "Tanggal",
-                                          1),
-                                      _buildSize(
-                                          PopupMenuButton<String>(padding: EdgeInsets.all(10),
-                                            color: Colors.grey.shade300,
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Container(
-                                              padding: const EdgeInsets.only(
-                                                  top: 5, left: 5, bottom: 5),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey.shade200,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5)),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(controlerMobil.text,
-                                                      style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontFamily: "Nunito",
-                                                          color: Colors.black)),
-                                                  const Icon(Icons
-                                                      .arrow_drop_down_sharp)
-                                                ],
-                                              ),
-                                            ),
-                                            itemBuilder: (context) => listMobil
-                                                .map<PopupMenuItem<String>>(
-                                                    (String value) {
-                                              return PopupMenuItem<String>(
-                                                onTap: () {
-                                                  setState(() {
-                                                    if (value ==
-                                                        "Pilih Mobil") {
-                                                      return;
+                                    children: [Expanded(flex: 9,
+                                      child: ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+      
+                                        child: SingleChildScrollView(
+                                          child: Column(children: [    _buildSize(
+                                                WebDatePicker(
+                                                  lastDate: DateTime.now(),
+                                                  height: 36,
+                                                  initialDate: DateTime.now(),
+                                                  dateformat: "dd/MM/yyyy",
+                                                  onChange: (value) {
+                                                    if (value != null) {
+                                                      transaksi.tanggalBerangkat =
+                                                          value.toIso8601String();
                                                     }
-                                                    controlerMobil.text = value;
-                                                    transaksi.mobil = value;
-                                                    transaksi
-                                                        .id_mobil = Provider.of<
-                                                                ProviderData>(
-                                                            context,
-                                                            listen: false)
-                                                        .backupListMobil
-                                                        .firstWhere((element) =>
-                                                            element
-                                                                .nama_mobil ==
-                                                            value)
-                                                        .id;
-                                                    controlerKetMobil
-                                                        .text = Provider.of<
-                                                                ProviderData>(
-                                                            context,
-                                                            listen: false)
-                                                        .listMobil
-                                                        .firstWhere((element) =>
-                                                            element
-                                                                .nama_mobil ==
-                                                            value)
-                                                        .keterangan_mobill;
-                                                  });
-                                                },
-                                                value: value,
-                                                child: Column(
-                                                  children: [
-                                                    Text(value.toString(),
-                                                        style: const TextStyle(
-                                                            fontSize: 16,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                            color:
-                                                                Colors.black)),
-                                                    const Divider(height: 0),
+                                                  },
+                                                ),
+                                                "Tanggal",
+                                                1),
+                                            _buildSize2(
+                                                DropDownField(
+                                                  value: transaksi.mobil,
+                                                  items: listMobil,
+                                                  height: 28,
+                                                  onValueChanged: (value) {
+                                                    setState(() {
+                                                      // if (value ==
+                                                      //     'Pilih No Pol') {
+                                                      //   return;
+                                                      // }
+                                                      controlerMobil.text = value;
+                                                      transaksi.mobil = value;
+                                                      transaksi.id_mobil =
+                                                          Provider.of<ProviderData>(
+                                                                  context,
+                                                                  listen: false)
+                                                              .backupListMobil
+                                                              .firstWhere((element) =>
+                                                                  element
+                                                                      .nama_mobil ==
+                                                                  value)
+                                                              .id;
+                                                      controlerKetMobil.text =
+                                                          Provider.of<ProviderData>(
+                                                                  context,
+                                                                  listen: false)
+                                                              .listMobil
+                                                              .firstWhere((element) =>
+                                                                  element
+                                                                      .nama_mobil ==
+                                                                  value)
+                                                              .keterangan_mobill;
+                                                    });
+                                                  },
+                                                ),
+                                                'Pilih No Pol',
+                                                1),
+                                            _buildSize(
+                                                TextFormField(
+                                                  style:
+                                                      const TextStyle(fontSize: 13),
+                                                  textInputAction:
+                                                      TextInputAction.next,
+                                                  readOnly: true,
+                                                  controller: controlerKetMobil,
+                                                  onChanged: (val) {},
+                                                ),
+                                                'Jenis Mobil',
+                                                1),
+                                            _buildSize2(
+                                                DropDownField(
+                                                  value: transaksi.supir,
+                                                  items: listSupir,
+                                                  height: 28,
+                                                  onValueChanged: (value) {
+                                                    setState(() {
+                                                      transaksi.supir = value;
+                                                      controlerSupir.text = value;
+                                                      transaksi.id_supir =
+                                                          Provider.of<ProviderData>(
+                                                                  context,
+                                                                  listen: false)
+                                                              .listSupir
+                                                              .firstWhere((element) =>
+                                                                  element
+                                                                      .nama_supir ==
+                                                                  value)
+                                                              .id;
+                                                    });
+                                                  },
+                                                ),
+                                                "Pilih Driver",
+                                                1),
+                                            _buildSize(
+                                                TextFormField(
+                                                  style:
+                                                      const TextStyle(fontSize: 13),
+                                                  textInputAction:
+                                                      TextInputAction.next,
+                                                  controller: controlerTujuan,
+                                                  onChanged: (va) {
+                                                    transaksi.tujuan = va;
+                                                    setState(() {});
+                                                  },
+                                                ),
+                                                "Ketik Tujuan",
+                                                1),
+                                            _buildSize(
+                                                TextFormField(
+                                                    style:
+                                                        const TextStyle(fontSize: 13),
+                                                    textInputAction:
+                                                        TextInputAction.next,
+                                                    controller: controlerKeterangan,
+                                                    onChanged: (val) {
+                                                      transaksi.keterangan = val;
+                                                      setState(() {});
+                                                    }),
+                                                "Keterangan",
+                                                2),
+                                            _buildSize(
+                                                TextFormField(
+                                                  style:
+                                                      const TextStyle(fontSize: 13),
+                                                  textInputAction:
+                                                      TextInputAction.next,
+                                                  controller: controlerOngkos,
+                                                  onChanged: (va) {
+                                                    if (va.isNotEmpty &&
+                                                        va.startsWith("Rp")) {
+                                                      transaksi.ongkos =
+                                                          Rupiah.parse(va);
+                                                      if (transaksi.keluar >
+                                                          Rupiah.parse(va)) {
+                                                        controlerSisa.text =
+                                                            "Tidak boleh minus";
+                                                        setState(() {});
+                                                      } else {
+                                                        controlerSisa.text =
+                                                            Rupiah.format((transaksi
+                                                                        .ongkos -
+                                                                    transaksi.keluar))
+                                                                .toString();
+                                                        transaksi.sisa =
+                                                            transaksi.ongkos -
+                                                                transaksi.keluar;
+                                                        setState(() {});
+                                                      }
+                                                    } else {
+                                                      transaksi.ongkos = 0;
+                                                    }
+                                                    setState(
+                                                      () {},
+                                                    );
+                                                  },
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly,
+                                                    CurrencyInputFormatter()
                                                   ],
                                                 ),
-                                              );
-                                            }).toList(),
-                                          ),
-                                          "Pilih Mobil",
-                                          1),  _buildSize(
-                                          TextFormField(
-                                            style:
-                                                const TextStyle(fontSize: 13),
-                                            textInputAction:
-                                                TextInputAction.next,
-                                            readOnly: true,
-                                            controller: controlerKetMobil,
-                                            onChanged: (val) {},
-                                          ),
-                                          "Keterangan Mobil",
-                                          1),
-                                      _buildSize(
-                                          PopupMenuButton<String>(
-                                            color: Colors.grey.shade300,
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
-                                            child: Container(
-                                              padding: const EdgeInsets.only(
-                                                  top: 5, left: 5, bottom: 5),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey.shade200,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5)),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(controlerSupir.text,
-                                                      style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontFamily: "Nunito",
-                                                          color: Colors.black)),
-                                                  const Icon(Icons
-                                                      .arrow_drop_down_sharp)
-                                                ],
-                                              ),
-                                            ),
-                                            itemBuilder: (context) => listSupir
-                                                .map<PopupMenuItem<String>>(
-                                                    (String value) {
-                                              return PopupMenuItem<String>(
-                                                onTap: () {
-                                                  setState(() {
-                                                    transaksi.supir = value;
-                                                    controlerSupir.text = value;
-                                                    transaksi
-                                                        .id_supir = Provider.of<
-                                                                ProviderData>(
-                                                            context,
-                                                            listen: false)
-                                                        .listSupir
-                                                        .firstWhere((element) =>
-                                                            element
-                                                                .nama_supir ==
-                                                            value)
-                                                        .id;
-                                                  });
-                                                },
-                                                value: value,
-                                                child: Column(
-                                                  children: [
-                                                    Text(value.toString(),
-                                                        style: const TextStyle(
-                                                            fontSize: 16,
-                                                            fontFamily:
-                                                                "Nunito",
-                                                            color:
-                                                                Colors.black)),
-                                                    const Divider(height: 0),
+                                                "Tarif",
+                                                1),
+                                            _buildSize(
+                                                TextFormField(
+                                                  style:
+                                                      const TextStyle(fontSize: 13),
+                                                  textInputAction:
+                                                      TextInputAction.done,
+                                                  controller: controlerKeluar,
+                                                  onChanged: (va) {
+                                                    if (va.isNotEmpty &&
+                                                        va.startsWith("Rp")) {
+                                                      transaksi.keluar =
+                                                          Rupiah.parse(va);
+                                                                            
+                                                      if (transaksi.ongkos <
+                                                          Rupiah.parse(va)) {
+                                                        controlerSisa.text =
+                                                            "Tidak boleh minus";
+                                                        setState(() {});
+                                                      } else {
+                                                        transaksi.sisa =
+                                                            transaksi.ongkos -
+                                                                transaksi.keluar;
+                                                        controlerSisa.text =
+                                                            Rupiah.format((transaksi
+                                                                        .ongkos -
+                                                                    transaksi.keluar))
+                                                                .toString();
+                                                        setState(() {});
+                                                      }
+                                                    } else {
+                                                      transaksi.keluar = 0;
+                                                    }
+                                                    setState(
+                                                      () {},
+                                                    );
+                                                  },
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly,
+                                                    CurrencyInputFormatter()
                                                   ],
                                                 ),
-                                              );
-                                            }).toList(),
-                                          ),
-                                          "Pilih Supir",
-                                          1),
-                                      _buildSize(
-                                          TextFormField(
-                                            style:
-                                                const TextStyle(fontSize: 13),
-                                            textInputAction:
-                                                TextInputAction.next,
-                                            controller: controlerTujuan,
-                                            onChanged: (va) {
-                                              transaksi.tujuan = va;
-                                              setState(() {});
-                                            },
-                                          ),
-                                          "Ketik Tujuan",
-                                          1), _buildSize(
-                                          TextFormField(
-                                              style:
-                                                  const TextStyle(fontSize: 13),
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              controller: controlerKeterangan,
-                                              onChanged: (val) {
-                                                transaksi.keterangan = val;
-                                                setState(() {});
-                                              }),
-                                          "Keterangan",
-                                          2),
-                                    
-                                      _buildSize(
-                                          TextFormField(
-                                            style:
-                                                const TextStyle(fontSize: 13),
-                                            textInputAction:
-                                                TextInputAction.next,
-                                            controller: controlerOngkos,
-                                            onChanged: (va) {
-                                              if (va.isNotEmpty &&
-                                                  va.startsWith("Rp")) {
-                                                transaksi.ongkos =
-                                                    Rupiah.parse(va);
-                                                if (transaksi.keluar >
-                                                    Rupiah.parse(va)) {
-                                                  controlerSisa.text =
-                                                      "Tidak boleh minus";
-                                                  setState(() {});
-                                                } else {
-                                                  controlerSisa.text =
-                                                      Rupiah.format((transaksi
-                                                                  .ongkos -
-                                                              transaksi.keluar))
-                                                          .toString();
-                                                  transaksi.sisa =
-                                                      transaksi.ongkos -
-                                                          transaksi.keluar;
-                                                  setState(() {});
-                                                }
-                                              } else {
-                                                transaksi.ongkos = 0;
-                                              }
-                                            },
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter
-                                                  .digitsOnly,
-                                              CurrencyInputFormatter()
-                                            ],
-                                          ),
-                                          "Biaya Ongkosan",
-                                          1),
-                                      _buildSize(
-                                          TextFormField(
-                                            style:
-                                                const TextStyle(fontSize: 13),
-                                            textInputAction:
-                                                TextInputAction.next,
-                                            controller: controlerKeluar,
-                                            onChanged: (va) {
-                                              if (va.isNotEmpty &&
-                                                  va.startsWith("Rp")) {
-                                                transaksi.keluar =
-                                                    Rupiah.parse(va);
-
-                                                if (transaksi.ongkos <
-                                                    Rupiah.parse(va)) {
-                                                  controlerSisa.text =
-                                                      "Tidak boleh minus";
-                                                  setState(() {});
-                                                } else {
-                                                  transaksi.sisa =
-                                                      transaksi.ongkos -
-                                                          transaksi.keluar;
-                                                  controlerSisa.text =
-                                                      Rupiah.format((transaksi
-                                                                  .ongkos -
-                                                              transaksi.keluar))
-                                                          .toString();
-                                                  setState(() {});
-                                                }
-                                              } else {
-                                                transaksi.keluar = 0;
-                                              }
-                                            },
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter
-                                                  .digitsOnly,
-                                              CurrencyInputFormatter()
-                                            ],
-                                          ),
-                                          "Biaya Keluar",
-                                          1),
-                                      _buildSize(
-                                          TextFormField(
-                                            style:
-                                                const TextStyle(fontSize: 13),
-                                            textInputAction:
-                                                TextInputAction.next,
-                                            controller: controlerSisa,
-                                            readOnly: true,
-                                            onChanged: (va) {
-                                              if (va.isNotEmpty &&
-                                                  va.startsWith("Rp")) {
-                                                transaksi.keluar =
-                                                    Rupiah.parse(va);
-                                              } else {
-                                                transaksi.keluar = 0;
-                                              }
-                                            },
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter
-                                                  .digitsOnly,
-                                              CurrencyInputFormatter()
-                                            ],
-                                          ),
-                                          "Sisa",
-                                          1),
+                                                "Biaya Keluar",
+                                                1),
+                                            _buildSize(
+                                                TextFormField(
+                                                  style:
+                                                      const TextStyle(fontSize: 13),
+                                                  textInputAction:
+                                                      TextInputAction.next,
+                                                  controller: controlerSisa,
+                                                  readOnly: true,
+                                                  onChanged: (va) {
+                                                    if (va.isNotEmpty &&
+                                                        va.startsWith("Rp")) {
+                                                      transaksi.keluar =
+                                                          Rupiah.parse(va);
+                                                    } else {
+                                                      transaksi.keluar = 0;
+                                                    }
+                                                    setState(
+                                                      () {},
+                                                    );
+                                                  },
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly,
+                                                    CurrencyInputFormatter()
+                                                  ],
+                                                ),
+                                                "Sisa",
+                                                1),],),
+                                        ),
+                                      ),
+                                    ),
+                                  
                                      
-                                      const Spacer(),
-                                      Container(
-                                        child: ElevatedButton.icon(
-                                            icon: const Icon(
-                                              Icons.arrow_right_alt_rounded,
-                                              color: Colors.white,
-                                            ),
-                                            label: const Text(
-                                              "Masukan",
-                                              style: TextStyle(
+                                      Expanded(flex: 1,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            ElevatedButton.icon(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            Colors.red)),
+                                                onPressed: () {
+                                                  controlerKetMobil.text = "";
+                                                  controlerMobil.text = "";
+                                                  controlerKeterangan.text = "";
+                                                  controlerOngkos.text = "";
+                                                  controlerKeluar.text = "";
+                                                  controlerSisa.text = "";
+                                                  controlerSupir.text = "";
+                                                  controlerKetMobil.text = "";
+                                                  controlerTujuan.text = "";
+                                                  transaksi.keterangan = "";
+                                                  transaksi.mobil = "";
+                                                  transaksi.supir = "";
+                                                  transaksi.keluar = 0;
+                                                  transaksi.sisa = 0;
+                                                  transaksi.ongkos = 0;
+                                                  transaksi.tujuan = "";
+                                                  transaksi.tanggalBerangkat =
+                                                      DateTime.now()
+                                                          .toIso8601String();
+                                      
+                                                  Transaksi.fromMap({
+                                                    "id_transaksi": "0",
+                                                    "id_mobil": "0",
+                                                    "plat_mobil": "",
+                                                    "id_supir": "0",
+                                                    "nama_supir": "",
+                                                    "tanggal": DateTime.now()
+                                                        .toIso8601String(),
+                                                    "ket_transaksi": "",
+                                                    "tujuan": "0",
+                                                    "ongkosan": "0",
+                                                    "keluar": "0",
+                                                    "sisa": "0"
+                                                  });
+                                                  setState(
+                                                    () {},
+                                                  );
+                                                },
+                                                icon: const Icon(
+                                                  Icons.delete,
                                                   color: Colors.white,
-                                                  fontSize: 13),
+                                                ),
+                                                label: Text(
+                                                  "Hapus",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 13),
+                                                )),
+                                            Container(
+                                              child: ElevatedButton.icon(
+                                                  icon: const Icon(
+                                                    Icons.arrow_right_alt_rounded,
+                                                    color: Colors.white,
+                                                  ),
+                                                  label: const Text(
+                                                    "Masukan",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 13),
+                                                  ),
+                                                  style: ButtonStyle(
+                                                      backgroundColor: MaterialStatePropertyAll(
+                                                          (transaksi.sisa <= 0 ||
+                                                                  transaksi.supir
+                                                                      .isEmpty ||
+                                                                  transaksi.mobil
+                                                                      .isEmpty ||
+                                                                  transaksi.tujuan
+                                                                      .isEmpty ||
+                                                                  transaksi.ongkos ==
+                                                                      0 ||
+                                                                  controlerSisa
+                                                                          .text ==
+                                                                      "Tidak boleh minus")
+                                                              ? Colors.grey
+                                                              : Colors.green),
+                                                      padding:
+                                                          MaterialStateProperty.all(
+                                                              const EdgeInsets.only(
+                                                                  right: 15,
+                                                                  left: 15))),
+                                                  onPressed: (transaksi.sisa <= 0 ||
+                                                          transaksi
+                                                              .supir.isEmpty ||
+                                                          transaksi.mobil.isEmpty ||
+                                                          transaksi.tujuan.isEmpty ||
+                                                          transaksi.ongkos == 0 ||
+                                                          controlerSisa.text == "Tidak boleh minus")
+                                                      ? null
+                                                      : () {
+                                                          Transaksi temp = Transaksi(
+                                                              "",
+                                                              transaksi.id_supir,
+                                                              transaksi.id_mobil,
+                                                              transaksi
+                                                                  .tanggalBerangkat,
+                                                              transaksi
+                                                                  .keterangan,
+                                                              transaksi.supir,
+                                                              transaksi.mobil,
+                                                              transaksi
+                                                                  .keterangan_mobill,
+                                                              transaksi.tujuan,
+                                                              transaksi.keluar,
+                                                              transaksi.ongkos,
+                                                              transaksi.sisa);
+                                      
+                                                          bulkTransaksi.add(temp);
+                                                          setState(
+                                                            () {},
+                                                          );
+                                                        }),
                                             ),
-                                            style: ButtonStyle(
-                                                padding:
-                                                    MaterialStateProperty.all(
-                                                        const EdgeInsets.only(
-                                                            right: 15,
-                                                            left: 15))),
-                                            onPressed: (transaksi.sisa <= 0 ||
-                                                    transaksi.supir ==
-                                                        "Pilih Supir" ||transaksi.mobil=="Pilih Mobil"||
-                                                    transaksi.tujuan.isEmpty ||
-                                                    transaksi.ongkos == 0 ||
-                                                    transaksi.keluar == 0)
-                                                ? null
-                                                : () {
-                                                  Transaksi temp=Transaksi("", transaksi.id_supir, 
-                                                  transaksi.id_mobil,transaksi. tanggalBerangkat,transaksi. keterangan,transaksi.
-                                                   supir, transaksi. mobil, transaksi.  keterangan_mobill, transaksi.  tujuan,  transaksi. 
-                                                   keluar, transaksi.  ongkos,  transaksi. sisa);
-                                               
-                                                    bulkTransaksi
-                                                        .add(temp);
-                                                    // controlerKetMobil.text = "";
-                                                    // controlerMobil.text =
-                                                    //     "Pilih Mobil";
-                                                    // controlerKeterangan.text =
-                                                    //     "";
-                                                    // controlerOngkos.text = "";
-                                                    // controlerKeluar.text = "";
-                                                    // controlerSisa.text = "";
-                                                    // controlerSupir.text =
-                                                    //     "Pilih Supir";
-                                                    // controlerKetMobil.text = "";
-                                                    // controlerTujuan.text = "";
-
-                                                    
-
-                                                   setState(() {
-                                                     
-                                                   },);
-                                                  }),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -615,7 +659,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             Expanded(
                                                 flex: 5,
                                                 child: Text(
-                                                  "Supir",
+                                                  'Driver',
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .displayMedium,
@@ -631,7 +675,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                             Expanded(
                                                 flex: 7,
                                                 child: Text(
-                                                  "Ongkosan",
+                                                  "Tarif",
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .displayMedium,
@@ -665,7 +709,8 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                         ),
                                       ),
                                       Expanded(
-                                        child: ListView(addAutomaticKeepAlives: false,
+                                        child: ListView(
+                                            addAutomaticKeepAlives: false,
                                             padding: EdgeInsets.zero,
                                             children: bulkTransaksi.reversed
                                                 .toList()
@@ -686,8 +731,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                                   const EdgeInsets
                                                                           .only(
                                                                       top: 2,
-                                                                      bottom:
-                                                                        2,
+                                                                      bottom: 2,
                                                                       left: 15,
                                                                       right:
                                                                           15),
@@ -847,7 +891,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                   Navigator.of(context).pop();
                                                 });
                                               },
-                                              child: const Text("Tambah",
+                                              child: const Text("Simpan",
                                                   style: TextStyle(
                                                       color: Colors.white)),
                                             ),
@@ -861,23 +905,30 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                       ),
                     ),
                   );
-                }).then((value) => {bulkTransaksi.clear(),
-                
-                transaksi =
-                                                        Transaksi.fromMap({
-                                                      "id_transaksi": "0",
-                                                      "id_mobil": "0",
-                                                      "plat_mobil": "Pilih Mobil",
-                                                      "id_supir": "0",
-                                                      "nama_supir": "Pilih Supir",
-                                                      "tanggal": DateTime.now()
-                                                          .toIso8601String(),
-                                                      "ket_transaksi": "k",
-                                                      "tujuan": "0",
-                                                      "ongkosan": "0",
-                                                      "keluar": "0",
-                                                      "sisa": "0"
-                                                    })
+                }).then((value) => {
+                  bulkTransaksi.clear(),
+                  controlerKetMobil.text = "",
+                  controlerMobil.text = "",
+                  controlerKeterangan.text = "",
+                  controlerOngkos.text = "",
+                  controlerKeluar.text = "",
+                  controlerSisa.text = "",
+                  controlerSupir.text = "",
+                  controlerKetMobil.text = "",
+                  controlerTujuan.text = "",
+                  Transaksi.fromMap({
+                    "id_transaksi": "0",
+                    "id_mobil": "0",
+                    "plat_mobil": "",
+                    "id_supir": "0",
+                    "nama_supir": "",
+                    "tanggal": DateTime.now().toIso8601String(),
+                    "ket_transaksi": "",
+                    "tujuan": "0",
+                    "ongkosan": "0",
+                    "keluar": "0",
+                    "sisa": "0"
+                  })
                 });
           }),
     );

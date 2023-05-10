@@ -164,8 +164,8 @@ class _BulananState extends State<Bulanan> {
 
   
   final children = <int, Widget>{
-    0: const Text('Transaksi', style: TextStyle(fontFamily: 'Nunito')),
-    1: const Text('Maintain', style: TextStyle(fontFamily: 'Nunito')),
+    0: const Text('Transaksi', style: TextStyle(fontFamily: 'Nunito',fontSize: 14,fontWeight: FontWeight.bold,color: Colors.green)),
+    1: const Text('Pemeliharaan', style: TextStyle(fontFamily: 'Nunito',fontSize: 14,fontWeight: FontWeight.bold,color: Colors.red)),
   };
   @override
   Widget build(BuildContext context) {
@@ -252,7 +252,7 @@ class _BulananState extends State<Bulanan> {
                                 flex: 4,
                                 child: Text(
                                   textAlign: TextAlign.left,
-                                  'Supir',
+                                  'Driver',
                                   style:
                                       Theme.of(context).textTheme.displayMedium,
                                 )),
@@ -268,7 +268,7 @@ class _BulananState extends State<Bulanan> {
                                 flex: 7,
                                 child: Text(
                                   textAlign: TextAlign.left,
-                                  'Ongkos',
+                                  'Tarif',
                                   style:
                                       Theme.of(context).textTheme.displayMedium,
                                 )),

@@ -33,7 +33,7 @@ class AppTheme {
      
         scrollbarTheme:  ScrollbarThemeData(
           thumbVisibility: MaterialStateProperty.all<bool>(true),thickness: MaterialStateProperty.all(5))
-            .copyWith(thumbColor: MaterialStateProperty.all(secondaryColor.withOpacity(0.5))),
+            .copyWith(thumbColor: MaterialStateProperty.all(secondaryColor)),
         textTheme:  const TextTheme(
             displaySmall: TextStyle(
               fontSize: 13,
@@ -57,7 +57,9 @@ class AppTheme {
               letterSpacing: 1,fontFamily: 'Nunito',
               fontWeight: FontWeight.bold,
               color: Colors.white,
-            )),
+            )), textSelectionTheme: TextSelectionThemeData(
+      cursorColor: Colors.green, //<-- SEE HERE
+    ),
         inputDecorationTheme: InputDecorationTheme(hintStyle: const TextStyle(fontSize: 13,fontFamily: 'Nunito'),
           labelStyle: TextStyle(
               fontSize: 18, color: Colors.grey.shade600, letterSpacing: 0.7),

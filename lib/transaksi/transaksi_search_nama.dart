@@ -22,7 +22,7 @@ class _SearchNamaState extends State<SearchNama> {
             Provider.of<ProviderData>(context, listen: false).searchTransaksi(true);
           },
           decoration: const InputDecoration(
-            hintText: 'Supir',
+            hintText: 'Driver',
           ),
         ));
   }

@@ -1,7 +1,6 @@
-
 // ignore_for_file: overridden_fields
 
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // ignore: must_be_immutable
@@ -14,6 +13,7 @@ class DropDownField extends FormField<String> {
   final TextStyle labelStyle;
   final TextStyle textStyle;
   final bool required;
+  final int? height;
   // ignore: annotate_overrides
   final bool enabled;
   final List<dynamic>? items;
@@ -27,6 +27,7 @@ class DropDownField extends FormField<String> {
   DropDownField(
       {Key? key,
       this.controller,
+      this.height=36,
       this.value,
       this.required = false,
       this.icon,
@@ -57,8 +58,8 @@ class DropDownField extends FormField<String> {
                 filled: true,
                 icon: icon,
                 suffixIcon: IconButton(
-                    icon: const Icon(Icons.arrow_drop_down,
-                         color: Colors.black),
+                    icon:
+                        const Icon(Icons.arrow_drop_down, color: Colors.black),
                     onPressed: () {
                       SystemChannels.textInput.invokeMethod('TextInput.hide');
                       // ignore: invalid_use_of_protected_member
@@ -77,9 +78,10 @@ class DropDownField extends FormField<String> {
                 Row(
                   children: <Widget>[
                     Expanded(
-                      child: SizedBox(height: 36,
+                      child: SizedBox(
+                        height:height!=null ?height.toDouble(): 36,
                         child: TextFormField(
-                             textInputAction: TextInputAction.next,
+                          textInputAction: TextInputAction.next,
                           // autovalidate: true,
                           controller: state._effectiveController,
                           decoration: effectiveDecoration.copyWith(
@@ -96,7 +98,7 @@ class DropDownField extends FormField<String> {
                                 return 'This field cannot be empty!';
                               }
                             }
-                      
+
                             //Items null check added since there could be an initial brief period of time
                             //when the dropdown items will not have been loaded
                             if (items != null) {
@@ -106,7 +108,7 @@ class DropDownField extends FormField<String> {
                                 return 'Invalid value in this field!';
                               }
                             }
-                      
+
                             return null;
                           },
                           onSaved: setter,
@@ -119,18 +121,19 @@ class DropDownField extends FormField<String> {
                 ),
                 !state._showdropdown
                     ? Container()
-                    : Container(  
+                    : Container(
                         alignment: Alignment.topCenter,
                         height: itemsVisibleInDropdown *
-                            150.0, //limit to default 3 items in dropdownlist view and then remaining scrolls
+                            140, //limit to default 3 items in dropdownlist view and then remaining scrolls
                         width: MediaQuery.of(field.context).size.width,
-                        child: ListView(padding: EdgeInsets.zero,
+                        child: ListView(
+                          padding: EdgeInsets.zero,
                           cacheExtent: 0.0,
                           scrollDirection: Axis.vertical,
                           controller: scrollController,
-                        
                           children: items!.isNotEmpty
-                              ? ListTile.divideTiles(color: const Color.fromARGB(255, 0, 0, 0),
+                              ? ListTile.divideTiles(
+                                      color: const Color.fromARGB(255, 0, 0, 0),
                                       context: field.context,
                                       tiles: state._getChildren(state._items!))
                                   .toList()
@@ -194,6 +197,7 @@ class DropDownFieldState extends FormFieldState<String> {
   @override
   void initState() {
     super.initState();
+    widget.items!.sort();
     _isSearching = false;
     if (widget.controller == null) {
       _controller = TextEditingController(text: widget.initialValue);
@@ -216,22 +220,24 @@ class DropDownFieldState extends FormFieldState<String> {
     List<ListTile> childItems = [];
     for (var item in items) {
       if (_searchText.isNotEmpty) {
-        if (item.toUpperCase().contains(_searchText.toUpperCase())) {
-          childItems.add(_getListTile(item));
+        if (item.toUpperCase().startsWith(_searchText.toUpperCase())) {
+          childItems.add(_getListTile(item, items));
         }
       } else {
-        childItems.add(_getListTile(item));
+        childItems.add(_getListTile(item, items));
       }
     }
     _isSearching ? childItems : [];
     return childItems;
   }
 
-  ListTile _getListTile(String text) {
-    return ListTile(hoverColor: Colors.grey,
+  ListTile _getListTile(String text, List<String> index) {
+    return ListTile(
+      hoverColor: Colors.grey,
+      tileColor: (index.indexOf(text)+1).isEven ? Colors.white : Colors.green,
       dense: true,
       title: Text(
-        text,
+        text,style: TextStyle(fontWeight: FontWeight.bold),
       ),
       onTap: () {
         setState(() {

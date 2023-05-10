@@ -119,7 +119,10 @@ Widget _buildSize(widget, String ket, int flex) {
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: SingleChildScrollView(
                               child: Column(
-                                children: [
+                                children: [ Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset('images/jb.png',width: 100,),
+                                  ),
                                  
                                       _buildSize(
                                           WebDatePicker(
@@ -155,7 +158,7 @@ Widget _buildSize(widget, String ket, int flex) {
                                                 widget.jualBeliMobil.ketMobil,
                                             readOnly: true,
                                           ),
-                                          'Keterangan Mobil',
+                                          'Jenis Mobil',
                                           1),
                                       _buildSize(
                                           TextFormField(
@@ -190,7 +193,16 @@ Widget _buildSize(widget, String ket, int flex) {
                                           'Keterangan',
                                           2),
                                    
-                                  RoundedLoadingButton(
+                                 Container(margin: EdgeInsets.only(top: 30),
+                                    child: Expanded(
+                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [RoundedLoadingButton(width: 120,color: Colors.red,controller:
+                                         RoundedLoadingButtonController(), onPressed: (){
+                                          Navigator.of(context).pop();
+                                         }, child: const Text('Batal',
+                                                style: TextStyle(color: Colors.white))),
+                                          RoundedLoadingButton(width: 120,
+                                         
                                     color: Colors.green,
                                     elevation: 10,
                                     successColor: Colors.green,
@@ -244,8 +256,8 @@ Widget _buildSize(widget, String ket, int flex) {
                                     },
                                     child: const Text('Edit',
                                         style: TextStyle(color: Colors.white)),
-                                  )
-                                ],
+                                  )])
+                              ))],
                               ),
                             ),
                           ),

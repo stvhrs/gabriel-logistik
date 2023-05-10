@@ -4,17 +4,25 @@ import 'package:gabriel_logistik/services/service.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
+import '../login/app_icons.dart';
 import '../providerData/providerData.dart';
 
-class TambahSupir extends StatelessWidget {
+class TambahUser extends StatefulWidget {
+
+  TambahUser({super.key});
+
+  @override
+  State<TambahUser> createState() => _TambahUserState();
+}
+
+class _TambahUserState extends State<TambahUser> {
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
-
-  TambahSupir({super.key});
-  @override
-  Widget build(BuildContext context) {
+bool hidden=true;
     String namaMobil = '';
     String noHp = '';
+  @override
+  Widget build(BuildContext context) {
 TextEditingController satu=TextEditingController();
 TextEditingController satu2=TextEditingController();
     return ElevatedButton.icon(
@@ -30,7 +38,7 @@ TextEditingController satu2=TextEditingController();
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Tambah Driver'),
+                      const Text('Tambah User'),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: CircleAvatar(
@@ -49,40 +57,62 @@ TextEditingController satu2=TextEditingController();
                     ],
                   ),
                   content: IntrinsicHeight(
-                    child: SizedBox(
-                      width: 500,
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(controller: satu,
-                              style: const TextStyle(fontSize: 13.5),
-                              textInputAction: TextInputAction.next,inputFormatters: [UpperCaseTextFormatter()],
-                              decoration: const InputDecoration(
-                                hintText: 'Nama Driver',
-                              ),
-                              onChanged: (val) {
-                                namaMobil = val.toString();
-                              },
-                              maxLines: 1,
+                    child:StatefulBuilder(
+                    builder: (context,setState,) {
+                        return SizedBox(
+                          width: 500,
+                          child: Column(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(bottom: 20),
+                                child: TextFormField(controller: satu,
+                                  style: const TextStyle(fontSize: 13.5),
+                                  textInputAction: TextInputAction.next,inputFormatters: [UpperCaseTextFormatter()],
+                                  decoration:   InputDecoration(
+                            border: InputBorder.none,
+                            prefixIcon: SizedBox(
+                             
+                              child: Icon(Icons.email),
                             ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 20),
-                            child: TextFormField(controller:satu2 ,
-                              style: const TextStyle(fontSize: 13.5),
-                              textInputAction: TextInputAction.next,
-                              decoration: const InputDecoration(
-                                hintText: 'No Hp',
+                                    hintText: 'Username',
+                                  ),
+                                  onChanged: (val) {
+                                    namaMobil = val.toString();
+                                  },
+                                  maxLines: 1,
+                                ),
                               ),
-                              onChanged: (val) {
-                                noHp = val.toString();
-                              },
-                              maxLines: 1,
-                            ),
+                              Container(
+                                margin: const EdgeInsets.only(bottom: 20),
+                                child: TextFormField(controller:satu2 ,obscureText: hidden,
+                                  style: const TextStyle(fontSize: 13.5),
+                                  textInputAction: TextInputAction.next,
+                                  decoration: InputDecoration(
+                                border: InputBorder.none,
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    hidden = !hidden;
+                                    setState(() {});
+                                  },
+                                  icon: hidden
+                                      ? Icon(Icons.remove_red_eye_outlined)
+                                      :  Icon(Icons.remove_red_eye_rounded),
+                                ),
+                                prefixIcon: SizedBox(
+                                  child:Icon(Icons.lock),
+                                ),
+                                    hintText: 'Password',
+                                  ),
+                                  onChanged: (val) {
+                                    noHp = val.toString();
+                                  },
+                                  maxLines: 1,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        );
+                      }
                     ),
                   ),
                   actions: <Widget>[

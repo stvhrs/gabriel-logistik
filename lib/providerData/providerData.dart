@@ -7,6 +7,7 @@ import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/models/supir.dart';
+import 'package:gabriel_logistik/models/user.dart';
 
 import '../models/mutasi_saldo.dart';
 import '../models/transaksi.dart';
@@ -47,10 +48,11 @@ class ProviderData with ChangeNotifier {
 
   List<HistorySaldo> listHistorySaldo = [];
   List<HistorySaldo> backupListHistorySaldo = [];
-List<Transaksi> bulk=[];
+
   List<MutasiSaldo> listMutasiSaldo = [];
   List<KeuanganBulanan> printed = [];
   double totalSaldo = 0;
+  List<User> listUser=[];
   void owner() {
     isOwner = true;
     notifyListeners();
@@ -261,6 +263,28 @@ List<Transaksi> bulk=[];
     notifyListeners();
   }
 
+
+  void addUser(User supir) {
+    listUser.add(supir);
+   
+
+    notifyListeners();
+  }
+
+  void deleteUser(String id) {
+    listUser.removeWhere(
+      (element) => element.id == id,
+    );
+   
+    notifyListeners();
+  }
+
+  void updateUser(User supir) {
+    int data = listUser.indexWhere((element) => element.id == supir.id);
+    listUser[data] = supir;
+
+    notifyListeners();
+  }
   void addSupir(Supir supir) {
     listSupir.add(supir);
     backupListSupir.add(supir);

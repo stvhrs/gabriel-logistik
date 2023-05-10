@@ -134,7 +134,7 @@ for (var listBulananMobil in element.listBulananMobil) {
                           pw.Expanded(
                               flex: 7, child: pw.Text('Bulam', style: bold)),
                           pw.Expanded(
-                              flex: 7, child: pw.Text('Ongkos', style: bold)),
+                              flex: 7, child: pw.Text('Tarif', style: bold)),
                           pw.Expanded(
                               flex: 7, child: pw.Text('Keluar', style: bold)),
                           pw.Expanded(

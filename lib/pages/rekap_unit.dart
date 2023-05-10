@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
 import 'package:gabriel_logistik/models/rekap_model.dart';
@@ -120,13 +121,13 @@ class _RekapUnitState extends State<RekapUnit> {
             Container(
               child: Row(
                 children: [
-                  DropdownButton<int>(
+                  DropdownButton2<int>(
                     value: ropdownValue2,
-                    elevation: 16,
+                menuItemStyleData: MenuItemStyleData(height: 36),
                     style:
                         TextStyle(color: Theme.of(context).colorScheme.secondary),
                     underline: Container(
-                      height: 2.5,
+                      height: 2.5,margin: EdgeInsets.only(top: 5),
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                     onChanged: (int? value) {

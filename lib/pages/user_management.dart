@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/mobil/mobil_tile.dart';
-import 'package:gabriel_logistik/mobil/tambah_mobil.dart';
-import 'package:gabriel_logistik/models/perbaikan.dart';
+import 'package:gabriel_logistik/models/supir.dart';
+import 'package:gabriel_logistik/models/user.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/services/service.dart';
+import 'package:gabriel_logistik/supir/supir_tile.dart';
+import 'package:gabriel_logistik/supir/tambah_supir.dart';
+import 'package:gabriel_logistik/user/tambah_user.dart';
+import 'package:gabriel_logistik/user/user_tile.dart';
 import 'package:provider/provider.dart';
 import 'package:gabriel_logistik/helper/custompaint.dart';
-import '../models/mobil.dart';
-class DaftarMobil extends StatefulWidget {
-  const DaftarMobil({super.key});
+class UserManagement extends StatefulWidget {
+  const UserManagement({super.key});
 
   @override
-  State<DaftarMobil> createState() => _DaftarMobilState();
+  State<UserManagement> createState() => _UserManagementState();
 }
 
-class _DaftarMobilState extends State<DaftarMobil> {
-    late List<Mobil> listTransaksi;
+class _UserManagementState extends State<UserManagement> {
+    late List<User> listUser;
 
  
   bool loading = true;
@@ -25,32 +27,29 @@ class _DaftarMobilState extends State<DaftarMobil> {
 // await Service.postSupir();
 // await Service.deleteSupir();
 // await Service.test3();
-  List<Perbaikan> per = await Service.getAllPerbaikan();
-    listTransaksi = await Service.getAllMobil(per);
+    listUser = await Service.getUser();
 
-    Provider.of<ProviderData>(context, listen: false)
-        .setData([], false, listTransaksi, [], per, [], []);
+  Provider.of<ProviderData>(context,listen: false).listUser=listUser;
+  loading = false;
 
+    setState(() {});
     
   }
   @override
   void initState() {
-        if (mounted){ initData();}
-    Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
-    loading = false;
-
-    setState(() {});
+    if (mounted){   initData();}
+   
+    
     super.initState();
   }
-
-//
+ 
   @override
   Widget build(BuildContext context) {
     return  loading==true
         ? Center(
             child: CustomPaints(),
           )
-        :  Container(
+        : Container(
         padding: const EdgeInsets.only(left: 25, right: 25, top: 0, bottom: 25),
         decoration: BoxDecoration(
             border: Border.all(
@@ -72,7 +71,7 @@ class _DaftarMobilState extends State<DaftarMobil> {
                       bottomLeft: Radius.circular(5),
                       bottomRight: Radius.circular(5))),
               child: const Text(
-                'Daftar Mobil',
+                'Daftar User',
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Nunito',
@@ -84,28 +83,14 @@ class _DaftarMobilState extends State<DaftarMobil> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height / 20,
-                    child: TextFormField(
-                      style: const TextStyle(fontSize: 13),
-                      textInputAction: TextInputAction.next,
-                      decoration: const InputDecoration(hintText: 'Cari'),
-                      onChanged: (val) {
-                        Provider.of<ProviderData>(context, listen: false)
-                            .searchMobil(val.toLowerCase(), true);
-                      },
-                    ),
-                  ),
-                ),
+               
                 const Expanded(flex: 4, child: SizedBox()),
-                TambahMobil()
+                TambahUser()
               ],
             ),
             Container(
               margin: const EdgeInsets.only(top: 15),
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               padding:
                   const EdgeInsets.only(top: 8, bottom: 8, left: 15, right: 15),
               child: Row(
@@ -114,12 +99,12 @@ class _DaftarMobilState extends State<DaftarMobil> {
                   Expanded(
                       flex: 11,
                       child: Text(
-                        'No Pol',
+                        'Username',
                         style: Theme.of(context).textTheme.displayMedium,
                       )),
                   Expanded(
                       flex: 11,
-                      child: Text('Keterangan',
+                      child: Text('Password',
                           style: Theme.of(context).textTheme.displayMedium)),
                   Expanded(
                       flex: 3,
@@ -129,18 +114,16 @@ class _DaftarMobilState extends State<DaftarMobil> {
               ),
             ),
             Consumer<ProviderData>(builder: (context, c, h) {
-              List<Mobil> data=c.listMobil.reversed.toList().where((element) => element.terjual==false).toList();
-          
-
+             List<User> data=c.listUser.reversed.toList() ;
               return SizedBox(
                   height: MediaQuery.of(context).size.height * 0.7,
                   child: ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context, index) {
-                       
-              return
-                      MobilTile(data[index], index);
-            }));
+                     
+                      
+                      return UserTile(data[index],index);},
+                  ));
             })
           ],
         ));

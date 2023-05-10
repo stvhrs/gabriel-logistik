@@ -149,7 +149,10 @@ class _JualAddState extends State<JualAdd> {
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: SingleChildScrollView(
                               child: Column(
-                                children:[
+                                children:[ Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset('images/jb.png',width: 100,),
+                                  ),
                                       _buildSize(
                                           WebDatePicker(
                                             lastDate: DateTime.now(),
@@ -180,7 +183,7 @@ class _JualAddState extends State<JualAdd> {
                                             },
                                             items: listMobil,
                                           ),
-                                          'Pilih Mobil',
+                                          'Pilih No Pol',
                                           1),
                                       _buildSize(
                                           TextFormField(
@@ -192,7 +195,7 @@ class _JualAddState extends State<JualAdd> {
                                               jualBeliMobil.ketMobil = va;
                                             },
                                           ),
-                                          'Keterangan Mobil',
+                                          'Jenis Mobil',
                                           1),
                                       _buildSize(
                                           TextFormField(
@@ -224,7 +227,16 @@ class _JualAddState extends State<JualAdd> {
                                           2),
                                     
                                 
-                                  RoundedLoadingButton(
+                                  Container(margin: EdgeInsets.only(top: 30),
+                                    child: Expanded(
+                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [RoundedLoadingButton(width: 120,color: Colors.green,controller:
+                                         RoundedLoadingButtonController(), onPressed: (){
+                                          Navigator.of(context).pop();
+                                         }, child: const Text('Batal',
+                                                style: TextStyle(color: Colors.white))),
+                                          RoundedLoadingButton(width: 120,
+                                            
                                     color: Colors.red,
                                     elevation: 10,
                                     successColor: Colors.green,
@@ -281,9 +293,9 @@ class _JualAddState extends State<JualAdd> {
                               ),
                             ),
                           ),
-                        ),
+                            ]))),
                       ),
-                    ));
+                    )));
               });
         },
         child: const Text(

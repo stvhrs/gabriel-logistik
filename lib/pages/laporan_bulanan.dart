@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/bulanan/bulanan.dart';
 
@@ -80,13 +81,13 @@ class _LaporanBulananState extends State<LaporanBulanan> {
             margin: const EdgeInsets.only(bottom: 10),
             child: Row(
               children: [
-                DropdownButton<int>(
+                DropdownButton2<int>(
                   value: ropdownValue2,
-                  elevation: 16,
+                   menuItemStyleData: MenuItemStyleData(height: 36),
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.secondary),
                   underline: Container(
-                    height: 2.5,
+                    height: 2.5,margin: EdgeInsets.only(top: 5),
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                   onChanged: (int? value) {
@@ -106,32 +107,33 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                     );
                   }).toList(),
                 ),
-                DropdownButton<String>(
-                  value: dropdownValue,
-                  elevation: 16,
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.secondary),
-                  underline: Container(
-                    height: 2.5,
-                    color: Theme.of(context).colorScheme.secondary,
+               DropdownButton2<String>( menuItemStyleData: MenuItemStyleData(height: 36),
+                    value: dropdownValue,
+                  
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.secondary),
+                    underline: Container(
+                      height: 2.5,margin: EdgeInsets.only(top: 5),
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                    onChanged: (String? value) {
+                      // This is called when the user selects an item.
+                      setState(() {
+                        dropdownValue = value!;
+                      });
+                    },
+                    items: list.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value,
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'Nunito',
+                                color: Colors.black)),
+                      );
+                    }).toList(),
                   ),
-                  onChanged: (String? value) {
-                    // This is called when the user selects an item.
-                    setState(() {
-                      dropdownValue = value!;
-                    });
-                  },
-                  items: list.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value,
-                          style: const TextStyle(
-                              fontSize: 16,
-                              fontFamily: 'Nunito',
-                              color: Colors.black)),
-                    );
-                  }).toList(),
-                ),
+                
               ],
             ),
           ),

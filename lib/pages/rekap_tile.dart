@@ -100,7 +100,7 @@ class _RekapState extends State<Rekap> {
                     Expanded(
                         flex: 7,
                         child: Text(
-                          'Ongkos',
+                          'Tarif',
                           style: Theme.of(context).textTheme.displayMedium,
                         )),
                     Expanded(

@@ -142,7 +142,7 @@ pw.ImageProvider asu = pw.MemoryImage(
                           style: med,
                           '${DateTime.parse(element.tanggal).day}, ${DateFormat('EEEE', "id_ID").format(DateTime.parse(element.tanggal))}')),
                   pw.Expanded(
-                      flex: 3,
+                      flex: 5,
                       child: pw.Text(
                         style: med,
                         textAlign: pw.TextAlign.left,
@@ -243,11 +243,11 @@ pw.ImageProvider asu = pw.MemoryImage(
                           pw.Expanded(
                               flex: 5, child: pw.Text('Tanggal', style: bold)),
                           pw.Expanded(
-                              flex: 4, child: pw.Text('Supir', style: bold)),
+                              flex: 4, child: pw.Text('Driver', style: bold)),
                           pw.Expanded(
                               flex: 10, child: pw.Text('Tujuan', style: bold)),
                           pw.Expanded(
-                              flex: 7, child: pw.Text('Ongkos', style: bold)),
+                              flex: 7, child: pw.Text('Tarif', style: bold)),
                           pw.Expanded(
                               flex: 7, child: pw.Text('Keluar', style: bold)),
                           pw.Expanded(
@@ -277,7 +277,7 @@ pw.ImageProvider asu = pw.MemoryImage(
                           pw.Expanded(
                               flex: 3, child: pw.Text('Tanggal', style: bold)),
                           pw.Expanded(
-                              flex: 3, child: pw.Text('Jenis', style: bold)),
+                              flex: 5, child: pw.Text('Jenis', style: bold)),
                           pw.Expanded(
                               flex: 5,
                               child: pw.Text('Maintain', style: bold)),

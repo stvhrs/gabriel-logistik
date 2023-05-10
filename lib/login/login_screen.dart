@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:gabriel_logistik/helper/decpty.dart';
 import 'package:gabriel_logistik/login/app_colors.dart';
 import 'package:gabriel_logistik/login/app_icons.dart';
 import 'package:gabriel_logistik/login/app_styles.dart';
@@ -10,6 +11,9 @@ import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/user.dart';
+import '../services/service.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -18,10 +22,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  List<Map<String, dynamic>> data = [
-    {'user': 'AriefCT5', 'pass': 'CahayaTrans5', 'status': 'owner'},
-    {'user': 'Operator5', 'pass': 'HanyalahAdmin', 'status': 'admin'},
-  ];
+  bool loading = true;
+
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
   String _userControler = '';
@@ -54,9 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                   
-                      SizedBox(height: height * 0.1),   Image.asset('images/title.png'),
-                             SizedBox(height: height * 0.1), 
+                      SizedBox(height: height * 0.1),
+                      Image.asset('images/title.png'),
+                      SizedBox(height: height * 0.1),
                       RichText(
                         text: TextSpan(
                           children: [
@@ -119,9 +121,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            prefixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.emailIcon),
+                            prefixIcon: SizedBox(
+                             
+                              child: Image.asset(AppIcons.emailIcon),
                             ),
                             contentPadding: const EdgeInsets.only(top: 0),
                             hintText: 'Enter Username',
@@ -154,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: AppColors.whiteColor,
                         ),
                         child: TextFormField(
-                          textInputAction: TextInputAction.next,
+                          textInputAction: TextInputAction.done,
                           onChanged: (val) {
                             _passwordControler = val;
                           },
@@ -175,9 +177,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ? Image.asset(AppIcons.eyeIcon)
                                   : const Icon(Icons.remove_red_eye_rounded),
                             ),
-                            prefixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AppIcons.lockIcon),
+                            prefixIcon: SizedBox(
+                              child: Image.asset(AppIcons.lockIcon),
                             ),
                             contentPadding: const EdgeInsets.only(top: 0),
                             hintText: 'Enter Password',
@@ -200,24 +201,40 @@ class _LoginScreenState extends State<LoginScreen> {
                           SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           bool valid = false;
-                          var userData = {};
-                          for (var element in data) {
-                            if (_passwordControler == element['pass'] &&
-                                _userControler == element['user']) {
-                              userData = element;
+                          User? data;
+                          List<User>? users = await Service.getUser();
+
+                          if (users == null) {
+                            return;
+                          }
+                          for (var element in users) {
+                            print(generateMd5(_passwordControler));
+                            print(element.password);
+                            if (element.username == _userControler &&
+                                element.password == _passwordControler) {
                               valid = true;
+                              data = element;
+                              // Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context) => MyHomePage(title: ''),));
                             }
                           }
-
                           if (valid) {
                             _btnController.success();
                             await Future.delayed(
                                 const Duration(milliseconds: 500));
-                            await prefs.setString('data', jsonEncode(userData));
-
+                            await prefs.setString(
+                                'data', jsonEncode(User.toMap(data!)));
                             Provider.of<ProviderData>(context, listen: false)
                                 .login();
-                                // Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context) => MyHomePage(title: ''),));
+                            if (data.owner) {
+                              print('owner');
+                              Provider.of<ProviderData>(context, listen: false)
+                                  .owner();
+                            } else {
+                              print('admin');
+                              Provider.of<ProviderData>(context, listen: false)
+                                  .admin();
+                            }
+                            return;
                           } else {
                             _btnController.error();
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -246,7 +263,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: height,
                       color: Theme.of(context).colorScheme.primary,
                       child: Center(
-                        child:Container( child: Image.asset('images/cahaya.png',height: height*0.5,)),
+                        child: Container(
+                            child: Image.asset(
+                          'images/cahaya.png',
+                          height: height * 0.5,
+                        )),
                       ),
                     ),
                   ),

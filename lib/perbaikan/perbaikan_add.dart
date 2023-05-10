@@ -195,7 +195,7 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
                                         },
                                         items: listMobil,
                                       ),
-                                      'Pilih Mobil',
+                                      'Pilih No Pol',
                                       1),
                                   _buildSize(
                                       TextFormField(
@@ -223,7 +223,15 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
                                       2),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: RoundedLoadingButton(
+                                    child:  Container(margin: EdgeInsets.only(top: 10),
+                                    child: Expanded(
+                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [RoundedLoadingButton(width: 120,color: Colors.red,controller:
+                                         RoundedLoadingButtonController(), onPressed: (){
+                                          Navigator.of(context).pop();
+                                         }, child: const Text('Batal',
+                                                style: TextStyle(color: Colors.white))),
+                                          RoundedLoadingButton(width: 120,
                                       color: Colors.green,
                                       elevation: 10,
                                       successColor: Colors.green,
@@ -266,9 +274,9 @@ class _PerbaikanAddState extends State<PerbaikanAdd> {
                                           Navigator.of(context).pop();
                                         });
                                       },
-                                      child: const Text('Tambah',
+                                      child: const Text('Simpan',
                                           style: TextStyle(color: Colors.white)),
-                                    ),
+                                    )]))),
                                   )
                                 ],
                               ),

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/helper/rupiah_format.dart';
 import 'package:gabriel_logistik/models/history_saldo.dart';
@@ -11,6 +12,7 @@ import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
 
 import '../models/perbaikan.dart';
+import '../print4.dart';
 
 List<String> list = <String>[
   'Januari',
@@ -45,14 +47,11 @@ class _LaporanKasState extends State<LaporanKas> {
     Provider.of<ProviderData>(context, listen: false).searchsupir = '';
     Provider.of<ProviderData>(context, listen: false).searchtujuan = '';
     Provider.of<ProviderData>(context, listen: false).searchmobile = '';
-
     Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
     Provider.of<ProviderData>(context, listen: false).searchTransaksi(false);
-
     Provider.of<ProviderData>(context, listen: false)
         .searchperbaikan('', false);
     Provider.of<ProviderData>(context, listen: false).calculateSaldo();
-
     Provider.of<ProviderData>(context, listen: false).calculateMutasi();
     log('calucalte mutasi page');
 
@@ -78,6 +77,7 @@ class _LaporanKasState extends State<LaporanKas> {
   double totalPengeluaran = 0;
   double saldoAkhir = 0;
   double saldoAwal = 0;
+
   @override
   void didChangeDependencies() {
     for (var element
@@ -176,6 +176,30 @@ class _LaporanKasState extends State<LaporanKas> {
     log(dropdownValue);
     log(list.indexOf(dropdownValue2).toString());
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.green,
+          child: const Icon(
+            Icons.print,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => LabaRugi(
+                  ropdownValue2,
+                  dropdownValue,
+                  dropdownValue2,
+                  totalTransaksi,
+                  totalJualUnit,
+                  totalNotaJual,
+                  tahunMaintain,
+                  toalBeliUnit,
+                  totalNotaBeli,
+                  totalPendapatan,
+                  totalPengeluaran,
+                  saldoAkhir,
+                  saldoAwal),
+            ));
+          }),
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.only(left: 50, right: 50, top: 10),
@@ -185,13 +209,14 @@ class _LaporanKasState extends State<LaporanKas> {
             Container(
               child: Row(
                 children: [
-                  DropdownButton<int>(
+                  DropdownButton2<int>(
                     value: ropdownValue2,
-                    elevation: 16,
+                    menuItemStyleData: MenuItemStyleData(height: 36),
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.secondary),
                     underline: Container(
                       height: 2.5,
+                      margin: EdgeInsets.only(top: 5),
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                     onChanged: (int? value) {
@@ -199,6 +224,7 @@ class _LaporanKasState extends State<LaporanKas> {
                       setState(() {
                         ropdownValue2 = value!;
                       });
+
                       test();
                     },
                     items: tahun.map<DropdownMenuItem<int>>((int value) {
@@ -212,13 +238,14 @@ class _LaporanKasState extends State<LaporanKas> {
                       );
                     }).toList(),
                   ),
-                  DropdownButton<String>(
+                  DropdownButton2<String>(
                     value: dropdownValue,
-                    elevation: 16,
+                    menuItemStyleData: MenuItemStyleData(height: 36),
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.secondary),
                     underline: Container(
                       height: 2.5,
+                      margin: EdgeInsets.only(top: 5),
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                     onChanged: (String? value) {
@@ -227,7 +254,7 @@ class _LaporanKasState extends State<LaporanKas> {
                       }
                       // This is called when the user selects an item.
                       setState(() {
-                        dropdownValue = value!;
+                        dropdownValue = value;
                       });
                       test();
                     },
@@ -246,13 +273,14 @@ class _LaporanKasState extends State<LaporanKas> {
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: Icon(Icons.arrow_forward_rounded),
                   ),
-                  DropdownButton<String>(
+                  DropdownButton2<String>(
                     value: dropdownValue2,
-                    elevation: 16,
+                    menuItemStyleData: MenuItemStyleData(height: 36),
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.secondary),
                     underline: Container(
                       height: 2.5,
+                      margin: EdgeInsets.only(top: 5),
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                     onChanged: (String? value) {
@@ -285,27 +313,33 @@ class _LaporanKasState extends State<LaporanKas> {
                 surfaceTintColor: Colors.white,
                 child: Column(
                   children: [
-                    Center(
-                      child: Column(children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.asset('images/title.png',width: 400,),
-                        ),  
-                        Text('Laporan Kas',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
-                        Text(""),
-                        Text("Periode "+ropdownValue2.toString() +
-                            " " +
-                            dropdownValue +
-                            " - " +
-                            dropdownValue2,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)
-                      ]),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                          child: Column(children: [
+                        Image.asset(
+                          'images/title.png',
+                          width: 400,
+                        ),
+                        Text(
+                          'Laporan Kas ' +
+                              "Periode " +
+                              ropdownValue2.toString() +
+                              " " +
+                              dropdownValue +
+                              " - " +
+                              dropdownValue2,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 17),
+                        ),
+                      ])),
                     ),
                     Container(
-                      color: Colors.grey.shade200,
+                      color: Color.fromRGBO(187, 222, 251, 1),
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          Expanded(
+                          Expanded(flex: 2,
                               child: Text(
                             "Saldo Awal",
                             style: bold,
@@ -322,7 +356,7 @@ class _LaporanKasState extends State<LaporanKas> {
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          Expanded(
+                          Expanded(flex: 2,
                               child: Text(
                             "Pemasukan :",
                             style: bold,
@@ -335,7 +369,7 @@ class _LaporanKasState extends State<LaporanKas> {
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          Expanded(
+                          Expanded(flex: 2,
                               child: Text(
                             "                  Transaksi",
                             style: bold,
@@ -352,7 +386,7 @@ class _LaporanKasState extends State<LaporanKas> {
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          Expanded(
+                          Expanded(flex: 2,
                               child: Text(
                             "                  Jual Unit",
                             style: bold,
@@ -370,7 +404,7 @@ class _LaporanKasState extends State<LaporanKas> {
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          Expanded(
+                          Expanded(flex: 2,
                               child: Text(
                             "                  Nota Jual",
                             style: bold,
@@ -388,7 +422,7 @@ class _LaporanKasState extends State<LaporanKas> {
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          Expanded(
+                          Expanded(flex: 2,
                               child: Text(
                             "Total Pemasukan",
                             style: bold,
@@ -405,7 +439,7 @@ class _LaporanKasState extends State<LaporanKas> {
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          Expanded(
+                          Expanded(flex: 2,
                               child: Text(
                             "Pengeluaran :",
                             style: bold,
@@ -418,7 +452,7 @@ class _LaporanKasState extends State<LaporanKas> {
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          Expanded(
+                          Expanded(flex: 2,
                               child: Text(
                             "                  Maintain",
                             style: bold,
@@ -435,7 +469,7 @@ class _LaporanKasState extends State<LaporanKas> {
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          Expanded(
+                          Expanded(flex: 2,
                               child: Text(
                             "                  Beli Unit",
                             style: bold,
@@ -453,7 +487,7 @@ class _LaporanKasState extends State<LaporanKas> {
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          Expanded(
+                          Expanded(flex: 2,
                               child: Text(
                             "                  Nota Beli",
                             style: bold,
@@ -471,7 +505,7 @@ class _LaporanKasState extends State<LaporanKas> {
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          Expanded(
+                          Expanded(flex: 2,
                               child: Text(
                             "Total Pengeluaran",
                             style: bold,
@@ -489,7 +523,7 @@ class _LaporanKasState extends State<LaporanKas> {
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          Expanded(
+                          Expanded(flex: 2,
                               child: Text(
                             "Laba Bersih ( Pemasukan - Pengeluaran )",
                             style: bold,
@@ -503,12 +537,13 @@ class _LaporanKasState extends State<LaporanKas> {
                       ),
                     ),
                     Container(
+                      color: Colors.blue.shade100,
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
-                          Expanded(
+                          Expanded(flex: 2,
                               child: Text(
-                            "Saldo Akhir ( Saldo Awal + Laba Bersih )",
+                            "Saldo Akhir",
                             style: bold,
                           )),
                           Expanded(

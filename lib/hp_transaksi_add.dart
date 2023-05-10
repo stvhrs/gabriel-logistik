@@ -34,7 +34,8 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
   @override
   void initState() {
     Provider.of<ProviderData>(context, listen: false)
-        .listSupir.where((element) => element.delted==false)
+        .listSupir
+        .where((element) => element.delted == false)
         .map((e) => e.nama_supir)
         .toList()
         .forEach((element) {
@@ -53,9 +54,15 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
         listMobil.add(element);
       }
     });
-    listSupir.insert(0, 'Supir');
+    listSupir.sort((a, b){ //sorting in ascending order
+    return a[0]. toLowerCase().compareTo(b[0].toLowerCase());
+});
+listMobil.sort((a, b){ //sorting in ascending order
+    return a[0].toLowerCase().compareTo(b[0].toLowerCase());
+});
+    listSupir.insert(0, 'Driver');
     listMobil.insert(0, 'Mobil');
-    controlerSupir.text = 'Supir';
+    controlerSupir.text = 'Driver';
     controlerMobil.text = 'Mobil';
     super.initState();
   }
@@ -64,49 +71,92 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
       RoundedLoadingButtonController();
   late Transaksi transaksi;
   TextStyle small = const TextStyle(fontSize: 13.5);
+ 
+  Widget _buildSize2(widget, String ket, int flex) {
+    return
+        //  Container(height: 50,
+        //   // margin: EdgeInsets.only(
+        //   //     right: ket == 'Jenis Mobil' || ket == "Ketik Tujuan" ? 0 : 50,
+        //   //     bottom: ket == "ket_transaksi" ? 20 : 5),
+        //   child: Row(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       Container(
+        //           margin: const EdgeInsets.only(
+        //             right: 7,
+        //           ),
+        //           child: Text(
+        //             "$ket :",
+        //             style: const TextStyle(fontSize: 13.5),
+        //           )),
+        Container(
+      margin: const EdgeInsets.only(bottom: 15, left: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // clipBehavior: Clip.none,
+        // alignment: Alignment.centerLeft,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Text(
+              "$ket :",
+              style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Nunito"),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: widget,
+          )
+        ],
+      ),
+    );
+  }
+
   Widget _buildSize(widget, String ket, int flex) {
-    return Container(
-        height: 70,
-        margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-        // margin: EdgeInsets.only(
-        //     right: ket == 'Keterangan Mobil' || ket == 'Ketik Tujuan' ? 0 : 50,
-        //     bottom: ket == 'Keterangan' ? 20 : 5),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(
-              margin: const EdgeInsets.only(
-                right: 7,
-              ),
-              child: Text(
-                '$ket :',
-                style: const TextStyle(fontSize: 13.5),
-              )),
-          widget
-        ]));
-    //     Container(
-    //   margin: EdgeInsets.only(bottom: 15, left: 10),
-    //   height: 36,
-    //   child: Row(
-    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //     // clipBehavior: Clip.none,
-    //     // alignment: Alignment.centerLeft,
-    //     children: [
-    //       Expanded(
-    //         flex: 2,
-    //         child: Text(
-    //           '$ket :',
-    //           style: const TextStyle(
-    //               fontSize: 14,
-    //               fontWeight: FontWeight.bold,
-    //               fontFamily: 'Nunito'),
-    //         ),
-    //       ),
-    //       Expanded(
-    //         flex: 3,
-    //         child: widget,
-    //       )
-    //     ],
-    //   ),
-    // );
+    return
+        //  Container(height: 50,
+        //   // margin: EdgeInsets.only(
+        //   //     right: ket == 'Jenis Mobil' || ket == "Ketik Tujuan" ? 0 : 50,
+        //   //     bottom: ket == "ket_transaksi" ? 20 : 5),
+        //   child: Row(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       Container(
+        //           margin: const EdgeInsets.only(
+        //             right: 7,
+        //           ),
+        //           child: Text(
+        //             "$ket :",
+        //             style: const TextStyle(fontSize: 13.5),
+        //           )),
+        Container(
+      margin: const EdgeInsets.only(bottom: 15, left: 10),
+      height: 28,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // clipBehavior: Clip.none,
+        // alignment: Alignment.centerLeft,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Text(
+              "$ket :",
+              style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Nunito"),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: widget,
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -212,7 +262,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                             ),
                                             'Tanggal',
                                             1),
-                                           _buildSize(
+                                        _buildSize(
                                             PopupMenuButton<String>(
                                               color: Colors.grey.shade300,
                                               elevation: 2,
@@ -297,10 +347,12 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                 );
                                               }).toList(),
                                             ),
-                                            'Pilih Mobil',
-                                            1), _buildSize(
+                                            'Pilih No Pol',
+                                            1),
+                                        _buildSize(
                                             TextFormField(
-                                              style: const TextStyle(fontSize: 13),
+                                              style:
+                                                  const TextStyle(fontSize: 13),
                                               textInputAction:
                                                   TextInputAction.next,
                                               readOnly: true,
@@ -309,8 +361,8 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                 setState(() {});
                                               },
                                             ),
-                                            'Keterangan Mobil',
-                                            1),  
+                                            'Jenis Mobil',
+                                            1),
                                         _buildSize(
                                             PopupMenuButton<String>(
                                               color: Colors.grey.shade300,
@@ -354,7 +406,8 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                       transaksi.supir = value;
                                                       controlerSupir.text =
                                                           value;
-                                                      transaksi.id_supir = Provider
+                                                      transaksi
+                                                          .id_supir = Provider
                                                               .of<ProviderData>(
                                                                   context,
                                                                   listen: false)
@@ -383,12 +436,12 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                 );
                                               }).toList(),
                                             ),
-                                            'Pilih Supir',
+                                            'Pilih Driver',
                                             1),
-                                       
-                                          _buildSize(
+                                        _buildSize(
                                             TextFormField(
-                                              style: const TextStyle(fontSize: 13),
+                                              style:
+                                                  const TextStyle(fontSize: 13),
                                               textInputAction:
                                                   TextInputAction.next,
                                               controller: controlerTujuan,
@@ -398,9 +451,11 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                               },
                                             ),
                                             'Ketik Tujuan',
-                                            1),  _buildSize(
+                                            1),
+                                        _buildSize(
                                             TextFormField(
-                                                style: const TextStyle(fontSize: 13),
+                                                style: const TextStyle(
+                                                    fontSize: 13),
                                                 textInputAction:
                                                     TextInputAction.done,
                                                 controller: controlerKeterangan,
@@ -412,7 +467,8 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                             2),
                                         _buildSize(
                                             TextFormField(
-                                              style: const TextStyle(fontSize: 13),
+                                              style:
+                                                  const TextStyle(fontSize: 13),
                                               textInputAction:
                                                   TextInputAction.next,
                                               controller: controlerOngkos,
@@ -452,7 +508,8 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                             1),
                                         _buildSize(
                                             TextFormField(
-                                              style: const TextStyle(fontSize: 13),
+                                              style:
+                                                  const TextStyle(fontSize: 13),
                                               textInputAction:
                                                   TextInputAction.next,
                                               controller: controlerKeluar,
@@ -494,7 +551,8 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                             1),
                                         _buildSize(
                                             TextFormField(
-                                              style: const TextStyle(fontSize: 13),
+                                              style:
+                                                  const TextStyle(fontSize: 13),
                                               textInputAction:
                                                   TextInputAction.next,
                                               keyboardType:
@@ -519,8 +577,6 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                             ),
                                             'Sisa',
                                             1),
-                                     
-                                      
                                         Padding(
                                           padding: const EdgeInsets.all(32),
                                           child: RoundedLoadingButton(
@@ -531,7 +587,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                             controller: _btnController,
                                             onPressed: (transaksi.sisa <= 0 ||
                                                     transaksi.supir ==
-                                                        'Supir' ||
+                                                        'Driver' ||
                                                     transaksi.tujuan.isEmpty ||
                                                     controlerSisa.text ==
                                                         'Tidak boleh minus' ||
@@ -583,7 +639,6 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
 
                                                     _btnController.success();
 
-                                                 
                                                     await Future.delayed(
                                                         const Duration(
                                                             seconds: 1), () {
@@ -593,9 +648,9 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                       controlerOngkos.text = '';
                                                       controlerKeluar.text = '';
                                                       controlerSupir.text =
-                                                          'Pilih Supir';
+                                                          'Pilih Driver';
                                                       controlerMobil.text =
-                                                          'Pilih Mobil';
+                                                          'Pilih No Pol';
                                                       controlerKeterangan.text =
                                                           '';
                                                       controlerTujuan.text = '';
@@ -612,7 +667,7 @@ class _TransaksiAddState extends State<HpTransaksiAdd> {
                                                           "id_transaksi": "0",
                                                           "id_mobil": "0",
                                                           "plat_mobil":
-                                                              "Pilih Mobil",
+                                                              'Pilih No Pol',
                                                           "id_supir": "0",
                                                           "nama_supir":
                                                               "Pilih Supir",

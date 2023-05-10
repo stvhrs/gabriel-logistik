@@ -29,9 +29,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
     Provider.of<ProviderData>(context, listen: false)
         .setData([], false, [], listTransaksi, [], [], []);
 
-    loading = false;
-
-    setState(() {});
+    
   }
   @override
   void initState() {
@@ -39,6 +37,9 @@ class _DaftarSupirState extends State<DaftarSupir> {
    
      Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
     Provider.of<ProviderData>(context, listen: false).searchSupir('', false);
+    loading = false;
+
+    setState(() {});
     super.initState();
   }
  
