@@ -199,7 +199,7 @@ static Future<User?> getUserId(String id) async {
       );
 
       if (response.body.isNotEmpty) {
-        return User.fromMap(json.decode(response.body)["0"]["user"][0]);
+        return User.fromMap(json.decode(response.body)["user"][0]);
       } else {
         return null;
       }

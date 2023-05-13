@@ -15,7 +15,7 @@ class _SearchTanggalState extends State<SearchTanggal> {
   DateTimeRange? picked;
   @override
   Widget build(BuildContext context) {
-    return Container(height: 36,
+    return SizedBox(height: 36,
       child: Card(
         color: Colors.grey.shade200,
         child: Padding(

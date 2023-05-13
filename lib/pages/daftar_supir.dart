@@ -25,11 +25,14 @@ class _DaftarSupirState extends State<DaftarSupir> {
 // await Service.deleteSupir();
 // await Service.test3();
     listTransaksi = await Service.getAllSupir();
-
+if (!mounted) return;
     Provider.of<ProviderData>(context, listen: false)
-        .setData([], false, [], listTransaksi, [], [], []);
+        .setData([],[], false, [], listTransaksi, [], [], []);
 
     
+loading = false;
+
+    setState(() {});
   }
   @override
   void initState() {
@@ -37,9 +40,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
    
      Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
     Provider.of<ProviderData>(context, listen: false).searchSupir('', false);
-    loading = false;
-
-    setState(() {});
+    
     super.initState();
   }
  
@@ -71,7 +72,7 @@ class _DaftarSupirState extends State<DaftarSupir> {
                       bottomLeft: Radius.circular(5),
                       bottomRight: Radius.circular(5))),
               child: const Text(
-                'Daftar Supir',
+                'Daftar Driver',
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Nunito',

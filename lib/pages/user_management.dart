@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/models/user.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:gabriel_logistik/services/service.dart';
-import 'package:gabriel_logistik/supir/supir_tile.dart';
-import 'package:gabriel_logistik/supir/tambah_supir.dart';
 import 'package:gabriel_logistik/user/tambah_user.dart';
 import 'package:gabriel_logistik/user/user_tile.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +25,7 @@ class _UserManagementState extends State<UserManagement> {
 // await Service.deleteSupir();
 // await Service.test3();
     listUser = await Service.getUser();
-
+if (!mounted) return;
   Provider.of<ProviderData>(context,listen: false).listUser=listUser;
   loading = false;
 
@@ -82,9 +79,9 @@ class _UserManagementState extends State<UserManagement> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                
-                const Expanded(flex: 4, child: SizedBox()),
+                Expanded(flex: 4, child: SizedBox()),
                 TambahUser()
               ],
             ),
@@ -105,6 +102,9 @@ class _UserManagementState extends State<UserManagement> {
                   Expanded(
                       flex: 11,
                       child: Text('Password',
+                          style: Theme.of(context).textTheme.displayMedium)), Expanded(
+                      flex: 11,
+                      child: Text('Role',
                           style: Theme.of(context).textTheme.displayMedium)),
                   Expanded(
                       flex: 3,

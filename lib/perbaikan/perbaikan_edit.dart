@@ -44,7 +44,7 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                   style: const TextStyle(fontSize: 13.5),
                 ),
               ),
-              Expanded(flex: 2, child:Container(height: 36,child: widget)),
+              Expanded(flex: 2, child:SizedBox(height: 36,child: widget)),
             ],
           ));
     
@@ -206,9 +206,8 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                                 
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child:  Container(margin: EdgeInsets.only(top: 10),
-                                    child: Expanded(
-                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    child:  Container(margin: const EdgeInsets.only(top: 10),
+                                    child:  Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [RoundedLoadingButton(width: 120,color: Colors.red,controller:
                                          RoundedLoadingButtonController(), onPressed: (){
                                           Navigator.of(context).pop();
@@ -263,7 +262,7 @@ class _PerbaikanEditState extends State<PerbaikanEdit> {
                                       child: const Text('Edit',
                                           style: TextStyle(color: Colors.white)),
                                     ),
-                                  ]))
+                                  ])
                               ))],
                               ),
                             ),

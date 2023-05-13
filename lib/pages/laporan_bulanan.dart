@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/bulanan/bulanan.dart';
 
 import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
-import 'package:gabriel_logistik/models/mobil.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
 import 'package:gabriel_logistik/models/transaksi.dart';
 import 'package:gabriel_logistik/prints.dart';
@@ -60,7 +59,9 @@ class _LaporanBulananState extends State<LaporanBulanan> {
 
   @override
   Widget build(BuildContext context) {
-     
+     var data=Provider.of<ProviderData>(context).backupListMobil;
+     data.sort((a, b){ //sorting in ascending order
+    return a.nama_mobil[0]. toLowerCase().compareTo(b.nama_mobil[0].toLowerCase());});
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(backgroundColor: Colors.green,
@@ -68,9 +69,13 @@ class _LaporanBulananState extends State<LaporanBulanan> {
           onPressed: () {
             if( Provider.of<ProviderData>(context, listen: false).printed.isNotEmpty){
                  Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => LaporanPrint(
-                  Provider.of<ProviderData>(context, listen: false).printed),
-            ));
+              builder: (context) {
+                var printed=Provider.of<ProviderData>(context, listen: false).printed;
+                    data.sort((a, b){ //sorting in ascending order
+    return a.nama_mobil[0]. toLowerCase().compareTo(b.nama_mobil[0].toLowerCase());});
+                return LaporanPrint(
+                  printed);
+              }  ));
             }
          
           }),
@@ -83,11 +88,11 @@ class _LaporanBulananState extends State<LaporanBulanan> {
               children: [
                 DropdownButton2<int>(
                   value: ropdownValue2,
-                   menuItemStyleData: MenuItemStyleData(height: 36),
+                   menuItemStyleData: const MenuItemStyleData(height: 36),
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.secondary),
                   underline: Container(
-                    height: 2.5,margin: EdgeInsets.only(top: 5),
+                    height: 2.5,margin: const EdgeInsets.only(top: 5),
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                   onChanged: (int? value) {
@@ -107,13 +112,13 @@ class _LaporanBulananState extends State<LaporanBulanan> {
                     );
                   }).toList(),
                 ),
-               DropdownButton2<String>( menuItemStyleData: MenuItemStyleData(height: 36),
+               DropdownButton2<String>( menuItemStyleData: const MenuItemStyleData(height: 36),
                     value: dropdownValue,
                   
                     style:
                         TextStyle(color: Theme.of(context).colorScheme.secondary),
                     underline: Container(
-                      height: 2.5,margin: EdgeInsets.only(top: 5),
+                      height: 2.5,margin: const EdgeInsets.only(top: 5),
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                     onChanged: (String? value) {
@@ -140,7 +145,7 @@ class _LaporanBulananState extends State<LaporanBulanan> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.89,
             child: ListView(
-              children: Provider.of<ProviderData>(context).backupListMobil.map((e) {
+              children: data.map((e) {
                 List<Transaksi> transaksiBulanIni = [];
                 double totalPerbaikan = 0;
                 double totalBersih = 0;

@@ -31,9 +31,12 @@ class _AdministrasiPageState extends State<AdministrasiPage> {
 // await Service.deleteSupir();
 // await Service.test3();
     listTransaksi = await Service.getAllPerbaikan();
-
+if (!mounted) return;
     Provider.of<ProviderData>(context, listen: false)
-        .setData([], false, [], [], listTransaksi, [], []);
+        .setData([],[], false, [], [], listTransaksi, [], []);
+loading = false;
+
+    setState(() {});
 
     
   }
@@ -47,9 +50,7 @@ class _AdministrasiPageState extends State<AdministrasiPage> {
                           Provider.of<ProviderData>(context, listen: false)
                             .searchperbaikan('',false);
                                 Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
-                                loading = false;
-
-    setState(() {});
+                            
     super.initState();
   }
 List<Perbaikan> data=[];

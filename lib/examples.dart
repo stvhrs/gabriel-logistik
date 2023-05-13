@@ -38,12 +38,12 @@ typedef LayoutCallbackWithData3 = Future<Uint8List> Function(
 
   
 typedef LayoutCallbackWithData4 = Future<Uint8List> Function(
-    PdfPageFormat pageFormat,  int ropdownValue2 ,String dropdownValue,String dropdownValue2,
+    PdfPageFormat pageFormat, int ropdownValue2 ,String dropdownValue,String dropdownValue2,
     double totalTransaksi ,
   double totalJualUnit ,
    double totalNotaJual 
   ,
-
+ double totalPerbaikan,
   double tahunMaintain ,
   double toalBeliUnit ,
   double totalNotaBeli,

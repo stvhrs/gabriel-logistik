@@ -5,7 +5,6 @@ import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/models/jual_beli_mobil.dart';
 import 'package:gabriel_logistik/models/perbaikan.dart';
-import 'package:gabriel_logistik/models/user.dart';
 import 'package:gabriel_logistik/pages/administrasi_page.dart';
 
 import 'package:gabriel_logistik/pages/daftar_supir.dart';
@@ -30,6 +29,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/mutasi_saldo.dart';
+import 'models/user.dart';
 import 'pages/daftar_mobil.dart';
 import 'models/mobil.dart';
 import 'models/supir.dart';
@@ -53,20 +53,40 @@ class _DashBoardState extends State<DashBoard> {
   late List<Perbaikan> listPerbaikan;
   late List<JualBeliMobil> listJualBeliMobil;
   late List<MutasiSaldo> listMutasiSaldo;
-
+late String username;
   String test = '';
   bool loading = true;
   initData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    
     try {
       var data = prefs.getString('data');
-      if (jsonDecode(data!)['status'] == 'owner') {
+       if (data != null) {
+      print(jsonDecode(data));
+      User? user = await Service.getUserId(jsonDecode(data)["id_user"]);
+      if (user == null ||
+          user.password != jsonDecode(data)["password"] ||
+          user.username != jsonDecode(data)["username"]) {
+        await prefs.clear();
+        Provider.of<ProviderData>(context, listen: false).logout();
+        loading=false;
+        setState(() {});
+        return;
+      }
+
+      // ignore: use_build_context_synchronously
+      Provider.of<ProviderData>(context, listen: false).login();
+      if (user.owner) {
         print('owner');
         Provider.of<ProviderData>(context, listen: false).owner();
       } else {
         print('admin');
         Provider.of<ProviderData>(context, listen: false).admin();
-      }
+      }username=jsonDecode(data)['username'];
+      loading = false;
+    
+    }
+    
 
       listTransaksi = await Service.getAllTransaksi();
       listSupir = await Service.getAllSupir();
@@ -76,7 +96,7 @@ class _DashBoardState extends State<DashBoard> {
       listMobil = await Service.getAllMobil(listPerbaikan);
       listMutasiSaldo = await Service.getAllMutasiSaldo();
 
-      Provider.of<ProviderData>(context, listen: false).setData(
+      Provider.of<ProviderData>(context, listen: false).setData([],
           listTransaksi,
           false,
           listMobil,
@@ -87,12 +107,12 @@ class _DashBoardState extends State<DashBoard> {
       sideMenu.addListener((p0) {
         page.jumpToPage(p0);
       });
-      loading = false;
+      loading = false; setState(() {});
     } catch (e) {
-      loading = false;
+      loading = false; setState(() {});
     }
 
-    setState(() {});
+   
   }
 
   @override
@@ -104,22 +124,22 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   int _selectedIndex = 0;
-  List<Widget> wid = [
-    const DashBoardPage(),
+  List<Widget> get wid => [
+     DashBoardPage(username),
     const DaftarMobil(),
     const DaftarSupir(),
     const JualBeli(),
     const TransaksiPage(),
     const PerbaikanPage(),
     const AdministrasiPage(),
-    CashFlow(),
+    const CashFlow(),
     const CashFlow1(),
     const LaporanBulanan(),
     const KasTahun(),
     const RekapUnit(),
-    LaporanKas(),
+    const LaporanKas(),
     const MutasiSaldoPage(),
-   UserManagement()
+   const UserManagement()
   ];
   final List<bool> _open = [true, false, false, false];
   @override
@@ -148,7 +168,8 @@ class _DashBoardState extends State<DashBoard> {
                     behavior: ScrollConfiguration.of(context).copyWith(
                       scrollbars: false,
                     ),
-                    child: SingleChildScrollView(
+                    child: ListTileTheme(
+  dense: true,child: SingleChildScrollView(
                       controller: null,
                       child: Column(
                         children: <Widget>[
@@ -165,7 +186,7 @@ class _DashBoardState extends State<DashBoard> {
                               color: _selectedIndex == 0
                                   ? Theme.of(context).colorScheme.secondary
                                   : Theme.of(context).primaryColor,
-                              child: ListTile(
+                              child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                 iconColor: Colors.white,
                                 minLeadingWidth: 10,
                                 textColor: _selectedIndex == 0
@@ -192,7 +213,7 @@ class _DashBoardState extends State<DashBoard> {
                                   color: _selectedIndex == 1
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).colorScheme.primary,
-                                  child: ListTile(
+                                  child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                     iconColor: Colors.white,
                                     minLeadingWidth: 10,
                                     textColor: _selectedIndex == 1
@@ -211,7 +232,7 @@ class _DashBoardState extends State<DashBoard> {
                                   color: _selectedIndex == 2
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).colorScheme.primary,
-                                  child: ListTile(
+                                  child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                     iconColor: Colors.white,
                                     minLeadingWidth: 10,
                                     textColor: _selectedIndex == 2
@@ -224,13 +245,13 @@ class _DashBoardState extends State<DashBoard> {
                                       setState(() {});
                                     },
                                     leading: const Icon(Icons.people),
-                                    title: Text(style: item, 'Daftar Supir'),
+                                    title: Text(style: item, 'Daftar Driver'),
                                   )),
                               Container(
                                   color: _selectedIndex == 3
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).colorScheme.primary,
-                                  child: ListTile(
+                                  child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                     iconColor: Colors.white,
                                     minLeadingWidth: 10,
                                     textColor: _selectedIndex == 3
@@ -260,7 +281,7 @@ class _DashBoardState extends State<DashBoard> {
                                   color: _selectedIndex == 4
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).colorScheme.primary,
-                                  child: ListTile(
+                                  child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                     iconColor: Colors.white,
                                     minLeadingWidth: 10,
                                     textColor: _selectedIndex == 4
@@ -280,7 +301,7 @@ class _DashBoardState extends State<DashBoard> {
                                   color: _selectedIndex == 5
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).colorScheme.primary,
-                                  child: ListTile(
+                                  child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                     iconColor: Colors.white,
                                     minLeadingWidth: 10,
                                     textColor: _selectedIndex == 5
@@ -300,7 +321,7 @@ class _DashBoardState extends State<DashBoard> {
                                   color: _selectedIndex == 6
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).colorScheme.primary,
-                                  child: ListTile(
+                                  child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                     iconColor: Colors.white,
                                     minLeadingWidth: 10,
                                     textColor: _selectedIndex == 6
@@ -333,7 +354,7 @@ class _DashBoardState extends State<DashBoard> {
                                             .colorScheme
                                             .secondary
                                         : Theme.of(context).colorScheme.primary,
-                                    child: ListTile(
+                                    child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                       iconColor: Colors.white,
                                       minLeadingWidth: 10,
                                       textColor: _selectedIndex == 7
@@ -355,7 +376,7 @@ class _DashBoardState extends State<DashBoard> {
                                             .colorScheme
                                             .secondary
                                         : Theme.of(context).colorScheme.primary,
-                                    child: ListTile(
+                                    child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                       iconColor: Colors.white,
                                       minLeadingWidth: 10,
                                       textColor: _selectedIndex == 8
@@ -385,7 +406,7 @@ class _DashBoardState extends State<DashBoard> {
                                   color: _selectedIndex == 9
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).colorScheme.primary,
-                                  child: ListTile(
+                                  child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                     iconColor: Colors.white,
                                     minLeadingWidth: 10,
                                     textColor: _selectedIndex == 8
@@ -405,7 +426,7 @@ class _DashBoardState extends State<DashBoard> {
                                   color: _selectedIndex == 10
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).colorScheme.primary,
-                                  child: ListTile(
+                                  child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                     iconColor: Colors.white,
                                     minLeadingWidth: 10,
                                     textColor: _selectedIndex == 10
@@ -425,7 +446,7 @@ class _DashBoardState extends State<DashBoard> {
                                   color: _selectedIndex == 11
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).colorScheme.primary,
-                                  child: ListTile(
+                                  child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                     iconColor: Colors.white,
                                     minLeadingWidth: 10,
                                     textColor: _selectedIndex == 11
@@ -456,7 +477,7 @@ class _DashBoardState extends State<DashBoard> {
                                   color: _selectedIndex == 12
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).primaryColor,
-                                  child: ListTile(
+                                  child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                     iconColor: Colors.white,
                                     minLeadingWidth: 10,
                                     textColor: _selectedIndex == 12
@@ -475,7 +496,7 @@ class _DashBoardState extends State<DashBoard> {
                                   color: _selectedIndex == 13
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).primaryColor,
-                                  child: ListTile(
+                                  child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                     iconColor: Colors.white,
                                     minLeadingWidth: 10,
                                     textColor: _selectedIndex == 13
@@ -499,7 +520,7 @@ class _DashBoardState extends State<DashBoard> {
                                   color: _selectedIndex == 14
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).primaryColor,
-                                  child: ListTile(
+                                  child: ListTile(visualDensity: VisualDensity(vertical: -4.0), 
                                     iconColor: Colors.white,
                                     minLeadingWidth: 10,
                                     textColor: _selectedIndex == 14
@@ -515,13 +536,13 @@ class _DashBoardState extends State<DashBoard> {
                                         const Icon(Icons.emoji_people_rounded),
                                     title: Text(style: item, 'User Management'),
                                   ))
-                              : SizedBox(),
+                              : const SizedBox(),
                               
                         ],
                       ),
                     ),
                   ),
-                ),
+                )),
                 Expanded(child: wid[_selectedIndex]),
               ],
             ));

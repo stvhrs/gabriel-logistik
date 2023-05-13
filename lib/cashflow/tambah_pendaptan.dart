@@ -478,9 +478,8 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                     ),const Spacer(),
                                     Align(
                                       alignment: Alignment.bottomCenter,
-                                      child: Container(margin: EdgeInsets.only(top: 10),
-                                    child: Expanded(
-                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      child: Container(margin: const EdgeInsets.only(top: 10),
+                                    child:  Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [RoundedLoadingButton(width: 120,color: Colors.red,controller:
                                          RoundedLoadingButtonController(), onPressed: (){
                                           Navigator.of(context).pop();
@@ -527,7 +526,7 @@ class _TambahPendapatanState extends State<TambahPendapatan> {
                                         child: const Text('Simpan',
                                             style:
                                                 TextStyle(color: Colors.white)),
-                                      )]))),
+                                      )])),
                                     ),const Spacer()
                                   ],
                                 ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/helper/custompaint.dart';
 import 'package:gabriel_logistik/hp_transaksi_add.dart';
 import 'package:gabriel_logistik/hp_transaksi_tile.dart';
-import 'package:gabriel_logistik/logout.dart';
 import 'package:gabriel_logistik/logout_hp.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +22,7 @@ import 'models/mutasi_saldo.dart';
 import 'models/perbaikan.dart';
 import 'models/supir.dart';
 import 'models/transaksi.dart';
+import 'models/user.dart';
 
 class DashBoardHp extends StatefulWidget {
   const DashBoardHp({super.key});
@@ -41,6 +41,7 @@ class _DashBoardHpState extends State<DashBoardHp> {
   late List<Perbaikan> listPerbaikan;
   late List<JualBeliMobil> listJualBeliMobil;
   late List<MutasiSaldo> listMutasiSaldo;
+  late List<User> listUser;
   bool loading = true;
   String test = '';
   initData() async {
@@ -49,6 +50,7 @@ class _DashBoardHpState extends State<DashBoardHp> {
 // await Service.postSupir();
 // await Service.deleteSupir();
 // await Service.test3();
+listUser=await Service.getUser();
     listTransaksi = await Service.getAllTransaksi();
     listSupir = await Service.getAllSupir();
     listPerbaikan = await Service.getAllPerbaikan();
@@ -66,7 +68,7 @@ class _DashBoardHpState extends State<DashBoardHp> {
       Provider.of<ProviderData>(context, listen: false).admin();
     }
 
-    Provider.of<ProviderData>(context, listen: false).setData(listTransaksi,
+    Provider.of<ProviderData>(context, listen: false).setData(listUser,listTransaksi,
         false, listMobil, listSupir, listPerbaikan, listJualBeliMobil,listMutasiSaldo);
     
     loading = false;
@@ -87,7 +89,7 @@ class _DashBoardHpState extends State<DashBoardHp> {
             child: CustomPaints(),
           )
         : Consumer<ProviderData>(builder: (context, prov, _) {
-            return Scaffold(resizeToAvoidBottomInset: false,
+            return Scaffold(
                 appBar: AppBar(  automaticallyImplyLeading: false,
                   backgroundColor: Theme.of(context).colorScheme.secondary,
                   title: const Text('Riwayat Transaksi',

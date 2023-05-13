@@ -33,6 +33,8 @@ const sep = 120.0;
 
 Future<Uint8List> generateResume(
     PdfPageFormat format, List<KeuanganBulanan> as) async {
+          as.sort((a, b){ //sorting in ascending order
+    return a.namaMobil[0]. toLowerCase().compareTo(b.namaMobil[0].toLowerCase());});
       print(as.length);
   pw.TextStyle med = const pw.TextStyle(fontSize: 10);
   DateTime dateTime = DateTime.parse(DateTime.now().toIso8601String());
@@ -53,8 +55,8 @@ pw.ImageProvider asu = pw.MemoryImage(
                 //         ? Colors.grey.shade200
                 //         : const Colors.white),
                 padding: const pw.EdgeInsets.only(
-                  top: 7,
-                  bottom: 7,
+                  top: 3,
+                  bottom: 3,
                   left: 15,
                 ),
                 child: pw.Row(children: [
@@ -129,8 +131,8 @@ pw.ImageProvider asu = pw.MemoryImage(
               //         ? Colors.grey.shade200
               //         :  const Colors.white),
               padding: const pw.EdgeInsets.only(
-                top: 7,
-                bottom: 7,
+                top: 3,
+                bottom: 3,
                 left: 15,
               ),
               child: pw.Row(
@@ -256,6 +258,7 @@ pw.ImageProvider asu = pw.MemoryImage(
                       ),
                     ),
                     ...buildChildren(element.transaksiBulanIni),
+                    pw.Spacer(),
                     pw.Container(
                         margin: const pw.EdgeInsets.only(top: 20, bottom: 3),
                         decoration: const pw.BoxDecoration(
@@ -263,7 +266,7 @@ pw.ImageProvider asu = pw.MemoryImage(
                         child: pw.Center(
                           child: pw.Text(
                               textAlign: pw.TextAlign.center,
-                             'Maintain',
+                             'Pemeliharaan',
                               style: bold2),
                         )),
                     pw.Container(
@@ -280,7 +283,7 @@ pw.ImageProvider asu = pw.MemoryImage(
                               flex: 5, child: pw.Text('Jenis', style: bold)),
                           pw.Expanded(
                               flex: 5,
-                              child: pw.Text('Maintain', style: bold)),
+                              child: pw.Text('Biaya Maintain', style: bold)),
                           pw.Expanded(
                               flex: 7,
                               child: pw.Text('Keterangan', style: bold)),

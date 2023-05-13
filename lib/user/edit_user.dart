@@ -1,16 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-import '../login/app_icons.dart';
 import '../providerData/providerData.dart';
 import '../services/service.dart';
 
 class EditUser extends StatefulWidget {
   final User supir;
-  EditUser(this.supir);
+  const EditUser(this.supir);
 
   @override
   State<EditUser> createState() => _EditUserState();
@@ -20,7 +19,17 @@ class _EditUserState extends State<EditUser> {
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
 bool hidden=true;
-  @override
+  @override final children = <int, Widget>{
+    0: const Text('Admin', style: TextStyle(fontFamily: 'Nunito',fontSize: 14,fontWeight: FontWeight.bold,)),
+    1: const Text('Owner', style: TextStyle(fontFamily: 'Nunito',fontSize: 14,fontWeight: FontWeight.bold,)),
+  }; int currentSegment = 0;
+ 
+@override
+  void initState() {
+   currentSegment=  widget.supir.owner ?1:0;
+    super.initState();
+  }
+  
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
@@ -58,10 +67,10 @@ bool hidden=true;
                           children: [
                             Container(
                               margin: const EdgeInsets.only(bottom: 20),
-                              child: TextFormField(
+                              child: TextFormField(readOnly: true,
                                   style: const TextStyle(fontSize:13),textInputAction: TextInputAction.next,
                                 initialValue: widget.supir.username,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                             border: InputBorder.none,
                             prefixIcon: SizedBox(
                              
@@ -88,10 +97,10 @@ bool hidden=true;
                                     setState(() {});
                                   },
                                   icon: hidden
-                                      ? Icon(Icons.remove_red_eye_outlined)
-                                      :  Icon(Icons.remove_red_eye_rounded),
+                                      ? const Icon(Icons.remove_red_eye_outlined)
+                                      :  const Icon(Icons.remove_red_eye_rounded),
                                 ),
-                                prefixIcon: SizedBox(
+                                prefixIcon: const SizedBox(
                                   child: Icon(Icons.lock),
                                 ),
                                   hintText: 'Password',
@@ -101,7 +110,19 @@ bool hidden=true;
                                 },
                                 maxLines: 1,
                               ),
-                            ),
+                           
+                              ),Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: CupertinoSlidingSegmentedControl<int>(
+                    children: children,
+                    onValueChanged:(int? newValue) {
+    setState(() {
+      currentSegment = newValue!;
+    });
+  },
+                    groupValue: currentSegment,
+                  ),
+                ),
                           
                           ],
                         ),
@@ -110,9 +131,8 @@ bool hidden=true;
                   ),
                 ),
                 actions: <Widget>[
-                  Container(margin: EdgeInsets.only(top: 10),
-                                    child: Expanded(
-                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  Container(margin: const EdgeInsets.only(top: 10),
+                                    child:Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [RoundedLoadingButton(width: 120,color: Colors.red,controller:
                                          RoundedLoadingButtonController(), onPressed: (){
                                           Navigator.of(context).pop();
@@ -134,7 +154,7 @@ bool hidden=true;
                       }
 
                          var data = await Service.updatUser(
-                            {'id_user':widget.supir.id,'username': widget.supir.username, "password": widget.supir.password,'status':widget.supir.owner?"owner":"admin"});
+                            {'id_user':widget.supir.id,'username': widget.supir.username, "password": widget.supir.password,"status":currentSegment==0? "admin":"owner"});
 
                         if (data != null) {
                           Provider.of<ProviderData>(context, listen: false)
@@ -157,7 +177,7 @@ bool hidden=true;
                         style: TextStyle(color: Colors.white)),
                   )
                 ],
-              )))]);
+              ))]);
             });
       },
       icon: const Icon(

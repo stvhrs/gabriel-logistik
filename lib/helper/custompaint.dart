@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CustomPaints extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Image.asset('images/title.png',width: 300,);
+    return Scaffold(body: Center(child: Image.asset('images/title.png',width: 300,)));
   }
 }
 //Copy this CustomPainter code to the Bottom of the File

@@ -27,18 +27,19 @@ class _JualBeliState extends State<JualBeli> {
   initData() async {
 
     listTransaksi = await Service.getAlljualBeli();
-
+if (!mounted) return;
     Provider.of<ProviderData>(context, listen: false)
-        .setData([], false, [], [], [], listTransaksi, []);
+        .setData([],[], false, [], [], [], listTransaksi, []);
 
+loading = false;
+
+    setState(() {});
     
   }
   @override
   void initState() {
     if (mounted){ initData();}
-    loading = false;
-
-    setState(() {});
+  
     super.initState();
   }
   int currentSegment = 0;

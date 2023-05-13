@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/cashflow/delete_pendaptan.dart';
 import 'package:gabriel_logistik/cashflow/edit_pendapta.dart';
@@ -33,9 +32,12 @@ class _CashFlowState extends State<CashFlow1> {
 // await Service.deleteSupir();
 // await Service.test3();
     listTransaksi = await Service.getAllMutasiSaldo();
-
+if (!mounted) return;
     Provider.of<ProviderData>(context, listen: false)
-        .setData([], false, [], [], [], [], listTransaksi);
+        .setData([],[], false, [], [], [], [], listTransaksi);
+loading = false;
+
+    setState(() {});
 
    
   }
@@ -44,9 +46,6 @@ class _CashFlowState extends State<CashFlow1> {
         if (mounted){ initData();}
    
  
-loading = false;
-
-    setState(() {});
   
 
     super.initState();
@@ -88,9 +87,9 @@ loading = false;
                   borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(5),
                       bottomRight: Radius.circular(5))),
-              child: Text(
+              child: const Text(
                 'Nota Penjualan',
-                style: const TextStyle(
+                style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Nunito',
                     fontSize: 24,
@@ -107,7 +106,7 @@ loading = false;
                                       .isOwner
                                   ? [
                                       const Spacer(),
-                                      TambahPendapatan( true)
+                                      const TambahPendapatan( true)
                                     ]
                                   : []),
                    ),

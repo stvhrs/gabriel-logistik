@@ -91,25 +91,24 @@ listMobil.sort((a, b){ //sorting in ascending order
         //           )),
         Container(
       margin: const EdgeInsets.only(bottom: 15, left: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+       crossAxisAlignment: CrossAxisAlignment.start,
         // clipBehavior: Clip.none,
         // alignment: Alignment.centerLeft,
         children: [
-          Expanded(
-            flex: 2,
-            child: Text(
-              "$ket :",
-              style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Nunito"),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: widget,
-          )
+         Padding(
+           padding: const EdgeInsets.only(bottom: 1),
+           child: Text(
+                "$ket :",
+                style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Nunito"),
+              ),
+         ),
+          
+           widget,
+          
         ],
       ),
     );
@@ -225,7 +224,7 @@ listMobil.sort((a, b){ //sorting in ascending order
                                                   color: Theme.of(context)
                                                       .colorScheme
                                                       .secondary,
-                                                  fontFamily: 'Nunito',
+                                                  fontFamily: 'FreeSans',
                                                   fontSize: 19),
                                             ),
                                             const SizedBox(),
@@ -240,25 +239,31 @@ listMobil.sort((a, b){ //sorting in ascending order
                                             ),
                                           ],
                                         ),
-                                        Divider(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                          thickness: 1,
+                                        Padding(
+                                          padding: const EdgeInsets.only(bottom: 10,top: 5),
+                                          child: Divider(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                            thickness: 3,height: 0,
+                                          ),
                                         ),
-                                        _buildSize(
-                                            WebDatePicker(
-                                              lastDate: DateTime.now(),
-                                              height: 36,
-                                              initialDate: DateTime.now(),
-                                              dateformat: 'dd/MM/yyyy',
-                                              onChange: (value) {
-                                                if (value != null) {
-                                                  transaksi.tanggalBerangkat =
-                                                      value.toIso8601String();
-                                                  setState(() {});
-                                                }
-                                              },
+                                        _buildSize2(
+                                            Padding(
+                                              padding: const EdgeInsets.only(right: 30),
+                                              child: WebDatePicker(
+                                                lastDate: DateTime.now(),
+                                                height: 28,
+                                                initialDate: DateTime.now(),
+                                                dateformat: 'dd/MM/yyyy',
+                                                onChange: (value) {
+                                                  if (value != null) {
+                                                    transaksi.tanggalBerangkat =
+                                                        value.toIso8601String();
+                                                    setState(() {});
+                                                  }
+                                                },
+                                              ),
                                             ),
                                             'Tanggal',
                                             1),
@@ -504,7 +509,7 @@ listMobil.sort((a, b){ //sorting in ascending order
                                                 CurrencyInputFormatter()
                                               ],
                                             ),
-                                            'Biaya Ongkos',
+                                            'Tarif',
                                             1),
                                         _buildSize(
                                             TextFormField(

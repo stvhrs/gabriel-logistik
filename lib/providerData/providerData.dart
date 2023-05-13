@@ -73,7 +73,7 @@ class ProviderData with ChangeNotifier {
     notifyListeners();
   }
 
-  void setData(
+  void setData(List<User> users,
       List<Transaksi> tras,
       bool listen,
       List<Mobil> mobilData,
@@ -82,6 +82,10 @@ class ProviderData with ChangeNotifier {
       List<JualBeliMobil> jualbeli,
       List<MutasiSaldo> listMutasi) {
     print('set');
+    if(users.isNotEmpty){
+      listUser.clear();
+      listUser.addAll(users);
+    }
     if (jualbeli.isNotEmpty) {
       listJualBeliMobil.clear();
       backuplistJualBeliMobil.clear();
@@ -168,7 +172,7 @@ class ProviderData with ChangeNotifier {
 
     listPerbaikan.every((e) {
       listHistorySaldo.add(
-          HistorySaldo('Maintain', 0, e.mobil, -e.harga, e.tanggal, false));
+          HistorySaldo(e.adminitrasi?"Administrasi": 'Perbaikan', 0, e.mobil, -e.harga, e.tanggal, false));
       return true;
     });
 

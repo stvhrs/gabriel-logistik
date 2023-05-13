@@ -9,7 +9,8 @@ import '../providerData/providerData.dart';
 import 'package:d_chart/d_chart.dart';
 
 class DashBoardPage extends StatefulWidget {
-  const DashBoardPage({super.key});
+  final String username;
+  const DashBoardPage(this.username);
 
   @override
   State<DashBoardPage> createState() => _DashBoardPageState();
@@ -125,11 +126,11 @@ double totalSiseaHarini=0;
           child: Row(
             children: [
             
-              const Spacer(),
+            
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(4),
+                    padding: const EdgeInsets.all(8),
                     child: Image.asset(
                       Provider.of<ProviderData>(context, listen: false).isOwner
                           ? 'images/boss.png'
@@ -140,15 +141,15 @@ double totalSiseaHarini=0;
                   ),
                   Text(
                     Provider.of<ProviderData>(context, listen: false).isOwner
-                        ? ' Hi Owner !   '
-                        : ' Hi Admin !   ',
+                        ? 'Owner : ${widget.username}'
+                        : 'Admin : ${widget.username}',
                     style: const TextStyle(
-                        fontFamily: 'Nunito', fontWeight: FontWeight.bold),
+                        fontFamily: 'Nunito', fontWeight: FontWeight.bold,fontSize: 14),
                   ),
                   // Spacer(),
-                  const VerticalDivider(), const VerticalDivider()
+               
                 ],
-              ),
+              ),  const Spacer(),   const VerticalDivider(), const VerticalDivider(),
               Logout()
             ],
           ),
@@ -180,9 +181,9 @@ double totalSiseaHarini=0;
             surfaceTintColor: Colors.white,
             child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text('Grafik Saldo ',style: const TextStyle(fontFamily: 'Nunito',fontWeight: FontWeight.bold,fontSize: 20),),
+                  const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text('Grafik Saldo ',style: TextStyle(fontFamily: 'Nunito',fontWeight: FontWeight.bold,fontSize: 20),),
                   ),
                   const Divider(height: 1,color: Colors.black,),
                   Container(

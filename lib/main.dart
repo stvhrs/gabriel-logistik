@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       // ignore: use_build_context_synchronously
       Provider.of<ProviderData>(context, listen: false).login();
-      if (jsonDecode(data)['status'] == 'owner') {
+      if (user.owner) {
         print('owner');
         Provider.of<ProviderData>(context, listen: false).owner();
       } else {

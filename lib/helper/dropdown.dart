@@ -237,7 +237,7 @@ class DropDownFieldState extends FormFieldState<String> {
       tileColor: (index.indexOf(text)+1).isEven ? Colors.white : Colors.green,
       dense: true,
       title: Text(
-        text,style: TextStyle(fontWeight: FontWeight.bold),
+        text,style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       onTap: () {
         setState(() {

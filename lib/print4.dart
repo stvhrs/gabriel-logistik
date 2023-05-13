@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/examples.dart';
-import 'package:gabriel_logistik/models/history_saldo.dart';
-import 'package:gabriel_logistik/providerData/providerData.dart';
 import 'package:printing/printing.dart';
-import 'package:provider/provider.dart';
 
 class LabaRugi extends StatefulWidget {
  
@@ -12,8 +9,8 @@ class LabaRugi extends StatefulWidget {
   final double totalJualUnit ;
    final double totalNotaJual 
   ;
-
-  final double tahunMaintain ;
+final double totalPerbaikan;
+  final double totalAdministrasi ;
   final double toalBeliUnit ;
   final double totalNotaBeli;
 
@@ -22,14 +19,14 @@ class LabaRugi extends StatefulWidget {
   final double saldoAkhir ;
   final double saldoAwal ; 
 
-   LabaRugi(
+   const LabaRugi(
     this. ropdownValue2 ,this. dropdownValue,this. dropdownValue2,
     this. totalTransaksi ,
   this. totalJualUnit ,
    this. totalNotaJual 
   ,
-
-  this. tahunMaintain ,
+this.totalPerbaikan,
+  this. totalAdministrasi ,
   this. toalBeliUnit ,
   this. totalNotaBeli,
 
@@ -82,8 +79,8 @@ class _LabaRugiState extends State<LabaRugi> {
   widget. totalJualUnit ,
    widget. totalNotaJual 
   ,
-
-  widget. tahunMaintain ,
+widget.totalPerbaikan,
+  widget. totalAdministrasi ,
   widget. toalBeliUnit ,
   widget. totalNotaBeli,
 

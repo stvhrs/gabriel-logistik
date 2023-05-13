@@ -30,9 +30,9 @@ class _TransaksiPageState extends State<TransaksiPage> {
 // await Service.deleteSupir();
 // await Service.test3();
     listTransaksi = await Service.getAllTransaksi();
-
+if (!mounted) return;
     Provider.of<ProviderData>(context, listen: false)
-        .setData(listTransaksi, false, [], [], [], [], []);
+        .setData([],listTransaksi, false, [], [], [], [], []);
 
     
     Provider.of<ProviderData>(context, listen: false).start = null;
@@ -44,7 +44,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
     Provider.of<ProviderData>(context, listen: false).searchTransaksi(false);
     loading = false;
 
-    setState(() {});
+   if (mounted){  setState(() {});}
   }
 
   @override 

@@ -86,9 +86,8 @@ TextEditingController satu2=TextEditingController();
                     ),
                   ),
                   actions: <Widget>[
-                   Container(margin: EdgeInsets.only(top: 10),
-                                    child: Expanded(
-                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                   Container(margin: const EdgeInsets.only(top: 10),child:    
+                                    Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [RoundedLoadingButton(width: 120,color: Colors.red,controller:
                                          RoundedLoadingButtonController(), onPressed: (){
                                           Navigator.of(context).pop();
@@ -136,7 +135,7 @@ TextEditingController satu2=TextEditingController();
                           style: TextStyle(color: Colors.white)),
                     )
                   ],
-                                    )))]);;
+                                    ))]);
               });
         },
         icon: const Icon(

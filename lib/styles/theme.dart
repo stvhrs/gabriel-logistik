@@ -57,7 +57,7 @@ class AppTheme {
               letterSpacing: 1,fontFamily: 'Nunito',
               fontWeight: FontWeight.bold,
               color: Colors.white,
-            )), textSelectionTheme: TextSelectionThemeData(
+            )), textSelectionTheme: const TextSelectionThemeData(
       cursorColor: Colors.green, //<-- SEE HERE
     ),
         inputDecorationTheme: InputDecorationTheme(hintStyle: const TextStyle(fontSize: 13,fontFamily: 'Nunito'),

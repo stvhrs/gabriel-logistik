@@ -58,7 +58,7 @@ class _JualAddState extends State<JualAdd> {
                   style: const TextStyle(fontSize: 13.5),
                 ),
               ),
-              Expanded(flex: 2, child:Container(height: 36,child: widget)),
+              Expanded(flex: 2, child:SizedBox(height: 36,child: widget)),
             ],
           ));
     
@@ -227,9 +227,8 @@ class _JualAddState extends State<JualAdd> {
                                           2),
                                     
                                 
-                                  Container(margin: EdgeInsets.only(top: 30),
-                                    child: Expanded(
-                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  Container(margin: const EdgeInsets.only(top: 30),
+                                    child:  Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [RoundedLoadingButton(width: 120,color: Colors.green,controller:
                                          RoundedLoadingButtonController(), onPressed: (){
                                           Navigator.of(context).pop();
@@ -291,7 +290,7 @@ class _JualAddState extends State<JualAdd> {
                                   )
                                 ],
                               ),
-                            ),
+                            
                           ),
                             ]))),
                       ),

@@ -1,15 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gabriel_logistik/helper/uppercase.dart';
 import 'package:gabriel_logistik/services/service.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-import '../login/app_icons.dart';
 import '../providerData/providerData.dart';
 
 class TambahUser extends StatefulWidget {
 
-  TambahUser({super.key});
+  const TambahUser({super.key});
 
   @override
   State<TambahUser> createState() => _TambahUserState();
@@ -21,6 +21,14 @@ class _TambahUserState extends State<TambahUser> {
 bool hidden=true;
     String namaMobil = '';
     String noHp = '';
+    
+  final children = <int, Widget>{
+    0: const Text('Admin', style: TextStyle(fontFamily: 'Nunito',fontSize: 14,fontWeight: FontWeight.bold,)),
+    1: const Text('Owner', style: TextStyle(fontFamily: 'Nunito',fontSize: 14,fontWeight: FontWeight.bold,)),
+  }; int currentSegment = 0;
+ 
+
+  
   @override
   Widget build(BuildContext context) {
 TextEditingController satu=TextEditingController();
@@ -67,8 +75,8 @@ TextEditingController satu2=TextEditingController();
                                 margin: const EdgeInsets.only(bottom: 20),
                                 child: TextFormField(controller: satu,
                                   style: const TextStyle(fontSize: 13.5),
-                                  textInputAction: TextInputAction.next,inputFormatters: [UpperCaseTextFormatter()],
-                                  decoration:   InputDecoration(
+                                  textInputAction: TextInputAction.next,inputFormatters: [],
+                                  decoration:   const InputDecoration(
                             border: InputBorder.none,
                             prefixIcon: SizedBox(
                              
@@ -95,10 +103,10 @@ TextEditingController satu2=TextEditingController();
                                     setState(() {});
                                   },
                                   icon: hidden
-                                      ? Icon(Icons.remove_red_eye_outlined)
-                                      :  Icon(Icons.remove_red_eye_rounded),
+                                      ? const Icon(Icons.remove_red_eye_outlined)
+                                      :  const Icon(Icons.remove_red_eye_rounded),
                                 ),
-                                prefixIcon: SizedBox(
+                                prefixIcon: const SizedBox(
                                   child:Icon(Icons.lock),
                                 ),
                                     hintText: 'Password',
@@ -108,7 +116,18 @@ TextEditingController satu2=TextEditingController();
                                   },
                                   maxLines: 1,
                                 ),
-                              ),
+                              ),Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: CupertinoSlidingSegmentedControl<int>(
+                    children: children,
+                    onValueChanged:(int? newValue) {
+    setState(() {
+      currentSegment = newValue!;
+    });
+  },
+                    groupValue: currentSegment,
+                  ),
+                ),
                             ],
                           ),
                         );
@@ -116,9 +135,8 @@ TextEditingController satu2=TextEditingController();
                     ),
                   ),
                   actions: <Widget>[
-                   Container(margin: EdgeInsets.only(top: 10),
-                                    child: Expanded(
-                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                   Container(margin: const EdgeInsets.only(top: 10),
+                                    child:  Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [RoundedLoadingButton(width: 120,color: Colors.red,controller:
                                          RoundedLoadingButtonController(), onPressed: (){
                                           Navigator.of(context).pop();
@@ -137,12 +155,12 @@ TextEditingController satu2=TextEditingController();
                           _btnController.reset();
                           return;
                         }
-                        var data = await Service.postSupir(
-                            {'nama_supir': namaMobil, "no_hp": noHp,"terhapus":"false"});
+                        var data = await Service.postUser(
+                            {'username': namaMobil, "password": noHp,"status":currentSegment==0? "admin":"owner"});
 
                         if (data != null) {
                           Provider.of<ProviderData>(context, listen: false)
-                              .addSupir(data);
+                              .addUser(data);
                         }else{
                           _btnController.error();
                          await Future.delayed(const Duration(milliseconds: 500));
@@ -159,14 +177,14 @@ TextEditingController satu2=TextEditingController();
                           satu.clear();
                           satu2.clear();
                           
-                        _btnController.reset();
+                       Navigator.of(context).pop();
                         });
                       },
                       child: const Text('Simpan',
                           style: TextStyle(color: Colors.white)),
                     )
                   ],
-                                    )))]);;
+                                    ))]);
               });
         },
         icon: const Icon(

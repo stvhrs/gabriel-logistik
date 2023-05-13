@@ -27,19 +27,20 @@ class _DaftarMobilState extends State<DaftarMobil> {
 // await Service.test3();
   List<Perbaikan> per = await Service.getAllPerbaikan();
     listTransaksi = await Service.getAllMobil(per);
-
+if (!mounted) return;
     Provider.of<ProviderData>(context, listen: false)
-        .setData([], false, listTransaksi, [], per, [], []);
+        .setData([],[], false, listTransaksi, [], per, [], []);
 
+loading = false;
+
+    setState(() {});
     
   }
   @override
   void initState() {
         if (mounted){ initData();}
     Provider.of<ProviderData>(context, listen: false).searchMobil('', false);
-    loading = false;
-
-    setState(() {});
+   
     super.initState();
   }
 

@@ -30,13 +30,13 @@ class _PerbaikanPageState extends State<PerbaikanPage> {
 // await Service.deleteSupir();
 // await Service.test3();
     listTransaksi = await Service.getAllPerbaikan();
-
+if (!mounted) return;
     Provider.of<ProviderData>(context, listen: false)
-        .setData([], false, [], [], listTransaksi, [], []);
+        .setData([],[], false, [], [], listTransaksi, [], []);
 
     loading = false;
 
-    setState(() {});
+   if (mounted){  setState(() {});}
   }
 
  

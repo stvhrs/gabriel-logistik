@@ -322,7 +322,7 @@ class _BulananState extends State<Bulanan> {
                                 flex: 5,
                                 child: Text(
                                   textAlign: TextAlign.left,
-                                  'Maintain',
+                                  'Biaya Maintain',
                                   style:
                                       Theme.of(context).textTheme.displayMedium,
                                 )),

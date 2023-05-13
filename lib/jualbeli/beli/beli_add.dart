@@ -37,7 +37,7 @@ class _BeliAddState extends State<BeliAdd> {
                 style: const TextStyle(fontSize: 13.5),
               ),
             ),
-            Expanded(flex: 2, child: Container(height: 36, child: widget)),
+            Expanded(flex: 2, child: SizedBox(height: 36, child: widget)),
           ],
         ));
   }
@@ -192,9 +192,8 @@ class _BeliAddState extends State<BeliAdd> {
                                       ),
                                       'Keterangan',
                                       2),
-                                  Container(margin: EdgeInsets.only(top: 30),
-                                    child: Expanded(
-                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  Container(margin: const EdgeInsets.only(top: 30),
+                                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [RoundedLoadingButton(width: 120,color: Colors.red,controller:
                                          RoundedLoadingButtonController(), onPressed: (){
                                           Navigator.of(context).pop();
@@ -260,7 +259,7 @@ class _BeliAddState extends State<BeliAdd> {
                                         ],
                                       ),
                                     ),
-                                  )
+                                  
                                 ]),
                               ),
                             ),

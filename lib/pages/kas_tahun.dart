@@ -78,13 +78,13 @@ class _KasTahunState extends State<KasTahun> {
           Container(
             child: Row(
               children: [
-                DropdownButton2<int>( menuItemStyleData: MenuItemStyleData(height: 36),
+                DropdownButton2<int>( menuItemStyleData: const MenuItemStyleData(height: 36),
                   value: ropdownValue2,
                  
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.secondary),
                   underline: Container(
-                    height: 2.5,margin: EdgeInsets.only(top: 5),
+                    height: 2.5,margin: const EdgeInsets.only(top: 5),
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                   onChanged: (int? value) {

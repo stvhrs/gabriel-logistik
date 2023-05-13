@@ -15,10 +15,7 @@
  */
 
 import 'dart:async';
-import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
-import 'package:gabriel_logistik/models/kas_tahun.dart';
-import 'package:gabriel_logistik/models/keuangan_bulanan.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -40,8 +37,8 @@ Future<Uint8List> generateResume4(
   String dropdownValue2,
   double totalTransaksi,
   double totalJualUnit,
-  double totalNotaJual,
-  double tahunMaintain,
+  double totalNotaJual,double totalPerbaikan,
+  double totalAdministrasi,
   double toalBeliUnit,
   double totalNotaBeli,
   double totalPendapatan,
@@ -65,7 +62,7 @@ Future<Uint8List> generateResume4(
       build: ((pw.Context context) {
         return pw.Container(
           decoration: pw.BoxDecoration(border: pw.Border.all()),
-          padding: pw.EdgeInsets.all(10),
+          padding: const pw.EdgeInsets.all(10),
           child: pw.Container(
             child: pw.Column(
               children: [
@@ -75,8 +72,7 @@ Future<Uint8List> generateResume4(
                       child: pw.Column(children: [
                     pw.Image(asu, width: 350),
                     pw.Text(
-                      'Laporan Kas ' +
-                          "Periode " +
+                      'Laporan Kas ' "Periode " +
                           ropdownValue2.toString() +
                           " " +
                           dropdownValue +
@@ -88,7 +84,7 @@ Future<Uint8List> generateResume4(
                   ])),
                 ),
                 pw.Container(color: lightblue,
-                  padding: pw.EdgeInsets.all(8),
+                  padding: const pw.EdgeInsets.all(8),
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
@@ -104,7 +100,7 @@ Future<Uint8List> generateResume4(
                   ),
                 ),
                 pw.Container(
-                  padding: pw.EdgeInsets.all(8),
+                  padding: const pw.EdgeInsets.all(8),
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
@@ -116,7 +112,7 @@ Future<Uint8List> generateResume4(
                   ),
                 ),
                 pw.Container(
-                  padding: pw.EdgeInsets.all(8),
+                  padding: const pw.EdgeInsets.all(8),
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
@@ -132,7 +128,7 @@ Future<Uint8List> generateResume4(
                   ),
                 ),
                 pw.Container(
-                  padding: pw.EdgeInsets.all(8),
+                  padding: const pw.EdgeInsets.all(8),
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
@@ -148,7 +144,7 @@ Future<Uint8List> generateResume4(
                   ),
                 ),
                 pw.Container(
-                  padding: pw.EdgeInsets.all(8),
+                  padding: const pw.EdgeInsets.all(8),
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
@@ -165,7 +161,7 @@ Future<Uint8List> generateResume4(
                 ),
                 pw.Container(
                   color: lightGreen,
-                  padding: pw.EdgeInsets.all(8),
+                  padding: const pw.EdgeInsets.all(8),
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
@@ -181,7 +177,7 @@ Future<Uint8List> generateResume4(
                   ),
                 ),
                 pw.Container(
-                  padding: pw.EdgeInsets.all(8),
+                  padding: const pw.EdgeInsets.all(8),
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
@@ -193,23 +189,38 @@ Future<Uint8List> generateResume4(
                   ),
                 ),
                 pw.Container(
-                  padding: pw.EdgeInsets.all(8),
+                  padding: const pw.EdgeInsets.all(8),
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
                       pw.Text(
-                        "                  Maintain",
+                        "                  Administrasi",
                         style: bold,
                       ),
                       pw.Text(
-                        Rupiah.format(tahunMaintain),
+                        Rupiah.format(totalAdministrasi,),
+                        style: light,
+                      ),
+                    ],
+                  ),
+                ), pw.Container(
+                  padding: const pw.EdgeInsets.all(8),
+                  child: pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+                      pw.Text(
+                        "                  Perbaikan",
+                        style: bold,
+                      ),
+                      pw.Text(
+                        Rupiah.format(totalPerbaikan,),
                         style: light,
                       ),
                     ],
                   ),
                 ),
                 pw.Container(
-                  padding: pw.EdgeInsets.all(8),
+                  padding: const pw.EdgeInsets.all(8),
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
@@ -225,7 +236,7 @@ Future<Uint8List> generateResume4(
                   ),
                 ),
                 pw.Container(
-                  padding: pw.EdgeInsets.all(8),
+                  padding: const pw.EdgeInsets.all(8),
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
@@ -242,7 +253,7 @@ Future<Uint8List> generateResume4(
                 ),
                 pw.Container(
                   color: lightRed,
-                  padding: pw.EdgeInsets.all(8),
+                  padding: const pw.EdgeInsets.all(8),
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
@@ -258,7 +269,7 @@ Future<Uint8List> generateResume4(
                   ),
                 ),
                 pw.Container(
-                  padding: pw.EdgeInsets.all(8),
+                  padding: const pw.EdgeInsets.all(8),
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
@@ -274,7 +285,7 @@ Future<Uint8List> generateResume4(
                   ),
                 ),
                 pw.Container(color: lightblue,
-                  padding: pw.EdgeInsets.all(8),
+                  padding: const pw.EdgeInsets.all(8),
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [

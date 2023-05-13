@@ -82,7 +82,7 @@ class _TransaksiEditState extends State<TransaksiEdit> {
                     ),
                   ],
                 )),
-            Container(height: 36, child: widget)
+            SizedBox(height: 36, child: widget)
           ],
         ),
       ),

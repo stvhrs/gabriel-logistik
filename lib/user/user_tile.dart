@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gabriel_logistik/models/supir.dart';
 import 'package:gabriel_logistik/models/user.dart';
 import 'package:gabriel_logistik/providerData/providerData.dart';
-import 'package:gabriel_logistik/supir/edit_supir.dart';
 import 'package:gabriel_logistik/user/edit_user.dart';
 import 'package:provider/provider.dart';
 
@@ -43,7 +41,10 @@ class _UserTileState extends State<UserTile> {
         child: Row(
           children: [
             Expanded(flex: 11, child: Text(widget.supir.username)),
-            Expanded(flex: 11, child: Text("------")),
+            const Expanded(flex: 11, child: Text("------------")), Expanded(
+                      flex: 11,
+                      child: Text(widget.supir.owner?"Owner":"Admin",
+                        )),
             Expanded(
               flex: 3,
               child: Row(
@@ -51,7 +52,7 @@ class _UserTileState extends State<UserTile> {
                 children: [
                   EditUser(widget.supir),
                   Provider.of<ProviderData>(context, listen: false).isOwner
-                      ?UserDelete(widget.supir)
+                      ?widget.supir.owner?SizedBox():UserDelete(widget.supir)
                           
                       : const SizedBox()
                 ],

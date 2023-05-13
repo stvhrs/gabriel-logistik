@@ -26,6 +26,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
   List<String> listSupir = [];
   List<String> listMobil = [];
   final List<Transaksi> bulkTransaksi = [];
+  FocusNode fd=FocusNode();
 
   TextEditingController controlerSisa = TextEditingController();
   TextEditingController controlerOngkos = TextEditingController();
@@ -331,7 +332,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                 "Pilih Driver",
                                                 1),
                                             _buildSize(
-                                                TextFormField(
+                                                TextFormField(focusNode:fd ,
                                                   style:
                                                       const TextStyle(fontSize: 13),
                                                   textInputAction:
@@ -483,7 +484,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                               MainAxisAlignment.spaceAround,
                                           children: [
                                             ElevatedButton.icon(
-                                                style: ButtonStyle(
+                                                style: const ButtonStyle(
                                                     backgroundColor:
                                                         MaterialStatePropertyAll(
                                                             Colors.red)),
@@ -522,6 +523,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                     "keluar": "0",
                                                     "sisa": "0"
                                                   });
+                                                  fd.requestFocus();
                                                   setState(
                                                     () {},
                                                   );
@@ -530,7 +532,7 @@ class _TransaksiAddState extends State<TransaksiAdd> {
                                                   Icons.delete,
                                                   color: Colors.white,
                                                 ),
-                                                label: Text(
+                                                label: const Text(
                                                   "Hapus",
                                                   style: TextStyle(
                                                       color: Colors.white,

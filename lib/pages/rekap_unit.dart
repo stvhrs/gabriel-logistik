@@ -123,11 +123,11 @@ class _RekapUnitState extends State<RekapUnit> {
                 children: [
                   DropdownButton2<int>(
                     value: ropdownValue2,
-                menuItemStyleData: MenuItemStyleData(height: 36),
+                menuItemStyleData: const MenuItemStyleData(height: 36),
                     style:
                         TextStyle(color: Theme.of(context).colorScheme.secondary),
                     underline: Container(
-                      height: 2.5,margin: EdgeInsets.only(top: 5),
+                      height: 2.5,margin: const EdgeInsets.only(top: 5),
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                     onChanged: (int? value) {
